@@ -1,0 +1,46 @@
+html,
+body {
+	@apply text-white;
+	@apply bg-gray-900;
+}
+
+/* Utilities */
+
+.text-shadow-2 {
+	text-shadow: 2px 2px 2px rgba(0, 0, 0, 0.5);
+}
+
+.blur-5 {
+	filter: blur(5px);
+}
+
+.bg-blur-10 {
+	background-color: rgba(48, 48, 48, 0.66);
+}
+
+@supports (
+	(-webkit-backdrop-filter: blur(10px)) or (backdrop-filter: blur(10px))
+) {
+	.bg-blur-10 {
+		opacity: 0.99;
+		background-color: rgba(48, 48, 48, 0.33);
+		-webkit-backdrop-filter: blur(10px);
+		backdrop-filter: blur(10px);
+	}
+}
+
+.w-fit {
+	width: fit-content;
+}
+
+.border-t-3 {
+	border-top-width: 3px;
+}
+
+.leading-0 {
+	line-height: 0;
+}
+
+.-z-1 {
+	z-index: -1;
+}

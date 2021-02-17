@@ -1,20 +1,15 @@
-import "@/styles.css";
-import "@/polyfills";
+import "../styles/core.css";
+// import "../styles/fonts.css";
+import "../styles/components.css";
+import "../styles/utilities.css";
 
 import type { AppProps } from "next/app";
-import Head from "next/head";
+import React from "react";
 
-export default function MyApp({ Component, pageProps }: AppProps) {
+export default function DLApp({ Component, pageProps }: AppProps) {
 	return (
-		<>
-			<Head>
-				<meta
-					name="color-scheme"
-					content="normal" // TODO: Set to "dark" or "light" based on theme
-				/>
-			</Head>
-
+		<React.StrictMode>
 			<Component {...pageProps} />
-		</>
+		</React.StrictMode>
 	);
 }

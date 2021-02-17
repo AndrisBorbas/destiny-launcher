@@ -35,8 +35,8 @@
 		"@typescript-eslint/no-invalid-void-type": "error", // Force type safety
 		"@typescript-eslint/prefer-ts-expect-error": "error", // Force type safety
 		"import/no-anonymous-default-export": "error", // For named React components
-		"import/no-default-export": "error", // Default exports are confusing
-		"import/prefer-default-export": "off",
+		// "import/no-default-export": "error", // Default exports are confusing
+		// "import/prefer-default-export": "off",
 		"jsx-a11y/anchor-is-valid": "off", // Doesn't play well with Next `<Link>`
 		"prefer-exponentiation-operator": "error", // Auto-fix for an inherited rule
 		"react/react-in-jsx-scope": "off", // React is always in scope with Next

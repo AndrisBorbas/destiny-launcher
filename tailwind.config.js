@@ -1,12 +1,17 @@
 const defaultTheme = require("tailwindcss/defaultTheme");
+const colors = require("tailwindcss/colors");
 
 module.exports = {
 	purge: ["./src/**/*.{js,ts,tsx}"],
-	darkMode: "class",
 	theme: {
+		colors,
 		extend: {
 			transitionTimingFunction: {
 				DEFAULT: defaultTheme.transitionTimingFunction.out,
+			},
+			fontFamily: {
+				Roboto: "Roboto",
+				Montserrat: "Montserrat",
 			},
 		},
 	},
