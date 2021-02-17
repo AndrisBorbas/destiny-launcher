@@ -1,5 +1,6 @@
 const defaultTheme = require("tailwindcss/defaultTheme");
 const colors = require("tailwindcss/colors");
+const aspectRatio = require("@tailwindcss/aspect-ratio");
 
 module.exports = {
 	purge: ["./src/**/*.{js,ts,tsx}"],
@@ -9,9 +10,17 @@ module.exports = {
 			transitionTimingFunction: {
 				DEFAULT: defaultTheme.transitionTimingFunction.out,
 			},
+			colors: {
+				banner: {
+					DEFAULT: "#1b1f44",
+					dark: "#12142b",
+				},
+			},
 			fontFamily: {
 				Roboto: "Roboto",
 				Montserrat: "Montserrat",
+				NeueHGD: "NeueHaasGroteskDisp",
+				NeueHGT: "NeueHaasGroteskText",
 			},
 		},
 	},
@@ -25,5 +34,5 @@ module.exports = {
 	corePlugins: {
 		animation: false,
 	},
-	plugins: [],
+	plugins: [aspectRatio],
 };

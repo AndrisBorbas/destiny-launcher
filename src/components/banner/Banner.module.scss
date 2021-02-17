@@ -1,0 +1,33 @@
+.header {
+	@apply bg-banner;
+	@apply gap-2;
+	@apply grid;
+	min-height: 56px;
+	grid-template-columns: 56px 1fr;
+}
+
+.headerText {
+	@apply font-NeueHGD;
+	@apply text-4xl;
+	@apply font-medium;
+	@apply uppercase;
+	@apply p-4;
+	@apply pl-2;
+	width: fit-content;
+
+	&:before,
+	&:after {
+		content: "";
+		display: block;
+		@apply border-t-2;
+		@apply border-gray-700;
+	}
+	&:before {
+		width: 66%;
+		margin-bottom: 2px;
+	}
+	&:after {
+		width: 4rem;
+		margin-top: 4px;
+	}
+}

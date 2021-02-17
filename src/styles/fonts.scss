@@ -1,4 +1,25 @@
 @font-face {
+	font-family: "NeueHaasGroteskDisp";
+	src: url("../../public/assets/fonts/NHaasGroteskDSPro-55Rg.woff2")
+			format("woff2"),
+		url("../../public/assets/fonts/NHaasGroteskDSPro-55Rg.woff") format("woff");
+	font-weight: 500;
+	font-style: normal;
+	font-display: swap;
+}
+
+@font-face {
+	font-family: "NeueHaasGroteskText";
+	src: url("../../public/assets/fonts/NHaasGroteskTXPro-55Rg.woff2")
+			format("woff2"),
+		url("../../public/assets/fonts/NHaasGroteskTXPro-55Rg.woff") format("woff");
+	font-weight: normal;
+	font-style: normal;
+	font-display: swap;
+}
+
+/*
+@font-face {
 	font-family: "Montserrat";
 	src: url("../../public/assets/fonts/Montserrat-Light.ttf") format("truetype");
 	font-weight: 300;
@@ -38,3 +59,4 @@
 	font-weight: 700;
 	font-style: normal;
 }
+*/

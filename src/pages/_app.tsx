@@ -1,6 +1,6 @@
 import "../styles/core.css";
-// import "../styles/fonts.css";
-import "../styles/components.css";
+import "../styles/fonts.scss";
+import "../styles/components.scss";
 import "../styles/utilities.css";
 
 import type { AppProps } from "next/app";
