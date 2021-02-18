@@ -1,5 +1,4 @@
 .header {
-	@apply bg-banner;
 	@apply gap-2;
 	@apply grid;
 	min-height: 56px;
@@ -30,4 +29,13 @@
 		width: 4rem;
 		margin-top: 4px;
 	}
+}
+
+.figure {
+	@apply p-2;
+	@screen sm {
+		@apply p-4;
+	}
+	max-height: 7rem;
+	overflow: hidden;
 }

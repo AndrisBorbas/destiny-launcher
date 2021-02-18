@@ -5,13 +5,12 @@ import { FaBars } from "react-icons/fa";
 
 import navbarContent from "@/data/navbar.json";
 
+import styles from "./Navbar.module.scss";
+
 export default function Navbar() {
 	const [navbarOpen, setNavbarOpen] = React.useState(false);
 	return (
-		<header
-			className="fixed z-40 top-0 flex flex-wrap items-center justify-between mb-3 w-screen text-white"
-			id="header"
-		>
+		<header className="bg-blur-10 fixed z-40 top-0 flex flex-wrap items-center justify-between w-screen text-white font-NeueHGD border-b border-gray-100">
 			<div className="relative flex flex-wrap items-center mx-auto p-4 w-full sm:p-8">
 				<div className="relative flex justify-between w-full sm:static sm:block sm:justify-start sm:w-auto">
 					<Link href="/">
@@ -20,7 +19,7 @@ export default function Navbar() {
 						</a>
 					</Link>
 					<button
-						className="block px-3 py-2 text-xl leading-none bg-transparent border border-solid border-transparent rounded outline-none focus:outline-none cursor-pointer sm:hidden"
+						className="bg-transparent border-transparent block px-3 py-2 text-xl leading-none border border-solid rounded outline-none focus:outline-none cursor-pointer sm:hidden"
 						type="button"
 						onClick={() => setNavbarOpen(!navbarOpen)}
 					>
@@ -32,9 +31,8 @@ export default function Navbar() {
 						"z-50 items-center sm:flex",
 						navbarOpen ? "flex" : " hidden",
 					)}
-					id="navbar"
 				>
-					<ul className="bg-blur-10 font-Roboto flex flex-col rounded-lg list-none lowercase sm:flex-row sm:ml-auto sm:w-auto">
+					<ul className="flex flex-col rounded-lg list-none lowercase sm:flex-row sm:ml-auto sm:w-auto">
 						{navbarContent.links.map(({ href, label }, i) => (
 							<li key={`${href}`} className="pl-2 py-1 w-full sm:pl-0">
 								<Link href={href}>
