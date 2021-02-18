@@ -39,6 +39,7 @@ export default function Index({
 				{banners.map((banner) => {
 					const content = hydrate(banner.mdxSource, {});
 					return (
+						// @ts-expect-error: Banners props should always be the same as the data in the mdx's.
 						<Banner key={banner.filePath} {...banner.data}>
 							{content}
 						</Banner>
