@@ -20,7 +20,7 @@ export default function Banner({
 		<article className={styles.banner}>
 			<div className={styles.container}>
 				<div className={styles.header}>
-					<div className="flex items-center p-2 py-4 w-14 h-full bg-banner-dark">
+					<div className="flex items-center p-2 py-4 w-14 bg-banner-dark">
 						<a
 							className="relative block w-10 h-10"
 							href={url}

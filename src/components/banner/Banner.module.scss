@@ -22,6 +22,7 @@
 	@apply grid;
 	min-height: 56px;
 	grid-template-columns: 56px 1fr;
+	align-items: stretch;
 }
 
 .headerText {
