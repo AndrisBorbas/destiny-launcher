@@ -1,7 +1,9 @@
 import Head from "next/head";
 
-import Footer from "@/components/Footer";
+import Footer from "@/components/footer/Footer";
 import Navbar from "@/components/navbar/Navbar";
+
+import styles from "./Layout.module.scss";
 
 export default function Layout({
 	children,
@@ -83,11 +85,13 @@ export default function Layout({
 				<meta name="theme-color" content="#E6A537" />
 			</Head>
 
-			<Navbar />
+			<div id="app" className={styles.app}>
+				<Navbar />
 
-			<main {...restProps}>{children}</main>
+				<main {...restProps}>{children}</main>
 
-			<Footer />
+				<Footer />
+			</div>
 		</>
 	);
 }

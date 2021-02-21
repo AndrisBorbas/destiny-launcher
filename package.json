@@ -26,6 +26,7 @@
 		"@next/bundle-analyzer": "^10.0.7",
 		"@next/mdx": "^10.0.7",
 		"@tailwindcss/aspect-ratio": "^0.2.0",
+		"autoprefixer": "^9.8.6",
 		"babel-plugin-optimize-clsx": "^2.6.1",
 		"clsx": "^1.1.1",
 		"focus-visible": "^5.2.0",

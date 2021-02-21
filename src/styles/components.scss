@@ -7,12 +7,12 @@
 }
 
 .bg-blur-10 {
-	background-color: rgba(48, 48, 48, 0.66);
+	background-color: rgba(122, 122, 122, 0.66);
 	@supports (
 		(-webkit-backdrop-filter: blur(10px)) or (backdrop-filter: blur(10px))
 	) {
 		opacity: 0.99;
-		background-color: rgba(48, 48, 48, 0.33);
+		background-color: rgba(150, 150, 150, 0.33);
 		-webkit-backdrop-filter: blur(10px);
 		backdrop-filter: blur(10px);
 	}
@@ -32,4 +32,11 @@
 
 .-z-1 {
 	z-index: -1;
+}
+
+.safe-area-x {
+	padding-left: calc(0.75rem + constant(safe-area-inset-left));
+	padding-left: calc(0.75rem + env(safe-area-inset-left));
+	padding-right: calc(0.75rem + constant(safe-area-inset-right));
+	padding-right: calc(0.75rem + env(safe-area-inset-right));
 }

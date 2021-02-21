@@ -1,3 +1,22 @@
+.banner {
+	@apply border-t-2;
+	@apply border-gray-300;
+
+	&:hover {
+		margin: -6px;
+		padding: 5px;
+		padding-top: 7px;
+		border-width: 1px;
+	}
+}
+
+.container {
+	@apply flex;
+	@apply flex-col;
+	@apply bg-banner;
+	@apply h-full;
+}
+
 .header {
 	@apply gap-2;
 	@apply grid;
@@ -36,6 +55,12 @@
 	@screen sm {
 		@apply p-4;
 	}
-	max-height: 7rem;
-	overflow: hidden;
+
+	// display: -webkit-box;
+	// -webkit-line-clamp: 3;
+	// -webkit-box-orient: vertical;
+	// overflow: hidden;
+
+	// max-height: 7rem;
+	// overflow: hidden;
 }

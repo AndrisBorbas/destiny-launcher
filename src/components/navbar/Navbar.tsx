@@ -10,8 +10,8 @@ import styles from "./Navbar.module.scss";
 export default function Navbar() {
 	const [navbarOpen, setNavbarOpen] = React.useState(false);
 	return (
-		<header className="bg-blur-10 fixed z-40 top-0 flex flex-wrap items-center justify-between w-screen text-white font-NeueHGD border-b border-gray-100">
-			<div className="relative flex flex-wrap items-center mx-auto p-4 w-full sm:p-8">
+		<header className={clsx(styles.header, "bg-blur-10")}>
+			<div className="relative flex flex-wrap items-center mx-auto px-4 w-full sm:px-8">
 				<div className="relative flex justify-between w-full sm:static sm:block sm:justify-start sm:w-auto">
 					<Link href="/">
 						<a className="block mr-8 no-underline text-2xl lg:text-4xl lg:leading-10">

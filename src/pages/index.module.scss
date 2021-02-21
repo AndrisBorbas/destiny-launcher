@@ -1,0 +1,25 @@
+.headerText {
+	@apply font-NeueHGD;
+	@apply text-5xl;
+	@apply font-medium;
+	@apply p-4;
+	@apply pl-2;
+	@apply my-4;
+	width: fit-content;
+
+	&:before,
+	&:after {
+		content: "";
+		display: block;
+		@apply border-t-2;
+		@apply border-gray-600;
+	}
+	&:before {
+		width: 4rem;
+		margin-bottom: 2px;
+	}
+	&:after {
+		width: 75%;
+		margin-top: 6px;
+	}
+}

@@ -1,11 +1,11 @@
+import clsx from "clsx";
 import { FaGithub } from "react-icons/fa";
+
+import styles from "./Footer.module.scss";
 
 export default function Footer() {
 	return (
-		<footer
-			className="z-20 p-8 w-full text-white bg-green-700 rounded-t-2xl"
-			id="footer"
-		>
+		<footer className={clsx(styles.footer, "bg-blur-10")} id="footer">
 			<div className="container flex flex-col items-center justify-center mx-auto space-y-6">
 				<div className="flex items-center justify-evenly w-full lg:w-1/3">
 					<a

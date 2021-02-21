@@ -1,8 +1,2 @@
 @tailwind base;
 @tailwind components;
-
-html,
-body {
-	@apply text-white;
-	@apply bg-gray-900;
-}

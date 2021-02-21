@@ -1,0 +1,18 @@
+:root {
+	--headerHeight: 5rem;
+	@screen lg {
+		--headerHeight: 6rem;
+	}
+}
+
+body {
+	@apply text-white;
+	@apply bg-gray-900;
+	@apply min-h-screen;
+
+	padding-top: var(--headerHeight);
+	padding-top: calc(var(--headerHeight) + constant(safe-area-inset-top));
+	padding-top: calc(var(--headerHeight) + env(safe-area-inset-top));
+
+	margin: 0 auto;
+}

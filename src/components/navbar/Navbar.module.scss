@@ -1,4 +1,23 @@
-@import "@/styles/components.scss";
-
 .header {
+	@apply fixed;
+	@apply z-40;
+	@apply top-0;
+	@apply flex;
+	@apply flex-wrap;
+	@apply items-center;
+	@apply justify-between;
+	@apply w-screen;
+	@apply text-white;
+	@apply font-NeueHGD;
+	@apply border-b;
+	@apply border-gray-100;
+
+	padding-top: 22px;
+	padding-bottom: 22px;
+
+	@screen sm {
+		@apply p-0;
+	}
+
+	min-height: var(--headerHeight);
 }
