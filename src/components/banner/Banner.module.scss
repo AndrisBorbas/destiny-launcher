@@ -1,6 +1,15 @@
 .banner {
-	@apply relative;
 	@apply w-full;
+}
+
+.container {
+	@apply flex;
+	@apply flex-col;
+	@apply bg-banner;
+	height: fit-content;
+
+	@apply relative;
+
 	&::after {
 		content: "";
 		@apply block;
@@ -21,13 +30,6 @@
 		@apply border;
 		@apply -inset-1.5;
 	}
-}
-
-.container {
-	@apply flex;
-	@apply flex-col;
-	@apply bg-banner;
-	height: fit-content;
 }
 
 .header {
