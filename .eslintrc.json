@@ -42,7 +42,8 @@
 		"react/react-in-jsx-scope": "off", // React is always in scope with Next
 		"react/require-default-props": "off", // React `defaultProps` are deprecated
 
-		"react/jsx-no-target-blank": "off" // Links on the site should be safe
+		"react/jsx-no-target-blank": "off", // Links on the site should be safe
+		"no-plusplus": "off"
 	},
 
 	"overrides": [

@@ -13,7 +13,6 @@
 
 		@apply border;
 		border-color: rgba(212, 212, 216, 0);
-		@apply border-t-2;
 		border-top-color: rgba(212, 212, 216, 1);
 	}
 
@@ -97,6 +96,8 @@
 		@apply p-4;
 	}
 
+	justify-content: stretch;
+
 	// display: -webkit-box;
 	// -webkit-line-clamp: 3;
 	// -webkit-box-orient: vertical;
@@ -104,4 +105,34 @@
 
 	// max-height: 7rem;
 	// overflow: hidden;
+}
+
+.button {
+	@apply bg-button;
+	@apply block;
+	@apply m-2;
+	@apply mt-4;
+	@apply p-2;
+	@apply relative;
+	@apply text-center;
+
+	&::after {
+		content: "";
+		@apply block;
+		@apply absolute;
+		@apply inset-0;
+		@apply pointer-events-none;
+
+		@apply transition-all;
+		@apply duration-200;
+
+		@apply border;
+		border-color: #ffce1f;
+	}
+
+	&:hover::after {
+		@apply border-gray-300;
+		@apply border;
+		@apply -inset-1;
+	}
 }

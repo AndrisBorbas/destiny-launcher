@@ -15,6 +15,9 @@ module.exports = {
 					DEFAULT: "#1b1f44",
 					dark: "#12142b",
 				},
+				button: {
+					DEFAULT: "rgba(183,140,37,.8)",
+				},
 			},
 			fontFamily: {
 				Roboto: "Roboto",

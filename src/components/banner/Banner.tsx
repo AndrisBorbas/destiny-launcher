@@ -20,7 +20,7 @@ export default function Banner({
 	url,
 	children,
 }: BannerProps) {
-	const [isOpened, setOpened] = React.useState(false);
+	const [isOpened, setOpened] = React.useState(true);
 	return (
 		<article
 			className={clsx(styles.banner, isOpened ? "row-span-4" : "row-span-1")}
@@ -88,6 +88,14 @@ export default function Banner({
 
 				<figure className={clsx(styles.figure, isOpened ? "block" : "hidden")}>
 					{children}
+					<a
+						className={styles.button}
+						href={url}
+						target="_blank"
+						rel="noopener"
+					>
+						Open
+					</a>
 				</figure>
 			</div>
 		</article>
