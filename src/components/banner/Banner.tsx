@@ -1,4 +1,8 @@
+import clsx from "clsx";
+import { motion } from "framer-motion";
 import Image from "next/image";
+import React from "react";
+import { FaAngleDown } from "react-icons/fa";
 
 import styles from "./Banner.module.scss";
 
@@ -16,8 +20,11 @@ export default function Banner({
 	url,
 	children,
 }: BannerProps) {
+	const [isOpened, setOpened] = React.useState(false);
 	return (
-		<article className={styles.banner}>
+		<article
+			className={clsx(styles.banner, isOpened ? "row-span-4" : "row-span-1")}
+		>
 			<div className={styles.container}>
 				<div className={styles.header}>
 					<div className="flex items-center p-2 py-4 w-14 bg-banner-dark">
@@ -41,9 +48,34 @@ export default function Banner({
 							{headerText}
 						</a>
 					</h3>
+
+					<motion.div
+						className={styles.toggle}
+						animate={{
+							rotate: isOpened ? 180 : 0,
+						}}
+						transition={{
+							duration: 0.3,
+							ease: "backInOut",
+						}}
+					>
+						<button
+							type="button"
+							onClick={() => {
+								setOpened(!isOpened);
+							}}
+						>
+							<FaAngleDown className="text-5xl" />
+						</button>
+					</motion.div>
 				</div>
 
-				<div className="aspect-w-16 aspect-h-9">
+				<div
+					className={clsx(
+						"aspect-w-16 aspect-h-9",
+						isOpened ? "block" : "hidden",
+					)}
+				>
 					<a href={url} target="_blank" rel="noopener">
 						<Image
 							src={previewImage}
@@ -54,7 +86,9 @@ export default function Banner({
 					</a>
 				</div>
 
-				<figure className={styles.figure}>{children}</figure>
+				<figure className={clsx(styles.figure, isOpened ? "block" : "hidden")}>
+					{children}
+				</figure>
 			</div>
 		</article>
 	);

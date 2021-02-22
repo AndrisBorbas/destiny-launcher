@@ -1,12 +1,26 @@
 .banner {
-	@apply border-t-2;
-	@apply border-gray-300;
+	@apply relative;
+	@apply w-full;
+	&::after {
+		content: "";
+		@apply block;
+		@apply absolute;
+		@apply inset-0;
+		@apply pointer-events-none;
 
-	&:hover {
-		margin: -6px;
-		padding: 5px;
-		padding-top: 7px;
-		border-width: 1px;
+		@apply transition-all;
+		@apply duration-200;
+
+		@apply border;
+		border-color: rgba(212, 212, 216, 0);
+		@apply border-t-2;
+		border-top-color: rgba(212, 212, 216, 1);
+	}
+
+	&:hover::after {
+		@apply border-gray-300;
+		@apply border;
+		@apply -inset-1.5;
 	}
 }
 
@@ -14,25 +28,40 @@
 	@apply flex;
 	@apply flex-col;
 	@apply bg-banner;
-	@apply h-full;
+	height: fit-content;
 }
 
 .header {
 	@apply gap-2;
 	@apply grid;
-	min-height: 56px;
-	grid-template-columns: 56px 1fr;
+	@apply h-full;
+	min-height: 122px;
+	grid-template-columns: 56px 1fr 48px;
 	align-items: stretch;
 }
 
 .headerText {
 	@apply font-NeueHGD;
-	@apply text-4xl;
+	@apply text-xl;
 	@apply font-medium;
 	@apply uppercase;
 	@apply p-4;
 	@apply pl-2;
+	@apply pr-0;
+	@apply self-center;
 	width: fit-content;
+
+	@media (min-width: 340px) {
+		@apply text-2xl;
+	}
+
+	@media (min-width: 420px) {
+		@apply text-3xl;
+	}
+
+	@screen sm {
+		@apply text-4xl;
+	}
 
 	&:before,
 	&:after {
@@ -48,6 +77,17 @@
 	&:after {
 		width: 4rem;
 		margin-top: 4px;
+	}
+}
+
+.toggle {
+	@apply w-12;
+	@apply h-12;
+	will-change: rotate;
+	transform-origin: center center;
+	align-self: center;
+	& button {
+		outline: none;
 	}
 }
 

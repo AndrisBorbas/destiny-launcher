@@ -4,5 +4,9 @@
 	"editor.codeActionsOnSave": {
 		"source.fixAll.eslint": true
 	},
-	"typescript.tsdk": "node_modules\\typescript\\lib"
+	"typescript.tsdk": "node_modules\\typescript\\lib",
+
+	"css.validate": false,
+	"less.validate": false,
+	"scss.validate": false
 }

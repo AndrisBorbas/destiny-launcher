@@ -39,7 +39,7 @@ export default function Index({
 	return (
 		<Layout className="safe-area-x flex flex-col mb-8 mx-auto sm:px-8 md:px-12 lg:px-16 xl:px-32">
 			<h2 className={styles.headerText}>Account Managers</h2>
-			<section className="grid gap-8 grid-cols-1 2xl:grid-cols-3 justify-items-center md:grid-cols-2">
+			<section className="grid gap-8 grid-cols-1 2xl:grid-cols-3 justify-items-center lg:grid-cols-2">
 				{banners.map((banner) => {
 					const content = hydrate(banner.mdxSource, {
 						components: { h4: H4 },
