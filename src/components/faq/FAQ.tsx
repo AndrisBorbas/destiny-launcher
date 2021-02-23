@@ -6,7 +6,7 @@ import styles from "./FAQ.module.scss";
 
 const components = {
 	// eslint-disable-next-line jsx-a11y/heading-has-content
-	h4: ({ ...restProps }) => <h4 className={styles.question} {...restProps} />,
+	h3: ({ ...restProps }) => <h3 className={styles.question} {...restProps} />,
 	p: ({ ...restProps }) => <p className={styles.answer} {...restProps} />,
 
 	a: ({ ...restProps }) => (

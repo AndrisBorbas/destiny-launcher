@@ -47,6 +47,7 @@ export default function Banner({
 							href={url}
 							target="_blank"
 							rel="noopener"
+							aria-label={`${headerText} link`}
 						>
 							<Image
 								src={iconSrc}
@@ -78,6 +79,7 @@ export default function Banner({
 							onClick={() => {
 								setOpened(!isOpened);
 							}}
+							aria-label="Toggle open button"
 						>
 							<FaAngleDown className="text-5xl" />
 						</button>
