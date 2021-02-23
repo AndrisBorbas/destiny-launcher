@@ -5,8 +5,16 @@ const withMDX = require("@next/mdx")({
 });
 
 module.exports = withPlugins(
-	[withBundleAnalyzer({ enabled: process.env.ANALYZE === "true" })],
-	[withMDX({ pageExtensions: ["tsx", "mdx"] })],
+	[
+		[withBundleAnalyzer({ enabled: process.env.ANALYZE === "true" })],
+		{
+			reactStrictMode: true,
+		},
+		[withMDX({ pageExtensions: ["tsx", "mdx"] })],
+		{
+			reactStrictMode: true,
+		},
+	],
 	{
 		reactStrictMode: true,
 	},

@@ -20,7 +20,21 @@ export default function Banner({
 	url,
 	children,
 }: BannerProps) {
-	const [isOpened, setOpened] = React.useState(true);
+	// Banners are hydrated with them being closed, less layout shift
+	const [isOpened, setOpened] = React.useState(false);
+
+	React.useEffect(() => {
+		const value = localStorage.getItem(url);
+		// But when the page loads they are opened if there is no stored value
+		setOpened(value !== null ? JSON.parse(value) : true);
+		return () => {};
+	}, [url]);
+
+	React.useEffect(() => {
+		localStorage.setItem(url, JSON.stringify(isOpened));
+		return () => {};
+	}, [url, isOpened]);
+
 	return (
 		<article
 			className={clsx(styles.banner, isOpened ? "row-span-4" : "row-span-1")}

@@ -5,6 +5,7 @@ import renderToString from "next-mdx-remote/render-to-string";
 import path from "path";
 
 import BannerSection from "@/components/banner/BannerSection";
+import FAQ from "@/components/faq/FAQ";
 import Layout from "@/components/Layout";
 import { BANNERS_PATH, bannersFilePaths } from "@/utils/mdxUtils";
 
@@ -50,6 +51,7 @@ export default function Index({ banners }: BannerProps) {
 		<Layout className="safe-area-x flex flex-col mb-8 mx-auto sm:px-8 md:px-12 lg:px-16 xl:px-32">
 			<BannerSection banners={managers} title="Account Managers" />
 			<BannerSection banners={informational} title="Informational sites" />
+			<FAQ />
 		</Layout>
 	);
 }

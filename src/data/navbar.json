@@ -1,6 +1,3 @@
 {
-	"links": [
-		{ "href": "/#about", "label": "About" },
-		{ "href": "/#contact", "label": "Contact" }
-	]
+	"links": [{ "href": "/#FAQ", "label": "FAQ" }]
 }

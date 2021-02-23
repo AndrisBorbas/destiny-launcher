@@ -1,8 +1,10 @@
 @font-face {
 	font-family: "NeueHaasGroteskDisp";
-	src: url("../../public/assets/fonts/NHaasGroteskDSPro-55Rg.woff2")
-			format("woff2"),
-		url("../../public/assets/fonts/NHaasGroteskDSPro-55Rg.woff") format("woff");
+	src: url("../../public/assets/fonts/NHaasGroteskDSPro-55Rg.ttf")
+			format("truetype"),
+		url("../../public/assets/fonts/NHaasGroteskDSPro-55Rg.woff") format("woff"),
+		url("../../public/assets/fonts/NHaasGroteskDSPro-55Rg.woff2")
+			format("woff2");
 	font-weight: 500;
 	font-style: normal;
 	font-display: swap;

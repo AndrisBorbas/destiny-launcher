@@ -11,9 +11,9 @@ export default function Navbar() {
 	const [navbarOpen, setNavbarOpen] = React.useState(false);
 	return (
 		<header className={clsx(styles.header, "bg-blur-10")}>
-			<div className="relative flex flex-wrap items-center mx-auto px-4 w-full sm:px-8">
+			<div className="relative flex flex-wrap items-center justify-between mx-auto px-4 w-full sm:px-8">
 				<div className="relative flex justify-between w-full sm:static sm:block sm:justify-start sm:w-auto">
-					<Link href="/">
+					<Link href="/#">
 						<a className="block mr-8 no-underline text-2xl lg:text-4xl lg:leading-10">
 							Destiny Launcher
 						</a>

@@ -5,6 +5,10 @@
 	}
 }
 
+html {
+	scroll-behavior: smooth;
+}
+
 body {
 	@apply text-white;
 	@apply bg-gray-900;

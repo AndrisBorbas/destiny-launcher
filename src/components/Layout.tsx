@@ -88,7 +88,7 @@ export default function Layout({
 			<div id="app" className={styles.app}>
 				<Navbar />
 
-				<main {...restProps}>{children}</main>
+				<main id="#" {...restProps}>{children}</main>
 
 				<Footer />
 			</div>

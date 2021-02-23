@@ -11,7 +11,7 @@ export default function Footer() {
 					<a
 						href="https://www.github.com/andrisborbas/destiny-launcher"
 						target="_blank"
-						rel="noopener noreferrer"
+						rel="noopener"
 					>
 						<FaGithub className="hover:text-blue text-blue-dark w-10 h-auto" />
 					</a>
