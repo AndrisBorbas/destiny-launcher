@@ -22,6 +22,7 @@ export default function Navbar() {
 						className="bg-transparent border-transparent block px-3 py-2 text-xl leading-none border border-solid rounded outline-none focus:outline-none cursor-pointer sm:hidden"
 						type="button"
 						onClick={() => setNavbarOpen(!navbarOpen)}
+						aria-label="Navbar toggler"
 					>
 						<FaBars />
 					</button>

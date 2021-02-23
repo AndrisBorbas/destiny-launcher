@@ -92,7 +92,12 @@ export default function Banner({
 						isOpened ? "block" : "hidden",
 					)}
 				>
-					<a href={url} target="_blank" rel="noopener">
+					<a
+						href={url}
+						target="_blank"
+						rel="noopener"
+						aria-label={`${headerText} link`}
+					>
 						<Image
 							src={previewImage}
 							objectFit="cover"
