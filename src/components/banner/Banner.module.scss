@@ -35,7 +35,6 @@
 .header {
 	@apply gap-2;
 	@apply grid;
-	@apply h-full;
 	min-height: 122px;
 	grid-template-columns: 56px 1fr 48px;
 	align-items: stretch;
