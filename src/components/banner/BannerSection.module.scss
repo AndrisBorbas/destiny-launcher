@@ -1,6 +1,6 @@
 .headerText {
 	@apply font-NeueHGD;
-	@apply text-5xl;
+	@apply text-4xl;
 	@apply font-medium;
 	@apply p-4;
 	@apply pl-2;
@@ -16,10 +16,21 @@
 	}
 	&:before {
 		width: 4rem;
-		margin-bottom: 2px;
+		margin-bottom: 0;
 	}
 	&:after {
 		width: 75%;
-		margin-top: 6px;
+		margin-top: 1px;
+	}
+}
+
+.bannerSection {
+	@apply grid;
+	@apply gap-8;
+	@apply justify-items-center;
+	@apply justify-center;
+	@apply grid-cols-1;
+	@screen sm {
+		grid-template-columns: repeat(auto-fill, 520px);
 	}
 }
