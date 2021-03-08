@@ -16,11 +16,20 @@ export default function Layout({
 				<meta name="viewport" content="initial-scale=1.0, width=device-width" />
 				<meta
 					name="description"
-					content="" // TODO: Fill description
+					content="Destiny Launcher aims to be a launcher for the websites
+					made around Destiny and its public api. It presents the numerous
+					websites for new players to explore and makes them easily accessible
+					from one place, for everyone."
 				/>
 				<meta name="twitter:card" content="summary_large_image" />
 				<meta name="twitter:title" content="Destiny Launcher" />
-				<meta name="twitter:description" content="" />
+				<meta
+					name="twitter:description"
+					content="Destiny Launcher aims to be a launcher for the websites
+					made around Destiny and its public api. It presents the numerous
+					websites for new players to explore and makes them easily accessible
+					from one place, for everyone."
+				/>
 				<meta
 					name="twitter:image"
 					content="https://destiny-launcher.vercel.app/preview.png" // TODO: Change after domain change
@@ -34,7 +43,13 @@ export default function Layout({
 					content="https://destiny-launcher.vercel.app/preview.png"
 				/>
 				<meta property="og:title" content="Destiny Launcher" />
-				<meta property="og:description" content="" />
+				<meta
+					property="og:description"
+					content="Destiny Launcher aims to be a launcher for the websites
+					made around Destiny and its public api. It presents the numerous
+					websites for new players to explore and makes them easily accessible
+					from one place, for everyone."
+				/>
 				<meta property="og:url" content="https://destinylauncher.net" />
 				<meta property="og:type" content="website" />
 				<link
