@@ -6,7 +6,7 @@
 
 .headerText {
 	@apply font-NeueHGD;
-	@apply text-5xl;
+	@apply text-4xl;
 	@apply font-medium;
 	@apply p-4;
 	@apply pl-2;
@@ -22,11 +22,11 @@
 	}
 	&:before {
 		width: 4rem;
-		margin-bottom: 2px;
+		margin-bottom: 0;
 	}
 	&:after {
 		width: 75%;
-		margin-top: 6px;
+		margin-top: 1px;
 	}
 }
 
