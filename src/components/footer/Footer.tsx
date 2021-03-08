@@ -22,7 +22,9 @@ export default function Footer() {
 						Destiny is a registered trademark of Bungie. Some content and images
 						are the property of Bungie.
 					</p>
-					<p className="text-xs">© 2021 AndrisBorbas</p>
+					<a className="text-xs" href="https://andrisborbas.com">
+						© 2021 AndrisBorbas
+					</a>
 				</div>
 			</div>
 		</footer>
