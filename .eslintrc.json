@@ -9,10 +9,7 @@
 		"plugin:eslint-comments/recommended",
 		"plugin:etc/recommended",
 		"plugin:react-etc/recommended",
-		"prettier",
-		"prettier/@typescript-eslint",
-		"prettier/prettier",
-		"prettier/react"
+		"plugin:prettier/recommended"
 	],
 	"plugins": ["simple-import-sort"],
 
