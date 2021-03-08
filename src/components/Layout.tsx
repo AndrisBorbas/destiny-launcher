@@ -32,15 +32,15 @@ export default function Layout({
 				/>
 				<meta
 					name="twitter:image"
-					content="https://destiny-launcher.vercel.app/preview.png" // TODO: Change after domain change
+					content="https://destinylauncher.net/preview.png"
 				/>
 				<meta
 					name="thumbnail"
-					content="https://destiny-launcher.vercel.app/preview.png"
+					content="https://destinylauncher.net/preview.png"
 				/>
 				<meta
 					property="og:image"
-					content="https://destiny-launcher.vercel.app/preview.png"
+					content="https://destinylauncher.net/preview.png"
 				/>
 				<meta property="og:title" content="Destiny Launcher" />
 				<meta
