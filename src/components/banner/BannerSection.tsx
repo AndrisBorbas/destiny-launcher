@@ -14,7 +14,7 @@ export default function BannerSection({
 	return (
 		<>
 			<h2 className={styles.headerText}>{title}</h2>
-			<section className="grid gap-8 grid-cols-1 2xl:grid-cols-3 justify-items-center lg:grid-cols-2">
+			<section className={styles.bannerSection}>
 				{banners.map((banner) => {
 					const bannerContent = hydrate(banner.mdxSource, {
 						components: { h4: H4 },

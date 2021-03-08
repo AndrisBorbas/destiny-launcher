@@ -48,7 +48,7 @@ export default function Index({ banners }: BannerProps) {
 	});
 
 	return (
-		<Layout className="safe-area-x flex flex-col mb-8 mx-auto sm:px-8 md:px-12 lg:px-16 xl:px-32">
+		<Layout className="safe-area-x flex flex-col mb-8 mx-auto sm:px-4 md:px-8 lg:px-12 xl:px-16">
 			<BannerSection banners={managers} title="Account Managers" />
 			<BannerSection banners={informational} title="Informational sites" />
 			<FAQ />
