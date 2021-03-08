@@ -75,20 +75,19 @@ export default function Layout({
 					href="/favicon-16x16.png"
 				/>
 				<link rel="manifest" href="/site.webmanifest" />
-				<link
-					rel="mask-icon"
-					href="/safari-pinned-tab.svg"
-					color="#273343" // TODO: change colors
-				/>
-				<meta name="msapplication-TileColor" content="#273343" />
-				<meta name="msapplication-TileImage" content="/mstile-150x150.png" />
-				<meta name="theme-color" content="#E6A537" />
+				<link rel="mask-icon" href="/safari-pinned-tab.svg" color="#161627" />
+				<meta name="apple-mobile-web-app-title" content="Destiny Launcher" />
+				<meta name="application-name" content="Destiny Launcher" />
+				<meta name="msapplication-TileColor" content="#161627" />
+				<meta name="theme-color" content="#161627" />
 			</Head>
 
 			<div id="app" className={styles.app}>
 				<Navbar />
 
-				<main id="#" {...restProps}>{children}</main>
+				<main id="#" {...restProps}>
+					{children}
+				</main>
 
 				<Footer />
 			</div>
