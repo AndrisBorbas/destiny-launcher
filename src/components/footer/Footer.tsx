@@ -1,5 +1,5 @@
 import clsx from "clsx";
-import { FaGithub } from "react-icons/fa";
+import { FaGithub, FaTwitter } from "react-icons/fa";
 
 import styles from "./Footer.module.scss";
 
@@ -9,11 +9,18 @@ export default function Footer() {
 			<div className="container flex flex-col items-center justify-center mx-auto space-y-6">
 				<div className="flex items-center justify-evenly w-full lg:w-1/3">
 					<a
+						href="https://twitter.com/AndrisBorbas"
+						target="_blank"
+						rel="noopener"
+					>
+						<FaTwitter className="w-10 h-auto text-white hover:text-yellow-500" />
+					</a>
+					<a
 						href="https://www.github.com/andrisborbas/destiny-launcher"
 						target="_blank"
 						rel="noopener"
 					>
-						<FaGithub className="hover:text-blue text-blue-dark w-10 h-auto" />
+						<FaGithub className="w-10 h-auto text-white hover:text-yellow-500" />
 					</a>
 				</div>
 
@@ -22,7 +29,7 @@ export default function Footer() {
 						Destiny is a registered trademark of Bungie. Some content and images
 						are the property of Bungie.
 					</p>
-					<a className="text-xs" href="https://andrisborbas.com">
+					<a className="text-xs" href="https://twitter.com/AndrisBorbas">
 						© 2021 AndrisBorbas
 					</a>
 				</div>
