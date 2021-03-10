@@ -30,7 +30,12 @@
 	@apply justify-items-center;
 	@apply justify-center;
 	@apply grid-cols-1;
+
 	@screen sm {
 		grid-template-columns: repeat(auto-fill, 520px);
 	}
+
+	grid-auto-rows: auto;
+
+	grid-template-rows: masonry; /* TODO: Experimental feature now */
 }

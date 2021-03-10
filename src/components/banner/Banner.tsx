@@ -37,7 +37,7 @@ export default function Banner({
 
 	return (
 		<article
-			className={clsx(styles.banner, isOpened ? "row-span-4" : "row-span-1")}
+			className={clsx(styles.banner, isOpened ? "row-span-6" : "row-span-1")}
 		>
 			<div className={styles.container}>
 				<div className={styles.header}>
