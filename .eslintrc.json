@@ -9,7 +9,8 @@
 		"plugin:eslint-comments/recommended",
 		"plugin:etc/recommended",
 		"plugin:react-etc/recommended",
-		"plugin:prettier/recommended"
+		"prettier",
+		"prettier/prettier"
 	],
 	"plugins": ["simple-import-sort"],
 
