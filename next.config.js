@@ -5,28 +5,15 @@ const withMDX = require("@next/mdx")({
 });
 const withPWA = require("next-pwa");
 
+const nextConfig = {
+	reactStrictMode: true,
+};
+
 module.exports = withPlugins(
 	[
-		[withBundleAnalyzer({ enabled: process.env.ANALYZE === "true" })],
-		{
-			reactStrictMode: true,
-		},
-		[withMDX({ pageExtensions: ["tsx", "mdx"] })],
-		{
-			reactStrictMode: true,
-		},
-		[
-			withPWA({
-				pwa: {
-					dest: "public",
-				},
-			}),
-		],
-		{
-			reactStrictMode: true,
-		},
+		[withBundleAnalyzer, { enabled: process.env.ANALYZE === "true" }],
+		[withMDX, { pageExtensions: ["tsx", "mdx"] }],
+		[withPWA, { pwa: { dest: "public" } }],
 	],
-	{
-		reactStrictMode: true,
-	},
+	nextConfig,
 );
