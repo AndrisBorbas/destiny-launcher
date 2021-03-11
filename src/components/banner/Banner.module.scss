@@ -22,12 +22,12 @@
 		@apply ease-out;
 
 		@apply border;
-		border-color: rgba(212, 212, 216, 0);
-		border-top-color: rgba(212, 212, 216, 1);
+		border-color: rgba(113, 113, 122, 0);
+		border-top-color: rgba(113, 113, 122, 1);
 	}
 
 	&:hover::after {
-		@apply border-gray-300;
+		@apply border-gray-500;
 		@apply border;
 		@apply -inset-1.5;
 	}
@@ -130,7 +130,7 @@
 	}
 
 	&:hover::after {
-		@apply border-gray-300;
+		@apply border-gray-500;
 		@apply border;
 		@apply -inset-1;
 	}

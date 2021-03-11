@@ -1,5 +1,6 @@
 import clsx from "clsx";
 import { FaGithub, FaTwitter } from "react-icons/fa";
+import { SiKoFi } from "react-icons/si";
 
 import styles from "./Footer.module.scss";
 
@@ -21,6 +22,13 @@ export default function Footer() {
 						rel="noopener"
 					>
 						<FaGithub className="w-10 h-auto text-white hover:text-yellow-500" />
+					</a>
+					<a
+						href="https://ko-fi.com/andrisborbas"
+						target="_blank"
+						rel="noopener"
+					>
+						<SiKoFi className="w-10 h-auto text-white hover:text-yellow-500" />
 					</a>
 				</div>
 
