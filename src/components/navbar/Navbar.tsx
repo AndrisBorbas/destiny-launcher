@@ -1,8 +1,8 @@
 import clsx from "clsx";
+import Image from "next/image";
 import Link from "next/link";
 import React from "react";
 import { FaBars } from "react-icons/fa";
-import Image from "next/image";
 
 import navbarContent from "@/data/navbar.json";
 
@@ -17,7 +17,7 @@ export default function Navbar() {
 					<Link href="/#">
 						<a className="flex items-center mr-2 no-underline text-2xl lg:text-4xl lg:leading-10">
 							<span className="relative inline-block mr-2 w-12 h-12">
-								<Image src="/icon.png" layout="fill"></Image>
+								<Image src="/icon.png" layout="fill" />
 							</span>
 							<h1>Destiny Launcher</h1>
 						</a>
@@ -48,6 +48,9 @@ export default function Navbar() {
 											i === navbarContent.links.length - 1 && "sm:pr-2",
 										)}
 										onClick={() => setNavbarOpen(false)}
+										onKeyPress={() => setNavbarOpen(false)}
+										role="link"
+										tabIndex={i}
 									>
 										{label}
 									</a>
