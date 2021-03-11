@@ -77,12 +77,17 @@ export default function Layout({
 					sizes="180x180"
 					href="/apple-touch-icon-180x180.png"
 				/>
-				<link rel="icon" type="image/png" sizes="300x300" href="/favicon.png" />
 				<link
 					rel="icon"
 					type="image/png"
-					sizes="100x100"
-					href="/favicon-100x100.png"
+					sizes="512x512"
+					href="/favicon-512x512.png"
+				/>
+				<link
+					rel="icon"
+					type="image/png"
+					sizes="192x192"
+					href="/favicon-192x192.png"
 				/>
 				<link
 					rel="icon"
