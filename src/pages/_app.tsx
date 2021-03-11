@@ -5,10 +5,10 @@ import "@/styles/utilities.css";
 import "@/styles/global.scss";
 
 import type { AppProps, NextWebVitalsMetric } from "next/app";
+import { useRouter } from "next/dist/client/router";
 import React from "react";
 
 import * as gtag from "@/utils/gtag";
-import { useRouter } from "next/dist/client/router";
 
 export function reportWebVitals({
 	id,
