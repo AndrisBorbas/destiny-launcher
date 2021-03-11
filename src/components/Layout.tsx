@@ -95,6 +95,13 @@ export default function Layout({
 				<meta name="application-name" content="Destiny Launcher" />
 				<meta name="msapplication-TileColor" content="#161627" />
 				<meta name="theme-color" content="#161627" />
+
+				<meta name="mobile-web-app-capable" content="yes" />
+				<meta name="apple-mobile-web-app-capable" content="yes" />
+				<meta name="apple-mobile-web-app-status-bar-style" content="default" />
+				<meta name="format-detection" content="telephone=no" />
+				<link rel="manifest" href="/manifest.json" />
+				<link rel="shortcut icon" href="/favicon.ico" />
 			</Head>
 
 			<div id="app" className={styles.app}>
