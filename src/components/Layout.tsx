@@ -77,6 +77,13 @@ export default function Layout({
 					sizes="180x180"
 					href="/apple-touch-icon-180x180.png"
 				/>
+				<link rel="icon" type="image/png" sizes="300x300" href="/favicon.png" />
+				<link
+					rel="icon"
+					type="image/png"
+					sizes="100x100"
+					href="/favicon-100x100.png"
+				/>
 				<link
 					rel="icon"
 					type="image/png"
@@ -95,6 +102,13 @@ export default function Layout({
 				<meta name="application-name" content="Destiny Launcher" />
 				<meta name="msapplication-TileColor" content="#161627" />
 				<meta name="theme-color" content="#161627" />
+
+				<meta name="mobile-web-app-capable" content="yes" />
+				<meta name="apple-mobile-web-app-capable" content="yes" />
+				<meta name="apple-mobile-web-app-status-bar-style" content="default" />
+				<meta name="format-detection" content="telephone=no" />
+				<link rel="manifest" href="/manifest.json" />
+				<link rel="shortcut icon" href="/favicon-100x100.png" />
 			</Head>
 
 			<div id="app" className={styles.app}>
