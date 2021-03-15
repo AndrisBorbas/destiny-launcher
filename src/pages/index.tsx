@@ -33,24 +33,25 @@ export const getStaticProps = async () => {
 export type BannerProps = InferGetStaticPropsType<typeof getStaticProps>;
 
 export default function Index({ banners }: BannerProps) {
+	banners.sort((a, b) => {
+		return a.data.order > b.data.order ? 1 : -1;
+	});
+
 	const managers = banners.filter(
 		(bannner) => bannner.data.category === "manager",
 	);
-	managers.sort((a, b) => {
-		return a.data.order > b.data.order ? 1 : -1;
-	});
 
 	const informational = banners.filter(
 		(bannner) => bannner.data.category === "info",
 	);
-	informational.sort((a, b) => {
-		return a.data.order > b.data.order ? 1 : -1;
-	});
+
+	const sheets = banners.filter((bannner) => bannner.data.category === "sheet");
 
 	return (
 		<Layout className="safe-area-x flex flex-col mb-8 mx-auto sm:px-4 md:px-8 lg:px-12 xl:px-16">
 			<BannerSection banners={managers} title="Account Managers" />
 			<BannerSection banners={informational} title="Informational sites" />
+			<BannerSection banners={sheets} title="Community spreadsheets" />
 			<FAQ />
 		</Layout>
 	);
