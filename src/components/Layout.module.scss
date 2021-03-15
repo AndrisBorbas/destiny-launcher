@@ -1,15 +1,15 @@
 .app::before {
-	content: "";
 	background: radial-gradient(circle at 50% 70px, #393956 0%, #161627 100%);
-	@apply inset-0;
 	//top: var(--headerHeight);
 	//top: calc(var(--headerHeight) + constant(safe-area-inset-top));
 	//top: calc(var(--headerHeight) + env(safe-area-inset-top));
 	background-position: center top;
 	background-repeat: no-repeat;
+	box-sizing: content-box;
+	content: "";
+	line-height: normal;
 	position: fixed;
 	will-change: transform;
 	z-index: -1;
-	box-sizing: content-box;
-	line-height: normal;
+	@apply inset-0;
 }

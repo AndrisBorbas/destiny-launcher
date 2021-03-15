@@ -1,64 +1,21 @@
 @font-face {
+	font-display: swap;
 	font-family: "NeueHaasGroteskDisp";
+	font-style: normal;
+	font-weight: 500;
 	src: url("../../public/assets/fonts/NHaasGroteskDSPro-55Rg.ttf")
 			format("truetype"),
 		url("../../public/assets/fonts/NHaasGroteskDSPro-55Rg.woff") format("woff"),
 		url("../../public/assets/fonts/NHaasGroteskDSPro-55Rg.woff2")
 			format("woff2");
-	font-weight: 500;
-	font-style: normal;
-	font-display: swap;
 }
 
 @font-face {
+	font-display: swap;
 	font-family: "NeueHaasGroteskText";
+	font-style: normal;
+	font-weight: normal;
 	src: url("../../public/assets/fonts/NHaasGroteskTXPro-55Rg.woff2")
 			format("woff2"),
 		url("../../public/assets/fonts/NHaasGroteskTXPro-55Rg.woff") format("woff");
-	font-weight: normal;
-	font-style: normal;
-	font-display: swap;
 }
-
-/*
-@font-face {
-	font-family: "Montserrat";
-	src: url("../../public/assets/fonts/Montserrat-Light.ttf") format("truetype");
-	font-weight: 300;
-	font-style: normal;
-}
-@font-face {
-	font-family: "Montserrat";
-	src: url("../../public/assets/fonts/Montserrat-Regular.ttf")
-		format("truetype");
-	font-weight: normal;
-	font-style: normal;
-}
-@font-face {
-	font-family: "Montserrat";
-	src: url("../../public/assets/fonts/Montserrat-SemiBold.ttf")
-		format("truetype");
-	font-weight: 600;
-	font-style: normal;
-}
-@font-face {
-	font-family: "Montserrat";
-	src: url("../../public/assets/fonts/Montserrat-ExtraBold.ttf")
-		format("truetype");
-	font-weight: 800;
-	font-style: normal;
-}
-
-@font-face {
-	font-family: "Roboto";
-	src: url("../../public/assets/fonts/Roboto-Regular.ttf") format("truetype");
-	font-weight: normal;
-	font-style: normal;
-}
-@font-face {
-	font-family: "Roboto";
-	src: url("../../public/assets/fonts/Roboto-Bold.ttf") format("truetype");
-	font-weight: 700;
-	font-style: normal;
-}
-*/
