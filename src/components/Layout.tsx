@@ -107,6 +107,7 @@ export default function Layout({
 				<meta name="application-name" content="Destiny Launcher" />
 				<meta name="msapplication-TileColor" content="#161627" />
 				<meta name="theme-color" content="#161627" />
+				<meta name="color-sheme" content="dark light" />
 
 				<meta name="mobile-web-app-capable" content="yes" />
 				<meta name="apple-mobile-web-app-capable" content="yes" />
