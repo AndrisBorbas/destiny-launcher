@@ -43,7 +43,7 @@
 		"react-dom": "^17.0.1",
 		"react-icons": "^4.2.0",
 		"sass": "^1.32.8",
-		"tailwindcss": "^2.0.3"
+		"tailwindcss": "^2.0.4"
 	},
 	"devDependencies": {
 		"@next/eslint-plugin-next": "^10.0.8",
