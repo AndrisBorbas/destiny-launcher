@@ -1,19 +1,21 @@
 .header {
-	@apply fixed;
-	@apply z-40;
-	@apply top-0;
-	@apply flex;
-	@apply flex-wrap;
-	@apply items-center;
-	@apply justify-between;
-	@apply w-full;
-	@apply text-white;
-	@apply font-NeueHGD;
-	@apply border-b;
-	@apply border-gray-100;
+	@apply fixed
+		z-40
+		top-0
+		flex
+		flex-wrap
+		items-center
+		justify-between
+		w-full
+		text-white
+		font-NeueHGD
+		border-b
+		border-gray-300;
 
-	padding-top: 22px;
+	min-height: var(--headerHeight);
+
 	padding-bottom: 22px;
+	padding-top: 22px;
 
 	top: calc(constant(safe-area-inset-top));
 	top: calc(env(safe-area-inset-top));
@@ -21,6 +23,4 @@
 	@screen sm {
 		@apply p-0;
 	}
-
-	min-height: var(--headerHeight);
 }
