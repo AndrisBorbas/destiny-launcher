@@ -31,7 +31,7 @@
 }
 
 .header {
-	@apply gap-2 grid cursor-move;
+	@apply gap-2 grid;
 	align-items: stretch;
 	// min-height: 122px;
 	grid-template-columns: 56px 1fr 48px;

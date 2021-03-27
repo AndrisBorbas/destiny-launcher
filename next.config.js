@@ -13,15 +13,7 @@ module.exports = withPlugins(
 	[
 		[withBundleAnalyzer, { enabled: process.env.ANALYZE === "true" }],
 		[withMDX, { pageExtensions: ["tsx", "mdx"] }],
-		[
-			withPWA,
-			{
-				pwa: {
-					dest: "public",
-					disable: process.env.NODE_ENV === "development",
-				},
-			},
-		],
+		[withPWA, { pwa: { dest: "public" } }],
 	],
 	nextConfig,
 );
