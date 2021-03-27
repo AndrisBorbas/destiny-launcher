@@ -1,10 +1,5 @@
 .headerText {
-	@apply font-NeueHGD
-		text-4xl
-		font-medium
-		p-4
-		pl-2
-		my-4;
+	@apply font-NeueHGD text-4xl font-medium p-4 pl-2 my-4;
 
 	width: fit-content;
 
@@ -12,25 +7,20 @@
 	&:after {
 		content: "";
 		display: block;
-		@apply border-t-2
-			border-gray-600;
+		@apply border-t-2 border-gray-600;
 	}
 	&:before {
-		margin-bottom: 0;
+		margin-bottom: 1px;
 		width: 4rem;
 	}
 	&:after {
-		margin-top: 1px;
+		margin-top: 0;
 		width: 75%;
 	}
 }
 
 .bannerSection {
-	@apply grid
-		gap-8
-		justify-items-center
-		justify-center
-		grid-cols-1;
+	@apply grid gap-8 justify-items-center justify-center grid-cols-1;
 
 	@screen sm {
 		grid-template-columns: repeat(auto-fill, 520px);
@@ -39,4 +29,8 @@
 	grid-auto-rows: auto;
 
 	/* grid-template-rows: masonry; /* TODO: Experimental feature now */
+}
+
+.placeholder {
+	@apply w-full h-full text-center text-lg flex justify-center items-center;
 }
