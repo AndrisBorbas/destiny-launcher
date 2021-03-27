@@ -13,7 +13,7 @@ export default function Navbar() {
 	return (
 		<header className={clsx(styles.header, "bg-blur-10")}>
 			<div className="relative flex flex-wrap items-center justify-between mx-auto px-2 w-full sm:px-8">
-				<div className="relative flex justify-between w-full sm:static sm:block sm:justify-start sm:w-auto">
+				<div className="relative flex justify-between w-full pointer-events-auto sm:static sm:block sm:justify-start sm:w-auto">
 					<Link href="/#">
 						<a className="flex items-center mr-2 no-underline text-2xl lg:text-4xl lg:leading-10">
 							<span className="relative inline-block mr-2 w-12 h-12">
@@ -33,7 +33,7 @@ export default function Navbar() {
 				</div>
 				<nav
 					className={clsx(
-						"z-50 items-center w-full sm:flex sm:w-auto",
+						"z-50 items-center w-full pointer-events-auto sm:flex sm:w-auto",
 						navbarOpen ? "flex" : "hidden",
 					)}
 				>

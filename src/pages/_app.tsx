@@ -7,6 +7,8 @@ import "@/styles/global.scss";
 import type { AppProps, NextWebVitalsMetric } from "next/app";
 import { useRouter } from "next/dist/client/router";
 import React from "react";
+import { DndProvider } from "react-dnd";
+import { HTML5Backend } from "react-dnd-html5-backend";
 
 import * as gtag from "@/utils/gtag";
 
@@ -41,7 +43,9 @@ export default function DLApp({ Component, pageProps }: AppProps) {
 
 	return (
 		<React.StrictMode>
-			<Component {...pageProps} />
+			<DndProvider backend={HTML5Backend}>
+				<Component {...pageProps} />
+			</DndProvider>
 		</React.StrictMode>
 	);
 }

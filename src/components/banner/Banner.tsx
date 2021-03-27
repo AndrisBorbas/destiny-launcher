@@ -2,6 +2,7 @@ import clsx from "clsx";
 import { motion } from "framer-motion";
 import Image from "next/image";
 import React from "react";
+import { useDrag } from "react-dnd";
 import { FaAngleDown } from "react-icons/fa";
 
 import styles from "./Banner.module.scss";
@@ -13,13 +14,16 @@ type BannerProps = {
 	url: string;
 } & React.HTMLProps<HTMLDivElement>;
 
+export const BannerDragType = "banner";
+
 export default function Banner({
 	iconSrc,
 	headerText,
 	previewImage,
 	url,
 	children,
-}: BannerProps) {
+	forceClosed,
+}: BannerProps & { forceClosed?: boolean }) {
 	// Banners are hydrated with them being closed, less layout shift
 	const [isOpened, setOpened] = React.useState(false);
 
@@ -35,9 +39,22 @@ export default function Banner({
 		return () => {};
 	}, [url, isOpened]);
 
+	const [{ isDragging }, drag] = useDrag(() => ({
+		type: BannerDragType,
+		item: { url },
+		collect: (monitor) => ({
+			isDragging: !!monitor.isDragging(),
+		}),
+	}));
+
 	return (
 		<article
-			className={clsx(styles.banner, isOpened ? "row-span-6" : "row-span-1")}
+			className={clsx(
+				styles.banner,
+				forceClosed === true || !isOpened ? "row-span-1" : "row-span-6",
+				isDragging ? "opacity-50" : "opacity-100",
+			)}
+			ref={drag}
 		>
 			<div className={styles.container}>
 				<div className={styles.header}>
@@ -65,9 +82,9 @@ export default function Banner({
 					</h3>
 
 					<motion.div
-						className={styles.toggle}
+						className={clsx(styles.toggle)}
 						animate={{
-							rotate: isOpened ? 180 : 0,
+							rotate: forceClosed === true || !isOpened ? 0 : 180,
 						}}
 						transition={{
 							duration: 0.3,
@@ -80,8 +97,16 @@ export default function Banner({
 								setOpened(!isOpened);
 							}}
 							aria-label="Toggle open button"
+							disabled={forceClosed === true}
 						>
-							<FaAngleDown className="text-5xl" />
+							<FaAngleDown
+								className={clsx(
+									"text-5xl",
+									forceClosed === true
+										? "cursor-not-allowed"
+										: "cursor-pointer",
+								)}
+							/>
 						</button>
 					</motion.div>
 				</div>
@@ -89,7 +114,7 @@ export default function Banner({
 				<div
 					className={clsx(
 						"aspect-w-16 aspect-h-9",
-						isOpened ? "block" : "hidden",
+						forceClosed === true || !isOpened ? "hidden" : "block",
 					)}
 				>
 					<a
@@ -107,7 +132,12 @@ export default function Banner({
 					</a>
 				</div>
 
-				<figure className={clsx(styles.figure, isOpened ? "block" : "hidden")}>
+				<figure
+					className={clsx(
+						styles.figure,
+						forceClosed === true || !isOpened ? "hidden" : "block",
+					)}
+				>
 					{children}
 					<a
 						className={styles.button}
