@@ -1,7 +1,9 @@
+import { useSortable } from "@dnd-kit/sortable";
+import { CSS } from "@dnd-kit/utilities";
 import clsx from "clsx";
 import { motion } from "framer-motion";
 import Image from "next/image";
-import React from "react";
+import React, { GetDerivedStateFromProps } from "react";
 import { FaAngleDown } from "react-icons/fa";
 
 import styles from "./Banner.module.scss";
@@ -11,13 +13,28 @@ type BannerProps = {
 	headerText: string;
 	previewImage: string;
 	url: string;
+	category: string;
+	id: string;
 } & React.HTMLProps<HTMLDivElement>;
+
+export const BannerPreview = React.forwardRef<HTMLDivElement, BannerProps>(
+	// eslint-disable-next-line react/prop-types
+	({ children, ...props }, ref) => {
+		return (
+			<article {...props} ref={ref}>
+				{children}
+			</article>
+		);
+	},
+);
 
 export default function Banner({
 	iconSrc,
 	headerText,
 	previewImage,
 	url,
+	category,
+	id,
 	children,
 }: BannerProps) {
 	// Banners are hydrated with them being closed, less layout shift
@@ -35,9 +52,27 @@ export default function Banner({
 		return () => {};
 	}, [url, isOpened]);
 
+	const {
+		attributes,
+		listeners,
+		setNodeRef,
+		transform,
+		transition,
+	} = useSortable({ id });
+
+	const style = {
+		transform: CSS.Transform.toString(transform),
+		transition,
+	};
+
 	return (
-		<article
+		<BannerPreview
 			className={clsx(styles.banner, isOpened ? "row-span-6" : "row-span-1")}
+			ref={setNodeRef}
+			// @ts-expect-error: No idea
+			style={style}
+			{...attributes}
+			{...listeners}
 		>
 			<div className={styles.container}>
 				<div className={styles.header}>
@@ -119,6 +154,6 @@ export default function Banner({
 					</a>
 				</figure>
 			</div>
-		</article>
+		</BannerPreview>
 	);
 }

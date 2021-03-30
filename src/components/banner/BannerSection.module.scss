@@ -32,5 +32,6 @@
 }
 
 .placeholder {
-	@apply w-full h-full text-center text-lg flex justify-center items-center;
+	@apply w-full text-center text-lg flex justify-center items-center;
+	height: 72px;
 }
