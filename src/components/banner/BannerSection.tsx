@@ -1,12 +1,9 @@
+import { useDroppable } from "@dnd-kit/core";
 import { useSortable } from "@dnd-kit/sortable";
 import { CSS } from "@dnd-kit/utilities";
 import clsx from "clsx";
-import hydrate from "next-mdx-remote/hydrate";
 import type { MdxRemote } from "next-mdx-remote/types";
 import React from "react";
-
-import H4 from "@/components/banner/H4";
-import type { BannerProps } from "@/pages";
 
 import Banner from "./Banner";
 import styles from "./BannerSection.module.scss";
@@ -28,7 +25,7 @@ export default function BannerSection({
 	const {
 		attributes,
 		listeners,
-		setNodeRef,
+		setNodeRef: sortableRef,
 		transform,
 		transition,
 	} = useSortable({ id: `${category} placeholder` });
@@ -38,10 +35,14 @@ export default function BannerSection({
 		transition,
 	};
 
+	const { setNodeRef: droppableRef } = useDroppable({
+		id: `${category} container`,
+	});
+
 	return (
 		<>
 			<h2 className={styles.headerText}>{title}</h2>
-			<section className={styles.bannerSection}>
+			<section ref={droppableRef} className={styles.bannerSection}>
 				{banners.map((banner) => {
 					if (banner.data.category !== category) return null;
 
@@ -56,18 +57,6 @@ export default function BannerSection({
 						</Banner>
 					);
 				})}
-				{category === "favourites" && (
-					<article
-						className={clsx(styles.placeholder, "bg-blur-10")}
-						ref={setNodeRef}
-						// @ts-expect-error: No idea
-						style={style}
-						{...attributes}
-						{...listeners}
-					>
-						Drag & drop banners here to add them to favourites.
-					</article>
-				)}
 			</section>
 		</>
 	);
