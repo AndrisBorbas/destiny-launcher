@@ -3,7 +3,7 @@ import { CSS } from "@dnd-kit/utilities";
 import clsx from "clsx";
 import { motion } from "framer-motion";
 import Image from "next/image";
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { FaAngleDown } from "react-icons/fa";
 
 import styles from "./Banner.module.scss";
@@ -38,9 +38,9 @@ export default function Banner({
 	children,
 }: BannerProps) {
 	// Banners are hydrated with them being closed, less layout shift
-	const [isOpened, setOpened] = React.useState(false);
+	const [isOpened, setOpened] = useState(false);
 
-	React.useEffect(() => {
+	useEffect(() => {
 		const jsonString = localStorage.getItem("toggledBanners");
 		const map =
 			jsonString != null
