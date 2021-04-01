@@ -3,7 +3,7 @@ import { CSS } from "@dnd-kit/utilities";
 import clsx from "clsx";
 import { motion } from "framer-motion";
 import Image from "next/image";
-import React, { GetDerivedStateFromProps } from "react";
+import React from "react";
 import { FaAngleDown } from "react-icons/fa";
 
 import styles from "./Banner.module.scss";
@@ -41,16 +41,28 @@ export default function Banner({
 	const [isOpened, setOpened] = React.useState(false);
 
 	React.useEffect(() => {
-		const value = localStorage.getItem(url);
+		const jsonString = localStorage.getItem("toggledBanners");
+		const map =
+			jsonString != null
+				? new Map<string, boolean>(JSON.parse(jsonString))
+				: new Map<string, boolean>();
 		// But when the page loads they are opened if there is no stored value
-		setOpened(value !== null ? JSON.parse(value) : true);
+		setOpened(map.get(url) ?? true);
 		return () => {};
 	}, [url]);
 
-	React.useEffect(() => {
-		localStorage.setItem(url, JSON.stringify(isOpened));
-		return () => {};
-	}, [url, isOpened]);
+	function saveState(state: boolean) {
+		const jsonString = localStorage.getItem("toggledBanners");
+		const map =
+			jsonString != null
+				? new Map<string, boolean>(JSON.parse(jsonString))
+				: new Map<string, boolean>();
+		map.set(url, state);
+		localStorage.setItem(
+			"toggledBanners",
+			JSON.stringify(Array.from(map.entries())),
+		);
+	}
 
 	const {
 		attributes,
@@ -112,6 +124,7 @@ export default function Banner({
 						<button
 							type="button"
 							onClick={() => {
+								saveState(!isOpened);
 								setOpened(!isOpened);
 							}}
 							aria-label="Toggle open button"
