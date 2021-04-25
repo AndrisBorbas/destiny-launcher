@@ -1,4 +1,5 @@
 import {
+	closestCenter,
 	closestCorners,
 	defaultDropAnimation,
 	DndContext,
@@ -6,6 +7,7 @@ import {
 	DropAnimation,
 	KeyboardSensor,
 	PointerSensor,
+	rectIntersection,
 	useSensor,
 	useSensors,
 } from "@dnd-kit/core";
@@ -125,7 +127,7 @@ export default function BannerSection({ banners: rawBanners }: BannerProps) {
 	return (
 		<DndContext
 			sensors={sensors}
-			collisionDetection={closestCorners}
+			collisionDetection={rectIntersection}
 			onDragStart={(event) => {
 				const { active } = event;
 				setActiveId(active.id);

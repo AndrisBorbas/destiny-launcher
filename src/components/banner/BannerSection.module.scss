@@ -26,11 +26,20 @@
 		grid-template-columns: repeat(auto-fill, 520px);
 	}
 
-	grid-auto-rows: auto;
-
-	min-height: 72px;
+	background-color: rgba(0, 0, 0, 0.2);
+	box-sizing: border-box;
+	grid-auto-rows: max-content;
+	min-height: 120px;
+	min-width: 280px;
 
 	/* grid-template-rows: masonry; /* TODO: Experimental feature now */
+
+	&::after {
+		content: "";
+		grid-column-start: span 1;
+		height: 2px;
+		width: 100%;
+	}
 }
 
 .placeholder {
