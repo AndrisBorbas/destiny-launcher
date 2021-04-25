@@ -20,6 +20,7 @@ import type { MdxRemote } from "next-mdx-remote/types";
 import React, { useState } from "react";
 import { createPortal } from "react-dom";
 
+import type { HydratedBannerType } from "@/@types/DataTypes";
 import type { BannerProps } from "@/pages";
 
 import DroppableContainer from "../dnd/DroppableContainer";
@@ -28,7 +29,7 @@ import styles from "./BannerSection.module.scss";
 import H4 from "./H4";
 
 const TITLES: { [key in string]: string } = {
-	favourites: "Favourites",
+	favourite: "Favourites",
 	manager: "Account Managers",
 	info: "Informational sites",
 	sheet: "Community spreadsheets",
@@ -39,38 +40,45 @@ const dropAnimation: DropAnimation = {
 	dragSourceOpacity: 0.5,
 };
 
-type IDs = {
-	[key in string]: string[];
-};
+const VOID_ID = "__void__";
 
-export type ReactiveBanner = {
-	content: React.ReactNode;
-	mdxSource: MdxRemote.Source;
-	data: {
-		[key: string]: any;
-	};
-	filePath: string;
-};
+type Keys = "favourite" | "manager" | "info" | "sheet";
 
 type Banners = {
-	[key in string]: ReactiveBanner[];
+	[key in Keys]: HydratedBannerType[];
 };
 
-export default function BannerSection({ banners }: BannerProps) {
-	function mapBanners(category: string) {
-		return banners
-			.filter((banner) => banner.data.category === category)
-			.map((banner) => banner.data.id);
-	}
-
-	const [ids, setIds] = useState<IDs>({
-		favourites: [],
-		manager: mapBanners("manager"),
-		info: mapBanners("info"),
-		sheet: mapBanners("sheet"),
+export default function BannerSection({ banners: rawBanners }: BannerProps) {
+	const hydratedBanners = rawBanners.map((banner) => {
+		const content = hydrate(banner.content, {
+			components: { h4: H4 },
+		});
+		return { ...banner, content };
 	});
+
+	const [banners, setBanners] = useState(() => {
+		const favourite = hydratedBanners.filter(
+			(banner) => banner.data.category === "favourite",
+		);
+		const manager = hydratedBanners.filter(
+			(banner) => banner.data.category === "manager",
+		);
+		const info = hydratedBanners.filter(
+			(banner) => banner.data.category === "info",
+		);
+		const sheet = hydratedBanners.filter(
+			(banner) => banner.data.category === "sheet",
+		);
+		return {
+			favourite,
+			manager,
+			info,
+			sheet,
+		};
+	});
+
+	const [clonedItems, setClonedItems] = useState<Banners | null>(null);
 	const [activeId, setActiveId] = useState<string | null>(null);
-	const [clonedIds, setClonedIds] = useState<IDs | null>(null);
 
 	const sensors = useSensors(
 		useSensor(PointerSensor),
@@ -79,32 +87,14 @@ export default function BannerSection({ banners }: BannerProps) {
 		}),
 	);
 
-	const hydratedBanners = banners.map((banner) => {
-		const content = hydrate(banner.mdxSource, {
-			components: { h4: H4 },
-		});
-		return { ...banner, content };
-	});
-
-	function filterBanners(category: string) {
-		return hydratedBanners.filter(
-			(banner) => banner.data.category === category,
-		);
-	}
-
-	const [reactiveBanners, setReactiveBanners] = useState<Banners>({
-		favourites: [],
-		manager: filterBanners("manager"),
-		info: filterBanners("info"),
-		sheet: filterBanners("sheet"),
-	});
-
 	const findContainer = (id: string) => {
-		if (id in ids) {
-			return id;
+		if (id in banners) {
+			return id as Keys;
 		}
 
-		return Object.keys(ids).find((key) => ids[key].includes(id));
+		return Object.keys(banners).find((key) =>
+			banners[key as Keys].some((banner) => banner.id === id),
+		) as Keys;
 	};
 
 	const getIndex = (id: string) => {
@@ -114,35 +104,36 @@ export default function BannerSection({ banners }: BannerProps) {
 			return -1;
 		}
 
-		const index = ids[container].indexOf(id);
+		const index = banners[container as Keys].findIndex(
+			(banner) => banner.id === id,
+		);
 
 		return index;
 	};
 
 	const onDragCancel = () => {
-		if (clonedIds) {
+		if (clonedItems) {
 			// Reset items to their original state in case items have been
 			// Dragged across containrs
-			setIds(clonedIds);
+			setBanners(clonedItems);
 		}
 
 		setActiveId(null);
-		setClonedIds(null);
+		setClonedItems(null);
 	};
 
 	return (
 		<DndContext
 			sensors={sensors}
 			collisionDetection={closestCorners}
-			onDragStart={({ active }) => {
+			onDragStart={(event) => {
+				const { active } = event;
 				setActiveId(active.id);
-				setClonedIds(ids);
+				setClonedItems(banners);
 			}}
 			onDragOver={(event) => {
-				const { active, over, draggingRect } = event;
+				const { active, over } = event;
 				const overId = over?.id;
-
-				console.log(event);
 
 				if (!overId) {
 					return;
@@ -156,52 +147,15 @@ export default function BannerSection({ banners }: BannerProps) {
 				}
 
 				if (activeContainer !== overContainer) {
-					setIds((items) => {
+					setBanners((items) => {
 						const activeItems = items[activeContainer];
-						const overItems = items[overContainer];
-						const overIndex = overItems.indexOf(overId);
-						const activeIndex = activeItems.indexOf(active.id);
 
-						let newIndex: number;
-
-						if (overId in items) {
-							newIndex = overItems.length + 1;
-						} else {
-							const isBelowLastItem =
-								over &&
-								overIndex === overItems.length - 1 &&
-								draggingRect.offsetTop > over.rect.offsetTop + over.rect.height;
-
-							const modifier = isBelowLastItem ? 1 : 0;
-
-							newIndex =
-								overIndex >= 0 ? overIndex + modifier : overItems.length + 1;
-						}
-
-						return {
-							...items,
-							[activeContainer]: [
-								...items[activeContainer].filter((item) => item !== active.id),
-							],
-							[overContainer]: [
-								...items[overContainer].slice(0, newIndex),
-								items[activeContainer][activeIndex],
-								...items[overContainer].slice(
-									newIndex,
-									items[overContainer].length,
-								),
-							],
-						};
-					});
-
-					setReactiveBanners((items) => {
-						const activeItems = items[activeContainer];
 						const overItems = items[overContainer];
 						const overIndex = overItems.findIndex(
-							(item) => item.data.id === overId,
+							(banner) => banner.id === overId,
 						);
 						const activeIndex = activeItems.findIndex(
-							(item) => item.data.id === active.id,
+							(banner) => banner.id === active.id,
 						);
 
 						let newIndex: number;
@@ -212,7 +166,9 @@ export default function BannerSection({ banners }: BannerProps) {
 							const isBelowLastItem =
 								over &&
 								overIndex === overItems.length - 1 &&
-								draggingRect.offsetTop > over.rect.offsetTop + over.rect.height;
+								active.rect.current.translated &&
+								active.rect.current.translated.offsetTop >
+									over.rect.offsetTop + over.rect.height;
 
 							const modifier = isBelowLastItem ? 1 : 0;
 
@@ -224,16 +180,17 @@ export default function BannerSection({ banners }: BannerProps) {
 							...items,
 							[activeContainer]: [
 								...items[activeContainer].filter(
-									(item) => item.data.id !== active.id,
+									(item) => item.id !== active.id,
 								),
 							],
 							[overContainer]: [
 								...items[overContainer].slice(0, newIndex),
-								items[activeContainer].filter(
-									(item) => item.data.id === active.id,
-								)[0],
+
+								items[activeContainer][activeIndex],
+
 								...items[overContainer].slice(
 									newIndex,
+
 									items[overContainer].length,
 								),
 							],
@@ -241,7 +198,8 @@ export default function BannerSection({ banners }: BannerProps) {
 					});
 				}
 			}}
-			onDragEnd={({ active, over }) => {
+			onDragEnd={(event) => {
+				const { active, over } = event;
 				const activeContainer = findContainer(active.id);
 
 				if (!activeContainer) {
@@ -249,16 +207,31 @@ export default function BannerSection({ banners }: BannerProps) {
 					return;
 				}
 
-				const overId = over?.id || "void";
-
+				const overId = over?.id || VOID_ID;
+				/*
+				if (overId === VOID_ID) {
+					// @ts-expect-error: keys should be the same
+					setBanners((items) => ({
+						...(false && over?.id === VOID_ID ? items : clonedItems),
+						[VOID_ID]: [],
+					}));
+					setActiveId(null);
+					return;
+				}
+				*/
 				const overContainer = findContainer(overId);
 
 				if (activeContainer && overContainer) {
-					const activeIndex = ids[activeContainer].indexOf(active.id);
-					const overIndex = ids[overContainer].indexOf(overId);
+					const activeIndex = banners[activeContainer].findIndex(
+						(banner) => banner.id === active.id,
+					);
+
+					const overIndex = banners[overContainer].findIndex(
+						(banner) => banner.id === overId,
+					);
 
 					if (activeIndex !== overIndex) {
-						setIds((items) => ({
+						setBanners((items) => ({
 							...items,
 							[overContainer]: arrayMove(
 								items[overContainer],
@@ -266,23 +239,6 @@ export default function BannerSection({ banners }: BannerProps) {
 								overIndex,
 							),
 						}));
-						setReactiveBanners((items) => {
-							const oldIndex = items[overContainer]
-								.map((e) => e.data.id)
-								.indexOf(active.id);
-							const newIndex = items[overContainer]
-								.map((e) => e.data.id)
-								.indexOf(over?.id ?? "asd");
-
-							return {
-								...items,
-								[overContainer]: arrayMove(
-									items[overContainer],
-									oldIndex,
-									newIndex,
-								),
-							};
-						});
 					}
 				}
 
@@ -290,43 +246,47 @@ export default function BannerSection({ banners }: BannerProps) {
 			}}
 			onDragCancel={onDragCancel}
 		>
-			{Object.keys(ids).map((containerId) => (
-				<SortableContext
-					key={containerId}
-					items={ids[containerId]}
-					strategy={rectSortingStrategy}
-				>
-					<h2 className={styles.headerText}>{TITLES[containerId]}</h2>
-					<DroppableContainer id={containerId} className={styles.bannerSection}>
-						{reactiveBanners[containerId].map((banner) => {
-							if (banner.data.category !== containerId) return null;
-							return (
-								// @ts-expect-error: Banners props should always be the same as the data in the mdx's.
-								<Banner key={banner.filePath} {...banner.data}>
-									{banner.content}
-								</Banner>
-							);
-						})}
-					</DroppableContainer>
-				</SortableContext>
-			))}
-			{/*
-			{typeof window !== "undefined" &&
+			{Object.keys(banners).map((containerId) => {
+				return (
+					<SortableContext
+						key={containerId}
+						items={banners[containerId as Keys]}
+						strategy={rectSortingStrategy}
+					>
+						<h2 className={styles.headerText}>{TITLES[containerId as Keys]}</h2>
+
+						<DroppableContainer
+							id={containerId}
+							// items={banners[containerId as Keys].map((banner) => banner.id)}
+							className={styles.bannerSection}
+						>
+							{banners[containerId as Keys].map((banner) => {
+								return (
+									<Banner key={banner.id} id={banner.id} {...banner.data}>
+										{banner.content}
+									</Banner>
+								);
+							})}
+						</DroppableContainer>
+					</SortableContext>
+				);
+			})}
+			{/* typeof window !== "undefined" &&
 				createPortal(
 					<DragOverlay dropAnimation={dropAnimation}>
 						{activeId ? (
 							<Banner
-								{...reactiveBanners[findContainer(activeId)!].find(
-									(item) => item.data.id === activeId,
-								)?.data}
+								id="asd"
+								{...banners[findContainer(activeId)!].find(
+									(item) => item.id === activeId,
+								)!.data}
 							>
 								asd
 							</Banner>
 						) : null}
 					</DragOverlay>,
 					document.body,
-				)}
-				 */}
+								) */}
 		</DndContext>
 	);
 }

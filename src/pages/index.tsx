@@ -5,42 +5,48 @@ import renderToString from "next-mdx-remote/render-to-string";
 import path from "path";
 import React from "react";
 
+import type { BannerDataTypes } from "@/@types/DataTypes";
 import BannerSection from "@/components/banner/BannerSection";
 import FAQ from "@/components/faq/FAQ";
 import Layout from "@/components/Layout";
 import { BANNERS_PATH, bannersFilePaths } from "@/utils/mdxUtils";
 
 export const getStaticProps = async () => {
-	const banners = await Promise.all(
+	const rawBanners = await Promise.all(
 		bannersFilePaths.map(async (filePath) => {
 			const source = fs.readFileSync(path.join(BANNERS_PATH, filePath));
-			const { content, data } = matter(source);
+			const { content, data } = (matter(source) as unknown) as {
+				content: string;
+				data: BannerDataTypes;
+			};
 
 			const mdxSource = await renderToString(content, {
 				scope: data,
 			});
 
-			data.id = `${data.category} ${data.url}`;
+			if (data.category === "manager") data.order *= 10;
+			if (data.category === "info") data.order *= 1000;
+			if (data.category === "sheet") data.order *= 100000;
 
 			return {
-				mdxSource,
+				content: mdxSource,
 				data,
 				filePath,
 			};
 		}),
 	);
 
-	banners.sort((a, b) => {
-		let asum = a.data.order;
-		if (a.data.category === "manager") asum *= 100;
-		if (a.data.category === "info") asum *= 10000;
-		if (a.data.category === "sheet") asum *= 1000000;
+	rawBanners.sort((a, b) => {
+		return a.data.order > b.data.order ? 1 : -1;
+	});
 
-		let bsum = b.data.order;
-		if (b.data.category === "manager") bsum *= 100;
-		if (b.data.category === "info") bsum *= 10000;
-		if (b.data.category === "sheet") bsum *= 1000000;
-		return asum > bsum ? 1 : -1;
+	const banners = rawBanners.map((banner, i) => {
+		return {
+			id: banner.filePath,
+			index: i,
+			data: banner.data,
+			content: banner.content,
+		};
 	});
 
 	return { props: { banners } };
