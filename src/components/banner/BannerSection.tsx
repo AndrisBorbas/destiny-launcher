@@ -1,12 +1,10 @@
 import {
-	closestCenter,
-	closestCorners,
 	defaultDropAnimation,
 	DndContext,
 	DragOverlay,
 	DropAnimation,
 	KeyboardSensor,
-	PointerSensor,
+	MouseSensor,
 	rectIntersection,
 	useSensor,
 	useSensors,
@@ -18,7 +16,6 @@ import {
 	sortableKeyboardCoordinates,
 } from "@dnd-kit/sortable";
 import hydrate from "next-mdx-remote/hydrate";
-import type { MdxRemote } from "next-mdx-remote/types";
 import React, { useState } from "react";
 import { createPortal } from "react-dom";
 
@@ -83,7 +80,7 @@ export default function BannerSection({ banners: rawBanners }: BannerProps) {
 	const [activeId, setActiveId] = useState<string | null>(null);
 
 	const sensors = useSensors(
-		useSensor(PointerSensor),
+		useSensor(MouseSensor),
 		useSensor(KeyboardSensor, {
 			coordinateGetter: sortableKeyboardCoordinates,
 		}),
