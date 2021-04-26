@@ -56,7 +56,7 @@ export const getStaticProps = async () => {
 export type BannerProps = InferGetStaticPropsType<typeof getStaticProps>;
 
 export default function Index({ banners }: BannerProps) {
-	const [isVisible, toggleVisible] = useState(true);
+	const [isVisible, toggleVisible] = useState(false);
 
 	useEffect(() => {
 		const jsonString = localStorage.getItem("isBanner1");
