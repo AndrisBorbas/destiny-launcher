@@ -141,19 +141,12 @@ const Banner = React.memo(
 								isOpened ? "block" : "hidden",
 							)}
 						>
-							<a
-								href={url}
-								target="_blank"
-								rel="noopener"
-								aria-label={`${headerText} link`}
-							>
-								<Image
-									src={previewImage}
-									objectFit="cover"
-									layout="fill"
-									alt={`${headerText} preview`}
-								/>
-							</a>
+							<Image
+								src={previewImage}
+								objectFit="cover"
+								layout="fill"
+								alt={`${headerText} preview`}
+							/>
 						</div>
 
 						<figure
