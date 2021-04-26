@@ -1,5 +1,5 @@
 .banner {
-	@apply w-full;
+	@apply w-full cursor-move;
 }
 
 .container {
@@ -13,20 +13,11 @@
 		border-color: rgba(113, 113, 122, 0);
 		border-top-color: rgba(113, 113, 122, 1);
 		content: "";
-		@apply block
-			absolute
-			inset-0
-			pointer-events-none
-			transition-all
-			duration-200
-			ease-out
-			border;
+		@apply block absolute inset-0 pointer-events-none transition-all duration-200 ease-out border;
 	}
 
 	&:hover::after {
-		@apply border-gray-500
-			border
-			-inset-1.5;
+		@apply border-gray-500 border -inset-1.5;
 	}
 }
 
@@ -38,14 +29,7 @@
 }
 
 .headerText {
-	@apply font-NeueHGD
-		text-xl
-		font-medium
-		uppercase
-		p-4
-		pl-2
-		pr-0
-		self-center;
+	@apply font-NeueHGD text-xl font-medium uppercase p-4 pl-2 pr-0 self-center;
 
 	width: fit-content;
 
@@ -74,8 +58,7 @@
 }
 
 .toggle {
-	@apply w-12
-		h-12;
+	@apply w-12 h-12;
 
 	align-self: center;
 	transform-origin: center center;
@@ -103,27 +86,15 @@
 }
 
 .button {
-	@apply bg-button
-		block
-		m-2
-		mt-4
-		p-2
-		relative
-		text-center;
+	@apply bg-button block m-2 mt-4 p-2 relative text-center;
 
 	&::after {
 		border-color: #ffce1f;
-		content: "" block absolute inset-0 pointer-events-none;
-
-		@apply transition-all
-			duration-200
-			ease-out
-			border;
+		content: "";
+		@apply block absolute inset-0 pointer-events-none transition-all duration-200 ease-out border;
 	}
 
 	&:hover::after {
-		@apply border-gray-500
-			border
-			-inset-1;
+		@apply border-gray-500 border -inset-1;
 	}
 }

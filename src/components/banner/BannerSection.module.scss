@@ -1,6 +1,8 @@
 .headerText {
 	@apply font-NeueHGD text-4xl font-medium p-4 pl-2 my-4;
 
+	scroll-margin: 100px;
+	scroll-margin-top: 100px;
 	width: fit-content;
 
 	&:before,
@@ -26,11 +28,15 @@
 		grid-template-columns: repeat(auto-fill, 520px);
 	}
 
-	grid-auto-rows: auto;
+	box-sizing: border-box;
+	grid-auto-rows: max-content;
+	min-height: 72px;
+	min-width: 280px;
 
 	/* grid-template-rows: masonry; /* TODO: Experimental feature now */
 }
 
 .placeholder {
-	@apply w-full h-full text-center text-lg flex justify-center items-center;
+	@apply w-full text-center text-lg flex justify-center items-center;
+	height: 72px;
 }

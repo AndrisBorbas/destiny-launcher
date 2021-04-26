@@ -7,13 +7,25 @@ const withPWA = require("next-pwa");
 
 const nextConfig = {
 	reactStrictMode: true,
+	future: {
+		webpack5: true,
+		strictPostcssConfiguration: true,
+	},
 };
 
 module.exports = withPlugins(
 	[
 		[withBundleAnalyzer, { enabled: process.env.ANALYZE === "true" }],
 		[withMDX, { pageExtensions: ["tsx", "mdx"] }],
-		[withPWA, { pwa: { dest: "public" } }],
+		[
+			withPWA,
+			{
+				pwa: {
+					dest: "public",
+					disable: process.env.NODE_ENV === "development",
+				},
+			},
+		],
 	],
 	nextConfig,
 );

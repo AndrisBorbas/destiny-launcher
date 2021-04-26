@@ -1,7 +1,7 @@
 .faq {
-	@apply mt-4
-		container
-		mx-auto;
+	@apply mt-4 container mx-auto;
+	scroll-margin: 100px;
+	scroll-margin-top: 100px;
 }
 
 .headerText {
