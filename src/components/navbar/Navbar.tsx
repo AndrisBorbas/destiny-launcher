@@ -12,8 +12,8 @@ export default function Navbar() {
 	const [navbarOpen, setNavbarOpen] = React.useState(false);
 	return (
 		<header className={clsx(styles.header, "bg-blur-10")}>
-			<div className="relative flex flex-wrap items-center justify-between mx-auto px-2 w-full sm:px-8">
-				<div className="relative flex justify-between w-full pointer-events-auto sm:static sm:block sm:justify-start sm:w-auto">
+			<div className="relative flex flex-wrap items-center justify-between mx-auto px-2 w-full lg:px-8">
+				<div className="relative flex justify-between w-full pointer-events-auto lg:static lg:block lg:justify-start lg:w-auto">
 					<Link href="/#">
 						<a className="flex items-center mr-2 no-underline text-2xl lg:text-4xl lg:leading-10">
 							<span className="relative inline-block mr-2 w-12 h-12">
@@ -23,7 +23,7 @@ export default function Navbar() {
 						</a>
 					</Link>
 					<button
-						className="bg-transparent border-transparent block px-3 py-2 text-xl leading-none border border-solid rounded outline-none focus:outline-none cursor-pointer sm:hidden"
+						className="bg-transparent border-transparent block px-3 py-2 text-xl leading-none border border-solid rounded outline-none focus:outline-none cursor-pointer lg:hidden"
 						type="button"
 						onClick={() => setNavbarOpen(!navbarOpen)}
 						aria-label="Navbar toggler"
@@ -33,19 +33,19 @@ export default function Navbar() {
 				</div>
 				<nav
 					className={clsx(
-						"z-50 items-center w-full pointer-events-auto sm:flex sm:w-auto",
+						"z-50 items-center w-full pointer-events-auto lg:flex lg:w-auto",
 						navbarOpen ? "flex" : "hidden",
 					)}
 				>
-					<ul className="flex flex-col w-full rounded-lg list-none sm:flex-row sm:ml-auto sm:w-auto">
+					<ul className="flex flex-col w-full rounded-lg list-none lg:flex-row lg:ml-auto lg:w-auto">
 						{navbarContent.links.map(({ href, label }, i) => (
-							<li key={`${href}`} className="pl-2 py-1 w-full sm:pl-0">
+							<li key={`${href}`} className="pl-2 py-1 lg:pl-0">
 								<Link href={href}>
 									<a
 										className={clsx(
-											"hover:text-pink inline-block px-2 py-2 w-full text-xl font-medium sm:px-5 sm:text-2xl",
-											i === 0 && "sm:pl-2",
-											i === navbarContent.links.length - 1 && "sm:pr-2",
+											"hover:text-pink inline-block px-2 py-2 w-full text-xl font-medium lg:px-5 lg:text-2xl",
+											i === 0 && "lg:pl-2",
+											i === navbarContent.links.length - 1 && "lg:pr-2",
 										)}
 										onClick={() => setNavbarOpen(false)}
 										onKeyPress={() => setNavbarOpen(false)}

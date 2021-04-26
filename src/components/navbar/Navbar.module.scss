@@ -22,7 +22,7 @@
 	top: calc(constant(safe-area-inset-top));
 	top: calc(env(safe-area-inset-top));
 
-	@screen sm {
+	@screen lg {
 		@apply p-0;
 	}
 }

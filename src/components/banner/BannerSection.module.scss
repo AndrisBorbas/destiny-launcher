@@ -1,6 +1,8 @@
 .headerText {
 	@apply font-NeueHGD text-4xl font-medium p-4 pl-2 my-4;
 
+	scroll-margin: 100px;
+	scroll-margin-top: 100px;
 	width: fit-content;
 
 	&:before,

@@ -320,7 +320,9 @@ export default function BannerSection({ banners: rawBanners }: BannerProps) {
 						items={banners[containerId as Keys]}
 						strategy={rectSortingStrategy}
 					>
-						<h2 className={styles.headerText}>{TITLES[containerId as Keys]}</h2>
+						<h2 className={styles.headerText} id={containerId}>
+							{TITLES[containerId as Keys]}
+						</h2>
 
 						<DroppableContainer
 							id={containerId}
@@ -339,6 +341,15 @@ export default function BannerSection({ banners: rawBanners }: BannerProps) {
 									</Banner>
 								);
 							})}
+							{containerId === "favourite" &&
+								banners[containerId as Keys].length === 0 && (
+									<article
+										className="bg-blur-10 flex items-center justify-center w-full text-center text-lg border-t border-gray-500"
+										style={{ height: "72px" }}
+									>
+										Drag & drop banners here to add them to favourites.
+									</article>
+								)}
 						</DroppableContainer>
 					</SortableContext>
 				);
