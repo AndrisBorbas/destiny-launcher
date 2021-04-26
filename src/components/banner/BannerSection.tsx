@@ -16,7 +16,7 @@ import {
 	sortableKeyboardCoordinates,
 } from "@dnd-kit/sortable";
 import hydrate from "next-mdx-remote/hydrate";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { createPortal } from "react-dom";
 
 import type { HydratedBannerType } from "@/@types/DataTypes";
@@ -47,6 +47,10 @@ type Banners = {
 	[key in Keys]: HydratedBannerType[];
 };
 
+type BannersStorage = {
+	[key in Keys]: string[];
+};
+
 export default function BannerSection({ banners: rawBanners }: BannerProps) {
 	const hydratedBanners = rawBanners.map((banner) => {
 		const content = hydrate(banner.content, {
@@ -75,6 +79,55 @@ export default function BannerSection({ banners: rawBanners }: BannerProps) {
 			sheet,
 		};
 	});
+
+	useEffect(() => {
+		const jsonString = localStorage.getItem("order");
+		const storage: BannersStorage =
+			jsonString != null
+				? JSON.parse(jsonString)
+				: { favourite: [], manager: [], info: [], sheet: [] };
+
+		setBanners((items) => {
+			const modified: Banners = {
+				favourite: [],
+				manager: [],
+				info: [],
+				sheet: [],
+			};
+
+			const flat = Object.values(items).flat(1);
+
+			Object.keys(storage).forEach((containerId) => {
+				modified[containerId as Keys] = storage[containerId as Keys].map(
+					(id) => {
+						// eslint-disable-next-line @typescript-eslint/no-non-null-assertion
+						return flat.find((banner) => banner.id === id)!;
+					},
+				);
+			});
+
+			return { ...modified };
+		});
+		return () => {};
+	}, []);
+
+	function saveState(state: Banners) {
+		const jsonString = localStorage.getItem("order");
+		const storage: BannersStorage =
+			jsonString != null
+				? JSON.parse(jsonString)
+				: { favourite: [], manager: [], info: [], sheet: [] };
+
+		Object.keys(state).forEach((containerId) => {
+			storage[containerId as Keys] = state[containerId as Keys].map(
+				(banner) => {
+					return banner.id;
+				},
+			);
+		});
+
+		localStorage.setItem("order", JSON.stringify(storage));
+	}
 
 	const [clonedItems, setClonedItems] = useState<Banners | null>(null);
 	const [activeId, setActiveId] = useState<string | null>(null);
@@ -114,6 +167,7 @@ export default function BannerSection({ banners: rawBanners }: BannerProps) {
 		if (clonedItems) {
 			// Reset items to their original state in case items have been
 			// Dragged across containrs
+			saveState(clonedItems);
 			setBanners(clonedItems);
 		}
 
@@ -175,7 +229,7 @@ export default function BannerSection({ banners: rawBanners }: BannerProps) {
 								overIndex >= 0 ? overIndex + modifier : overItems.length + 1;
 						}
 
-						return {
+						const modified = {
 							...items,
 							[activeContainer]: [
 								...items[activeContainer].filter(
@@ -194,6 +248,15 @@ export default function BannerSection({ banners: rawBanners }: BannerProps) {
 								),
 							],
 						};
+						Object.keys(modified).forEach((containerId) => {
+							modified[containerId as Keys].forEach((banner, i) => {
+								// eslint-disable-next-line no-param-reassign
+								banner.index = i;
+							});
+						});
+
+						saveState(modified);
+						return modified;
 					});
 				}
 			}}
@@ -230,14 +293,25 @@ export default function BannerSection({ banners: rawBanners }: BannerProps) {
 					);
 
 					if (activeIndex !== overIndex) {
-						setBanners((items) => ({
-							...items,
-							[overContainer]: arrayMove(
-								items[overContainer],
-								activeIndex,
-								overIndex,
-							),
-						}));
+						setBanners((items) => {
+							const modified = {
+								...items,
+								[overContainer]: arrayMove(
+									items[overContainer],
+									activeIndex,
+									overIndex,
+								),
+							};
+							Object.keys(modified).forEach((containerId) => {
+								modified[containerId as Keys].forEach((banner, i) => {
+									// eslint-disable-next-line no-param-reassign
+									banner.index = i;
+								});
+							});
+
+							saveState(modified);
+							return modified;
+						});
 					}
 				}
 
