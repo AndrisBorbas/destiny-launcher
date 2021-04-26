@@ -329,7 +329,12 @@ export default function BannerSection({ banners: rawBanners }: BannerProps) {
 						>
 							{banners[containerId as Keys].map((banner) => {
 								return (
-									<Banner key={banner.id} id={banner.id} {...banner.data}>
+									<Banner
+										key={banner.id}
+										id={banner.id}
+										isActive={activeId === banner.id}
+										{...banner.data}
+									>
 										{banner.content}
 									</Banner>
 								);

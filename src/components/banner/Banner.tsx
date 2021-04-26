@@ -15,13 +15,24 @@ type BannerProps = {
 	url: string;
 	category: string;
 	id: string;
+	isActive?: boolean;
 } & React.HTMLProps<HTMLDivElement>;
 
 const Banner = React.memo(
 	React.forwardRef<HTMLDivElement, BannerProps>(
 		(
-			// eslint-disable-next-line react/prop-types
-			{ iconSrc, headerText, previewImage, url, category, id, children },
+			/* eslint-disable react/prop-types */
+			{
+				iconSrc,
+				headerText,
+				previewImage,
+				url,
+				category,
+				id,
+				isActive,
+				children,
+			},
+			/* eslint-enable react/prop-types */
 			ref,
 		) => {
 			// Banners are hydrated with them being closed, less layout shift
@@ -68,6 +79,7 @@ const Banner = React.memo(
 					className={clsx(
 						styles.banner,
 						isOpened ? "row-span-6" : "row-span-1",
+						// isActive === true ? "opacity-0" : "opacity-100",
 					)}
 					ref={setNodeRef}
 					// @ts-expect-error: No idea
