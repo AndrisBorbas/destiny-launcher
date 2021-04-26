@@ -71,7 +71,7 @@ export default function Index({ banners }: BannerProps) {
 				style={{ display: isVisible === true ? "block" : "none" }}
 				className="hidden mt-8 md:block"
 			>
-				<h3 className="w-fit relative mx-auto p-6 px-9 text-center text-xl bg-button rounded-md">
+				<h3 className="w-fit relative mx-auto p-6 px-9 text-center text-xl bg-button border-t border-gray-300">
 					New feature: favoriting and reordering
 					<button
 						className="absolute right-1 top-1 p-1"
