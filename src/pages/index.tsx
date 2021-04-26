@@ -3,7 +3,8 @@ import matter from "gray-matter";
 import type { InferGetStaticPropsType } from "next";
 import renderToString from "next-mdx-remote/render-to-string";
 import path from "path";
-import React from "react";
+import React, { useEffect, useState } from "react";
+import { FaTimes } from "react-icons/fa";
 
 import type { BannerDataTypes } from "@/@types/DataTypes";
 import BannerSection from "@/components/banner/BannerSection";
@@ -55,8 +56,35 @@ export const getStaticProps = async () => {
 export type BannerProps = InferGetStaticPropsType<typeof getStaticProps>;
 
 export default function Index({ banners }: BannerProps) {
+	const [isVisible, toggleVisible] = useState(true);
+
+	useEffect(() => {
+		const jsonString = localStorage.getItem("isBanner1");
+		const value = jsonString != null ? JSON.parse(jsonString) : true;
+		toggleVisible(value);
+		return () => {};
+	}, []);
+
 	return (
 		<Layout className="safe-area-x flex flex-col mb-8 mx-auto sm:px-4 md:px-8 lg:px-12 xl:px-16">
+			<div
+				style={{ display: isVisible === true ? "block" : "none" }}
+				className="hidden mt-8 md:block"
+			>
+				<h3 className="w-fit relative mx-auto p-6 px-9 text-center text-xl bg-button rounded-md">
+					New feature: favoriting and reordering
+					<button
+						className="absolute right-1 top-1 p-1"
+						type="button"
+						onClick={() => {
+							localStorage.setItem("isBanner1", JSON.stringify(false));
+							toggleVisible(false);
+						}}
+					>
+						<FaTimes />
+					</button>
+				</h3>
+			</div>
 			<BannerSection banners={banners} />
 			<FAQ />
 		</Layout>

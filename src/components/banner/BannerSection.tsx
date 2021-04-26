@@ -82,20 +82,14 @@ export default function BannerSection({ banners: rawBanners }: BannerProps) {
 
 	useEffect(() => {
 		const jsonString = localStorage.getItem("order");
-		const storage: BannersStorage =
-			jsonString != null
-				? JSON.parse(jsonString)
-				: { favourite: [], manager: [], info: [], sheet: [] };
-
+		if (!jsonString) return () => {};
+		const storage: BannersStorage = JSON.parse(jsonString);
 		setBanners((items) => {
-			const modified: Banners = {
-				favourite: [],
-				manager: [],
-				info: [],
-				sheet: [],
-			};
-
 			const flat = Object.values(items).flat(1);
+			if (Object.values(storage).flat(1).length !== flat.length) {
+				return items;
+			}
+			const modified = items;
 
 			Object.keys(storage).forEach((containerId) => {
 				modified[containerId as Keys] = storage[containerId as Keys].map(
@@ -106,7 +100,7 @@ export default function BannerSection({ banners: rawBanners }: BannerProps) {
 				);
 			});
 
-			return { ...modified };
+			return modified;
 		});
 		return () => {};
 	}, []);
