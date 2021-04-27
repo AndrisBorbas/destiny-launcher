@@ -86,10 +86,12 @@ export default function BannerSection({ banners: rawBanners }: BannerProps) {
 		const storage: BannersStorage = JSON.parse(jsonString);
 		setBanners((items) => {
 			const flat = Object.values(items).flat(1);
-			if (Object.values(storage).flat(1).length !== flat.length) {
-				return items;
-			}
-			const modified = items;
+			const modified: Banners = {
+				favourite: [],
+				manager: [],
+				info: [],
+				sheet: [],
+			};
 
 			Object.keys(storage).forEach((containerId) => {
 				modified[containerId as Keys] = storage[containerId as Keys].map(
@@ -98,6 +100,16 @@ export default function BannerSection({ banners: rawBanners }: BannerProps) {
 						return flat.find((banner) => banner.id === id)!;
 					},
 				);
+				const tempFlat = Object.values(modified).flat(1);
+				items[containerId as Keys].forEach((banner) => {
+					if (
+						tempFlat.every((item) => item.id !== banner.id) &&
+						containerId === banner.data.category
+					) {
+						console.log(containerId, banner);
+						modified[containerId as Keys].push(banner);
+					}
+				});
 			});
 
 			return modified;
