@@ -86,22 +86,30 @@ export default function BannerSection({ banners: rawBanners }: BannerProps) {
 		const storage: BannersStorage = JSON.parse(jsonString);
 		setBanners((items) => {
 			const flat = Object.values(items).flat(1);
-			const modified = items;
+			const modified: Banners = {
+				favourite: [],
+				manager: [],
+				info: [],
+				sheet: [],
+			};
 
 			Object.keys(storage).forEach((containerId) => {
-				const temp = storage[containerId as Keys].map((id) => {
-					// eslint-disable-next-line @typescript-eslint/no-non-null-assertion
-					return flat.find((banner) => banner.id === id)!;
-				});
+				modified[containerId as Keys] = storage[containerId as Keys].map(
+					(id) => {
+						// eslint-disable-next-line @typescript-eslint/no-non-null-assertion
+						return flat.find((banner) => banner.id === id)!;
+					},
+				);
+				const tempFlat = Object.values(modified).flat(1);
 				items[containerId as Keys].forEach((banner) => {
 					if (
-						!temp.some((item) => item.id === banner.id) &&
-						temp.some((item) => item.data.category === banner.data.category)
+						tempFlat.every((item) => item.id !== banner.id) &&
+						containerId === banner.data.category
 					) {
-						temp.push(banner);
+						console.log(containerId, banner);
+						modified[containerId as Keys].push(banner);
 					}
 				});
-				modified[containerId as Keys] = temp;
 			});
 
 			return modified;
