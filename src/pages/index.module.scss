@@ -1,3 +1,6 @@
-.banner {
-	width: min(100%, 520px);
+.notices {
+	@apply hidden md:block;
+	&:nth-child(1) {
+		@apply mt-8;
+	}
 }
