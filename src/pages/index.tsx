@@ -7,6 +7,7 @@ import React, { useEffect, useState } from "react";
 
 import type { BannerDataTypes } from "@/@types/DataTypes";
 import BannerSection from "@/components/banner/BannerSection";
+import H4 from "@/components/banner/H4";
 import FAQ from "@/components/faq/FAQ";
 import Layout from "@/components/Layout";
 import Notice from "@/components/notice/Notice";
@@ -24,6 +25,7 @@ export const getStaticProps = async () => {
 			};
 
 			const mdxSource = await renderToString(content, {
+				components: { h4: H4 },
 				scope: data,
 			});
 
