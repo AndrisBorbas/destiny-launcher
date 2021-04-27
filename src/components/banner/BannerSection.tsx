@@ -100,7 +100,11 @@ export default function BannerSection({ banners: rawBanners }: BannerProps) {
 						return flat.find((banner) => banner.id === id)!;
 					},
 				);
-				const tempFlat = Object.values(modified).flat(1);
+			});
+
+			const tempFlat = Object.values(modified).flat(1);
+
+			Object.keys(storage).forEach((containerId) => {
 				items[containerId as Keys].forEach((banner) => {
 					if (
 						tempFlat.every((item) => item.id !== banner.id) &&
