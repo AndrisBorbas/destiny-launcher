@@ -80,6 +80,10 @@ export default function BannerSection({ banners: rawBanners }: BannerProps) {
 		};
 	});
 
+	const [activeBanner, setActiveBanner] = useState<HydratedBannerType | null>(
+		null,
+	);
+
 	useEffect(() => {
 		const jsonString = localStorage.getItem("order");
 		if (!jsonString) return () => {};
@@ -143,7 +147,7 @@ export default function BannerSection({ banners: rawBanners }: BannerProps) {
 	const [activeId, setActiveId] = useState<string | null>(null);
 
 	const sensors = useSensors(
-		useSensor(MouseSensor),
+		useSensor(MouseSensor, { activationConstraint: { distance: 3 } }),
 		useSensor(KeyboardSensor, {
 			coordinateGetter: sortableKeyboardCoordinates,
 		}),
@@ -182,6 +186,7 @@ export default function BannerSection({ banners: rawBanners }: BannerProps) {
 		}
 
 		setActiveId(null);
+		setActiveBanner(null);
 		setClonedItems(null);
 	};
 
@@ -192,6 +197,11 @@ export default function BannerSection({ banners: rawBanners }: BannerProps) {
 			onDragStart={(event) => {
 				const { active } = event;
 				setActiveId(active.id);
+				setActiveBanner(
+					banners[findContainer(active.id) as Keys].find(
+						(banner) => banner.id === active.id,
+					) ?? null,
+				);
 				setClonedItems(banners);
 			}}
 			onDragOver={(event) => {
@@ -276,6 +286,7 @@ export default function BannerSection({ banners: rawBanners }: BannerProps) {
 
 				if (!activeContainer) {
 					setActiveId(null);
+					setActiveBanner(null);
 					return;
 				}
 
@@ -288,6 +299,7 @@ export default function BannerSection({ banners: rawBanners }: BannerProps) {
 						[VOID_ID]: [],
 					}));
 					setActiveId(null);
+					setActiveBanner(null);
 					return;
 				}
 				*/
@@ -326,6 +338,7 @@ export default function BannerSection({ banners: rawBanners }: BannerProps) {
 				}
 
 				setActiveId(null);
+				setActiveBanner(null);
 			}}
 			onDragCancel={onDragCancel}
 		>
@@ -370,22 +383,15 @@ export default function BannerSection({ banners: rawBanners }: BannerProps) {
 					</SortableContext>
 				);
 			})}
-			{/* typeof window !== "undefined" &&
-				createPortal(
-					<DragOverlay dropAnimation={dropAnimation}>
-						{activeId ? (
-							<Banner
-								id="asd"
-								{...banners[findContainer(activeId)!].find(
-									(item) => item.id === activeId,
-								)!.data}
-							>
-								asd
-							</Banner>
-						) : null}
-					</DragOverlay>,
-					document.body,
-								) */}
+			{typeof window !== "undefined" && (
+				<DragOverlay>
+					{activeId && activeBanner ? (
+						<Banner id="disabled" {...activeBanner.data}>
+							{activeBanner.content}
+						</Banner>
+					) : null}
+				</DragOverlay>
+			)}
 		</DndContext>
 	);
 }
