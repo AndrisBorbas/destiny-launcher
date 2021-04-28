@@ -71,7 +71,7 @@ const Banner = React.memo(
 			} = useSortable({ id });
 
 			const style = {
-				transform: CSS.Transform.toString(transform),
+				transform: CSS.Translate.toString(transform),
 				transition,
 			};
 			return (
@@ -79,7 +79,7 @@ const Banner = React.memo(
 					className={clsx(
 						styles.banner,
 						isOpened ? "row-span-6" : "row-span-1",
-						// isActive === true ? "opacity-0" : "opacity-100",
+						isActive === true ? "opacity-0" : "opacity-100",
 					)}
 					ref={setNodeRef}
 					// @ts-expect-error: No idea
