@@ -17,7 +17,7 @@ export default function Navbar() {
 					<Link href="/#">
 						<a className="flex items-center mr-2 no-underline text-2xl lg:text-4xl lg:leading-10">
 							<span className="relative inline-block mr-2 w-12 h-12">
-								<Image src="/icon.png" layout="fill" />
+								<Image src="/icon.png" alt="Logo" layout="fill" />
 							</span>
 							<h1>Destiny Launcher</h1>
 						</a>

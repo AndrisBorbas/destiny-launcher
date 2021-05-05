@@ -13,6 +13,7 @@ export default function Footer() {
 						href="https://twitter.com/AndrisBorbas"
 						target="_blank"
 						rel="noopener"
+						aria-label="Twitter link"
 					>
 						<FaTwitter className="w-10 h-auto text-white hover:text-yellow-500" />
 					</a>
@@ -20,6 +21,7 @@ export default function Footer() {
 						href="https://www.github.com/andrisborbas/destiny-launcher"
 						target="_blank"
 						rel="noopener"
+						aria-label="GitHub link"
 					>
 						<FaGithub className="w-10 h-auto text-white hover:text-yellow-500" />
 					</a>
@@ -27,6 +29,7 @@ export default function Footer() {
 						href="https://ko-fi.com/andrisborbas"
 						target="_blank"
 						rel="noopener"
+						aria-label="Ko-fi link"
 					>
 						<SiKoFi className="w-10 h-auto text-white hover:text-yellow-500" />
 					</a>
