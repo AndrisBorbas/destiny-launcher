@@ -15,9 +15,7 @@ import {
 	SortableContext,
 	sortableKeyboardCoordinates,
 } from "@dnd-kit/sortable";
-import hydrate from "next-mdx-remote/hydrate";
 import React, { useEffect, useState } from "react";
-import { createPortal } from "react-dom";
 
 import type { HydratedBannerType } from "@/@types/DataTypes";
 import type { BannerProps } from "@/pages";
@@ -52,24 +50,15 @@ type BannersStorage = {
 };
 
 export default function BannerSection({ banners: rawBanners }: BannerProps) {
-	const hydratedBanners = rawBanners.map((banner) => {
-		const content = hydrate(banner.content, {
-			components: { h4: H4 },
-		});
-		return { ...banner, content };
-	});
-
 	const [banners, setBanners] = useState(() => {
-		const favourite = hydratedBanners.filter(
+		const favourite = rawBanners.filter(
 			(banner) => banner.data.category === "favourite",
 		);
-		const manager = hydratedBanners.filter(
+		const manager = rawBanners.filter(
 			(banner) => banner.data.category === "manager",
 		);
-		const info = hydratedBanners.filter(
-			(banner) => banner.data.category === "info",
-		);
-		const sheet = hydratedBanners.filter(
+		const info = rawBanners.filter((banner) => banner.data.category === "info");
+		const sheet = rawBanners.filter(
 			(banner) => banner.data.category === "sheet",
 		);
 		return {

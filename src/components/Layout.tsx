@@ -12,6 +12,8 @@ export default function Layout({
 	return (
 		<>
 			<Head>
+				<link rel="preconnect" href="https://vitals.vercel-insights.com" />
+				<link rel="preconnect" href="https://www.google-analytics.com" />
 				<title>Destiny Launcher</title>
 				<meta name="viewport" content="initial-scale=1.0, width=device-width" />
 				<meta

@@ -1,3 +1,5 @@
+import type { MDXRemoteSerializeResult } from "next-mdx-remote";
+
 export type BannerDataTypes = {
 	category: string;
 	headerText: string;
@@ -11,5 +13,5 @@ export type HydratedBannerType = {
 	id: string;
 	index: number;
 	data: BannerDataTypes;
-	content: React.ReactNode;
+	content: MDXRemoteSerializeResult;
 };

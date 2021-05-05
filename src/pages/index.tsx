@@ -1,7 +1,7 @@
 import fs from "fs";
 import matter from "gray-matter";
 import type { InferGetStaticPropsType } from "next";
-import renderToString from "next-mdx-remote/render-to-string";
+import { serialize } from "next-mdx-remote/serialize";
 import path from "path";
 import React, { useEffect, useState } from "react";
 
@@ -24,10 +24,7 @@ export const getStaticProps = async () => {
 				data: BannerDataTypes;
 			};
 
-			const mdxSource = await renderToString(content, {
-				components: { h4: H4 },
-				scope: data,
-			});
+			const mdxSource = await serialize(content, { scope: data });
 
 			if (data.category === "manager") data.order *= 10;
 			if (data.category === "info") data.order *= 1000;
