@@ -3,10 +3,12 @@ import { CSS } from "@dnd-kit/utilities";
 import clsx from "clsx";
 import { motion } from "framer-motion";
 import Image from "next/image";
+import { MDXRemote, MDXRemoteSerializeResult } from "next-mdx-remote";
 import React, { useEffect, useState } from "react";
 import { FaAngleDown } from "react-icons/fa";
 
 import styles from "./Banner.module.scss";
+import H4 from "./H4";
 
 type BannerProps = {
 	iconSrc: string;
@@ -16,6 +18,7 @@ type BannerProps = {
 	category: string;
 	id: string;
 	isActive?: boolean;
+	children: MDXRemoteSerializeResult;
 } & React.HTMLProps<HTMLDivElement>;
 
 const Banner = React.memo(
@@ -152,7 +155,7 @@ const Banner = React.memo(
 						<figure
 							className={clsx(styles.figure, isOpened ? "block" : "hidden")}
 						>
-							{children}
+							<MDXRemote {...children} components={{ h4: H4 }} />
 							<a
 								className={styles.button}
 								href={url}
