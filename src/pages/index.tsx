@@ -60,13 +60,9 @@ export default function Index({ banners }: BannerProps) {
 	return (
 		<Layout className="safe-area-x flex flex-col mb-8 mx-auto sm:px-4 md:px-8 lg:px-12 xl:px-16">
 			<section className={styles.notices}>
-				<Notice id="isBanner1">New feature: favoriting and reordering</Notice>
-				<Notice id="notice2">
-					New sites: <br />
-					Raid Dad <br />
-					Nightfall Report <br />
-					Destiny Optimizer <br />
-					D2 Checklist
+				<Notice id="notice3">
+					<h2 className="mb-1">New site:</h2>
+					Destiny Recipes - easily clean your vault before the new season
 				</Notice>
 			</section>
 			<BannerSection banners={banners} />
