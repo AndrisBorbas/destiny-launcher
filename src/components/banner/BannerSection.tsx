@@ -18,7 +18,6 @@ import {
 import React, { useEffect, useState } from "react";
 
 import type { HydratedBannerType } from "@/@types/DataTypes";
-import type { BannerProps } from "@/pages";
 
 import DroppableContainer from "../dnd/DroppableContainer";
 import Banner from "./Banner";
@@ -49,7 +48,11 @@ type BannersStorage = {
 	[key in Keys]: string[];
 };
 
-export default function BannerSection({ banners: rawBanners }: BannerProps) {
+export default function BannerSection({
+	banners: rawBanners,
+}: {
+	banners: HydratedBannerType[];
+}) {
 	const [banners, setBanners] = useState(() => {
 		const favourite = rawBanners.filter(
 			(banner) => banner.data.category === "favourite",
@@ -103,7 +106,7 @@ export default function BannerSection({ banners: rawBanners }: BannerProps) {
 						tempFlat.every((item) => item.id !== banner.id) &&
 						containerId === banner.data.category
 					) {
-						console.log(containerId, banner);
+						// console.log(containerId, banner);
 						modified[containerId as Keys].push(banner);
 					}
 				});
