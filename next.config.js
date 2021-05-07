@@ -4,6 +4,7 @@ const withMDX = require("@next/mdx")({
 	extension: /\.mdx?$/,
 });
 const withPWA = require("next-pwa");
+const withTM = require("next-transpile-modules")(["bungie-api-ts"]);
 
 const nextConfig = {
 	reactStrictMode: true,
@@ -15,6 +16,7 @@ const nextConfig = {
 
 module.exports = withPlugins(
 	[
+		[withTM],
 		[withBundleAnalyzer, { enabled: process.env.ANALYZE === "true" }],
 		[withMDX, { pageExtensions: ["tsx", "mdx"] }],
 		[

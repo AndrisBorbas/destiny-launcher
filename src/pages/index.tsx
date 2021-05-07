@@ -1,3 +1,4 @@
+import type { DestinySeasonDefinition } from "bungie-api-ts/destiny2";
 import fs from "fs";
 import matter from "gray-matter";
 import type { InferGetStaticPropsType } from "next";
@@ -11,6 +12,7 @@ import H4 from "@/components/banner/H4";
 import FAQ from "@/components/faq/FAQ";
 import Layout from "@/components/Layout";
 import Notice from "@/components/notice/Notice";
+import getD2Info from "@/utils/bungieApi/destiny2-api";
 import { BANNERS_PATH, bannersFilePaths } from "@/utils/mdxUtils";
 
 import styles from "./index.module.scss";
@@ -51,12 +53,39 @@ export const getStaticProps = async () => {
 		};
 	});
 
-	return { props: { banners } };
+	const { allSeasons, commonSettings } = await getD2Info();
+
+	return { props: { banners, allSeasons, commonSettings } };
 };
 
-export type BannerProps = InferGetStaticPropsType<typeof getStaticProps>;
+type PageProps = InferGetStaticPropsType<typeof getStaticProps>;
 
-export default function Index({ banners }: BannerProps) {
+export default function Index({
+	banners,
+	allSeasons,
+	commonSettings,
+}: PageProps) {
+	let currentSeason: DestinySeasonDefinition | undefined;
+	Object.values(allSeasons).forEach((season) => {
+		if (season.startDate) {
+			const now = Date.now();
+			const date = Date.parse(season.startDate);
+			if (!currentSeason) {
+				currentSeason = season;
+				return;
+			}
+			if (currentSeason.startDate) {
+				const currentDate = Date.parse(currentSeason.startDate);
+				if (date <= now && date > currentDate) {
+					currentSeason = season;
+				}
+			}
+		}
+	});
+	console.log(currentSeason);
+
+	console.log(commonSettings.destiny2CoreSettings.currentSeasonHash);
+
 	return (
 		<Layout className="safe-area-x flex flex-col mb-8 mx-auto sm:px-4 md:px-8 lg:px-12 xl:px-16">
 			<section className={styles.notices}>
