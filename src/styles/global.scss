@@ -1,9 +1,9 @@
 :root {
 	color-scheme: dark light;
 
-	--headerHeight: 5rem;
+	--headerHeight: 65px;
 	@screen lg {
-		--headerHeight: 6rem;
+		--headerHeight: 65px;
 	}
 }
 
