@@ -26,7 +26,7 @@ module.exports = {
 					"ui-sans-serif",
 					"system-ui",
 					"-apple-system",
-					"Segoe UI",
+					'"Segoe UI"',
 					"Roboto",
 				],
 				NeueHGT: [
@@ -34,7 +34,7 @@ module.exports = {
 					"ui-sans-serif",
 					"system-ui",
 					"-apple-system",
-					"Segoe UI",
+					'"Segoe UI"',
 					"Roboto",
 				],
 			},
