@@ -8,7 +8,7 @@ type NoticeProps = {
 	id: string;
 } & HTMLProps<HTMLDivElement>;
 
-export default function Notice({ id, children }: NoticeProps) {
+export default function Notice({ id, children, className }: NoticeProps) {
 	const [isVisible, toggleVisible] = useState(false);
 
 	useEffect(() => {
@@ -18,11 +18,14 @@ export default function Notice({ id, children }: NoticeProps) {
 		return () => {};
 	}, [id]);
 	return (
-		<div style={{ display: isVisible === true ? "" : "none" }} className="mb-4">
+		<div
+			style={{ display: isVisible === true ? "" : "none" }}
+			className={clsx("mb-4", className)}
+		>
 			<h3
 				className={clsx(
 					styles.notice,
-					"relative mx-auto p-6 px-9 text-center text-xl bg-button border-t border-gray-300",
+					"relative ml-auto p-3 px-6 text-center text-xl bg-button border-t border-gray-300",
 				)}
 			>
 				{children}
