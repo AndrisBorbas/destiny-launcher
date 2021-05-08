@@ -1,6 +1,3 @@
 .notices {
-	@apply hidden md:block;
-	&:nth-child(1) {
-		@apply mt-8;
-	}
+	@apply hidden md:block absolute right-8 lg:right-12 xl:right-16 top-0;
 }
