@@ -21,14 +21,22 @@ module.exports = {
 				},
 			},
 			fontFamily: {
-				Roboto:
-					"Roboto, ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto",
-				Montserrat:
-					"Montserrat, ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto",
-				NeueHGD:
-					"NeueHaasGroteskDisp, ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto",
-				NeueHGT:
-					"NeueHaasGroteskText, ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto",
+				NeueHGD: [
+					"NeueHaasGroteskDisp",
+					"ui-sans-serif",
+					"system-ui",
+					"-apple-system",
+					"Segoe UI",
+					"Roboto",
+				],
+				NeueHGT: [
+					"NeueHaasGroteskText",
+					"ui-sans-serif",
+					"system-ui",
+					"-apple-system",
+					"Segoe UI",
+					"Roboto",
+				],
 			},
 		},
 	},
