@@ -5,9 +5,7 @@ import {
 	DropAnimation,
 	KeyboardSensor,
 	MouseSensor,
-	PointerSensor,
 	rectIntersection,
-	TouchSensor,
 	useSensor,
 	useSensors,
 } from "@dnd-kit/core";
@@ -141,7 +139,7 @@ export default function BannerSection({
 	const [activeId, setActiveId] = useState<string | null>(null);
 
 	const sensors = useSensors(
-		useSensor(PointerSensor, { activationConstraint: { distance: 3 } }),
+		useSensor(MouseSensor, { activationConstraint: { distance: 3 } }),
 		useSensor(KeyboardSensor, {
 			coordinateGetter: sortableKeyboardCoordinates,
 		}),
