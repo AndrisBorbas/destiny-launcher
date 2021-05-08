@@ -1,28 +1,22 @@
 .header {
-	@apply fixed
-		z-40
-		top-0
-		flex
-		flex-wrap
-		items-center
-		justify-between
-		w-full
-		text-white
-		font-NeueHGD
-		border-b
-		border-gray-300;
+	@apply fixed z-40 top-0 flex flex-wrap items-center justify-between w-full text-white font-NeueHGD border-b border-gray-300 py-2;
 
 	min-height: var(--headerHeight);
-
-	padding-bottom: 22px;
-	padding-top: 22px;
 
 	pointer-events: none;
 
 	top: calc(constant(safe-area-inset-top));
 	top: calc(env(safe-area-inset-top));
+}
 
-	@screen lg {
-		@apply p-0;
+.navlink {
+	outline: none;
+
+	&::after {
+		@apply border-t-2 border-gray-500 block;
+		content: "";
+		margin-top: -2px;
+		width: var(--after-w);
+		will-change: width;
 	}
 }
