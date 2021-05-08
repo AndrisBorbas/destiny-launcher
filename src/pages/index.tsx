@@ -10,6 +10,7 @@ import type { BannerDataTypes } from "@/@types/DataTypes";
 import BannerSection from "@/components/banner/BannerSection";
 import H4 from "@/components/banner/H4";
 import FAQ from "@/components/faq/FAQ";
+import SeasonInfo from "@/components/info/SeasonInfo";
 import Layout from "@/components/Layout";
 import Notice from "@/components/notice/Notice";
 import getD2Info from "@/utils/bungieApi/destiny2-api";
@@ -65,35 +66,15 @@ export default function Index({
 	allSeasons,
 	commonSettings,
 }: PageProps) {
-	let currentSeason: DestinySeasonDefinition | undefined;
-	Object.values(allSeasons).forEach((season) => {
-		if (season.startDate) {
-			const now = Date.now();
-			const date = Date.parse(season.startDate);
-			if (!currentSeason) {
-				currentSeason = season;
-				return;
-			}
-			if (currentSeason.startDate) {
-				const currentDate = Date.parse(currentSeason.startDate);
-				if (date <= now && date > currentDate) {
-					currentSeason = season;
-				}
-			}
-		}
-	});
-	console.log(currentSeason);
-
-	console.log(commonSettings.destiny2CoreSettings.currentSeasonHash);
-
 	return (
-		<Layout className="safe-area-x flex flex-col mb-8 mx-auto sm:px-4 md:px-8 lg:px-12 xl:px-16">
+		<Layout className="safe-area-x relative flex flex-col mb-8 mx-auto sm:px-4 md:px-8 lg:px-12 xl:px-16">
 			<section className={styles.notices}>
-				<Notice id="notice3">
+				<Notice id="notice3" className="mt-8">
 					<h2 className="mb-1">New site:</h2>
 					Destiny Recipes - easily clean your vault before the new season
 				</Notice>
 			</section>
+			<SeasonInfo allSeasons={allSeasons} commonSettings={commonSettings} />
 			<BannerSection banners={banners} />
 			<FAQ />
 		</Layout>
