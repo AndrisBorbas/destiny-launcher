@@ -5,6 +5,7 @@ import {
 	getDestinyManifest,
 	getDestinyManifestSlice,
 } from "bungie-api-ts/destiny2";
+import fs from "fs";
 
 import unauthenticatedHttpClient from "./client";
 
@@ -17,7 +18,7 @@ async function getSettings(): Promise<CoreSettingsConfiguration> {
 	return response.Response;
 }
 
-export default async function getD2Info() {
+export default async function getD2Info(save?: boolean) {
 	const destinyManifest = await getManifest();
 	const manifestTables = await getDestinyManifestSlice(
 		unauthenticatedHttpClient,
@@ -27,6 +28,24 @@ export default async function getD2Info() {
 			language: "en",
 		},
 	);
+
+	if (save) {
+		fs.mkdirSync("public/data");
+		fs.writeFile(
+			"public/data/d2manifest.json",
+			JSON.stringify(destinyManifest),
+			(err) => {
+				if (err) throw err;
+			},
+		);
+		fs.writeFile(
+			"public/data/seasoninfo.json",
+			JSON.stringify(manifestTables),
+			(err) => {
+				if (err) throw err;
+			},
+		);
+	}
 
 	const commonSettings = await getSettings();
 

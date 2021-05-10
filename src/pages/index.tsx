@@ -22,7 +22,7 @@ export const getStaticProps = async () => {
 	const rawBanners = await Promise.all(
 		bannersFilePaths.map(async (filePath) => {
 			const source = fs.readFileSync(path.join(BANNERS_PATH, filePath));
-			const { content, data } = (matter(source) as unknown) as {
+			const { content, data } = matter(source) as unknown as {
 				content: string;
 				data: BannerDataTypes;
 			};
@@ -54,7 +54,7 @@ export const getStaticProps = async () => {
 		};
 	});
 
-	const { allSeasons, commonSettings } = await getD2Info();
+	const { allSeasons, commonSettings } = await getD2Info(true);
 
 	return { props: { banners, allSeasons, commonSettings } };
 };
