@@ -30,16 +30,16 @@ export default async function getD2Info(save?: boolean) {
 	);
 
 	if (save) {
-		fs.mkdirSync("data");
+		fs.mkdirSync("public/data");
 		fs.writeFile(
-			"data/d2manifest.json",
+			"public/data/d2manifest.json",
 			JSON.stringify(destinyManifest),
 			(err) => {
 				if (err) throw err;
 			},
 		);
 		fs.writeFile(
-			"data/seasoninfo.json",
+			"public/data/seasoninfo.json",
 			JSON.stringify(manifestTables),
 			(err) => {
 				if (err) throw err;

@@ -39,4 +39,4 @@ public/workbox-*.js
 
 src/components/banner/Test.tsx
 
-data/
+public/data/
