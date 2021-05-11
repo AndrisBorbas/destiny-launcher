@@ -87,7 +87,12 @@ export default function SeasonInfo({
 							/>
 						</div>
 					)}
-					<h3 className="ml-1 my-2 text-4xl font-bold xl:text-5xl">
+					<h3
+						className={clsx(
+							styles.seasonName,
+							"ml-1 my-2 text-4xl font-bold xl:text-5xl",
+						)}
+					>
 						{currentSeason.displayProperties.name}
 					</h3>
 				</div>
