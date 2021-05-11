@@ -11,7 +11,12 @@ import FAQ from "@/components/faq/FAQ";
 import SeasonInfo from "@/components/info/SeasonInfo";
 import Layout from "@/components/Layout";
 import Notice from "@/components/notice/Notice";
-import getInitialD2Info from "@/utils/bungieApi/destiny2-api";
+import {
+	getManifest,
+	getSettings,
+	getSlice,
+} from "@/utils/bungieApi/destiny2-api-client";
+import getInitialD2Info from "@/utils/bungieApi/destiny2-api-server";
 import { BANNERS_PATH, bannersFilePaths } from "@/utils/mdxUtils";
 
 import styles from "./index.module.scss";
@@ -65,6 +70,32 @@ export const getStaticProps = async () => {
 type PageProps = InferGetStaticPropsType<typeof getStaticProps>;
 
 export default function Index({ banners, d2info }: PageProps) {
+	const [d2InfoState, setD2InfoState] = useState(d2info);
+	useEffect(() => {
+		async function loadManifest() {
+			const manifest = await getManifest();
+
+			if (d2info.version !== manifest.version) {
+				const manifestTables = await getSlice(manifest, [
+					"DestinySeasonDefinition",
+					"DestinyPresentationNodeDefinition",
+				]);
+				const commonSettings = await getSettings();
+
+				setD2InfoState({
+					version: manifest.version,
+					allSeasons: manifestTables.DestinySeasonDefinition,
+					presentationNodes: manifestTables.DestinyPresentationNodeDefinition,
+					commonSettings,
+				});
+			}
+		}
+
+		loadManifest();
+
+		return () => {};
+	}, [d2info.version]);
+
 	return (
 		<Layout className="safe-area-x relative flex flex-col mb-8 mx-auto sm:px-4 md:px-8 lg:px-12 xl:px-16">
 			<section className={styles.notices}>
@@ -73,7 +104,7 @@ export default function Index({ banners, d2info }: PageProps) {
 					Destiny Data Compendium - Detailed info on abilities data.
 				</Notice>
 			</section>
-			<SeasonInfo {...d2info} />
+			<SeasonInfo {...d2InfoState} />
 			<BannerSection banners={banners} />
 			<FAQ />
 		</Layout>
