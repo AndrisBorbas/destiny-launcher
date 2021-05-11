@@ -72,9 +72,9 @@ export default function Index({ banners, d2info }: PageProps) {
 	return (
 		<Layout className="safe-area-x relative flex flex-col mb-8 mx-auto sm:px-4 md:px-8 lg:px-12 xl:px-16">
 			<section className={styles.notices}>
-				<Notice id="notice3" className="mt-8">
-					<h2 className="mb-1">New site:</h2>
-					Destiny Recipes - easily clean your vault before the new season
+				<Notice id="notice4" className="mt-8">
+					<h2 className="mb-1">New sheet:</h2>
+					Destiny Data Compendium - Detailed info on abilities data.
 				</Notice>
 			</section>
 			<SeasonInfo {...d2info} />
