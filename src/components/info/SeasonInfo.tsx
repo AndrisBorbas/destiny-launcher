@@ -1,7 +1,14 @@
 import type { CoreSettingsConfiguration } from "bungie-api-ts/core";
-import type { DestinySeasonDefinition } from "bungie-api-ts/destiny2";
+import type {
+	DestinyPresentationNodeDefinition,
+	DestinySeasonDefinition,
+} from "bungie-api-ts/destiny2";
+import clsx from "clsx";
+import Image from "next/image";
 
-function weeksBetween(d1: number, d2: number) {
+import styles from "./SeasonInfo.module.scss";
+
+function timeBetween(d1: number, d2: number) {
 	const weeks = Math.floor((d2 - d1) / (7 * 24 * 60 * 60 * 1000));
 	const days = Math.floor((d2 - d1) / (24 * 60 * 60 * 1000)) - weeks * 7;
 	const hours =
@@ -14,9 +21,16 @@ type PageProps = {
 		[key: number]: DestinySeasonDefinition;
 	};
 	commonSettings: CoreSettingsConfiguration;
+	presentationNodes: {
+		[key: number]: DestinyPresentationNodeDefinition;
+	};
 };
 
-export default function SeasonInfo({ allSeasons, commonSettings }: PageProps) {
+export default function SeasonInfo({
+	allSeasons,
+	commonSettings,
+	presentationNodes,
+}: PageProps) {
 	// console.log(allSeasons);
 	// console.log(commonSettings.destiny2CoreSettings.futureSeasonHashes);
 
@@ -39,14 +53,20 @@ export default function SeasonInfo({ allSeasons, commonSettings }: PageProps) {
 
 	if (!currentSeason || !currentSeason.endDate) return <></>;
 
-	const { hours, days, weeks } = weeksBetween(
+	const seasonIcon = Object.values(presentationNodes).find(
+		(node) =>
+			node.displayProperties.name === currentSeason?.displayProperties.name &&
+			node.displayProperties.hasIcon,
+	);
+
+	const { hours, days, weeks } = timeBetween(
 		Date.now(),
 		Date.parse(currentSeason.endDate ?? Date.now().toString()),
 	);
 
 	return (
-		<section className="w-fit mt-4 font-NeueHGD tracking-widest uppercase">
-			<h4 className="text-2xl xl:text-3xl">
+		<section className="w-fit mt-4 p-2 font-NeueHGD tracking-widest uppercase">
+			<h4 className={clsx(styles.seasonCounter, "text-2xl xl:text-3xl")}>
 				Season {currentSeason.seasonNumber}
 			</h4>
 			<a
@@ -57,11 +77,22 @@ export default function SeasonInfo({ allSeasons, commonSettings }: PageProps) {
 				target="_blank"
 				rel="noopener"
 			>
-				<h3 className="my-2 text-4xl font-bold xl:text-5xl">
-					{currentSeason.displayProperties.name}
-				</h3>
+				<div className="flex items-center">
+					{seasonIcon && (
+						<div className={styles.image}>
+							<Image
+								src={`https://bungie.net${seasonIcon?.displayProperties.icon}`}
+								width={64}
+								height={64}
+							/>
+						</div>
+					)}
+					<h3 className="ml-1 my-2 text-4xl font-bold xl:text-5xl">
+						{currentSeason.displayProperties.name}
+					</h3>
+				</div>
 			</a>
-			<h4 className="text-xl xl:text-2xl">
+			<h4 className={clsx(styles.seasonTimer, "text-xl xl:text-2xl")}>
 				Season ends in:
 				<span className="mx-2">
 					{weeks > 0 && (

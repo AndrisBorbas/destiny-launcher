@@ -25,7 +25,7 @@ export default function Notice({ id, children, className }: NoticeProps) {
 			<h3
 				className={clsx(
 					styles.notice,
-					"relative ml-auto p-3 px-6 text-center text-xl bg-button border-t border-gray-300",
+					"bg-blur-10 relative ml-auto p-3 px-6 text-center text-xl bg-button bg-opacity-50 border-t border-gray-300",
 				)}
 			>
 				{children}

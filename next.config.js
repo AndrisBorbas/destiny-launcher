@@ -12,6 +12,9 @@ const nextConfig = {
 		webpack5: true,
 		strictPostcssConfiguration: true,
 	},
+	images: {
+		domains: ["bungie.net"],
+	},
 };
 
 module.exports = withPlugins(

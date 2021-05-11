@@ -1,0 +1,36 @@
+.seasonCounter {
+	width: fit-content;
+
+	&:before {
+		content: "";
+		display: block;
+		margin-bottom: -1px;
+		width: 4rem;
+		@apply border-t-2 border-gray-600;
+	}
+}
+
+.seasonTimer {
+	width: fit-content;
+
+	&:after {
+		content: "";
+		display: block;
+		margin-top: 0;
+		width: 75%;
+		@apply border-t-2 border-gray-600;
+	}
+}
+
+.image {
+	@apply w-12 h-12;
+	@screen xl {
+		@apply w-16 h-16;
+	}
+	& > div {
+		@apply w-12 h-12;
+		@screen xl {
+			@apply w-16 h-16;
+		}
+	}
+}

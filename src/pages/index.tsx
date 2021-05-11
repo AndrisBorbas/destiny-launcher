@@ -54,18 +54,21 @@ export const getStaticProps = async () => {
 		};
 	});
 
-	const { allSeasons, commonSettings } = await getD2Info(true);
+	const { allSeasons, commonSettings, presentationNodes } = await getD2Info(
+		true,
+	);
 
-	return { props: { banners, allSeasons, commonSettings } };
+	return {
+		props: {
+			banners,
+			d2info: { allSeasons, commonSettings, presentationNodes },
+		},
+	};
 };
 
 type PageProps = InferGetStaticPropsType<typeof getStaticProps>;
 
-export default function Index({
-	banners,
-	allSeasons,
-	commonSettings,
-}: PageProps) {
+export default function Index({ banners, d2info }: PageProps) {
 	return (
 		<Layout className="safe-area-x relative flex flex-col mb-8 mx-auto sm:px-4 md:px-8 lg:px-12 xl:px-16">
 			<section className={styles.notices}>
@@ -74,7 +77,7 @@ export default function Index({
 					Destiny Recipes - easily clean your vault before the new season
 				</Notice>
 			</section>
-			<SeasonInfo allSeasons={allSeasons} commonSettings={commonSettings} />
+			<SeasonInfo {...d2info} />
 			<BannerSection banners={banners} />
 			<FAQ />
 		</Layout>
