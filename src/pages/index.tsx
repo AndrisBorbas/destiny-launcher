@@ -1,4 +1,3 @@
-import type { DestinySeasonDefinition } from "bungie-api-ts/destiny2";
 import fs from "fs";
 import matter from "gray-matter";
 import type { InferGetStaticPropsType } from "next";
@@ -8,12 +7,11 @@ import React, { useEffect, useState } from "react";
 
 import type { BannerDataTypes } from "@/@types/DataTypes";
 import BannerSection from "@/components/banner/BannerSection";
-import H4 from "@/components/banner/H4";
 import FAQ from "@/components/faq/FAQ";
 import SeasonInfo from "@/components/info/SeasonInfo";
 import Layout from "@/components/Layout";
 import Notice from "@/components/notice/Notice";
-import getD2Info from "@/utils/bungieApi/destiny2-api";
+import getInitialD2Info from "@/utils/bungieApi/destiny2-api";
 import { BANNERS_PATH, bannersFilePaths } from "@/utils/mdxUtils";
 
 import styles from "./index.module.scss";
@@ -54,14 +52,12 @@ export const getStaticProps = async () => {
 		};
 	});
 
-	const { allSeasons, commonSettings, presentationNodes } = await getD2Info(
-		true,
-	);
+	const d2info = await getInitialD2Info(true);
 
 	return {
 		props: {
 			banners,
-			d2info: { allSeasons, commonSettings, presentationNodes },
+			d2info,
 		},
 	};
 };

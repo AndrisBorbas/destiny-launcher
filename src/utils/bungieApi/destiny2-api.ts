@@ -18,7 +18,7 @@ async function getSettings(): Promise<CoreSettingsConfiguration> {
 	return response.Response;
 }
 
-export default async function getD2Info(save?: boolean) {
+export default async function getInitialD2Info(save?: boolean) {
 	const destinyManifest = await getManifest();
 	const manifestTables = await getDestinyManifestSlice(
 		unauthenticatedHttpClient,
@@ -56,6 +56,7 @@ export default async function getD2Info(save?: boolean) {
 	const commonSettings = await getSettings();
 
 	return {
+		version: destinyManifest.version,
 		allSeasons: manifestTables.DestinySeasonDefinition,
 		commonSettings,
 		presentationNodes: manifestTables.DestinyPresentationNodeDefinition,
