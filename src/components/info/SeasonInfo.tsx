@@ -65,13 +65,9 @@ export default function SeasonInfo({
 			node.displayProperties.hasIcon,
 	);
 
-	console.log(currentSeason.endDate);
-
 	const { hours, days, weeks, minutes } = timeBetween(
 		Date.now(),
-		Date.parse(
-			"2021-05-11T15:00:00Z" ?? currentSeason.endDate ?? Date.now().toString(),
-		),
+		Date.parse(currentSeason.endDate ?? Date.now().toString()),
 	);
 
 	return (
