@@ -86,7 +86,7 @@
 }
 
 .button {
-	@apply bg-button block m-2 mt-4 p-2 relative text-center;
+	@apply bg-button bg-opacity-50 block m-2 mt-4 p-2 relative text-center;
 
 	&::after {
 		border-color: #ffce1f;

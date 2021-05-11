@@ -24,22 +24,28 @@ export default async function getD2Info(save?: boolean) {
 		unauthenticatedHttpClient,
 		{
 			destinyManifest,
-			tableNames: ["DestinySeasonDefinition"],
+			tableNames: [
+				"DestinySeasonDefinition",
+				"DestinyPresentationNodeDefinition",
+			],
 			language: "en",
 		},
 	);
 
+	// console.log(manifestTables.DestinyPresentationNodeDefinition)
+
 	if (save) {
-		fs.mkdirSync("public/data");
+		const dir = "public/data";
+		if (!fs.existsSync(dir)) fs.mkdirSync(dir);
 		fs.writeFile(
-			"public/data/d2manifest.json",
+			`${dir}/d2manifest.json`,
 			JSON.stringify(destinyManifest),
 			(err) => {
 				if (err) throw err;
 			},
 		);
 		fs.writeFile(
-			"public/data/seasoninfo.json",
+			`${dir}/seasoninfo.json`,
 			JSON.stringify(manifestTables),
 			(err) => {
 				if (err) throw err;
@@ -52,5 +58,6 @@ export default async function getD2Info(save?: boolean) {
 	return {
 		allSeasons: manifestTables.DestinySeasonDefinition,
 		commonSettings,
+		presentationNodes: manifestTables.DestinyPresentationNodeDefinition,
 	};
 }

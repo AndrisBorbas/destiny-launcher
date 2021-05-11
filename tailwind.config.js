@@ -17,7 +17,7 @@ module.exports = {
 					dark: "#12142b",
 				},
 				button: {
-					DEFAULT: "rgba(183,140,37,.8)",
+					DEFAULT: "#ffb80e",
 				},
 			},
 			fontFamily: {
