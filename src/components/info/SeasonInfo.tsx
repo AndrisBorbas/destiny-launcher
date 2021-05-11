@@ -13,7 +13,13 @@ function timeBetween(d1: number, d2: number) {
 	const days = Math.floor((d2 - d1) / (24 * 60 * 60 * 1000)) - weeks * 7;
 	const hours =
 		Math.floor((d2 - d1) / (60 * 60 * 1000)) - weeks * 7 * 24 - days * 24;
-	return { hours, days, weeks };
+	const minutes =
+		Math.floor((d2 - d1) / (60 * 1000)) -
+		weeks * 7 * 24 -
+		days * 24 -
+		hours * 60 +
+		1;
+	return { hours, days, weeks, minutes };
 }
 
 type PageProps = {
@@ -51,7 +57,7 @@ export default function SeasonInfo({
 		);
 	}
 
-	if (!currentSeason || !currentSeason.endDate) return <></>;
+	if (!currentSeason) return <></>;
 
 	const seasonIcon = Object.values(presentationNodes).find(
 		(node) =>
@@ -59,9 +65,13 @@ export default function SeasonInfo({
 			node.displayProperties.hasIcon,
 	);
 
-	const { hours, days, weeks } = timeBetween(
+	console.log(currentSeason.endDate);
+
+	const { hours, days, weeks, minutes } = timeBetween(
 		Date.now(),
-		Date.parse(currentSeason.endDate ?? Date.now().toString()),
+		Date.parse(
+			"2021-05-11T15:00:00Z" ?? currentSeason.endDate ?? Date.now().toString(),
+		),
 	);
 
 	return (
@@ -116,6 +126,12 @@ export default function SeasonInfo({
 						<>
 							<span className="mx-1">{hours}</span>
 							{hours > 1 ? " hours" : " hour"}
+						</>
+					)}
+					{weeks + days + hours <= 0 && (
+						<>
+							<span className="mx-1">{minutes}</span>
+							{minutes > 1 ? " minutes" : " minute"}
 						</>
 					)}
 				</span>
