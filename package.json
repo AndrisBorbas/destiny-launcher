@@ -35,7 +35,7 @@
 		"bungie-api-ts": "^4.8.0",
 		"clsx": "^1.1.1",
 		"focus-visible": "^5.2.0",
-		"framer-motion": "^4.1.13",
+		"framer-motion": "^4.1.16",
 		"gray-matter": "^4.0.3",
 		"next": "^10.2.0",
 		"next-compose-plugins": "^2.2.1",
