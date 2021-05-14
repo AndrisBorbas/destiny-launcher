@@ -21,7 +21,7 @@
 		"*.{js,ts,tsx}": "eslint --fix"
 	},
 	"dependencies": {
-		"@dnd-kit/core": "^3.0.2",
+		"@dnd-kit/core": "^3.0.3",
 		"@dnd-kit/sortable": "^3.0.1",
 		"@dnd-kit/utilities": "^2.0.0",
 		"@mdx-js/loader": "^1.6.22",
