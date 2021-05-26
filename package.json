@@ -1,6 +1,7 @@
 {
 	"name": "destiny-launcher",
 	"private": true,
+	"proxy": "https://dev.destinylauncher.net/",
 	"scripts": {
 		"build": "next build",
 		"build:analyze": "cross-env ANALYZE=true npm run build",
