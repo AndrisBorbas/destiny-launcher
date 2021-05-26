@@ -53,7 +53,7 @@ export default function Navbar() {
 					<ul className="flex flex-col w-full rounded-lg list-none lg:flex-row lg:ml-auto lg:w-auto">
 						{navbarContent.links.map(({ href, label }, i) => (
 							<li key={`${href}`} className="pl-2 py-1 lg:p-0">
-								<Link href={href} passHref>
+								<Link href={href} passHref replace>
 									<motion.a
 										className={clsx(
 											styles.navlink,
