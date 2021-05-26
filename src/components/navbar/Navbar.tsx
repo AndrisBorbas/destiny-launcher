@@ -27,7 +27,7 @@ export default function Navbar() {
 		<header className={clsx(styles.header, "bg-blur-10")}>
 			<div className="relative flex flex-wrap items-center justify-between mx-auto px-2 w-full lg:px-8">
 				<div className="relative flex items-center justify-between w-full pointer-events-auto lg:static lg:block lg:justify-start lg:w-auto">
-					<Link href="/#">
+					<Link href="/#" replace>
 						<a className="flex items-center mr-2 no-underline text-2xl lg:text-4xl lg:leading-10">
 							<span className="relative inline-block mr-2 w-12 h-12">
 								<Image src="/icon.png" alt="Logo" layout="fill" />
