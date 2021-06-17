@@ -15,7 +15,8 @@ export default function Navbar() {
 	const { user, error, isLoading, mutateUser } = useUser("/", false);
 
 	useEffect(() => {
-		console.log(user, error, isLoading);
+		if (process.env.NODE_ENV !== "production")
+			console.log(user, error, isLoading);
 
 		return () => {};
 	}, [user, error, isLoading]);

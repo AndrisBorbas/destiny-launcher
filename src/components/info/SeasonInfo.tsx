@@ -1,4 +1,3 @@
-import type { DestinyCharacterComponent } from "bungie-api-ts/destiny2";
 import clsx from "clsx";
 import Image from "next/image";
 
