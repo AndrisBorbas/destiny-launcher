@@ -1,13 +1,20 @@
 import type { ServerResponse } from "bungie-api-ts/destiny2";
 import type { HttpClient, HttpClientConfig } from "bungie-api-ts/http";
 
+import { oauthClientAPIKey } from "./consts";
+
+interface HttpClientConfigExtra extends HttpClientConfig {
+	headers?: { auth: string; [key: string]: unknown };
+}
+
 // I got this example from the DIM source code, because I couldn't manage to make it work on my own.
 // https://github.com/DestinyItemManager/DIM/blob/master/src/app/bungie-api/http-client.ts#L139
 function createHttpClient(
+	fetchFunction: typeof fetch,
 	apiKey: string,
 	withCredentials: boolean,
 ): HttpClient {
-	return async (config: HttpClientConfig) => {
+	return async (config: HttpClientConfigExtra) => {
 		let { url } = config;
 		if (config.params) {
 			// strip out undefined params keys. bungie-api-ts creates them for optional endpoint parameters
@@ -27,19 +34,30 @@ function createHttpClient(
 			body: config.body ? JSON.stringify(config.body) : undefined,
 			headers: {
 				"X-API-Key": apiKey,
+				...(config.headers &&
+					config.headers.auth &&
+					config.headers.auth !== "" &&
+					withCredentials && {
+						Authorization: `Bearer ${config.headers.auth}`,
+					}),
 				...(config.body && { "Content-Type": "application/json" }),
 			},
 			credentials: withCredentials ? "include" : "omit",
 		});
-		const response = await fetch(fetchOptions);
+		const response = await fetchFunction(fetchOptions);
 		const data: ServerResponse<unknown> = await response.json();
 		return data;
 	};
 }
 
-const unauthenticatedHttpClient = createHttpClient(
-	process.env.BUNGIE_API_KEY ?? "",
+export const unauthenticatedHttpClient = createHttpClient(
+	fetch,
+	oauthClientAPIKey(),
 	false,
 );
 
-export default unauthenticatedHttpClient;
+export const authenticatedHttpClient = createHttpClient(
+	fetch,
+	oauthClientAPIKey(),
+	true,
+);

@@ -22,7 +22,7 @@ export default function Notice({ id, children, className }: NoticeProps) {
 			style={{ display: isVisible === true ? "" : "none" }}
 			className={clsx("mb-4", className)}
 		>
-			<h3
+			<div
 				className={clsx(
 					styles.notice,
 					"bg-blur-10 relative ml-auto p-3 px-6 text-center text-xl bg-button bg-opacity-50 border-t border-gray-300",
@@ -39,7 +39,7 @@ export default function Notice({ id, children, className }: NoticeProps) {
 				>
 					<FaTimes />
 				</button>
-			</h3>
+			</div>
 		</div>
 	);
 }

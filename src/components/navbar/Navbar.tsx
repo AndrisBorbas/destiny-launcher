@@ -1,27 +1,24 @@
 import clsx from "clsx";
-import { motion } from "framer-motion";
 import Image from "next/image";
 import Link from "next/link";
-import React from "react";
+import { useEffect } from "react";
 import { FaBars } from "react-icons/fa";
 
 import navbarContent from "@/data/navbar.json";
+import { useBool, useUser } from "@/utils/hooks";
 
 import styles from "./Navbar.module.scss";
+import { NavLink } from "./NavLink";
 
 export default function Navbar() {
-	const [navbarOpen, setNavbarOpen] = React.useState(false);
+	const [isNavbarOpen, navbarHandlers] = useBool();
+	const { user, error, isLoading, mutateUser } = useUser("/", false);
 
-	const variants = {
-		initial: {
-			"--after-w": "0%",
-			rotation: 0.001,
-		},
-		hover: {
-			"--after-w": "100%",
-			rotation: 0.001,
-		},
-	};
+	useEffect(() => {
+		console.log(user, error, isLoading);
+
+		return () => {};
+	}, [user, error, isLoading]);
 
 	return (
 		<header className={clsx(styles.header, "bg-blur-10")}>
@@ -38,7 +35,7 @@ export default function Navbar() {
 					<button
 						className="bg-transparent border-transparent block px-2 py-2 h-full text-xl leading-none border border-solid rounded outline-none focus:outline-none cursor-pointer lg:hidden"
 						type="button"
-						onClick={() => setNavbarOpen(!navbarOpen)}
+						onClick={navbarHandlers.toggle}
 						aria-label="Navbar toggler"
 					>
 						<FaBars />
@@ -47,36 +44,36 @@ export default function Navbar() {
 				<nav
 					className={clsx(
 						"z-50 items-center w-full pointer-events-auto lg:flex lg:w-auto",
-						navbarOpen ? "flex" : "hidden",
+						isNavbarOpen ? "flex" : "hidden",
 					)}
 				>
 					<ul className="flex flex-col w-full rounded-lg list-none lg:flex-row lg:ml-auto lg:w-auto">
 						{navbarContent.links.map(({ href, label }, i) => (
-							<li key={`${href}`} className="pl-2 py-1 lg:p-0">
-								<Link href={href} passHref replace>
-									<motion.a
-										className={clsx(
-											styles.navlink,
-											"hover:text-pink inline-block px-2 py-2 w-full text-xl font-medium lg:px-5 lg:text-2xl",
-											i === 0 && "lg:pl-2",
-											i === navbarContent.links.length - 1 && "lg:pr-2",
-										)}
-										onClick={() => setNavbarOpen(false)}
-										onKeyPress={() => setNavbarOpen(false)}
-										role="link"
-										tabIndex={i}
-										// @ts-expect-error: Variants work, I don't know why it is an error
-										variants={variants}
-										initial="initial"
-										whileHover="hover"
-										whileFocus="hover"
-										transition={{ duration: 0.3 }}
-									>
-										{label}
-									</motion.a>
-								</Link>
-							</li>
+							<NavLink
+								href={href}
+								label={label}
+								isFirst={i === 0}
+								closeNavbar={navbarHandlers.setFalse}
+								key={label}
+								replace
+							/>
 						))}
+						{(!!error || isLoading) && (
+							<NavLink
+								href="/api/auth/login"
+								label="Login"
+								isLast
+								closeNavbar={navbarHandlers.setFalse}
+							/>
+						)}
+						{!error && !isLoading && (
+							<NavLink
+								href="/api/auth/logout"
+								label="Logout"
+								isLast
+								closeNavbar={navbarHandlers.setFalse}
+							/>
+						)}
 					</ul>
 				</nav>
 			</div>

@@ -9,7 +9,7 @@ import {
 	getDestinyManifestSlice,
 } from "bungie-api-ts/destiny2";
 
-import unauthenticatedHttpClient from "./client";
+import { unauthenticatedHttpClient } from "./client";
 
 export async function getManifest(): Promise<DestinyManifest> {
 	const response = await getDestinyManifest(unauthenticatedHttpClient);

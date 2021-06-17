@@ -3,7 +3,8 @@ import matter from "gray-matter";
 import type { InferGetStaticPropsType } from "next";
 import { serialize } from "next-mdx-remote/serialize";
 import path from "path";
-import React, { useEffect, useState } from "react";
+import React, { useEffect } from "react";
+import { mutate } from "swr";
 
 import type { BannerDataTypes } from "@/@types/DataTypes";
 import BannerSection from "@/components/banner/BannerSection";
@@ -11,12 +12,9 @@ import FAQ from "@/components/faq/FAQ";
 import SeasonInfo from "@/components/info/SeasonInfo";
 import Layout from "@/components/Layout";
 import Notice from "@/components/notice/Notice";
-import {
-	getManifest,
-	getSettings,
-	getSlice,
-} from "@/utils/bungieApi/destiny2-api-client";
-import getInitialD2Info from "@/utils/bungieApi/destiny2-api-server";
+import { getInitialD2Info } from "@/utils/bungieApi/destiny2-api-server";
+import { dedupePromise } from "@/utils/bungieApi/utils";
+import { d2InfoKey, d2InfoRoute, d2UserKey, useUser } from "@/utils/hooks";
 import { BANNERS_PATH, bannersFilePaths } from "@/utils/mdxUtils";
 
 import styles from "./index.module.scss";
@@ -70,41 +68,40 @@ export const getStaticProps = async () => {
 type PageProps = InferGetStaticPropsType<typeof getStaticProps>;
 
 export default function Index({ banners, d2info }: PageProps) {
-	const [d2InfoState, setD2InfoState] = useState(d2info);
-	useEffect(() => {
-		async function loadManifest() {
-			const manifest = await getManifest();
+	if (typeof window === "undefined") {
+		if (d2info) mutate(d2InfoRoute, d2info, false);
+	} else {
+		const info = localStorage.getItem(d2InfoKey);
+		if (info) mutate(d2InfoRoute, JSON.parse(info), false);
+	}
+	if (typeof window !== "undefined") {
+		const user = localStorage.getItem(d2UserKey);
+		if (user) mutate(d2UserKey, JSON.parse(user), false);
+	}
 
-			if (d2info.version !== manifest.version) {
-				const manifestTables = await getSlice(manifest, [
-					"DestinySeasonDefinition",
-					"DestinyPresentationNodeDefinition",
-				]);
-				const commonSettings = await getSettings();
-
-				setD2InfoState({
-					version: manifest.version,
-					allSeasons: manifestTables.DestinySeasonDefinition,
-					presentationNodes: manifestTables.DestinyPresentationNodeDefinition,
-					commonSettings,
-				});
-			}
+	/*	useEffect(() => {
+		const refresh = dedupePromise((): Promise<Response> => {
+			return Promise.resolve(fetch("/api/auth/refresh"));
+		});
+		if (user) {
+			console.log(user);
 		}
-
-		loadManifest();
-
+		if (error && error.name === "AuthError") {
+			console.error(error);
+			refresh();
+		}
 		return () => {};
-	}, [d2info.version]);
+	}, [user, error]); */
 
 	return (
 		<Layout className="safe-area-x relative flex flex-col mb-8 mx-auto sm:px-4 md:px-8 lg:px-12 xl:px-16">
 			<section className={styles.notices}>
-				<Notice id="notice4" className="mt-8">
-					<h2 className="mb-1">New sheet:</h2>
-					Destiny Data Compendium - Detailed info on abilities data.
+				<Notice id="notice5" className="mt-8">
+					<h2 className="mb-1 font-semibold">New feature:</h2>
+					<h3>Login to have personalized links to sites.</h3>
 				</Notice>
 			</section>
-			<SeasonInfo {...d2InfoState} />
+			<SeasonInfo initialData={d2info} />
 			<BannerSection banners={banners} />
 			<FAQ />
 		</Layout>

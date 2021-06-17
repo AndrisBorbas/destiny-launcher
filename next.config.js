@@ -9,7 +9,6 @@ const withTM = require("next-transpile-modules")(["bungie-api-ts"]);
 const nextConfig = {
 	reactStrictMode: true,
 	future: {
-		webpack5: true,
 		strictPostcssConfiguration: true,
 	},
 	images: {
@@ -21,7 +20,7 @@ module.exports = withPlugins(
 	[
 		[withTM],
 		[withBundleAnalyzer, { enabled: process.env.ANALYZE === "true" }],
-		[withMDX, { pageExtensions: ["tsx", "mdx"] }],
+		[withMDX, { pageExtensions: ["tsx", "mdx", "ts"] }],
 		[
 			withPWA,
 			{
