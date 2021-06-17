@@ -15,6 +15,7 @@ const components = {
 		// eslint-disable-next-line jsx-a11y/anchor-has-content
 		<a className={styles.link} rel="noopener" target="_blank" {...restProps} />
 	),
+	ul: ({ ...restProps }) => <ul className="pl-8 list-disc" {...restProps} />,
 };
 
 /* eslint-enable react/display-name */
