@@ -70,7 +70,7 @@ export default function SeasonInfo({
 	);
 
 	return (
-		<section className={clsx(styles.grid, "grid mt-4 p-2 font-NeueHGD")}>
+		<section className={clsx(styles.grid, "grid gap-3 mt-4 p-2 font-NeueHGD")}>
 			<div className="tracking-widest uppercase">
 				<h4 className={clsx(styles.seasonCounter, "text-2xl xl:text-3xl")}>
 					Season {currentSeason?.seasonNumber ?? "-1"}
