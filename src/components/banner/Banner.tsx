@@ -7,7 +7,7 @@ import { MDXRemote, MDXRemoteSerializeResult } from "next-mdx-remote";
 import React, { useEffect, useState } from "react";
 import { FaAngleDown } from "react-icons/fa";
 
-import { currentCharacter } from "@/utils/bungieApi/utils";
+import { currentCharacter, getPlatformCode } from "@/utils/bungieApi/utils";
 import { useUser } from "@/utils/hooks";
 
 import styles from "./Banner.module.scss";
@@ -60,6 +60,10 @@ const Banner = React.memo(
 							.replace(
 								"{Platform}",
 								user.profile.userInfo.membershipType.toString(),
+							)
+							.replace(
+								"{Platform2Code}",
+								getPlatformCode(user.profile.userInfo.membershipType, 0),
 							)
 							.replace(
 								"{Character}",

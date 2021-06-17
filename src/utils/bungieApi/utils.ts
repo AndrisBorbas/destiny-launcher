@@ -1,4 +1,5 @@
 import {
+	BungieMembershipType,
 	DestinyCharacterComponent,
 	DestinyClass,
 } from "bungie-api-ts/destiny2";
@@ -55,4 +56,32 @@ export function getClass(p?: DestinyClass) {
 		default:
 			return "Guardian";
 	}
+}
+
+/**
+ * Get platform codes that sites use
+ * @param m membershipType
+ * @param codeType 0: 2 letter (report),
+ * @returns platform code
+ */
+export function getPlatformCode(m?: BungieMembershipType, codeType = 0) {
+	if (codeType === 0) {
+		switch (m) {
+			// @ts-expect-error: const enums work
+			case BungieMembershipType.TigerXbox: {
+				return "xb";
+			}
+			// @ts-expect-error: const enums work
+			case BungieMembershipType.TigerPsn: {
+				return "ps";
+			}
+			// @ts-expect-error: const enums work
+			case BungieMembershipType.TigerSteam: {
+				return "pc";
+			}
+			default:
+				return "";
+		}
+	}
+	return "";
 }
