@@ -51,7 +51,11 @@ export function useUser(redirectTo?: string, redirectIfLoggedIn = false) {
 	}, [router, data, redirectTo, redirectIfLoggedIn]);
 
 	return {
-		user: data && { profile: data.profile, characters: data.characters },
+		user: data && {
+			profile: data.profile,
+			characters: data.characters,
+			clan: data.clan,
+		},
 		isLoading: !data || !!data.error,
 		error: data?.error,
 		mutateUser: mutate,

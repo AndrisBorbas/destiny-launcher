@@ -2,6 +2,7 @@ import type {
 	DestinyCharacterComponent,
 	DestinyProfileComponent,
 } from "bungie-api-ts/destiny2";
+import type { GroupMembership } from "bungie-api-ts/groupv2";
 import type { NextApiRequest, NextApiResponse } from "next";
 
 import {
@@ -14,6 +15,7 @@ export type ProfileResponse = {
 		[key: string]: DestinyCharacterComponent;
 	};
 	profile: DestinyProfileComponent;
+	clan?: GroupMembership;
 	error?: AuthError;
 };
 
@@ -24,7 +26,9 @@ export default async (
 	switch (req.method) {
 		case "GET": {
 			try {
-				const user = await fetchUserProfileFromBungie(req.cookies.accessToken);
+				const { user, clan } = await fetchUserProfileFromBungie(
+					req.cookies.accessToken,
+				);
 				if (!user.profile.data || !user.characters.data) {
 					throw new Error("No data inside fetched profile");
 				}
@@ -32,6 +36,7 @@ export default async (
 				const data = {
 					characters: user.characters.data,
 					profile: user.profile.data,
+					clan: clan && clan.totalResults > 0 ? clan.results[0] : undefined,
 				};
 
 				return res.status(200).json(data);

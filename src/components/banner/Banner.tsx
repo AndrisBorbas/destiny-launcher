@@ -56,6 +56,11 @@ const Banner = React.memo(
 				return user && loggedInURL
 					? loggedInURL
 							.replace("{Profile}", user.profile.userInfo.membershipId)
+							.replace("{Clan}", user.clan?.group.groupId ?? "")
+							.replace(
+								"{Platform}",
+								user.profile.userInfo.membershipType.toString(),
+							)
 							.replace(
 								"{Character}",
 								currentCharacter(user.characters)?.characterId ?? "",
