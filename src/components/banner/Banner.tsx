@@ -18,7 +18,7 @@ type BannerProps = {
 	headerText: string;
 	previewImage: string;
 	url: string;
-	loggedInURL: string;
+	loggedInURL?: string;
 	category: string;
 	id: string;
 	isActive?: boolean;
