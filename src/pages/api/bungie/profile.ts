@@ -26,6 +26,12 @@ export default async (
 	switch (req.method) {
 		case "GET": {
 			try {
+				if (
+					!req.cookies.destinyLauncherLoggedIn ||
+					req.cookies.destinyLauncherLoggedIn !== "1"
+				) {
+					return res.status(403).end();
+				}
 				const { user, clan } = await fetchUserProfileFromBungie(
 					req.cookies.accessToken,
 				);
