@@ -3,6 +3,7 @@ import matter from "gray-matter";
 import type { InferGetStaticPropsType } from "next";
 import { serialize } from "next-mdx-remote/serialize";
 import path from "path";
+import { getPlaiceholder } from "plaiceholder";
 import React, { useEffect } from "react";
 import { mutate } from "swr";
 
@@ -46,14 +47,21 @@ export const getStaticProps = async () => {
 		return a.data.order > b.data.order ? 1 : -1;
 	});
 
-	const banners = rawBanners.map((banner, i) => {
-		return {
-			id: banner.filePath,
-			index: i,
-			data: banner.data,
-			content: banner.content,
-		};
-	});
+	const banners = await Promise.all(
+		rawBanners.map(async (banner, i) => {
+			const { base64 } = await getPlaiceholder(banner.data.previewImage);
+
+			return {
+				id: banner.filePath,
+				index: i,
+				data: {
+					...banner.data,
+					previewBlurhash: base64,
+				},
+				content: banner.content,
+			};
+		}),
+	);
 
 	const d2info = await getInitialD2Info(true);
 

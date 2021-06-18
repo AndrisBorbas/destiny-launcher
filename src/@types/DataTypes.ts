@@ -7,6 +7,7 @@ export type BannerDataTypes = {
 	loggedInURL?: string;
 	iconSrc: string;
 	previewImage: string;
+	previewBlurhash: string;
 	order: number;
 };
 

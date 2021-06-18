@@ -17,6 +17,7 @@ type BannerProps = {
 	iconSrc: string;
 	headerText: string;
 	previewImage: string;
+	previewBlurhash: string;
 	url: string;
 	loggedInURL?: string;
 	category: string;
@@ -33,6 +34,7 @@ const Banner = React.memo(
 				iconSrc,
 				headerText,
 				previewImage,
+				previewBlurhash,
 				url,
 				category,
 				loggedInURL,
@@ -175,6 +177,8 @@ const Banner = React.memo(
 								objectFit="cover"
 								layout="fill"
 								alt={`${headerText} preview`}
+								placeholder="blur"
+								blurDataURL={previewBlurhash}
 							/>
 						</div>
 
