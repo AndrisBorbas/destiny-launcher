@@ -3,8 +3,8 @@ const colors = require("tailwindcss/colors");
 const aspectRatio = require("@tailwindcss/aspect-ratio");
 
 module.exports = {
-	// mode: process.env.NODE_ENV ? "jit" : undefined,
-	purge: ["./src/**/*.{js,ts,tsx,scss}"],
+	mode: "jit",
+	purge: ["./src/**/*.{js,ts,tsx,scss,mdx}"],
 	theme: {
 		colors,
 		extend: {

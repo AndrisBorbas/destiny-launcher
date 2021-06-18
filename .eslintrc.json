@@ -4,6 +4,7 @@
 	"extends": [
 		"airbnb-typescript",
 		"airbnb/hooks",
+		"next",
 		"plugin:@next/next/recommended",
 		"plugin:@typescript-eslint/recommended",
 		"plugin:eslint-comments/recommended",
@@ -34,7 +35,7 @@
 		"@typescript-eslint/prefer-ts-expect-error": "error", // Force type safety
 		"import/no-anonymous-default-export": "error", // For named React components
 		// "import/no-default-export": "error", // Default exports are confusing
-		// "import/prefer-default-export": "off",
+		"import/prefer-default-export": "off",
 		"jsx-a11y/anchor-is-valid": "off", // Doesn't play well with Next `<Link>`
 		"prefer-exponentiation-operator": "error", // Auto-fix for an inherited rule
 		"react/react-in-jsx-scope": "off", // React is always in scope with Next

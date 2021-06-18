@@ -7,6 +7,9 @@ import { MDXRemote, MDXRemoteSerializeResult } from "next-mdx-remote";
 import React, { useEffect, useState } from "react";
 import { FaAngleDown } from "react-icons/fa";
 
+import { currentCharacter, getPlatformCode } from "@/utils/bungieApi/utils";
+import { useUser } from "@/utils/hooks";
+
 import styles from "./Banner.module.scss";
 import H4 from "./H4";
 
@@ -14,7 +17,9 @@ type BannerProps = {
 	iconSrc: string;
 	headerText: string;
 	previewImage: string;
+	previewBlurhash: string;
 	url: string;
+	loggedInURL?: string;
 	category: string;
 	id: string;
 	isActive?: boolean;
@@ -29,8 +34,10 @@ const Banner = React.memo(
 				iconSrc,
 				headerText,
 				previewImage,
+				previewBlurhash,
 				url,
 				category,
+				loggedInURL,
 				id,
 				isActive,
 				children,
@@ -40,6 +47,32 @@ const Banner = React.memo(
 		) => {
 			// Banners are hydrated with them being closed, less layout shift
 			const [isOpened, setOpened] = useState(false);
+			const {
+				user,
+				error: userError,
+				isLoading,
+				mutateUser,
+			} = useUser("/", false);
+
+			function getLink() {
+				return user && loggedInURL
+					? loggedInURL
+							.replace("{Profile}", user.profile.userInfo.membershipId)
+							.replace("{Clan}", user.clan?.group.groupId ?? "")
+							.replace(
+								"{Platform}",
+								user.profile.userInfo.membershipType.toString(),
+							)
+							.replace(
+								"{Platform2Code}",
+								getPlatformCode(user.profile.userInfo.membershipType, 0),
+							)
+							.replace(
+								"{Character}",
+								currentCharacter(user.characters)?.characterId ?? "",
+							)
+					: url;
+			}
 
 			useEffect(() => {
 				const jsonString = localStorage.getItem("toggledBanners");
@@ -65,13 +98,8 @@ const Banner = React.memo(
 				);
 			}
 
-			const {
-				attributes,
-				listeners,
-				setNodeRef,
-				transform,
-				transition,
-			} = useSortable({ id });
+			const { attributes, listeners, setNodeRef, transform, transition } =
+				useSortable({ id });
 
 			const style = {
 				transform: CSS.Translate.toString(transform),
@@ -95,7 +123,7 @@ const Banner = React.memo(
 							<div className="flex items-center p-2 py-4 w-14 bg-banner-dark">
 								<a
 									className="relative block w-10 h-10"
-									href={url}
+									href={getLink()}
 									target="_blank"
 									rel="noopener"
 									aria-label={`${headerText} link`}
@@ -110,7 +138,7 @@ const Banner = React.memo(
 							</div>
 
 							<h3 className={styles.headerText}>
-								<a href={url} target="_blank" rel="noopener">
+								<a href={getLink()} target="_blank" rel="noopener">
 									{headerText}
 								</a>
 							</h3>
@@ -149,6 +177,8 @@ const Banner = React.memo(
 								objectFit="cover"
 								layout="fill"
 								alt={`${headerText} preview`}
+								placeholder="blur"
+								blurDataURL={previewBlurhash}
 							/>
 						</div>
 
@@ -158,7 +188,7 @@ const Banner = React.memo(
 							<MDXRemote {...children} components={{ h4: H4 }} />
 							<a
 								className={styles.button}
-								href={url}
+								href={getLink()}
 								target="_blank"
 								rel="noopener"
 							>
@@ -171,5 +201,7 @@ const Banner = React.memo(
 		},
 	),
 );
+
+Banner.displayName = "Banner";
 
 export default Banner;

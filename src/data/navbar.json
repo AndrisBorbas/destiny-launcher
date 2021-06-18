@@ -1,6 +1,5 @@
 {
 	"links": [
-		{ "href": "/#favourite", "label": "Favourites" },
 		{ "href": "/#manager", "label": "Managers" },
 		{ "href": "/#info", "label": "Info sites" },
 		{ "href": "/#sheet", "label": "Sheets" },

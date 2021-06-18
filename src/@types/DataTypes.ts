@@ -4,8 +4,10 @@ export type BannerDataTypes = {
 	category: string;
 	headerText: string;
 	url: string;
+	loggedInURL?: string;
 	iconSrc: string;
 	previewImage: string;
+	previewBlurhash: string;
 	order: number;
 };
 
