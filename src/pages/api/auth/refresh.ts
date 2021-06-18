@@ -8,7 +8,6 @@ import {
 import { isSecureEnvironment } from "@/utils/utils";
 
 export default async (req: NextApiRequest, res: NextApiResponse) => {
-	console.log(req.method);
 	switch (req.method) {
 		case "GET": {
 			const tokens = await getAccessTokenFromRefreshToken(
@@ -17,8 +16,6 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
 				console.error(r);
 				throw new Error("Can't get access token");
 			});
-
-			console.log(tokens);
 			if (!tokens.refreshToken) {
 				return res.status(400).end();
 			}
