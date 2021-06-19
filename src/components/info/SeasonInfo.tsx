@@ -52,11 +52,6 @@ export default function SeasonInfo({
 		);
 	}
 
-	if (!currentSeason) {
-		console.error("Could not find current season");
-		return <></>;
-	}
-
 	const seasonIcon = Object.values(swrD2Info.presentationNodes).find(
 		(node) =>
 			node.displayProperties.name === currentSeason?.displayProperties.name &&
@@ -65,19 +60,18 @@ export default function SeasonInfo({
 
 	const { hours, days, weeks, minutes } = timeBetween(
 		Date.now(),
-		Date.parse(currentSeason.endDate ?? Date.now().toString()),
+		Date.parse(currentSeason?.endDate ?? Date.now().toString()),
 	);
 
 	return (
 		<section className={clsx(styles.grid, "grid gap-3 mt-4 p-2 font-NeueHGD")}>
 			<div className="tracking-widest uppercase">
 				<h4 className={clsx(styles.seasonCounter, "text-2xl xl:text-3xl")}>
-					Season {currentSeason?.seasonNumber ?? "-1"}
+					Season {currentSeason?.seasonNumber ?? "didn't load"}
 				</h4>
 				<a
 					href={`https://www.bungie.net/${
-						currentSeason?.displayProperties.name ??
-						"destiny".replace(/\s+/g, "")
+						currentSeason?.displayProperties.name.replace(/\s+/g, "") ?? ""
 					}`}
 					target="_blank"
 					rel="noopener"

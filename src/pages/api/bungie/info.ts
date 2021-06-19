@@ -37,11 +37,17 @@ export default async (
 				]);
 				const commonSettings = await getSettings();
 
+				const seasonNodes = Object.values(
+					manifestTables.DestinyPresentationNodeDefinition,
+				).filter((node) =>
+					node.displayProperties.name.toLowerCase().includes("season of"),
+				);
+
 				const data: InfoResponse = {
 					version: manifest.version,
 					allSeasons: manifestTables.DestinySeasonDefinition,
 					commonSettings,
-					presentationNodes: manifestTables.DestinyPresentationNodeDefinition,
+					presentationNodes: seasonNodes,
 				};
 
 				return res.status(200).json(data);
