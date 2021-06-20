@@ -120,10 +120,15 @@ export async function fetchUserProfileFromBungie(accessToken: string) {
 	}
 
 	const primaryProfile =
-		linkedProfiles.Response.profiles.find(
+		/* linkedProfiles.Response.profiles.find(
 			(profile) =>
 				profile.membershipId === currentUser.Response.primaryMembershipId,
-		) ?? linkedProfiles.Response.profiles[0];
+		) ?? */
+		linkedProfiles.Response.profiles.reduce((prev, curr) =>
+			Date.parse(curr.dateLastPlayed) >= Date.parse(prev.dateLastPlayed)
+				? curr
+				: prev,
+		);
 
 	const detailedProfile = await getProfile(
 		(config) =>
