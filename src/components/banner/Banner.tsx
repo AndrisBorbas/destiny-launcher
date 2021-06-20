@@ -5,7 +5,7 @@ import { motion } from "framer-motion";
 import Image from "next/image";
 import { MDXRemote, MDXRemoteSerializeResult } from "next-mdx-remote";
 import React, { useEffect, useState } from "react";
-import { FaAngleDown } from "react-icons/fa";
+import { FaAngleDown, FaGripVertical } from "react-icons/fa";
 
 import { currentCharacter, getPlatformCode } from "@/utils/bungieApi/utils";
 import { useUser } from "@/utils/hooks";
@@ -116,7 +116,6 @@ const Banner = React.memo(
 					// @ts-expect-error: No idea
 					style={style}
 					{...attributes}
-					{...listeners}
 				>
 					<div className={styles.container}>
 						<div className={styles.header}>
@@ -142,6 +141,11 @@ const Banner = React.memo(
 									{headerText}
 								</a>
 							</h3>
+
+							<FaGripVertical
+								className="self-center text-2xl cursor-move"
+								{...listeners}
+							/>
 
 							<motion.div
 								className={styles.toggle}
