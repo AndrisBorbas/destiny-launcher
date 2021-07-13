@@ -19,7 +19,7 @@ const nextConfig = {
 module.exports = withPlugins(
 	[
 		[withTM],
-		[withBundleAnalyzer, { enabled: process.env.ANALYZE === "true" }],
+		[withBundleAnalyzer({ enabled: process.env.ANALYZE === "true" })],
 		[withMDX, { pageExtensions: ["tsx", "mdx", "ts"] }],
 		[
 			withPWA,

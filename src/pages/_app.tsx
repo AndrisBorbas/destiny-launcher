@@ -5,40 +5,23 @@ import "@/styles/utilities.css";
 import "@/styles/global.scss";
 
 import type { AppProps, NextWebVitalsMetric } from "next/app";
-import { useRouter } from "next/dist/client/router";
+import { useRouter } from "next/router";
 import React, { useEffect } from "react";
 import type { Workbox } from "workbox-window";
+import type { WorkboxLifecycleWaitingEvent } from "workbox-window/utils/WorkboxEvent";
 
-import * as gtag from "@/utils/gtag";
-
-export function reportWebVitals({
-	id,
-	name,
-	label,
-	value,
-}: NextWebVitalsMetric) {
-	// Use `window.gtag` if you initialized Google Analytics as this example:
-	// https://github.com/vercel/next.js/blob/canary/examples/with-google-analytics/pages/_document.js
-	window.gtag("event", name, {
-		event_category:
-			label === "web-vital" ? "Web Vitals" : "Next.js custom metric",
-		value: Math.round(name === "CLS" ? value * 1000 : value), // values must be integers
-		event_label: id, // id unique to current page load
-		non_interaction: true, // avoids affecting bounce rate.
-	});
-}
+import { GTMPageView } from "@/utils/gtm";
 
 export default function DLApp({ Component, pageProps }: AppProps) {
 	const router = useRouter();
 	useEffect(() => {
-		const handleRouteChange = (url: string) => {
-			gtag.pageview(url);
-		};
+		const handleRouteChange = (url: string) => GTMPageView(url);
 		router.events.on("routeChangeComplete", handleRouteChange);
 		return () => {
 			router.events.off("routeChangeComplete", handleRouteChange);
 		};
-	}, [router.events]);
+		// eslint-disable-next-line react-hooks/exhaustive-deps
+	}, []);
 
 	useEffect(() => {
 		window as Window & { workbox: Workbox } & typeof globalThis;
@@ -70,7 +53,9 @@ export default function DLApp({ Component, pageProps }: AppProps) {
 			// A common UX pattern for progressive web apps is to show a banner when a service worker has updated and waiting to install.
 			// NOTE: MUST set skipWaiting to false in next.config.js pwa object
 			// https://developers.google.com/web/tools/workbox/guides/advanced-recipes#offer_a_page_reload_for_users
-			const promptNewVersionAvailable = (event: any) => {
+			const promptNewVersionAvailable = (
+				event: WorkboxLifecycleWaitingEvent,
+			) => {
 				// `event.wasWaitingBeforeRegister` will be false if this is the first time the updated service worker is waiting.
 				// When `event.wasWaitingBeforeRegister` is true, a previously updated service worker is still waiting.
 				// You may want to customize the UI prompt accordingly.
