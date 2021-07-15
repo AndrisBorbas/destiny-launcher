@@ -7,6 +7,11 @@ import { useD2Info, useUser } from "@/utils/hooks";
 
 import styles from "./SeasonInfo.module.scss";
 
+/** Calculates the time between two dates
+ * @param d1 the first date in number form
+ * @param d2 the second date in number form
+ * @returns {{ minutes: number, hours: number, days: number, weeks: number}} the minutes, hours, days and weeks in an object
+ */
 function timeBetween(d1: number, d2: number) {
 	const weeks = Math.floor((d2 - d1) / (7 * 24 * 60 * 60 * 1000));
 	const days = Math.floor((d2 - d1) / (24 * 60 * 60 * 1000)) - weeks * 7;
@@ -18,7 +23,7 @@ function timeBetween(d1: number, d2: number) {
 		days * 24 -
 		hours * 60 +
 		1;
-	return { hours, days, weeks, minutes };
+	return { minutes, hours, days, weeks };
 }
 
 export default function SeasonInfo({
@@ -58,7 +63,7 @@ export default function SeasonInfo({
 			node.displayProperties.hasIcon,
 	);
 
-	const { hours, days, weeks, minutes } = timeBetween(
+	const { minutes, hours, days, weeks } = timeBetween(
 		Date.now(),
 		Date.parse(currentSeason?.endDate ?? Date.now().toString()),
 	);
@@ -86,6 +91,7 @@ export default function SeasonInfo({
 									width={64}
 									height={64}
 									alt="Season Logo"
+									unoptimized
 								/>
 							</div>
 						)}

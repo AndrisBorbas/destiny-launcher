@@ -132,6 +132,7 @@ const Banner = React.memo(
 										objectFit="cover"
 										layout="fill"
 										alt={`${headerText} icon`}
+										unoptimized
 									/>
 								</a>
 							</div>
