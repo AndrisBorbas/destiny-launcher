@@ -156,7 +156,7 @@ export default function SeasonInfo({
 						className={clsx(
 							styles.left,
 							styles.glow,
-							"absolute top-2 w-56 text-3xl overflow-hidden overflow-ellipsis",
+							"w-[13.5rem] absolute top-2 text-3xl overflow-hidden overflow-ellipsis",
 						)}
 					>
 						{user.profile.userInfo.displayName}
@@ -166,6 +166,7 @@ export default function SeasonInfo({
 					</h5>
 					<h4
 						className={clsx(
+							styles.light,
 							styles.glow,
 							"absolute right-4 top-2 text-yellow-300 text-3xl",
 						)}
