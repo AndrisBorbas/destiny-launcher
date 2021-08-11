@@ -5,6 +5,6 @@
 
 ### Code for Destiny Launcher website.
 
-The sites are built from [this directory](https://github.com/AndrisBorbas/destiny-launcher/tree/main/src/data/banners) and the images used should be put [here](https://github.com/AndrisBorbas/destiny-launcher/tree/main/public/assets/images)
+The sites are built from [this directory](/src/data/banners) and the images used should be put [here](/public/assets/images)
 
 If you have new site suggestions you can open a pr with one, if you know how or contact me on [twitter](https://twitter.com/AndrisBorbas).
