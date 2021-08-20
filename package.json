@@ -45,7 +45,7 @@
 		"next": "^11.1.0",
 		"next-compose-plugins": "^2.2.1",
 		"next-mdx-remote": "^3.0.4",
-		"next-pwa": "^5.2.24",
+		"next-pwa": "^5.3.1",
 		"next-transpile-modules": "^8.0.0",
 		"plaiceholder": "^2.0.1",
 		"postcss-import": "^14.0.2",
