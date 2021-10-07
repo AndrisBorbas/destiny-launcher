@@ -366,7 +366,7 @@ export default function BannerSection({
 							{containerId === "favourite" &&
 								banners[containerId as Keys].length === 0 && (
 									<article
-										className="bg-blur-10 flex items-center justify-center w-full text-center text-lg border-t border-gray-500 md:flex"
+										className="flex md:flex justify-center items-center w-full text-lg text-center border-t border-gray-500 bg-blur-10"
 										style={{ height: "72px" }}
 									>
 										Drag & drop banners here to add them to favourites.

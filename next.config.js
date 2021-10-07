@@ -6,6 +6,7 @@ const withMDX = require("@next/mdx")({
 const withPWA = require("next-pwa");
 const withTM = require("next-transpile-modules")(["bungie-api-ts"]);
 
+/** @type {import("next").NextConfig} */
 const nextConfig = {
 	reactStrictMode: true,
 	future: {

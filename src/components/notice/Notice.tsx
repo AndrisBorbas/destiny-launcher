@@ -25,12 +25,12 @@ export default function Notice({ id, children, className }: NoticeProps) {
 			<div
 				className={clsx(
 					styles.notice,
-					"bg-blur-10 relative ml-auto p-3 px-6 text-center text-xl bg-button bg-opacity-50 border-t border-gray-300",
+					"relative p-3 px-6 ml-auto text-xl text-center bg-button bg-opacity-50 border-t border-gray-300 bg-blur-10",
 				)}
 			>
 				{children}
 				<button
-					className="absolute right-1 top-1 p-1"
+					className="absolute top-1 right-1 p-1"
 					type="button"
 					onClick={() => {
 						localStorage.setItem(id, JSON.stringify(false));

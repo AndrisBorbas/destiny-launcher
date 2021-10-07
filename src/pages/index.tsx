@@ -102,7 +102,7 @@ export default function Index({ banners, d2info }: PageProps) {
 	}, [user, error]); */
 
 	return (
-		<Layout className="safe-area-x relative flex flex-col mb-8 mx-auto sm:px-4 md:px-8 lg:px-12 xl:px-16">
+		<Layout className="flex relative flex-col sm:px-4 md:px-8 lg:px-12 xl:px-16 mx-auto mb-8 safe-area-x">
 			<section className={styles.notices}>
 				<Notice id="notice5" className="mt-8">
 					<h2 className="mb-1 font-semibold">New feature:</h2>

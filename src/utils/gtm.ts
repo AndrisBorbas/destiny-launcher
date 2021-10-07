@@ -12,6 +12,6 @@ export const GTMPageView = (url: string) => {
 	};
 
 	// @ts-expect-error: Should work
-	if (window && window.dataLayer) window.dataLayer.push(pageEvent);
+	if (window?.dataLayer) window.dataLayer.push(pageEvent);
 	return pageEvent;
 };

@@ -69,7 +69,7 @@ export default function SeasonInfo({
 	);
 
 	return (
-		<section className={clsx(styles.grid, "grid gap-3 mt-4 p-2 font-NeueHGD")}>
+		<section className={clsx(styles.grid, "grid gap-3 p-2 mt-4 font-NeueHGD")}>
 			<div className="tracking-widest uppercase">
 				<h4 className={clsx(styles.seasonCounter, "text-2xl xl:text-3xl")}>
 					Season {currentSeason?.seasonNumber ?? "didn't load"}
@@ -79,7 +79,7 @@ export default function SeasonInfo({
 						currentSeason?.displayProperties.name.replace(/\s+/g, "") ?? ""
 					}`}
 					target="_blank"
-					rel="noopener"
+					rel="noopener noreferrer"
 				>
 					<div className="flex items-center">
 						{seasonIcon && (
@@ -98,7 +98,7 @@ export default function SeasonInfo({
 						<h3
 							className={clsx(
 								styles.glow,
-								"ml-1 my-2 text-4xl font-bold xl:text-5xl",
+								"my-2 ml-1 text-4xl xl:text-5xl font-bold",
 							)}
 						>
 							{currentSeason?.displayProperties.name ??
@@ -140,7 +140,7 @@ export default function SeasonInfo({
 				<div
 					className={clsx(
 						styles.min,
-						"h-fit relative col-end-3 col-start-1 row-start-1 justify-self-end md:col-span-1 md:col-start-2",
+						"relative md:col-span-1 col-start-1 md:col-start-2 col-end-3 row-start-1 justify-self-end h-fit",
 					)}
 				>
 					<Image
@@ -156,7 +156,7 @@ export default function SeasonInfo({
 						className={clsx(
 							styles.left,
 							styles.glow,
-							"w-[13.5rem] absolute top-2 text-3xl overflow-hidden overflow-ellipsis",
+							"overflow-hidden absolute top-2 w-[13.5rem] text-3xl overflow-ellipsis",
 						)}
 					>
 						{user.profile.userInfo.displayName}
@@ -168,7 +168,7 @@ export default function SeasonInfo({
 						className={clsx(
 							styles.light,
 							styles.glow,
-							"absolute right-4 top-2 text-yellow-300 text-3xl",
+							"absolute top-2 right-4 text-3xl text-yellow-300",
 						)}
 					>
 						{currentCharacter(user.characters)?.light}

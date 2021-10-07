@@ -54,9 +54,10 @@ const Banner = React.memo(
 				mutateUser,
 			} = useUser("/", false);
 
-			function getLink() {
+			function getLink(): string {
 				return user && loggedInURL
 					? loggedInURL
+							// eslint-disable-next-line react/prop-types
 							.replace("{Profile}", user.profile.userInfo.membershipId)
 							.replace("{Clan}", user.clan?.group.groupId ?? "")
 							.replace(
@@ -73,6 +74,26 @@ const Banner = React.memo(
 							)
 					: url;
 			}
+
+			const link =
+				user && loggedInURL
+					? loggedInURL
+							// eslint-disable-next-line react/prop-types
+							.replace("{Profile}", user.profile.userInfo.membershipId)
+							.replace("{Clan}", user.clan?.group.groupId ?? "")
+							.replace(
+								"{Platform}",
+								user.profile.userInfo.membershipType.toString(),
+							)
+							.replace(
+								"{Platform2Code}",
+								getPlatformCode(user.profile.userInfo.membershipType, 0),
+							)
+							.replace(
+								"{Character}",
+								currentCharacter(user.characters)?.characterId ?? "",
+							)
+					: url;
 
 			useEffect(() => {
 				const jsonString = localStorage.getItem("toggledBanners");
@@ -113,7 +134,6 @@ const Banner = React.memo(
 						isActive === true ? "opacity-0" : "opacity-100",
 					)}
 					ref={setNodeRef}
-					// @ts-expect-error: No idea
 					style={style}
 					{...attributes}
 				>
@@ -121,10 +141,10 @@ const Banner = React.memo(
 						<div className={styles.header}>
 							<div className="flex items-center p-2 py-4 w-14 bg-banner-dark">
 								<a
-									className="relative block w-10 h-10"
-									href={getLink()}
+									className="block relative w-10 h-10"
+									href={link}
 									target="_blank"
-									rel="noopener"
+									rel="noopener noreferrer"
 									aria-label={`${headerText} link`}
 								>
 									<Image
@@ -138,7 +158,7 @@ const Banner = React.memo(
 							</div>
 
 							<h3 className={styles.headerText}>
-								<a href={getLink()} target="_blank" rel="noopener">
+								<a href={link} target="_blank" rel="noopener noreferrer">
 									{headerText}
 								</a>
 							</h3>
@@ -196,9 +216,9 @@ const Banner = React.memo(
 							<MDXRemote {...children} components={{ h4: H4 }} />
 							<a
 								className={styles.button}
-								href={getLink()}
+								href={link}
 								target="_blank"
-								rel="noopener"
+								rel="noopener noreferrer"
 							>
 								Open
 							</a>
