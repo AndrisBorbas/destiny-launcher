@@ -1,5 +1,3 @@
-import { PlatformErrorCodes } from "bungie-api-ts/user";
-
 import type { Token, Tokens } from "./@types/apiTypes";
 import { oauthClientId, oauthClientSecret } from "./consts";
 import { dedupePromise } from "./utils";

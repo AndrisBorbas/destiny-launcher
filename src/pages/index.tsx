@@ -4,7 +4,6 @@ import type { InferGetStaticPropsType } from "next";
 import { serialize } from "next-mdx-remote/serialize";
 import path from "path";
 import { getPlaiceholder } from "plaiceholder";
-import React, { useEffect } from "react";
 import { mutate } from "swr";
 
 import type { BannerDataTypes } from "@/@types/DataTypes";
@@ -14,8 +13,7 @@ import SeasonInfo from "@/components/info/SeasonInfo";
 import Layout from "@/components/Layout";
 import Notice from "@/components/notice/Notice";
 import { getInitialD2Info } from "@/utils/bungieApi/destiny2-api-server";
-import { dedupePromise } from "@/utils/bungieApi/utils";
-import { d2InfoKey, d2InfoRoute, d2UserKey, useUser } from "@/utils/hooks";
+import { d2InfoKey, d2InfoRoute, d2UserKey } from "@/utils/hooks";
 import { BANNERS_PATH, bannersFilePaths } from "@/utils/mdxUtils";
 
 import styles from "./index.module.scss";

@@ -1,13 +1,17 @@
 {
 	"root": true,
-	"parserOptions": { "project": "./tsconfig.json" },
+	"parserOptions": {
+		"project": "./tsconfig.json",
+		"extraFileExtensions": [".mjs"] // TODO: Remove, see typescript-eslint/typescript-eslint#4059
+	},
 	"extends": [
-		// "next/core-web-vitals",
+		"next",
 		"airbnb",
 		"airbnb-typescript",
 		"plugin:@typescript-eslint/recommended",
 		"plugin:eslint-comments/recommended",
 		"plugin:etc/recommended",
+		"plugin:react/jsx-runtime",
 		"plugin:react-etc/recommended",
 		"plugin:tailwindcss/recommended",
 		"prettier",
@@ -21,7 +25,6 @@
 		"simple-import-sort/exports": "error",
 		"sort-imports": "off",
 		"import/order": "off",
-		"import/extensions": "off",
 
 		/* Custom preferences */
 		"@typescript-eslint/array-type": "error",
@@ -30,22 +33,27 @@
 			"index-signature" // Prevent ambiguity with Records & Tuples
 		],
 		"@typescript-eslint/consistent-type-assertions": "error",
-		"@typescript-eslint/explicit-module-boundary-types": "off", // Reduce bloat
 		"@typescript-eslint/method-signature-style": "error", // Force type safety
 		"@typescript-eslint/no-dynamic-delete": "error", // Use Map/Set structures
 		"@typescript-eslint/no-invalid-void-type": "error", // Force type safety
-		"@typescript-eslint/no-unnecessary-type-constraint": "error",
 		"@typescript-eslint/prefer-optional-chain": "error",
 		"@typescript-eslint/prefer-ts-expect-error": "error", // Force type safety
 		"import/no-anonymous-default-export": "error", // For named React components
 		// "import/no-default-export": "error", // Default exports are confusing
 		"import/prefer-default-export": "off",
 		"jsx-a11y/anchor-is-valid": "off", // Doesn't play well with Next `<Link>`
-		"prefer-exponentiation-operator": "error", // Auto-fix for an inherited rule
-		"react/react-in-jsx-scope": "off", // React is always in scope with Next
 		"react/require-default-props": "off", // React `defaultProps` are deprecated
+
 		"tailwindcss/no-custom-classname": "off",
-		"no-plusplus": "off"
+
+		// TODO: Remove these, see airbnb/javascript#2501
+		"react/function-component-definition": [
+			"error",
+			{
+				"namedComponents": "function-declaration",
+				"unnamedComponents": "function-expression"
+			}
+		]
 	},
 
 	"overrides": [
@@ -63,14 +71,14 @@
 			}
 		},
 		{
-			"files": ["./src/pages/**"],
+			"files": ["./src/pages/**", "*.config.mjs"],
 			"rules": {
 				"import/no-default-export": "off",
 				"import/prefer-default-export": "error"
 			}
 		},
 		{
-			"files": ["./src/pages/api/**"],
+			"files": ["./src/pages/api/**", "*.config.mjs"],
 			"rules": {
 				"import/no-anonymous-default-export": "off",
 				"import/prefer-default-export": "off"

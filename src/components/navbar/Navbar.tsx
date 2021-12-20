@@ -12,12 +12,13 @@ import { NavLink } from "./NavLink";
 
 export default function Navbar() {
 	const [isNavbarOpen, navbarHandlers] = useBool();
-	const { user, error, isLoading, mutateUser } = useUser("/", false);
+	const { user, error, isLoading } = useUser("/", false);
 
 	useEffect(() => {
-		if (process.env.NODE_ENV !== "production")
+		if (process.env.NODE_ENV !== "production") {
+			// eslint-disable-next-line no-console
 			console.log(user, error, isLoading);
-
+		}
 		return () => {};
 	}, [user, error, isLoading]);
 
@@ -34,7 +35,7 @@ export default function Navbar() {
 						</a>
 					</Link>
 					<button
-						className="block lg:hidden py-2 px-2 h-full text-xl leading-none rounded border border-solid cursor-pointer outline-none focus:outline-none bg-transparent border-transparent"
+						className="block lg:hidden py-2 px-2 h-full text-xl leading-none bg-transparent rounded border border-transparent border-solid cursor-pointer outline-none focus:outline-none"
 						type="button"
 						onClick={navbarHandlers.toggle}
 						aria-label="Navbar toggler"

@@ -116,6 +116,7 @@ export default function Layout({
 				<meta name="apple-mobile-web-app-status-bar-style" content="default" />
 				<meta name="format-detection" content="telephone=no" />
 				<link rel="manifest" href="/manifest.json" />
+				{/* eslint-disable-next-line react/no-invalid-html-attribute */}
 				<link rel="shortcut icon" href="/favicon-100x100.png" />
 			</Head>
 

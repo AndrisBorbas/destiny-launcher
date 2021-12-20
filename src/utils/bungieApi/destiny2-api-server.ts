@@ -177,7 +177,8 @@ export async function fetchUserProfileFromBungie(accessToken: string) {
 	);
 	// @ts-expect-error: const enums work
 	if (clan.ErrorCode !== PlatformErrorCodes.Success) {
-		console.error("Could not get clan info");
+		// eslint-disable-next-line no-console
+		console.error(new Error("Could not get clan info"));
 	}
 
 	return { user: detailedProfile.Response, clan: clan.Response };

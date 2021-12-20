@@ -41,7 +41,7 @@ export default function Footer() {
 						are the property of Bungie.
 					</p>
 					<a className="text-xs" href="https://twitter.com/AndrisBorbas">
-						© 2021 AndrisBorbas
+						© {new Date().getFullYear()} AndrisBorbas
 					</a>
 				</div>
 			</div>

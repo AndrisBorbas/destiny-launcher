@@ -34,7 +34,7 @@ export default function SeasonInfo({
 	initialData: InfoResponse;
 }) {
 	const { data: swrD2Info, error } = useD2Info(initialData);
-	const { user, error: userError, isLoading, mutateUser } = useUser("/", false);
+	const { user } = useUser("/", false);
 	const [isResetTime, ResetTimeHandlers] = useBool(false);
 	const controls = useAnimation();
 
@@ -56,11 +56,13 @@ export default function SeasonInfo({
 			toggleReset();
 		}, 7000);
 		return () => clearInterval(interval);
+		// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, [isResetTime]);
 
 	if (!swrD2Info) {
-		console.error("Season info not yet loaded");
-		return <></>;
+		// eslint-disable-next-line no-console
+		console.error(error);
+		return null;
 	}
 
 	let currentSeason = Object.values(swrD2Info.allSeasons).find(
@@ -164,7 +166,7 @@ export default function SeasonInfo({
 							{hours > 0 && (
 								<>
 									<span className="mx-1">{hours}</span>
-									{hours > 1 ? " hours" : " hour"}
+									{hours > 1 ? " hours " : " hour "}
 								</>
 							)}
 							{weeks + days + hours <= 0 && (
@@ -202,7 +204,7 @@ export default function SeasonInfo({
 							{hours > 0 && (
 								<>
 									<span className="mx-1">{hours}</span>
-									{hours > 1 ? " hours" : " hour"}
+									{hours > 1 ? " hours " : " hour "}
 								</>
 							)}
 							{days <= 0 && (
@@ -235,7 +237,7 @@ export default function SeasonInfo({
 						className={clsx(
 							styles.left,
 							styles.glow,
-							"overflow-hidden absolute top-2 w-[13.5rem] text-3xl overflow-ellipsis",
+							"overflow-hidden absolute top-2 text-3xl overflow-ellipsis w-[13.5rem]",
 						)}
 					>
 						{user.profile.userInfo.displayName}

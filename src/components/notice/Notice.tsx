@@ -1,5 +1,5 @@
 import clsx from "clsx";
-import React, { HTMLProps, useEffect, useState } from "react";
+import { HTMLProps, useEffect, useState } from "react";
 import { FaTimes } from "react-icons/fa";
 
 import styles from "./Notice.module.scss";
