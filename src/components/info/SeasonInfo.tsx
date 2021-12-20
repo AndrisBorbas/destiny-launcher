@@ -132,7 +132,11 @@ export default function SeasonInfo({
 						</h3>
 					</div>
 				</a>
-				<button onClick={() => toggleReset()} type="button">
+				<button
+					className="text-left"
+					onClick={() => toggleReset()}
+					type="button"
+				>
 					<motion.h4
 						className={clsx(
 							styles.seasonTimer,
