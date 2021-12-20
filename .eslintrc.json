@@ -44,6 +44,7 @@
 		"prefer-exponentiation-operator": "error", // Auto-fix for an inherited rule
 		"react/react-in-jsx-scope": "off", // React is always in scope with Next
 		"react/require-default-props": "off", // React `defaultProps` are deprecated
+		"tailwindcss/no-custom-classname": "off",
 		"no-plusplus": "off"
 	},
 

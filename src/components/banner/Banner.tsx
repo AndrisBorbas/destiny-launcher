@@ -54,27 +54,6 @@ const Banner = React.memo(
 				mutateUser,
 			} = useUser("/", false);
 
-			function getLink(): string {
-				return user && loggedInURL
-					? loggedInURL
-							// eslint-disable-next-line react/prop-types
-							.replace("{Profile}", user.profile.userInfo.membershipId)
-							.replace("{Clan}", user.clan?.group.groupId ?? "")
-							.replace(
-								"{Platform}",
-								user.profile.userInfo.membershipType.toString(),
-							)
-							.replace(
-								"{Platform2Code}",
-								getPlatformCode(user.profile.userInfo.membershipType, 0),
-							)
-							.replace(
-								"{Character}",
-								currentCharacter(user.characters)?.characterId ?? "",
-							)
-					: url;
-			}
-
 			const link =
 				user && loggedInURL
 					? loggedInURL

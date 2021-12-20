@@ -1,9 +1,11 @@
 import clsx from "clsx";
+import { motion, useAnimation } from "framer-motion";
 import Image from "next/image";
+import { useEffect } from "react";
 
 import type { InfoResponse } from "@/pages/api/bungie/info";
 import { currentCharacter, getClass } from "@/utils/bungieApi/utils";
-import { useD2Info, useUser } from "@/utils/hooks";
+import { useBool, useD2Info, useUser } from "@/utils/hooks";
 
 import styles from "./SeasonInfo.module.scss";
 
@@ -19,8 +21,8 @@ function timeBetween(d1: number, d2: number) {
 		Math.floor((d2 - d1) / (60 * 60 * 1000)) - weeks * 7 * 24 - days * 24;
 	const minutes =
 		Math.floor((d2 - d1) / (60 * 1000)) -
-		weeks * 7 * 24 -
-		days * 24 -
+		weeks * 7 * 24 * 60 -
+		days * 24 * 60 -
 		hours * 60 +
 		1;
 	return { minutes, hours, days, weeks };
@@ -33,6 +35,28 @@ export default function SeasonInfo({
 }) {
 	const { data: swrD2Info, error } = useD2Info(initialData);
 	const { user, error: userError, isLoading, mutateUser } = useUser("/", false);
+	const [isResetTime, ResetTimeHandlers] = useBool(false);
+	const controls = useAnimation();
+
+	function toggleReset() {
+		ResetTimeHandlers.toggle();
+		controls.set({
+			// @ts-expect-error: Custom css variables work
+			"--after-w": "100%",
+		});
+		controls.start({
+			// @ts-expect-error: Custom css variables work
+			"--after-w": "0%",
+			transition: { duration: 7, ease: "easeOut" },
+		});
+	}
+
+	useEffect(() => {
+		const interval = setInterval(() => {
+			toggleReset();
+		}, 7000);
+		return () => clearInterval(interval);
+	}, [isResetTime]);
 
 	if (!swrD2Info) {
 		console.error("Season info not yet loaded");
@@ -106,35 +130,90 @@ export default function SeasonInfo({
 						</h3>
 					</div>
 				</a>
-				<h4 className={clsx(styles.seasonTimer, "text-xl xl:text-2xl")}>
-					Season ends in:
-					<span className="mx-2">
-						{weeks > 0 && (
-							<>
-								<span className="mx-1">{weeks}</span>
-								{weeks > 1 ? " weeks " : " week "}
-							</>
+				<button onClick={() => toggleReset()} type="button">
+					<motion.h4
+						className={clsx(
+							styles.seasonTimer,
+							"text-xl xl:text-2xl uppercase",
+							isResetTime === true ? "hidden" : "initial",
 						)}
-						{days > 0 && (
-							<>
-								<span className="mx-1">{days}</span>
-								{days > 1 ? " days " : " day "}
-							</>
+						// @ts-expect-error: Variants work, I don't know why it is an error
+						initial={{ "--after-w": "100%" }}
+						animate={controls}
+						transition={{
+							duration: 7,
+							repeat: Infinity,
+							ease: "linear",
+						}}
+						transitionEnd={{ "--after-w": "100%" }}
+					>
+						Season ends in:
+						<span className="mx-2">
+							{weeks > 0 && (
+								<>
+									<span className="mx-1">{weeks}</span>
+									{weeks > 1 ? " weeks " : " week "}
+								</>
+							)}
+							{days > 0 && (
+								<>
+									<span className="mx-1">{days}</span>
+									{days > 1 ? " days " : " day "}
+								</>
+							)}
+							{hours > 0 && (
+								<>
+									<span className="mx-1">{hours}</span>
+									{hours > 1 ? " hours" : " hour"}
+								</>
+							)}
+							{weeks + days + hours <= 0 && (
+								<>
+									<span className="mx-1">{minutes}</span>
+									{minutes > 1 ? " minutes" : " minute"}
+								</>
+							)}
+						</span>
+					</motion.h4>
+					<motion.h4
+						className={clsx(
+							styles.seasonTimer,
+							"text-xl xl:text-2xl uppercase",
+							isResetTime === false ? "hidden" : "initial",
 						)}
-						{hours > 0 && (
-							<>
-								<span className="mx-1">{hours}</span>
-								{hours > 1 ? " hours" : " hour"}
-							</>
-						)}
-						{weeks + days + hours <= 0 && (
-							<>
-								<span className="mx-1">{minutes}</span>
-								{minutes > 1 ? " minutes" : " minute"}
-							</>
-						)}
-					</span>
-				</h4>
+						// @ts-expect-error: Variants work, I don't know why it is an error
+						initial={{ "--after-w": "100%" }}
+						animate={controls}
+						transition={{
+							duration: 7,
+							repeat: Infinity,
+							ease: "linear",
+						}}
+						transitionEnd={{ "--after-w": "100%" }}
+					>
+						Weekly reset in:
+						<span className="mx-2">
+							{days > 0 && (
+								<>
+									<span className="mx-1">{days}</span>
+									{days > 1 ? " days " : " day "}
+								</>
+							)}
+							{hours > 0 && (
+								<>
+									<span className="mx-1">{hours}</span>
+									{hours > 1 ? " hours" : " hour"}
+								</>
+							)}
+							{days <= 0 && (
+								<>
+									<span className="mx-1">{minutes}</span>
+									{minutes > 1 ? " minutes" : " minute"}
+								</>
+							)}
+						</span>
+					</motion.h4>
+				</button>
 			</div>
 			{user && (
 				<div
