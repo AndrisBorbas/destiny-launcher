@@ -16,7 +16,7 @@ import {
 	SortableContext,
 	sortableKeyboardCoordinates,
 } from "@dnd-kit/sortable";
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 
 import type { HydratedBannerType } from "@/@types/DataTypes";
 
