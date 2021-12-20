@@ -172,16 +172,17 @@ const Banner = memo(
 					</div>
 
 					<div
-						style={{ height: "292px" }}
+						// style={{ height: "292px" }}
 						className={clsx(
-							// "aspect-w-16 aspect-h-9",
+							"aspect-w-16 aspect-h-9",
 							isOpened ? "block" : "hidden",
+							"relative",
 						)}
 					>
 						<Image
 							src={previewImage}
 							objectFit="cover"
-							layout="intrinsic"
+							layout="fill"
 							width={520}
 							height={292}
 							alt={`${headerText} preview`}
