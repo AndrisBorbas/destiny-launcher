@@ -1,18 +1,18 @@
 import clsx from "clsx";
 import { FaGithub, FaTwitter } from "react-icons/fa";
-import { SiKoFi } from "react-icons/si";
+import { SiKofi } from "react-icons/si";
 
 import styles from "./Footer.module.scss";
 
 export default function Footer() {
 	return (
 		<footer className={clsx(styles.footer, "bg-blur-10")} id="footer">
-			<div className="container flex flex-col items-center justify-center mx-auto space-y-6">
-				<div className="flex items-center justify-evenly w-full lg:w-1/3">
+			<div className="container flex flex-col justify-center items-center mx-auto space-y-6">
+				<div className="flex justify-evenly items-center w-full lg:w-1/3">
 					<a
 						href="https://twitter.com/AndrisBorbas"
 						target="_blank"
-						rel="noopener"
+						rel="noopener noreferrer"
 						aria-label="Twitter link"
 					>
 						<FaTwitter className="w-10 h-auto text-white hover:text-yellow-500" />
@@ -20,7 +20,7 @@ export default function Footer() {
 					<a
 						href="https://www.github.com/andrisborbas/destiny-launcher"
 						target="_blank"
-						rel="noopener"
+						rel="noopener noreferrer"
 						aria-label="GitHub link"
 					>
 						<FaGithub className="w-10 h-auto text-white hover:text-yellow-500" />
@@ -28,10 +28,10 @@ export default function Footer() {
 					<a
 						href="https://ko-fi.com/andrisborbas"
 						target="_blank"
-						rel="noopener"
+						rel="noopener noreferrer"
 						aria-label="Ko-fi link"
 					>
-						<SiKoFi className="w-10 h-auto text-white hover:text-yellow-500" />
+						<SiKofi className="w-10 h-auto text-white hover:text-yellow-500" />
 					</a>
 				</div>
 

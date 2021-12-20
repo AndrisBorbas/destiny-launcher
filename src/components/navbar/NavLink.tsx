@@ -32,12 +32,12 @@ export function NavLink({
 		},
 	};
 	return (
-		<li key={`${href}`} className="pl-2 py-1 lg:p-0">
+		<li key={`${href}`} className="lg:p-0 py-1 pl-2">
 			<Link href={href} passHref replace={replace}>
 				<motion.a
 					className={clsx(
 						styles.navlink,
-						"hover:text-pink inline-block px-2 py-2 w-full text-xl font-medium lg:px-5 lg:text-2xl",
+						"inline-block py-2 px-2 lg:px-5 w-full text-xl lg:text-2xl font-medium hover:text-pink",
 						isFirst && "lg:pl-2",
 						isLast && "lg:pr-2",
 					)}

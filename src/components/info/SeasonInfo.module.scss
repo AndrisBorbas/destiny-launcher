@@ -17,7 +17,7 @@
 		content: "";
 		display: block;
 		margin-top: 0;
-		width: 75%;
+		width: var(--after-w);
 		@apply border-t-2 border-gray-600;
 	}
 }

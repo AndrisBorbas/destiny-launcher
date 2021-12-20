@@ -11,7 +11,7 @@ export const d2InfoKey = "d2manifest";
  * Fetch from "/api/bungie/info"
  * @returns manifest info
  */
-export function useD2Info(initialData?: InfoResponse) {
+export function useD2Info(fallbackData?: InfoResponse) {
 	return useSWR<InfoResponse>(d2InfoRoute, {
 		onError() {
 			localStorage.removeItem(d2InfoKey);
@@ -19,7 +19,7 @@ export function useD2Info(initialData?: InfoResponse) {
 		onSuccess(data) {
 			localStorage.setItem(d2InfoKey, JSON.stringify(data));
 		},
-		initialData,
+		fallbackData,
 	});
 }
 

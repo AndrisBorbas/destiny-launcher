@@ -20,7 +20,7 @@ function createHttpClient(
 			// strip out undefined params keys. bungie-api-ts creates them for optional endpoint parameters
 			/* eslint-disable guard-for-in, no-restricted-syntax */
 			for (const key in config.params) {
-				// eslint-disable-next-line @typescript-eslint/no-unused-expressions, no-param-reassign
+				// eslint-disable-next-line @typescript-eslint/no-unused-expressions, @typescript-eslint/no-dynamic-delete, no-param-reassign
 				typeof config.params[key] === "undefined" && delete config.params[key];
 			}
 			/* eslint-enable guard-for-in, no-restricted-syntax */
@@ -34,8 +34,7 @@ function createHttpClient(
 			body: config.body ? JSON.stringify(config.body) : undefined,
 			headers: {
 				"X-API-Key": apiKey,
-				...(config.headers &&
-					config.headers.auth &&
+				...(config.headers?.auth &&
 					config.headers.auth !== "" &&
 					withCredentials && {
 						Authorization: `Bearer ${config.headers.auth}`,

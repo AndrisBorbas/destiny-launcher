@@ -23,18 +23,18 @@ export default function Navbar() {
 
 	return (
 		<header className={clsx(styles.header, "bg-blur-10")}>
-			<div className="relative flex flex-wrap items-center justify-between mx-auto px-2 w-full lg:px-8">
-				<div className="relative flex items-center justify-between w-full pointer-events-auto lg:static lg:block lg:justify-start lg:w-auto">
+			<div className="flex relative flex-wrap justify-between items-center px-2 lg:px-8 mx-auto w-full">
+				<div className="flex lg:block relative lg:static justify-between lg:justify-start items-center w-full lg:w-auto pointer-events-auto">
 					<Link href="/#" replace>
-						<a className="flex items-center mr-2 no-underline text-2xl lg:text-4xl lg:leading-10">
-							<span className="relative inline-block mr-2 w-12 h-12">
+						<a className="flex items-center mr-2 text-2xl lg:text-4xl lg:leading-10 no-underline">
+							<span className="inline-block relative mr-2 w-12 h-12">
 								<Image src="/icon.png" alt="Logo" layout="fill" unoptimized />
 							</span>
 							<h1>Destiny Launcher</h1>
 						</a>
 					</Link>
 					<button
-						className="bg-transparent border-transparent block px-2 py-2 h-full text-xl leading-none border border-solid rounded outline-none focus:outline-none cursor-pointer lg:hidden"
+						className="block lg:hidden py-2 px-2 h-full text-xl leading-none rounded border border-solid cursor-pointer outline-none focus:outline-none bg-transparent border-transparent"
 						type="button"
 						onClick={navbarHandlers.toggle}
 						aria-label="Navbar toggler"
@@ -44,11 +44,11 @@ export default function Navbar() {
 				</div>
 				<nav
 					className={clsx(
-						"z-50 items-center w-full pointer-events-auto lg:flex lg:w-auto",
+						"lg:flex z-50 items-center w-full lg:w-auto pointer-events-auto",
 						isNavbarOpen ? "flex" : "hidden",
 					)}
 				>
-					<ul className="flex flex-col w-full rounded-lg list-none lg:flex-row lg:ml-auto lg:w-auto">
+					<ul className="flex flex-col lg:flex-row lg:ml-auto w-full lg:w-auto list-none rounded-lg">
 						{navbarContent.links.map(({ href, label }, i) => (
 							<NavLink
 								href={href}

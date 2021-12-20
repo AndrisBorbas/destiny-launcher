@@ -46,7 +46,7 @@ export default async (
 				};
 
 				return res.status(200).json(data);
-			} catch (error) {
+			} catch (error: any) {
 				console.error(error);
 				if (error.name === "AuthError") {
 					console.log("red");
