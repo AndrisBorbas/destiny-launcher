@@ -2,6 +2,8 @@ import clsx from "clsx";
 import { FaGithub, FaTwitter } from "react-icons/fa";
 import { SiKofi } from "react-icons/si";
 
+import { version } from "@/../package.json";
+
 import styles from "./Footer.module.scss";
 
 export default function Footer() {
@@ -40,9 +42,24 @@ export default function Footer() {
 						Destiny is a registered trademark of Bungie. Some content and images
 						are the property of Bungie.
 					</p>
-					<a className="text-xs" href="https://twitter.com/AndrisBorbas">
-						© {new Date().getFullYear()} AndrisBorbas
-					</a>
+					<p className="text-xs">
+						<a
+							href="https://www.github.com/andrisborbas/destiny-launcher"
+							target="_blank"
+							rel="noopener noreferrer"
+							aria-label="GitHub link"
+						>
+							v{version}
+						</a>{" "}
+						<a
+							href="https://twitter.com/AndrisBorbas"
+							target="_blank"
+							rel="noopener noreferrer"
+							aria-label="Twitter link"
+						>
+							©&nbsp;{new Date().getFullYear()}&nbsp;AndrisBorbas
+						</a>
+					</p>
 				</div>
 			</div>
 		</footer>
