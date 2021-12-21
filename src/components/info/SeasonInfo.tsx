@@ -151,7 +151,6 @@ export default function SeasonInfo({
 							repeat: Infinity,
 							ease: "linear",
 						}}
-						transitionEnd={{ "--after-w": "100%" }}
 					>
 						Season ends in:
 						<span className="mx-2">
