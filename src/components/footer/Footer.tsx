@@ -2,7 +2,7 @@ import clsx from "clsx";
 import { FaGithub, FaTwitter } from "react-icons/fa";
 import { SiKofi } from "react-icons/si";
 
-import { version } from "@/../package.json";
+import manifest from "@/../package.json";
 
 import styles from "./Footer.module.scss";
 
@@ -49,7 +49,7 @@ export default function Footer() {
 							rel="noopener noreferrer"
 							aria-label="GitHub link"
 						>
-							v{version}
+							v{manifest.version}
 						</a>{" "}
 						<a
 							href="https://twitter.com/AndrisBorbas"

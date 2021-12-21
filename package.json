@@ -1,7 +1,7 @@
 {
 	"name": "destiny-launcher",
 	"private": true,
-	"version": "3.2.2",
+	"version": "3.3.0",
 	"scripts": {
 		"build": "next build",
 		"build:analyze": "cross-env ANALYZE=true npm run build",

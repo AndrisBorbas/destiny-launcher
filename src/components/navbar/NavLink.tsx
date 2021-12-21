@@ -37,9 +37,9 @@ export function NavLink({
 				<motion.a
 					className={clsx(
 						styles.navlink,
-						"inline-block py-2 px-2 lg:px-5 w-full text-xl lg:text-2xl font-medium hover:text-pink",
-						isFirst && "lg:pl-2",
-						isLast && "lg:pr-2",
+						"inline-block py-2 px-2 lg:px-4 xl:px-5 w-full text-xl lg:text-xl xl:text-2xl font-medium hover:text-pink",
+						isFirst && "lg:pl-0",
+						isLast && "lg:pr-0",
 					)}
 					onClick={closeNavbar}
 					onKeyPress={closeNavbar}
