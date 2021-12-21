@@ -15,6 +15,7 @@ const nextConfig = {
 	images: {
 		domains: ["bungie.net"],
 	},
+	swcMinify: true,
 };
 
 module.exports = withPlugins(
