@@ -16,6 +16,20 @@ const nextConfig = {
 		domains: ["bungie.net"],
 	},
 	swcMinify: true,
+	async rewrites() {
+		return {
+			fallback: [
+				{
+					source: "/2021",
+					destination: "https://konferencia.simonyi.bme.hu",
+				},
+				{
+					source: "/2021/:path*",
+					destination: "https://konferencia.simonyi.bme.hu/:path*",
+				},
+			],
+		};
+	},
 };
 
 module.exports = withPlugins(
