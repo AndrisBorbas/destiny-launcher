@@ -3,4 +3,5 @@
 	@screen xl {
 		width: min(100%, 520px);
 	}
+	@apply pointer-events-auto;
 }
