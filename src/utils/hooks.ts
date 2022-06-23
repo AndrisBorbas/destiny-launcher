@@ -59,7 +59,7 @@ export function useUser(redirectTo?: string, redirectIfLoggedIn = false) {
 			characters: data.characters,
 			clan: data.clan,
 		},
-		error,
+		error: data?.error,
 		isLoading: !error && !data,
 		isValidating,
 		mutateUser: mutate,
