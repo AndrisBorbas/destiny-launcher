@@ -36,8 +36,7 @@ module.exports = withPlugins(
 			{
 				pwa: {
 					dest: "public",
-					disable: process.env.NODE_ENV === "development",
-					register: false,
+					disable: process.env.NODE_ENV !== "production",
 				},
 			},
 		],
