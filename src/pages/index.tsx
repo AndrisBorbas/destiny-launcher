@@ -63,6 +63,21 @@ export const getStaticProps = async () => {
 
 	const d2info = await getInitialD2Info(true);
 
+	// Reduce size of data by removing unnecessary fields
+	Object.entries(d2info.presentationNodes).forEach(([key, value]) => {
+		Object.keys(value).forEach((subKey) => {
+			if (!["displayProperties"].includes(subKey)) {
+				// @ts-expect-error: it has the key because i used their keys
+				// eslint-disable-next-line no-param-reassign
+				delete value[subKey];
+			}
+			if (!value.displayProperties.name.includes("Season")) {
+				// @ts-expect-error: it has the key because i used their keys
+				delete d2info.presentationNodes[key];
+			}
+		});
+	});
+
 	return {
 		props: {
 			banners,
@@ -74,6 +89,8 @@ export const getStaticProps = async () => {
 type PageProps = InferGetStaticPropsType<typeof getStaticProps>;
 
 export default function Index({ banners, d2info }: PageProps) {
+	// console.log({ banners, d2info });
+
 	if (typeof window === "undefined") {
 		if (d2info) mutate(d2InfoRoute, d2info, false);
 	} else {
@@ -100,12 +117,14 @@ export default function Index({ banners, d2info }: PageProps) {
 	}, [user, error]); */
 
 	return (
-		<Layout className="flex relative flex-col sm:px-4 md:px-8 lg:px-12 xl:px-16 mx-auto mb-8 safe-area-x">
+		<Layout className="safe-area-x relative mx-auto mb-8 flex flex-col sm:px-4 md:px-8 lg:px-12 xl:px-16">
 			<section className={styles.notices}>
-				<Notice id="notice6" className="mt-8">
+				<Notice id="notice7" className="mt-6">
 					<h2 className="mb-1 font-semibold">New features:</h2>
 					<h3>Login to have personalized links to sites.</h3>
-					<h3>Click the timer to switch between them.</h3>
+					<h3>
+						Click the countdown to switch between weekly reset and season end.
+					</h3>
 					<a
 						className="mt-2 text-sm underline decoration-yellow-300 hover:underline-offset-2"
 						href="https://ko-fi.com/andrisborbas"

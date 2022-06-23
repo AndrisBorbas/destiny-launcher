@@ -31,14 +31,17 @@ export const d2UserKey = "d2User";
  */
 export function useUser(redirectTo?: string, redirectIfLoggedIn = false) {
 	const router = useRouter();
-	const { data, mutate } = useSWR<ProfileResponse>(d2UserRoute, {
-		onError() {
-			localStorage.removeItem(d2UserKey);
+	const { data, error, isValidating, mutate } = useSWR<ProfileResponse>(
+		d2UserRoute,
+		{
+			onError() {
+				localStorage.removeItem(d2UserKey);
+			},
+			onSuccess(loadedData) {
+				localStorage.setItem(d2UserKey, JSON.stringify(loadedData));
+			},
 		},
-		onSuccess(loadedData) {
-			localStorage.setItem(d2UserKey, JSON.stringify(loadedData));
-		},
-	});
+	);
 	useEffect(() => {
 		if (!redirectTo || !data) return;
 
@@ -56,8 +59,9 @@ export function useUser(redirectTo?: string, redirectIfLoggedIn = false) {
 			characters: data.characters,
 			clan: data.clan,
 		},
-		isLoading: !data || !!data.error,
 		error: data?.error,
+		isLoading: !error && !data,
+		isValidating,
 		mutateUser: mutate,
 	};
 }

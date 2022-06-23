@@ -11,6 +11,7 @@ export type NavLinkProps = {
 	closeNavbar: () => void;
 	label: string;
 	replace?: boolean;
+	disabled?: boolean;
 };
 
 export function NavLink({
@@ -20,6 +21,7 @@ export function NavLink({
 	label,
 	closeNavbar,
 	replace,
+	disabled,
 }: NavLinkProps) {
 	const variants = {
 		initial: {
@@ -32,12 +34,19 @@ export function NavLink({
 		},
 	};
 	return (
-		<li key={`${href}`} className="lg:p-0 py-1 pl-2">
-			<Link href={href} passHref replace={replace}>
-				<motion.a
+		<li key={`${href}`} className="py-1 pl-2 lg:p-0">
+			<Link
+				href={href}
+				passHref
+				replace={replace}
+				className={clsx(
+					disabled && "pointer-events-none cursor-default opacity-70",
+				)}
+			>
+				<motion.p
 					className={clsx(
 						styles.navlink,
-						"inline-block py-2 px-2 lg:px-4 xl:px-5 w-full text-xl lg:text-xl xl:text-2xl font-medium hover:text-pink",
+						"hover:text-pink inline-block w-full py-2 px-2 text-xl font-medium lg:px-4 lg:text-xl xl:px-5 xl:text-2xl",
 						isFirst && "lg:pl-0",
 						isLast && "lg:pr-0",
 					)}
@@ -52,7 +61,7 @@ export function NavLink({
 					transition={{ duration: 0.3 }}
 				>
 					{label}
-				</motion.a>
+				</motion.p>
 			</Link>
 		</li>
 	);

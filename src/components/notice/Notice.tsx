@@ -19,13 +19,13 @@ export default function Notice({ id, children, className }: NoticeProps) {
 	}, [id]);
 	return (
 		<div
-			style={{ display: isVisible === true ? "" : "none" }}
+			style={{ display: isVisible ? "" : "none" }}
 			className={clsx("mb-4", className)}
 		>
 			<div
 				className={clsx(
 					styles.notice,
-					"relative p-3 px-6 ml-auto text-xl text-center bg-button bg-opacity-50 border-t border-gray-300 bg-blur-10",
+					"bg-blur-10 relative ml-auto border-t border-gray-300 bg-button bg-opacity-50 p-3 px-6 text-center text-xl",
 				)}
 			>
 				{children}

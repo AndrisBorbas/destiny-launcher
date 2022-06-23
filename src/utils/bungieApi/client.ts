@@ -3,9 +3,9 @@ import type { HttpClient, HttpClientConfig } from "bungie-api-ts/http";
 
 import { oauthClientAPIKey } from "./consts";
 
-interface HttpClientConfigExtra extends HttpClientConfig {
+type HttpClientConfigExtra = {
 	headers?: { auth: string; [key: string]: unknown };
-}
+} & HttpClientConfig;
 
 // I got this example from the DIM source code, because I couldn't manage to make it work on my own.
 // https://github.com/DestinyItemManager/DIM/blob/master/src/app/bungie-api/http-client.ts#L139

@@ -1,5 +1,5 @@
 .headerText {
-	@apply font-NeueHGD text-4xl font-medium p-4 pl-2 my-4;
+	@apply my-4 p-4 pl-2 font-NeueHGD text-4xl font-medium;
 
 	scroll-margin: 100px;
 	scroll-margin-top: 100px;
@@ -22,7 +22,7 @@
 }
 
 .bannerSection {
-	@apply grid gap-8 justify-items-center justify-center grid-cols-1;
+	@apply grid grid-cols-1 justify-center justify-items-center gap-8;
 
 	@screen sm {
 		grid-template-columns: repeat(auto-fill, 520px);
@@ -37,6 +37,6 @@
 }
 
 .placeholder {
-	@apply w-full text-center text-lg flex justify-center items-center;
+	@apply flex w-full items-center justify-center text-center text-lg;
 	height: 72px;
 }
