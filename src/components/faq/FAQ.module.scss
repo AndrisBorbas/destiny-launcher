@@ -1,16 +1,16 @@
 .faq {
-	@apply mt-4 container mx-auto;
+	@apply container mx-auto mt-4;
 	scroll-margin: 100px;
 	scroll-margin-top: 100px;
 }
 
 .headerText {
-	@apply font-NeueHGD
-		text-4xl
-		font-medium
+	@apply my-4
 		p-4
 		pl-2
-		my-4;
+		font-NeueHGD
+		text-4xl
+		font-medium;
 
 	width: fit-content;
 
@@ -32,15 +32,15 @@
 }
 
 .question {
-	@apply text-2xl
-		font-medium
-		mb-2;
+	@apply mb-2
+		text-2xl
+		font-medium;
 }
 
 .answer {
-	@apply pl-3
-		text-lg
-		mb-3;
+	@apply mb-3
+		pl-3
+		text-lg;
 }
 
 .link {

@@ -1,7 +1,7 @@
 /**
  * An OAuth token, either authorization or refresh.
  */
-export interface Token {
+export type Token = {
 	/** The oauth token key */
 	value: string;
 	/** The token expires this many seconds after it is acquired. */
@@ -9,10 +9,10 @@ export interface Token {
 	name: "access" | "refresh";
 	/** A UTC epoch milliseconds timestamp representing when the token was acquired. */
 	inception: number;
-}
+};
 
-export interface Tokens {
+export type Tokens = {
 	accessToken: Token;
 	refreshToken?: Token;
 	bungieMembershipId: string;
-}
+};

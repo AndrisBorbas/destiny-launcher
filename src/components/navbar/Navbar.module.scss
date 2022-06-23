@@ -1,5 +1,5 @@
 .header {
-	@apply fixed z-40 top-0 flex flex-wrap items-center justify-between w-full text-white font-NeueHGD border-b border-gray-300 py-2;
+	@apply fixed top-0 z-40 flex w-full flex-wrap items-center justify-between border-b border-gray-300 py-2 font-NeueHGD text-white;
 
 	min-height: var(--headerHeight);
 

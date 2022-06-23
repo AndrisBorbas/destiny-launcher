@@ -1,10 +1,10 @@
 export const GTM_ID = "GTM-P39BGT3";
 
 export const GTMPageView = (url: string) => {
-	interface PageEventProps {
+	type PageEventProps = {
 		event: string;
 		page: string;
-	}
+	};
 
 	const pageEvent: PageEventProps = {
 		event: "pageview",
@@ -12,6 +12,6 @@ export const GTMPageView = (url: string) => {
 	};
 
 	// @ts-expect-error: Should work
-	if (window?.dataLayer) window.dataLayer.push(pageEvent);
+	if (window.dataLayer) window.dataLayer.push(pageEvent);
 	return pageEvent;
 };
