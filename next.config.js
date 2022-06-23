@@ -9,13 +9,12 @@ const withTM = require("next-transpile-modules")(["bungie-api-ts"]);
 /** @type {import("next").NextConfig} */
 const nextConfig = {
 	reactStrictMode: true,
-	future: {
-		strictPostcssConfiguration: true,
-	},
 	images: {
 		domains: ["bungie.net"],
 	},
-	swcMinify: true,
+	experimental: {
+		newNextLinkBehavior: true,
+	},
 };
 
 module.exports = withPlugins(

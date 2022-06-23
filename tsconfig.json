@@ -12,5 +12,5 @@
 		]
 	},
 	"include": ["*.config.js", "next-env.d.ts", "**/*.ts", "**/*.tsx"],
-	"exclude": ["node_modules", "public"]
+	"exclude": ["node_modules", "public", ".next/"]
 }
