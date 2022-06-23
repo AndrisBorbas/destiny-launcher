@@ -23,18 +23,12 @@ import type { HydratedBannerType } from "@/@types/DataTypes";
 import DroppableContainer from "../dnd/DroppableContainer";
 import Banner from "./Banner";
 import styles from "./BannerSection.module.scss";
-import H4 from "./H4";
 
 const TITLES: { [key in string]: string } = {
 	favourite: "Favourites",
 	manager: "Account Managers",
 	info: "Informational sites",
 	sheet: "Community spreadsheets",
-};
-
-const dropAnimation: DropAnimation = {
-	...defaultDropAnimation,
-	dragSourceOpacity: 0.5,
 };
 
 const VOID_ID = "__void__";
@@ -137,7 +131,7 @@ export default function BannerSection({
 	}
 
 	const [clonedItems, setClonedItems] = useState<Banners | null>(null);
-	const [activeId, setActiveId] = useState<string | null>(null);
+	const [activeId, setActiveId] = useState<string | number | null>(null);
 
 	const sensors = useSensors(
 		useSensor(PointerSensor, { activationConstraint: { distance: 3 } }),
@@ -146,7 +140,7 @@ export default function BannerSection({
 		}),
 	);
 
-	const findContainer = (id: string) => {
+	const findContainer = (id: string | number) => {
 		if (id in banners) {
 			return id as Keys;
 		}
@@ -233,8 +227,8 @@ export default function BannerSection({
 								over &&
 								overIndex === overItems.length - 1 &&
 								active.rect.current.translated &&
-								active.rect.current.translated.offsetTop >
-									over.rect.offsetTop + over.rect.height;
+								active.rect.current.translated.top >
+									over.rect.top + over.rect.height;
 
 							const modifier = isBelowLastItem ? 1 : 0;
 
@@ -379,7 +373,7 @@ export default function BannerSection({
 			{typeof window !== "undefined" && (
 				<DragOverlay>
 					{activeId && activeBanner ? (
-						<Banner id="disabled" {...activeBanner.data}>
+						<Banner id="disabled" {...activeBanner.data} className="opacity-50">
 							{activeBanner.content}
 						</Banner>
 					) : null}

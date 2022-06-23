@@ -26,7 +26,7 @@ type BannerProps = {
 	isActive?: boolean;
 	children: MDXRemoteSerializeResult;
 	/* eslint-enable react/no-unused-prop-types */
-} & React.HTMLProps<HTMLDivElement>;
+} & Omit<React.HTMLProps<HTMLDivElement>, "children">;
 
 const Banner = memo(
 	forwardRef<HTMLDivElement, BannerProps>(function Banner(
@@ -41,6 +41,7 @@ const Banner = memo(
 			loggedInURL,
 			id,
 			isActive,
+			className,
 			children,
 		},
 		/* eslint-enable react/prop-types */
@@ -112,6 +113,7 @@ const Banner = memo(
 					styles.banner,
 					isOpened ? "row-span-6" : "row-span-1",
 					isActive === true ? "opacity-0" : "opacity-100",
+					className,
 				)}
 				ref={setNodeRef}
 				style={style}
