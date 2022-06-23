@@ -16,7 +16,7 @@ import {
 	SortableContext,
 	sortableKeyboardCoordinates,
 } from "@dnd-kit/sortable";
-import { useEffect, useState } from "react";
+import { Suspense, useEffect, useState } from "react";
 
 import type { HydratedBannerType } from "@/@types/DataTypes";
 
@@ -366,7 +366,7 @@ export default function BannerSection({
 							{containerId === "favourite" &&
 								banners[containerId as Keys].length === 0 && (
 									<article
-										className="flex md:flex justify-center items-center w-full text-lg text-center border-t border-gray-500 bg-blur-10"
+										className="bg-blur-10 flex w-full items-center justify-center border-t border-gray-500 text-center text-lg md:flex"
 										style={{ height: "72px" }}
 									>
 										Drag & drop banners here to add them to favourites.

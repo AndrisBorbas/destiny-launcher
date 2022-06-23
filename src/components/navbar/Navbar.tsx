@@ -1,7 +1,7 @@
 import clsx from "clsx";
 import Image from "next/image";
 import Link from "next/link";
-import { useEffect } from "react";
+import { Suspense, useEffect } from "react";
 import { FaBars } from "react-icons/fa";
 
 import navbarContent from "@/data/navbar.json";
@@ -12,73 +12,78 @@ import { NavLink } from "./NavLink";
 
 export default function Navbar() {
 	const [isNavbarOpen, navbarHandlers] = useBool();
-	const { user, error, isLoading } = useUser("/", false);
+	const { user, error, isLoading, isValidating } = useUser("/", false);
 
 	useEffect(() => {
 		if (process.env.NODE_ENV !== "production") {
 			// eslint-disable-next-line no-console
-			console.log(user, error, isLoading);
+			console.log(user, error, isLoading, isValidating);
 		}
 		return () => {};
-	}, [user, error, isLoading]);
+	}, [user, error, isLoading, isValidating]);
 
 	return (
 		<header className={clsx(styles.header, "bg-blur-10")}>
-			<div className="flex relative flex-wrap justify-between items-center px-2 lg:px-8 mx-auto w-full">
-				<div className="flex lg:block relative lg:static justify-between lg:justify-start items-center w-full lg:w-auto pointer-events-auto">
-					<Link href="/#" replace>
-						<a className="flex items-center mr-2 text-2xl lg:text-4xl lg:leading-10 no-underline">
-							<span className="inline-block relative mr-2 w-12 h-12">
+			<Suspense>
+				<div className="relative mx-auto flex w-full flex-wrap items-center justify-between px-2 lg:px-8">
+					<div className="pointer-events-auto relative flex w-full items-center justify-between lg:static lg:block lg:w-auto lg:justify-start">
+						<Link
+							href="/#"
+							replace
+							className="mr-2 flex items-center text-2xl no-underline lg:text-4xl lg:leading-10"
+						>
+							<span className="relative mr-2 inline-block h-12 w-12">
 								<Image src="/icon.png" alt="Logo" layout="fill" unoptimized />
 							</span>
 							<h1>Destiny Launcher</h1>
-						</a>
-					</Link>
-					<button
-						className="block lg:hidden py-2 px-2 h-full text-xl leading-none bg-transparent rounded border border-transparent border-solid cursor-pointer outline-none focus:outline-none"
-						type="button"
-						onClick={navbarHandlers.toggle}
-						aria-label="Navbar toggler"
+						</Link>
+						<button
+							className="block h-full cursor-pointer rounded border border-solid border-transparent bg-transparent py-2 px-2 text-xl leading-none outline-none focus:outline-none lg:hidden"
+							type="button"
+							onClick={navbarHandlers.toggle}
+							aria-label="Navbar toggler"
+						>
+							<FaBars />
+						</button>
+					</div>
+					<nav
+						className={clsx(
+							"pointer-events-auto z-50 w-full items-center lg:flex lg:w-auto",
+							isNavbarOpen ? "flex" : "hidden",
+						)}
 					>
-						<FaBars />
-					</button>
+						<ul className="flex w-full list-none flex-col rounded-lg lg:ml-auto lg:w-auto lg:flex-row">
+							{navbarContent.links.map(({ href, label }, i) => (
+								<NavLink
+									href={href}
+									label={label}
+									isFirst={i === 0}
+									closeNavbar={navbarHandlers.setFalse}
+									key={label}
+									replace
+								/>
+							))}
+							{!user && (
+								<NavLink
+									href="/api/auth/login"
+									disabled={isLoading}
+									label="Login"
+									isLast
+									closeNavbar={navbarHandlers.setFalse}
+								/>
+							)}
+							{(!!user || !!error) && (
+								<NavLink
+									href="/api/auth/logout"
+									label="Logout"
+									isLast
+									closeNavbar={navbarHandlers.setFalse}
+								/>
+							)}
+						</ul>
+					</nav>
 				</div>
-				<nav
-					className={clsx(
-						"lg:flex z-50 items-center w-full lg:w-auto pointer-events-auto",
-						isNavbarOpen ? "flex" : "hidden",
-					)}
-				>
-					<ul className="flex flex-col lg:flex-row lg:ml-auto w-full lg:w-auto list-none rounded-lg">
-						{navbarContent.links.map(({ href, label }, i) => (
-							<NavLink
-								href={href}
-								label={label}
-								isFirst={i === 0}
-								closeNavbar={navbarHandlers.setFalse}
-								key={label}
-								replace
-							/>
-						))}
-						{(!!error || isLoading) && (
-							<NavLink
-								href="/api/auth/login"
-								label="Login"
-								isLast
-								closeNavbar={navbarHandlers.setFalse}
-							/>
-						)}
-						{!error && !isLoading && (
-							<NavLink
-								href="/api/auth/logout"
-								label="Logout"
-								isLast
-								closeNavbar={navbarHandlers.setFalse}
-							/>
-						)}
-					</ul>
-				</nav>
-			</div>
+			</Suspense>
 		</header>
 	);
 }

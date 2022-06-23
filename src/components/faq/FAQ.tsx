@@ -15,18 +15,20 @@ const components = {
 		// eslint-disable-next-line jsx-a11y/anchor-has-content
 		<a className={styles.link} rel="noopener" target="_blank" {...restProps} />
 	),
-	ul: ({ ...restProps }) => <ul className="pl-8 list-disc" {...restProps} />,
+	ul: ({ ...restProps }) => <ul className="list-disc pl-8" {...restProps} />,
 };
 
 /* eslint-enable react/display-name */
 
 export default function FAQ() {
 	return (
-		<section id="FAQ" className={styles.faq}>
+		<>
 			<h2 className={styles.headerText}>Frequently Asked Questions</h2>
-			<MDXProvider components={components}>
-				<FAQContent />
-			</MDXProvider>
-		</section>
+			<section id="FAQ" className={styles.faq}>
+				<MDXProvider components={components}>
+					<FAQContent />
+				</MDXProvider>
+			</section>
+		</>
 	);
 }

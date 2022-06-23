@@ -2,6 +2,9 @@ const withBundleAnalyzer = require("@next/bundle-analyzer");
 const withPlugins = require("next-compose-plugins");
 const withMDX = require("@next/mdx")({
 	extension: /\.mdx?$/,
+	options: {
+		providerImportSource: "@mdx-js/react",
+	},
 });
 const withPWA = require("next-pwa");
 const withTM = require("next-transpile-modules")(["bungie-api-ts"]);
@@ -15,13 +18,19 @@ const nextConfig = {
 	experimental: {
 		newNextLinkBehavior: true,
 	},
+	swcMinify: true,
 };
 
 module.exports = withPlugins(
 	[
 		[withTM],
 		[withBundleAnalyzer({ enabled: process.env.ANALYZE === "true" })],
-		[withMDX, { pageExtensions: ["tsx", "mdx", "ts"] }],
+		[
+			withMDX,
+			{
+				pageExtensions: ["tsx", "mdx", "ts"],
+			},
+		],
 		[
 			withPWA,
 			{

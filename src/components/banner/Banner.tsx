@@ -4,7 +4,7 @@ import clsx from "clsx";
 import { motion } from "framer-motion";
 import Image from "next/image";
 import { MDXRemote, MDXRemoteSerializeResult } from "next-mdx-remote";
-import { forwardRef, memo, useEffect, useState } from "react";
+import { forwardRef, memo, Suspense, useEffect, useState } from "react";
 import { FaAngleDown, FaGripVertical } from "react-icons/fa";
 
 import { currentCharacter, getPlatformCode } from "@/utils/bungieApi/utils";
@@ -119,9 +119,9 @@ const Banner = memo(
 			>
 				<div className={styles.container}>
 					<div className={styles.header}>
-						<div className="flex items-center p-2 py-4 w-14 bg-banner-dark">
+						<div className="flex w-14 items-center bg-banner-dark p-2 py-4">
 							<a
-								className="block relative w-10 h-10"
+								className="relative block h-10 w-10"
 								href={link}
 								target="_blank"
 								rel="noopener noreferrer"
@@ -144,7 +144,7 @@ const Banner = memo(
 						</h3>
 
 						<FaGripVertical
-							className="self-center text-2xl cursor-move"
+							className="cursor-move self-center text-2xl"
 							{...listeners}
 						/>
 
