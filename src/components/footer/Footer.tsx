@@ -49,15 +49,8 @@ export default function Footer() {
 							rel="noopener noreferrer"
 							aria-label="GitHub link"
 						>
-							v{manifest.version}
-						</a>{" "}
-						<a
-							href="https://twitter.com/AndrisBorbas"
-							target="_blank"
-							rel="noopener noreferrer"
-							aria-label="Twitter link"
-						>
-							©&nbsp;{new Date().getFullYear()}&nbsp;AndrisBorbas
+							v{manifest.version} ©&nbsp;{new Date().getFullYear()}
+							&nbsp;AndrisBorbas
 						</a>
 					</p>
 				</div>
