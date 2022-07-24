@@ -26,7 +26,7 @@ export default function DLApp({ Component, pageProps }: AppProps) {
 				async
 				defer
 				data-website-id="6dbdd14e-cbac-4d0e-8231-38d54549a3e2"
-				src="http://analytics.andrisborbas.com/umami.js"
+				src="https://analytics.andrisborbas.com/umami.js"
 			/>
 			{/* End Umami analytics */}
 
