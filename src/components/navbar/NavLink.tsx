@@ -2,6 +2,8 @@ import clsx from "clsx";
 import { motion } from "framer-motion";
 import Link from "next/link";
 
+import { trackEvent } from "@/utils/track";
+
 import styles from "./NavLink.module.scss";
 
 export type NavLinkProps = {
@@ -42,6 +44,7 @@ export function NavLink({
 				className={clsx(
 					disabled && "pointer-events-none cursor-default opacity-70",
 				)}
+				onClick={() => trackEvent(href, "navlink_click")}
 			>
 				<motion.p
 					className={clsx(

@@ -9,6 +9,7 @@ import { FaAngleDown, FaGripVertical } from "react-icons/fa";
 
 import { currentCharacter, getPlatformCode } from "@/utils/bungieApi/utils";
 import { useUser } from "@/utils/hooks";
+import { trackEvent } from "@/utils/track";
 
 import styles from "./Banner.module.scss";
 import H4 from "./H4";
@@ -128,6 +129,9 @@ const Banner = memo(
 								target="_blank"
 								rel="noopener noreferrer"
 								aria-label={`${headerText} link`}
+								onClick={() => {
+									trackEvent(headerText, "banner_logo_click");
+								}}
 							>
 								<Image
 									src={iconSrc}
@@ -140,7 +144,14 @@ const Banner = memo(
 						</div>
 
 						<h3 className={styles.headerText}>
-							<a href={link} target="_blank" rel="noopener noreferrer">
+							<a
+								href={link}
+								target="_blank"
+								rel="noopener noreferrer"
+								onClick={() => {
+									trackEvent(headerText, "banner_name_click");
+								}}
+							>
 								{headerText}
 							</a>
 						</h3>
@@ -202,6 +213,9 @@ const Banner = memo(
 							href={link}
 							target="_blank"
 							rel="noopener noreferrer"
+							onClick={() => {
+								trackEvent(headerText, "banner_button_click");
+							}}
 						>
 							Open
 						</a>
