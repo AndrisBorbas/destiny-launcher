@@ -17,7 +17,7 @@ export default function Navbar() {
 	useEffect(() => {
 		if (process.env.NODE_ENV !== "production") {
 			// eslint-disable-next-line no-console
-			console.log(user, error, isLoading, isValidating);
+			console.log(user, error?.message, isLoading, isValidating);
 		}
 		return () => {};
 	}, [user, error, isLoading, isValidating]);
@@ -72,7 +72,7 @@ export default function Navbar() {
 									closeNavbar={navbarHandlers.setFalse}
 								/>
 							)}
-							{(!!user || !!error) && (
+							{!!user && (
 								<NavLink
 									href="/api/auth/logout"
 									label="Logout"

@@ -10,6 +10,8 @@ import Script from "next/script";
 import React, { useEffect } from "react";
 import { SWRConfig } from "swr";
 
+import { swrFetcher } from "@/utils/utils";
+
 export default function DLApp({ Component, pageProps }: AppProps) {
 	// const router = useRouter();
 	// useEffect(() => {
@@ -30,9 +32,7 @@ export default function DLApp({ Component, pageProps }: AppProps) {
 			/>
 			{/* End Umami analytics */}
 
-			<SWRConfig
-				value={{ fetcher: (url) => fetch(url).then((res) => res.json()) }}
-			>
+			<SWRConfig value={{ fetcher: swrFetcher }}>
 				<Component {...pageProps} />
 			</SWRConfig>
 		</React.StrictMode>

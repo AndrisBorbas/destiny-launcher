@@ -3,7 +3,8 @@ export function trackEvent(
 	eventType: string,
 	url?: string,
 ) {
-	if (typeof global.umami.trackEvent === "function") {
+	// eslint-disable-next-line @typescript-eslint/no-unnecessary-condition
+	if (typeof global.umami?.trackEvent === "function") {
 		global.umami.trackEvent(eventValue, eventType, url);
 		if (process.env.NODE_ENV !== "production") {
 			console.log(`Tracking event: ${eventValue}, {${eventType}}`);

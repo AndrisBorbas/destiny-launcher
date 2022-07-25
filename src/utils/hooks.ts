@@ -31,7 +31,7 @@ export const d2UserKey = "d2User";
  */
 export function useUser(redirectTo?: string, redirectIfLoggedIn = false) {
 	const router = useRouter();
-	const { data, error, isValidating, mutate } = useSWR<ProfileResponse>(
+	const { data, error, mutate, isValidating } = useSWR<ProfileResponse, Error>(
 		d2UserRoute,
 		{
 			onError() {
@@ -59,7 +59,7 @@ export function useUser(redirectTo?: string, redirectIfLoggedIn = false) {
 			characters: data.characters,
 			clan: data.clan,
 		},
-		error: data?.error,
+		error,
 		isLoading: !error && !data,
 		isValidating,
 		mutateUser: mutate,

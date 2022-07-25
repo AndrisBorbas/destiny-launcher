@@ -1,5 +1,11 @@
 import type { NextApiRequest } from "next";
 
+export async function swrFetcher(url: string) {
+	const res = await fetch(url);
+	if (res.ok) return res.json();
+	throw new Error(`Failed to fetch ${url}: ${res.status} ${res.statusText}`);
+}
+
 /**
  * Fetch with typed result
  * @param url fetch url
