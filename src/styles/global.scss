@@ -18,7 +18,7 @@ body {
 
 	margin: 0 auto;
 
-	padding-top: var(--headerHeight);
-	padding-top: calc(var(--headerHeight) + constant(safe-area-inset-top));
-	padding-top: calc(var(--headerHeight) + env(safe-area-inset-top));
+	// padding-top: var(--headerHeight);
+	// padding-top: calc(var(--headerHeight) + constant(safe-area-inset-top));
+	// padding-top: calc(var(--headerHeight) + env(safe-area-inset-top));
 }
