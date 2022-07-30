@@ -198,6 +198,7 @@ const Banner = memo(
 							layout="fill"
 							// width={520}
 							// height={292}
+							sizes="520px"
 							alt={`${headerText} preview`}
 							placeholder="blur"
 							blurDataURL={previewBlurhash}

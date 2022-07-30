@@ -13,6 +13,8 @@ const withTM = require("next-transpile-modules")(["bungie-api-ts"]);
 const nextConfig = {
 	reactStrictMode: true,
 	images: {
+		deviceSizes: [375],
+		imageSizes: [40, 48, 64, 390, 520],
 		domains: ["bungie.net"],
 	},
 	experimental: {
