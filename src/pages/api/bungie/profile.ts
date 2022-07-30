@@ -28,7 +28,8 @@ export default async (
 			try {
 				if (
 					!req.cookies.destinyLauncherLoggedIn ||
-					req.cookies.destinyLauncherLoggedIn !== "1"
+					req.cookies.destinyLauncherLoggedIn !== "1" ||
+					!req.cookies.accessToken
 				) {
 					return res.status(403).end();
 				}

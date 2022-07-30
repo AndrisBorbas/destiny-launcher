@@ -10,6 +10,9 @@ import { isSecureEnvironment } from "@/utils/utils";
 export default async (req: NextApiRequest, res: NextApiResponse) => {
 	switch (req.method) {
 		case "GET": {
+			if (!req.cookies.refreshToken) {
+				return res.status(403).end();
+			}
 			const tokens = await getAccessTokenFromRefreshToken(
 				req.cookies.refreshToken,
 			).catch((r: unknown) => {
