@@ -10,6 +10,7 @@ import Script from "next/script";
 import React, { useEffect } from "react";
 import { SWRConfig } from "swr";
 
+import { TRACKING_ID } from "@/utils/track";
 import { swrFetcher } from "@/utils/utils";
 
 export default function DLApp({ Component, pageProps }: AppProps) {
@@ -27,8 +28,8 @@ export default function DLApp({ Component, pageProps }: AppProps) {
 			<Script
 				async
 				defer
-				data-website-id="6dbdd14e-cbac-4d0e-8231-38d54549a3e2"
-				src="https://analytics.andrisborbas.com/umami.js"
+				data-website-id={TRACKING_ID}
+				src="https://analytics.andrisborbas.com/epic.js"
 			/>
 			{/* End Umami analytics */}
 
