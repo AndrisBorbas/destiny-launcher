@@ -11,6 +11,7 @@ import BannerSection from "@/components/banner/BannerSection";
 import FAQ from "@/components/faq/FAQ";
 import SeasonInfo from "@/components/info/SeasonInfo";
 import Layout from "@/components/Layout";
+import { TrackingLink } from "@/components/link/TrackingLink";
 import Notice from "@/components/notice/Notice";
 import { getInitialD2Info } from "@/utils/bungieApi/destiny2-api-server";
 import { d2InfoKey, d2InfoRoute, d2UserKey } from "@/utils/hooks";
@@ -125,15 +126,17 @@ export default function Index({ banners, d2info }: PageProps) {
 					<h3>
 						Click the countdown to switch between weekly reset and season end.
 					</h3>
-					<a
+					<TrackingLink
 						className="mt-2 text-sm underline decoration-yellow-300 hover:underline-offset-2"
 						href="https://ko-fi.com/andrisborbas"
 						target="_blank"
 						rel="noopener noreferrer"
 						aria-label="Ko-fi link"
+						isExternal
+						eventName="banner-link-click"
 					>
 						Please consider supporting if you like this project.
-					</a>
+					</TrackingLink>
 				</Notice>
 			</section>
 			<SeasonInfo initialData={d2info} />

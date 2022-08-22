@@ -1,9 +1,7 @@
 import clsx from "clsx";
 import { motion } from "framer-motion";
-import Link from "next/link";
 
-import { trackEvent } from "@/utils/track";
-
+import { TrackingLink } from "../link/TrackingLink";
 import styles from "./NavLink.module.scss";
 
 export type NavLinkProps = {
@@ -37,14 +35,14 @@ export function NavLink({
 	};
 	return (
 		<li key={`${href}`} className="py-1 pl-2 lg:p-0">
-			<Link
+			<TrackingLink
 				href={href}
 				passHref
 				replace={replace}
 				className={clsx(
 					disabled && "pointer-events-none cursor-default opacity-70",
 				)}
-				onClick={() => trackEvent(href, "navlink_click")}
+				eventName="navbar-link-click"
 			>
 				<motion.p
 					className={clsx(
@@ -65,7 +63,7 @@ export function NavLink({
 				>
 					{label}
 				</motion.p>
-			</Link>
+			</TrackingLink>
 		</li>
 	);
 }

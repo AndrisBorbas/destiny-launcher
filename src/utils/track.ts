@@ -1,13 +1,10 @@
-export function trackEvent(
-	eventValue: string,
-	eventType: string,
-	url?: string,
-) {
+export function trackEvent(eventName: string, data: object, url?: string) {
 	// eslint-disable-next-line @typescript-eslint/no-unnecessary-condition
 	if (typeof global.umami?.trackEvent === "function") {
-		global.umami.trackEvent(eventValue, eventType, url);
+		// @ts-expect-error: Umami changed to objects in v1.37.0
+		global.umami.trackEvent(eventName, data, url);
 		if (process.env.NODE_ENV !== "production") {
-			console.log(`Tracking event: ${eventValue}, {${eventType}}`);
+			console.log(`Tracking event: ${eventName}, `, data);
 		}
 	} else if (process.env.NODE_ENV !== "production") {
 		console.error("umami undefined");

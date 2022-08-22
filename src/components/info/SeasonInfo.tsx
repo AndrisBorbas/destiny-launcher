@@ -7,6 +7,7 @@ import type { InfoResponse } from "@/pages/api/bungie/info";
 import { currentCharacter, getClass } from "@/utils/bungieApi/utils";
 import { useBool, useD2Info, useUser } from "@/utils/hooks";
 
+import { TrackingLink } from "../link/TrackingLink";
 import styles from "./SeasonInfo.module.scss";
 
 /** Calculates the time between two dates
@@ -110,12 +111,14 @@ export default function SeasonInfo({
 					<h4 className={clsx(styles.seasonCounter, "text-2xl xl:text-3xl")}>
 						Season {currentSeason?.seasonNumber ?? "didn't load"}
 					</h4>
-					<a
+					<TrackingLink
 						href={`https://www.bungie.net/${
 							currentSeason?.displayProperties.name.replace(/\s+/g, "") ?? ""
 						}`}
 						target="_blank"
 						rel="noopener noreferrer"
+						isExternal
+						eventName="season-link-click"
 					>
 						<div className="flex items-center">
 							{seasonIcon && (
@@ -141,7 +144,7 @@ export default function SeasonInfo({
 									"Season of the [REDACTED]"}
 							</h3>
 						</div>
-					</a>
+					</TrackingLink>
 					<button
 						className="text-left"
 						onClick={() => toggleReset()}

@@ -2,6 +2,7 @@ import { MDXProvider } from "@mdx-js/react";
 
 import FAQContent from "@/data/FAQ.mdx";
 
+import { TrackingLink } from "../link/TrackingLink";
 import styles from "./FAQ.module.scss";
 
 /* eslint-disable react/display-name */
@@ -13,7 +14,15 @@ const components = {
 
 	a: ({ ...restProps }) => (
 		// eslint-disable-next-line jsx-a11y/anchor-has-content
-		<a className={styles.link} rel="noopener" target="_blank" {...restProps} />
+		// @ts-expect-error: Should have link from mdx
+		<TrackingLink
+			className={styles.link}
+			rel="noopener"
+			target="_blank"
+			isExternal
+			eventName="faq-link-click"
+			{...restProps}
+		/>
 	),
 	ul: ({ ...restProps }) => <ul className="list-disc pl-8" {...restProps} />,
 };

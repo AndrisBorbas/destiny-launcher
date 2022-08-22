@@ -9,8 +9,8 @@ import { FaAngleDown, FaGripVertical } from "react-icons/fa";
 
 import { currentCharacter, getPlatformCode } from "@/utils/bungieApi/utils";
 import { useUser } from "@/utils/hooks";
-import { trackEvent } from "@/utils/track";
 
+import { TrackingLink } from "../link/TrackingLink";
 import styles from "./Banner.module.scss";
 import H4 from "./H4";
 
@@ -123,15 +123,14 @@ const Banner = memo(
 				<div className={styles.container}>
 					<div className={styles.header}>
 						<div className="flex w-14 items-center bg-banner-dark p-2 py-4">
-							<a
+							<TrackingLink
 								className="relative block h-10 w-10"
 								href={link}
 								target="_blank"
 								rel="noopener noreferrer"
 								aria-label={`${headerText} link`}
-								onClick={() => {
-									trackEvent(headerText, "banner_logo_click");
-								}}
+								isExternal
+								eventName="banner-icon-click"
 							>
 								<Image
 									src={iconSrc}
@@ -140,20 +139,19 @@ const Banner = memo(
 									alt={`${headerText} icon`}
 									unoptimized
 								/>
-							</a>
+							</TrackingLink>
 						</div>
 
 						<h3 className={styles.headerText}>
-							<a
+							<TrackingLink
 								href={link}
 								target="_blank"
 								rel="noopener noreferrer"
-								onClick={() => {
-									trackEvent(headerText, "banner_name_click");
-								}}
+								isExternal
+								eventName="banner-header-click"
 							>
 								{headerText}
-							</a>
+							</TrackingLink>
 						</h3>
 
 						<FaGripVertical
@@ -209,17 +207,16 @@ const Banner = memo(
 						className={clsx(styles.figure, isOpened ? "block" : "hidden")}
 					>
 						<MDXRemote {...children} components={{ h4: H4 }} />
-						<a
+						<TrackingLink
 							className={styles.button}
 							href={link}
 							target="_blank"
 							rel="noopener noreferrer"
-							onClick={() => {
-								trackEvent(headerText, "banner_button_click");
-							}}
+							isExternal
+							eventName="banner-button-click"
 						>
 							Open
-						</a>
+						</TrackingLink>
 					</figure>
 				</div>
 			</article>

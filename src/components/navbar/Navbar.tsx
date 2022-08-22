@@ -7,6 +7,7 @@ import { FaBars } from "react-icons/fa";
 import navbarContent from "@/data/navbar.json";
 import { useBool, useUser } from "@/utils/hooks";
 
+import { TrackingLink } from "../link/TrackingLink";
 import styles from "./Navbar.module.scss";
 import { NavLink } from "./NavLink";
 
@@ -27,16 +28,17 @@ export default function Navbar() {
 			<Suspense>
 				<div className="relative mx-auto flex w-full flex-wrap items-center justify-between px-2 lg:px-8">
 					<div className="pointer-events-auto relative flex w-full items-center justify-between lg:static lg:block lg:w-auto lg:justify-start">
-						<Link
+						<TrackingLink
 							href="/#"
 							replace
 							className="mr-2 flex items-center text-2xl no-underline lg:text-4xl lg:leading-10"
+							eventName="navbar-link-click"
 						>
 							<span className="relative mr-2 inline-block h-12 w-12">
 								<Image src="/icon.png" alt="Logo" layout="fill" unoptimized />
 							</span>
 							<h1>Destiny Launcher</h1>
-						</Link>
+						</TrackingLink>
 						<button
 							className="block h-full cursor-pointer rounded border border-solid border-transparent bg-transparent py-2 px-2 text-xl leading-none outline-none focus:outline-none lg:hidden"
 							type="button"
