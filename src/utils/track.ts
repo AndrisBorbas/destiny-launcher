@@ -19,6 +19,20 @@ export const getPayload = () => ({
 	url: `${location.pathname}${location.search}`,
 });
 
+export function trackView(referrer?: string, url?: string) {
+	fetch("/api/utils/view", {
+		method: "POST",
+		body: JSON.stringify({
+			type: "pageview",
+			payload: assign(getPayload(), {
+				website: TRACKING_ID,
+				url,
+				referrer,
+			}),
+		}),
+	});
+}
+
 export function trackEvent(eventName: string, data: object, url?: string) {
 	fetch("/api/utils/event", {
 		method: "POST",
@@ -32,16 +46,4 @@ export function trackEvent(eventName: string, data: object, url?: string) {
 			}),
 		}),
 	});
-
-	return;
-
-	if (typeof global.umami.trackEvent === "function") {
-		// @ts-expect-error: Umami changed to objects in v1.37.0
-		global.umami.trackEvent(eventName, data, url);
-		if (process.env.NODE_ENV !== "production") {
-			console.log(`Tracking event: ${eventName}, `, data);
-		}
-	} else if (process.env.NODE_ENV !== "production") {
-		console.error("umami undefined");
-	}
 }
