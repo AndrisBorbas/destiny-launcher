@@ -15,11 +15,11 @@ import { TRACKING_ID, trackView } from "@/utils/track";
 import { dlog, swrFetcher } from "@/utils/utils";
 
 export default function DLApp({ Component, pageProps }: AppProps) {
-	const router = useRouter();
-	useEffectOnce(() => {
-		dlog(document.referrer, router.asPath);
-		trackView(document.referrer, router.asPath);
-	});
+	// const router = useRouter();
+	// useEffectOnce(() => {
+	// 	dlog(document.referrer, router.asPath);
+	// 	trackView(document.referrer, router.asPath);
+	// });
 
 	return (
 		<React.StrictMode>
@@ -29,7 +29,7 @@ export default function DLApp({ Component, pageProps }: AppProps) {
 				defer
 				data-website-id={TRACKING_ID}
 				src="https://analytics.andrisborbas.com/epic.js"
-				data-auto-track="false"
+				// data-auto-track="false"
 			/>
 			{/* End Umami analytics */}
 
