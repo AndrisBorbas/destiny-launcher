@@ -151,7 +151,7 @@ export function useLocalStorage<T>(key: string, initialValue: T) {
 export function useEffectOnce(fn: () => void) {
 	const ref = useRef(false);
 	useEffect(() => {
-		if (ref.current) {
+		if (!ref.current) {
 			fn();
 		}
 		return () => {
