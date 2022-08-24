@@ -6,6 +6,7 @@ import { FaBars } from "react-icons/fa";
 
 import navbarContent from "@/data/navbar.json";
 import { useBool, useUser } from "@/utils/hooks";
+import { dlog } from "@/utils/utils";
 
 import { TrackingLink } from "../link/TrackingLink";
 import styles from "./Navbar.module.scss";
@@ -16,10 +17,8 @@ export default function Navbar() {
 	const { user, error, isLoading, isValidating } = useUser("/", false);
 
 	useEffect(() => {
-		if (process.env.NODE_ENV !== "production") {
-			// eslint-disable-next-line no-console
-			console.log(user, error?.message, isLoading, isValidating);
-		}
+		dlog(user, error?.message, isLoading, isValidating);
+
 		return () => {};
 	}, [user, error, isLoading, isValidating]);
 

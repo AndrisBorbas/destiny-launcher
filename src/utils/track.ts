@@ -1,3 +1,5 @@
+import { dlog } from "./utils";
+
 export const TRACKING_ID = "29d1f3eb-69a8-4451-a1c9-9a9a67fcff1c";
 
 export const assign = (a: any, b: any) => {
@@ -20,6 +22,10 @@ export const getPayload = () => ({
 });
 
 export function trackView(referrer?: string, url?: string) {
+	if (process.env.NODE_ENV === "development") {
+		dlog("trackView blocked: ", referrer, url);
+		return;
+	}
 	fetch("/api/utils/view", {
 		method: "POST",
 		body: JSON.stringify({

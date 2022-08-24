@@ -1,4 +1,5 @@
 import type { NextApiRequest } from "next";
+import { useEffect, useRef } from "react";
 
 export async function swrFetcher(url: string) {
 	const res = await fetch(url);
@@ -41,4 +42,11 @@ export function isSecureEnvironment(req: NextApiRequest) {
 	}
 
 	return true;
+}
+
+export function dlog(...args: any) {
+	if (process.env.NODE_ENV !== "production") {
+		// eslint-disable-next-line no-console
+		console.log(...args);
+	}
 }

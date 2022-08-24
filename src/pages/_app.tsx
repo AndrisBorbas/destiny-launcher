@@ -4,23 +4,22 @@ import "@/styles/components.scss";
 import "@/styles/utilities.css";
 import "@/styles/global.scss";
 
-import type { AppProps, NextWebVitalsMetric } from "next/app";
+import type { AppProps } from "next/app";
 import { useRouter } from "next/router";
 import Script from "next/script";
-import React, { useEffect } from "react";
+import React from "react";
 import { SWRConfig } from "swr";
 
-import { TRACKING_ID } from "@/utils/track";
-import { swrFetcher } from "@/utils/utils";
+import { useEffectOnce } from "@/utils/hooks";
+import { TRACKING_ID, trackView } from "@/utils/track";
+import { dlog, swrFetcher } from "@/utils/utils";
 
 export default function DLApp({ Component, pageProps }: AppProps) {
-	// const router = useRouter();
-	// useEffect(() => {
-	// 	router.events.on("routeChangeComplete", handleRouteChange);
-	// 	return () => {
-	// 		router.events.off("routeChangeComplete", handleRouteChange);
-	// 	};
-	// }, []);
+	const router = useRouter();
+	useEffectOnce(() => {
+		dlog(document.referrer, router.asPath);
+		trackView(document.referrer, router.asPath);
+	});
 
 	return (
 		<React.StrictMode>
@@ -30,6 +29,7 @@ export default function DLApp({ Component, pageProps }: AppProps) {
 				defer
 				data-website-id={TRACKING_ID}
 				src="https://analytics.andrisborbas.com/epic.js"
+				data-auto-track="false"
 			/>
 			{/* End Umami analytics */}
 

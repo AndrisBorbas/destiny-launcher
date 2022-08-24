@@ -1,9 +1,11 @@
 import { useRouter } from "next/router";
-import { useEffect, useMemo, useState } from "react";
+import { useEffect, useMemo, useRef, useState } from "react";
 import useSWR from "swr";
 
 import type { InfoResponse } from "@/pages/api/bungie/info";
 import type { ProfileResponse } from "@/pages/api/bungie/profile";
+
+import { dlog } from "./utils";
 
 export const d2InfoRoute = "/api/bungie/info";
 export const d2InfoKey = "d2manifest";
@@ -111,7 +113,7 @@ export function useLocalStorage<T>(key: string, initialValue: T) {
 			return initialValue;
 		}
 		try {
-			console.log("init");
+			dlog("init");
 			// Get from local storage by key
 			const item = window.localStorage.getItem(key);
 			// Parse stored json or if none return initialValue
@@ -130,7 +132,7 @@ export function useLocalStorage<T>(key: string, initialValue: T) {
 			return;
 		}
 		try {
-			console.log("save");
+			dlog("save");
 			// Allow value to be a function so we have same API as useState
 			const valueToStore =
 				value instanceof Function ? value(storedValue) : value;
@@ -144,4 +146,16 @@ export function useLocalStorage<T>(key: string, initialValue: T) {
 		}
 	};
 	return [storedValue, setValue] as const;
+}
+
+export function useEffectOnce(fn: () => void) {
+	const ref = useRef(false);
+	useEffect(() => {
+		if (ref.current) {
+			fn();
+		}
+		return () => {
+			ref.current = true;
+		};
+	}, [fn]);
 }
