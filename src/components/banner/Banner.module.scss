@@ -54,6 +54,11 @@
 	&:after {
 		margin-top: -1px;
 		width: 4rem;
+		@apply transition-all duration-300 ease-out;
+	}
+
+	&:hover::after {
+		width: 100%;
 	}
 }
 

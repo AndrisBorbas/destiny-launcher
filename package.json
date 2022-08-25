@@ -1,7 +1,8 @@
 {
 	"name": "destiny-launcher",
 	"private": true,
-	"version": "3.4.7",
+	"version": "3.4.8",
+	"browserslist": "> 0.5%, last 2 versions, not dead, not < 0.2%",
 	"scripts": {
 		"build": "next build",
 		"build:analyze": "cross-env ANALYZE=true npm run build",
@@ -46,7 +47,7 @@
 		"next": "^12.2.5",
 		"next-compose-plugins": "^2.2.1",
 		"next-mdx-remote": "^4.1.0",
-		"next-pwa": "^5.5.4",
+		"next-pwa": "5.5.4",
 		"next-transpile-modules": "^9.0.0",
 		"plaiceholder": "^2.4.0",
 		"postcss-import": "^14.1.0",

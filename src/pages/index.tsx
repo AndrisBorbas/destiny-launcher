@@ -83,13 +83,14 @@ export const getStaticProps = async () => {
 		props: {
 			banners,
 			d2info,
+			buildDate: Date.now(),
 		},
 	};
 };
 
 type PageProps = InferGetStaticPropsType<typeof getStaticProps>;
 
-export default function Index({ banners, d2info }: PageProps) {
+export default function Index({ banners, d2info, buildDate }: PageProps) {
 	// console.log({ banners, d2info });
 
 	if (typeof window === "undefined") {
@@ -118,7 +119,10 @@ export default function Index({ banners, d2info }: PageProps) {
 	}, [user, error]); */
 
 	return (
-		<Layout className="safe-area-x relative mx-auto mb-8 flex flex-col sm:px-4 md:px-8 lg:px-12 xl:px-16">
+		<Layout
+			className="safe-area-x relative mx-auto mb-8 flex flex-col sm:px-4 md:px-8 lg:px-12 xl:px-16"
+			buildDate={buildDate}
+		>
 			<section className={styles.notices}>
 				<Notice id="notice7" className="mt-6">
 					<h2 className="mb-1 font-semibold">New features:</h2>

@@ -7,7 +7,23 @@ import manifest from "@/../package.json";
 import { TrackingLink } from "../link/TrackingLink";
 import styles from "./Footer.module.scss";
 
-export default function Footer() {
+type FooterProps = {
+	buildDate?: number;
+};
+
+export default function Footer({ buildDate }: FooterProps) {
+	const buildDateFormat = buildDate && new Date(buildDate);
+	const buildDateString = buildDate
+		? new Intl.DateTimeFormat("hu-HU", {
+				month: "2-digit",
+				day: "2-digit",
+				hour: "2-digit",
+				minute: "2-digit",
+		  })
+				.format(buildDateFormat)
+				.match(/\d+/g)
+				?.join("")
+		: "";
 	return (
 		<footer className={clsx(styles.footer, "bg-blur-10")} id="footer">
 			<div className="container mx-auto flex flex-col items-center justify-center space-y-6">
@@ -49,7 +65,7 @@ export default function Footer() {
 						Destiny is a registered trademark of Bungie. Some content and images
 						are the property of Bungie.
 					</p>
-					<p className="text-xs">
+					<p className="text-xs decoration-yellow-300 underline-offset-2 hover:underline">
 						<TrackingLink
 							href="https://www.github.com/andrisborbas/destiny-launcher"
 							target="_blank"
@@ -58,7 +74,8 @@ export default function Footer() {
 							isExternal
 							eventName="footer-link-click"
 						>
-							v{manifest.version} ©&nbsp;{new Date().getFullYear()}
+							v{manifest.version}.{buildDateString} ©&nbsp;
+							{new Date().getFullYear()}
 							&nbsp;AndrisBorbas
 						</TrackingLink>
 					</p>

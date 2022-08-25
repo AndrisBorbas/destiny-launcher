@@ -5,10 +5,15 @@ import Navbar from "@/components/navbar/Navbar";
 
 import styles from "./Layout.module.scss";
 
+type LayoutProps = {
+	buildDate?: number;
+} & React.HTMLAttributes<HTMLDivElement>;
+
 export default function Layout({
 	children,
+	buildDate,
 	...restProps
-}: React.HTMLAttributes<HTMLDivElement>): JSX.Element {
+}: LayoutProps): JSX.Element {
 	return (
 		<>
 			<Head>
@@ -127,7 +132,7 @@ export default function Layout({
 					{children}
 				</main>
 
-				<Footer />
+				<Footer buildDate={buildDate} />
 			</div>
 		</>
 	);
