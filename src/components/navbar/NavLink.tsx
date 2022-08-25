@@ -33,6 +33,11 @@ export function NavLink({
 			rotation: 0.001,
 		},
 	};
+
+	let eventName = "navbar-link-click";
+	if (label === "Login") eventName = "login";
+	if (label === "Logout") eventName = "logout";
+
 	return (
 		<li key={`${href}`} className="py-1 pl-2 lg:p-0">
 			<TrackingLink
@@ -42,7 +47,7 @@ export function NavLink({
 				className={clsx(
 					disabled && "pointer-events-none cursor-default opacity-70",
 				)}
-				eventName="navbar-link-click"
+				eventName={eventName}
 			>
 				<motion.p
 					className={clsx(
