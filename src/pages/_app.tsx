@@ -28,7 +28,7 @@ export default function DLApp({ Component, pageProps }: AppProps) {
 				async
 				defer
 				data-website-id={TRACKING_ID}
-				src="https://analytics.andrisborbas.com/epic.js"
+				src="https://succ.andrisborbas.com/succ.js"
 				// data-auto-track="false"
 			/>
 			{/* End Umami analytics */}
