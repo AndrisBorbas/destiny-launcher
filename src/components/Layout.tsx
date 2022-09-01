@@ -18,7 +18,7 @@ export default function Layout({
 		<>
 			<Head>
 				<link rel="preconnect" href="https://vitals.vercel-insights.com" />
-				<link rel="preconnect" href="https://www.google-analytics.com" />
+				<link rel="preconnect" href="https://succ.andrisborbas.com" />
 				<title>Destiny Launcher</title>
 				<meta name="viewport" content="initial-scale=1.0, width=device-width" />
 				<meta
@@ -114,7 +114,7 @@ export default function Layout({
 				<meta name="application-name" content="Destiny Launcher" />
 				<meta name="msapplication-TileColor" content="#161627" />
 				<meta name="theme-color" content="#161627" />
-				<meta name="color-sheme" content="dark light" />
+				<meta name="color-scheme" content="dark light" />
 
 				<meta name="mobile-web-app-capable" content="yes" />
 				<meta name="apple-mobile-web-app-capable" content="yes" />
