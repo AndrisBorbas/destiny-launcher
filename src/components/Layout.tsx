@@ -1,4 +1,6 @@
+import { motion, useAnimation } from "framer-motion";
 import Head from "next/head";
+import { useEffect } from "react";
 
 import Footer from "@/components/footer/Footer";
 import Navbar from "@/components/navbar/Navbar";
@@ -125,7 +127,16 @@ export default function Layout({
 				<link rel="shortcut icon" href="/favicon-100x100.png" />
 			</Head>
 
-			<div id="app" className={styles.app}>
+			<motion.div
+				id="app"
+				className={styles.app}
+				animate={{
+					// @ts-expect-error: Variants work
+					"--size-bottom": ["55%", "65%", "55%"],
+					"--size-top": ["20%", "30%", "20%"],
+				}}
+				transition={{ duration: 17.7, repeat: Infinity }}
+			>
 				<Navbar />
 
 				<main id="#" {...restProps}>
@@ -133,7 +144,7 @@ export default function Layout({
 				</main>
 
 				<Footer buildDate={buildDate} />
-			</div>
+			</motion.div>
 		</>
 	);
 }
