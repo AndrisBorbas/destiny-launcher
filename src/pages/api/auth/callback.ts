@@ -24,7 +24,7 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
 						sameSite: true,
 						httpOnly: true,
 					}),
-					serialize("membershipID", tokens.bungieMembershipId, {
+					serialize("membershipId", tokens.bungieMembershipId, {
 						maxAge: tokens.accessToken.expires,
 						secure: true /* isSecureEnvironment(req) */,
 						path: "/",
@@ -54,7 +54,7 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
 						sameSite: true,
 						httpOnly: true,
 					}),
-					serialize("membershipID", tokens.bungieMembershipId, {
+					serialize("membershipId", tokens.bungieMembershipId, {
 						maxAge: tokens.refreshToken.expires,
 						secure: true /* isSecureEnvironment(req) */,
 						path: "/",

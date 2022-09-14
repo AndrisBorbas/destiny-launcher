@@ -9,7 +9,7 @@ import {
 	GroupsForMemberFilter,
 	GroupType,
 } from "bungie-api-ts/groupv2";
-import { getMembershipDataForCurrentUser } from "bungie-api-ts/user";
+import { getMembershipDataById } from "bungie-api-ts/user";
 import fs from "fs";
 
 import { authenticatedHttpClient } from "./client";
@@ -61,56 +61,40 @@ export class AuthError extends Error {
 	}
 }
 
-export async function fetchUserProfileFromBungie(accessToken: string) {
-	const currentUser = await getMembershipDataForCurrentUser((config) =>
-		authenticatedHttpClient({
-			...config,
-			headers: { auth: accessToken },
-		}),
-	);
+export async function fetchUserProfileFromBungie(membershipId: string) {
+	const currentUser = await getMembershipDataById(authenticatedHttpClient, {
+		membershipId,
+		membershipType: BungieMembershipType.BungieNext,
+	});
 
 	if (
-		// @ts-expect-error: const enums work
 		currentUser.ErrorCode === PlatformErrorCodes.AccessTokenHasExpired ||
-		// @ts-expect-error: const enums work
 		currentUser.ErrorCode === PlatformErrorCodes.WebAuthRequired ||
 		// (also means the access token has expired)
-		// @ts-expect-error: const enums work
 		currentUser.ErrorCode === PlatformErrorCodes.WebAuthModuleAsyncFailed ||
-		// @ts-expect-error: const enums work
 		currentUser.ErrorCode === PlatformErrorCodes.AuthorizationRecordRevoked ||
-		// @ts-expect-error: const enums work
 		currentUser.ErrorCode === PlatformErrorCodes.AuthorizationRecordExpired ||
-		// @ts-expect-error: const enums work
 		currentUser.ErrorCode === PlatformErrorCodes.AuthorizationCodeStale ||
-		// @ts-expect-error: const enums work
 		currentUser.ErrorCode === PlatformErrorCodes.AuthorizationCodeInvalid
 	) {
 		throw new AuthError(
 			`(currentUser) ${currentUser.ErrorCode} - ${currentUser.ErrorStatus}: ${currentUser.Message}`,
 		);
 	}
-	// @ts-expect-error: const enums work
+
 	if (currentUser.ErrorCode !== PlatformErrorCodes.Success) {
 		throw new Error(
 			`(currentUser) ${currentUser.ErrorCode} - ${currentUser.ErrorStatus}: ${currentUser.Message}`,
 		);
 	}
 
-	const linkedProfiles = await getLinkedProfiles(
-		(config) =>
-			authenticatedHttpClient({
-				...config,
-				headers: { auth: accessToken },
-			}),
-		{
-			membershipId: currentUser.Response.bungieNetUser.membershipId,
-			// @ts-expect-error: const enums work
-			membershipType: BungieMembershipType.All,
-			getAllMemberships: true,
-		},
-	);
-	// @ts-expect-error: const enums work
+	const linkedProfiles = await getLinkedProfiles(authenticatedHttpClient, {
+		membershipId: currentUser.Response.bungieNetUser.membershipId,
+
+		membershipType: BungieMembershipType.All,
+		getAllMemberships: true,
+	});
+
 	if (linkedProfiles.ErrorCode !== PlatformErrorCodes.Success) {
 		throw new Error(
 			`(linkedProfiles) ${linkedProfiles.ErrorCode} - ${linkedProfiles.ErrorStatus}: ${linkedProfiles.Message}`,
@@ -128,50 +112,33 @@ export async function fetchUserProfileFromBungie(accessToken: string) {
 				: prev,
 		);
 
-	const detailedProfile = await getProfile(
-		(config) =>
-			authenticatedHttpClient({
-				...config,
-				headers: { auth: accessToken },
-			}),
-		{
-			destinyMembershipId: primaryProfile.membershipId,
-			membershipType: primaryProfile.membershipType,
-			components: [
-				// @ts-expect-error: const enums work
-				DestinyComponentType.Profiles,
-				// @ts-expect-error: const enums work
-				DestinyComponentType.Characters,
-			],
-		},
-	);
-	// @ts-expect-error: const enums work
+	const detailedProfile = await getProfile(authenticatedHttpClient, {
+		destinyMembershipId: primaryProfile.membershipId,
+		membershipType: primaryProfile.membershipType,
+		components: [
+			DestinyComponentType.Profiles,
+
+			DestinyComponentType.Characters,
+		],
+	});
+
 	if (detailedProfile.ErrorCode !== PlatformErrorCodes.Success) {
 		throw new Error(
 			`(detailedProfile) ${detailedProfile.ErrorCode} - ${detailedProfile.ErrorStatus}: ${detailedProfile.Message}`,
 		);
 	}
 
-	const clan = await getGroupsForMember(
-		(config) =>
-			authenticatedHttpClient({
-				...config,
-				headers: { auth: accessToken },
-			}),
-		{
-			// @ts-expect-error: const enums work
-			filter: GroupsForMemberFilter.All,
-			// @ts-expect-error: const enums work
-			groupType: GroupType.Clan,
-			membershipId:
-				detailedProfile.Response.profile.data?.userInfo.membershipId ?? "",
-			membershipType:
-				detailedProfile.Response.profile.data?.userInfo.membershipType ??
-				// @ts-expect-error: const enums work
-				BungieMembershipType.All,
-		},
-	);
-	// @ts-expect-error: const enums work
+	const clan = await getGroupsForMember(authenticatedHttpClient, {
+		filter: GroupsForMemberFilter.All,
+
+		groupType: GroupType.Clan,
+		membershipId:
+			detailedProfile.Response.profile.data?.userInfo.membershipId ?? "",
+		membershipType:
+			detailedProfile.Response.profile.data?.userInfo.membershipType ??
+			BungieMembershipType.All,
+	});
+
 	if (clan.ErrorCode !== PlatformErrorCodes.Success) {
 		// eslint-disable-next-line no-console
 		console.error(new Error("Could not get clan info"));

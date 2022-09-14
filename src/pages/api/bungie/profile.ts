@@ -29,12 +29,12 @@ export default async (
 				if (
 					!req.cookies.destinyLauncherLoggedIn ||
 					req.cookies.destinyLauncherLoggedIn !== "1" ||
-					!req.cookies.accessToken
+					!req.cookies.membershipId
 				) {
 					return res.status(403).end();
 				}
 				const { user, clan } = await fetchUserProfileFromBungie(
-					req.cookies.accessToken,
+					req.cookies.membershipId,
 				);
 				if (!user.profile.data || !user.characters.data) {
 					throw new Error("No data inside fetched profile");
@@ -50,7 +50,7 @@ export default async (
 			} catch (error: any) {
 				console.error(error);
 				if (error.name === "AuthError") {
-					console.log("red");
+					console.error("AuthError");
 					return res.redirect("/api/auth/refresh");
 					return res.status(403).json({
 						characters: undefined as never,

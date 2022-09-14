@@ -3,10 +3,6 @@ import type { HttpClient, HttpClientConfig } from "bungie-api-ts/http";
 
 import { oauthClientAPIKey } from "./consts";
 
-type HttpClientConfigExtra = {
-	headers?: { auth: string; [key: string]: unknown };
-} & HttpClientConfig;
-
 // I got this example from the DIM source code, because I couldn't manage to make it work on my own.
 // https://github.com/DestinyItemManager/DIM/blob/master/src/app/bungie-api/http-client.ts#L139
 function createHttpClient(
@@ -14,7 +10,7 @@ function createHttpClient(
 	apiKey: string,
 	withCredentials: boolean,
 ): HttpClient {
-	return async (config: HttpClientConfigExtra) => {
+	return async (config: HttpClientConfig) => {
 		let { url } = config;
 		if (config.params) {
 			// strip out undefined params keys. bungie-api-ts creates them for optional endpoint parameters
@@ -34,11 +30,6 @@ function createHttpClient(
 			body: config.body ? JSON.stringify(config.body) : undefined,
 			headers: {
 				"X-API-Key": apiKey,
-				...(config.headers?.auth &&
-					config.headers.auth !== "" &&
-					withCredentials && {
-						Authorization: `Bearer ${config.headers.auth}`,
-					}),
 				...(config.body && { "Content-Type": "application/json" }),
 			},
 			credentials: withCredentials ? "include" : "omit",

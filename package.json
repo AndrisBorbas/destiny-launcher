@@ -1,7 +1,7 @@
 {
 	"name": "destiny-launcher",
 	"private": true,
-	"version": "3.5.0",
+	"version": "3.5.1",
 	"browserslist": "> 0.5%, last 2 versions, not dead, not < 0.2%",
 	"scripts": {
 		"build": "next build",

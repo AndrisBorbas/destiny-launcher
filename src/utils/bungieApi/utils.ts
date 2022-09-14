@@ -41,15 +41,12 @@ export function currentCharacter(characters?: {
 
 export function getClass(p?: DestinyClass) {
 	switch (p) {
-		// @ts-expect-error: const enums work
 		case DestinyClass.Titan: {
 			return "Titan";
 		}
-		// @ts-expect-error: const enums work
 		case DestinyClass.Hunter: {
 			return "Hunter";
 		}
-		// @ts-expect-error: const enums work
 		case DestinyClass.Warlock: {
 			return "Warlock";
 		}
@@ -67,15 +64,14 @@ export function getClass(p?: DestinyClass) {
 export function getPlatformCode(m?: BungieMembershipType, codeType = 0) {
 	if (codeType === 0) {
 		switch (m) {
-			// @ts-expect-error: const enums work
 			case BungieMembershipType.TigerXbox: {
 				return "xb";
 			}
-			// @ts-expect-error: const enums work
+
 			case BungieMembershipType.TigerPsn: {
 				return "ps";
 			}
-			// @ts-expect-error: const enums work
+
 			case BungieMembershipType.TigerSteam: {
 				return "pc";
 			}
