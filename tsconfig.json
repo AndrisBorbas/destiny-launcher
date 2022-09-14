@@ -5,8 +5,8 @@
 		"paths": { "@/*": ["*"], "*": [""] },
 		"importsNotUsedAsValues": "error",
 		"strict": true,
-		"skipLibCheck": false,
-		"isolatedModules": false,
+		"skipLibCheck": true,
+		"isolatedModules": true,
 		"plugins": [
 			{
 				"name": "typescript-plugin-css-modules"

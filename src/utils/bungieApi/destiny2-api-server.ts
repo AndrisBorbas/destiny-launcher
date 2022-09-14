@@ -64,24 +64,32 @@ export class AuthError extends Error {
 export async function fetchUserProfileFromBungie(membershipId: string) {
 	const currentUser = await getMembershipDataById(authenticatedHttpClient, {
 		membershipId,
+		// @ts-expect-error: Const enums work
 		membershipType: BungieMembershipType.BungieNext,
 	});
 
 	if (
+		// @ts-expect-error: Const enums work
 		currentUser.ErrorCode === PlatformErrorCodes.AccessTokenHasExpired ||
+		// @ts-expect-error: Const enums work
 		currentUser.ErrorCode === PlatformErrorCodes.WebAuthRequired ||
 		// (also means the access token has expired)
+		// @ts-expect-error: Const enums work
 		currentUser.ErrorCode === PlatformErrorCodes.WebAuthModuleAsyncFailed ||
+		// @ts-expect-error: Const enums work
 		currentUser.ErrorCode === PlatformErrorCodes.AuthorizationRecordRevoked ||
+		// @ts-expect-error: Const enums work
 		currentUser.ErrorCode === PlatformErrorCodes.AuthorizationRecordExpired ||
+		// @ts-expect-error: Const enums work
 		currentUser.ErrorCode === PlatformErrorCodes.AuthorizationCodeStale ||
+		// @ts-expect-error: Const enums work
 		currentUser.ErrorCode === PlatformErrorCodes.AuthorizationCodeInvalid
 	) {
 		throw new AuthError(
 			`(currentUser) ${currentUser.ErrorCode} - ${currentUser.ErrorStatus}: ${currentUser.Message}`,
 		);
 	}
-
+	// @ts-expect-error: Const enums work
 	if (currentUser.ErrorCode !== PlatformErrorCodes.Success) {
 		throw new Error(
 			`(currentUser) ${currentUser.ErrorCode} - ${currentUser.ErrorStatus}: ${currentUser.Message}`,
@@ -90,11 +98,11 @@ export async function fetchUserProfileFromBungie(membershipId: string) {
 
 	const linkedProfiles = await getLinkedProfiles(authenticatedHttpClient, {
 		membershipId: currentUser.Response.bungieNetUser.membershipId,
-
+		// @ts-expect-error: Const enums work
 		membershipType: BungieMembershipType.All,
 		getAllMemberships: true,
 	});
-
+	// @ts-expect-error: Const enums work
 	if (linkedProfiles.ErrorCode !== PlatformErrorCodes.Success) {
 		throw new Error(
 			`(linkedProfiles) ${linkedProfiles.ErrorCode} - ${linkedProfiles.ErrorStatus}: ${linkedProfiles.Message}`,
@@ -116,12 +124,13 @@ export async function fetchUserProfileFromBungie(membershipId: string) {
 		destinyMembershipId: primaryProfile.membershipId,
 		membershipType: primaryProfile.membershipType,
 		components: [
+			// @ts-expect-error: Const enums work
 			DestinyComponentType.Profiles,
-
+			// @ts-expect-error: Const enums work
 			DestinyComponentType.Characters,
 		],
 	});
-
+	// @ts-expect-error: Const enums work
 	if (detailedProfile.ErrorCode !== PlatformErrorCodes.Success) {
 		throw new Error(
 			`(detailedProfile) ${detailedProfile.ErrorCode} - ${detailedProfile.ErrorStatus}: ${detailedProfile.Message}`,
@@ -129,16 +138,18 @@ export async function fetchUserProfileFromBungie(membershipId: string) {
 	}
 
 	const clan = await getGroupsForMember(authenticatedHttpClient, {
+		// @ts-expect-error: Const enums work
 		filter: GroupsForMemberFilter.All,
-
+		// @ts-expect-error: Const enums work
 		groupType: GroupType.Clan,
 		membershipId:
 			detailedProfile.Response.profile.data?.userInfo.membershipId ?? "",
 		membershipType:
 			detailedProfile.Response.profile.data?.userInfo.membershipType ??
+			// @ts-expect-error: Const enums work
 			BungieMembershipType.All,
 	});
-
+	// @ts-expect-error: Const enums work
 	if (clan.ErrorCode !== PlatformErrorCodes.Success) {
 		// eslint-disable-next-line no-console
 		console.error(new Error("Could not get clan info"));
