@@ -1,6 +1,6 @@
 import type { NextApiRequest, NextApiResponse } from "next";
 
-import { assign, TRACKING_ID } from "@/utils/track";
+import { assign } from "@/utils/track";
 
 export default async (req: NextApiRequest, res: NextApiResponse) => {
 	switch (req.method) {

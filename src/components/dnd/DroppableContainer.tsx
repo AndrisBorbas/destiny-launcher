@@ -1,6 +1,6 @@
 import { useDroppable } from "@dnd-kit/core";
 
-export default function DroppableContainer({
+export function DroppableContainer({
 	children,
 	className,
 	id,

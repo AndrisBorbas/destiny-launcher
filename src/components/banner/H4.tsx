@@ -1,4 +1,4 @@
-export default function H4({
+export function H4({
 	children,
 	...restProps
 }: React.HTMLProps<HTMLHeadingElement>) {

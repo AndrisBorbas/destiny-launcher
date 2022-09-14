@@ -29,11 +29,7 @@ function timeBetween(d1: number, d2: number) {
 	return { minutes, hours, days, weeks };
 }
 
-export default function SeasonInfo({
-	initialData,
-}: {
-	initialData: InfoResponse;
-}) {
+export function SeasonInfo({ initialData }: { initialData: InfoResponse }) {
 	const { data: swrD2Info, error } = useD2Info(initialData);
 	const { user } = useUser("/", false);
 	const [isResetTime, ResetTimeHandlers] = useBool(false);

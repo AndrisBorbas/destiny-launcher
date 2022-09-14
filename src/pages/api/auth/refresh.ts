@@ -1,11 +1,7 @@
 import { serialize } from "cookie";
 import type { NextApiRequest, NextApiResponse } from "next";
 
-import {
-	getAccessTokenFromRefreshToken,
-	getAccessTokensFromCode,
-} from "@/utils/bungieApi/oauth";
-import { isSecureEnvironment } from "@/utils/utils";
+import { getAccessTokenFromRefreshToken } from "@/utils/bungieApi/oauth";
 
 export default async (req: NextApiRequest, res: NextApiResponse) => {
 	switch (req.method) {

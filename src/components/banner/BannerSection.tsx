@@ -16,12 +16,12 @@ import {
 	SortableContext,
 	sortableKeyboardCoordinates,
 } from "@dnd-kit/sortable";
-import { Suspense, useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 
 import type { HydratedBannerType } from "@/@types/DataTypes";
 
-import DroppableContainer from "../dnd/DroppableContainer";
-import Banner from "./Banner";
+import { DroppableContainer } from "../dnd/DroppableContainer";
+import { Banner } from "./Banner";
 import styles from "./BannerSection.module.scss";
 
 const TITLES: { [key in string]: string } = {
@@ -43,7 +43,7 @@ type BannersStorage = {
 	[key in Keys]: string[];
 };
 
-export default function BannerSection({
+export function BannerSection({
 	banners: rawBanners,
 }: {
 	banners: HydratedBannerType[];

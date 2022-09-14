@@ -1,9 +1,8 @@
-import { motion, useAnimation } from "framer-motion";
+import { motion } from "framer-motion";
 import Head from "next/head";
-import { useEffect } from "react";
 
-import Footer from "@/components/footer/Footer";
-import Navbar from "@/components/navbar/Navbar";
+import { Footer } from "@/components/footer/Footer";
+import { Navbar } from "@/components/navbar/Navbar";
 
 import styles from "./Layout.module.scss";
 
@@ -11,7 +10,7 @@ type LayoutProps = {
 	buildDate?: number;
 } & React.HTMLAttributes<HTMLDivElement>;
 
-export default function Layout({
+export function Layout({
 	children,
 	buildDate,
 	...restProps

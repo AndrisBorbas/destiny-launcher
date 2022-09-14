@@ -29,7 +29,7 @@ const components = {
 
 /* eslint-enable react/display-name */
 
-export default function FAQ() {
+export function FAQ() {
 	return (
 		<>
 			<h2 className={styles.headerText}>Frequently Asked Questions</h2>

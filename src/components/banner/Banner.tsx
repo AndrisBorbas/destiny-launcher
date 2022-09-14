@@ -4,7 +4,7 @@ import clsx from "clsx";
 import { motion } from "framer-motion";
 import Image from "next/image";
 import { MDXRemote, MDXRemoteSerializeResult } from "next-mdx-remote";
-import { forwardRef, memo, Suspense, useEffect, useState } from "react";
+import { forwardRef, memo, useEffect, useState } from "react";
 import { FaAngleDown, FaGripVertical } from "react-icons/fa";
 
 import { currentCharacter, getPlatformCode } from "@/utils/bungieApi/utils";
@@ -12,7 +12,7 @@ import { useUser } from "@/utils/hooks";
 
 import { TrackingLink } from "../link/TrackingLink";
 import styles from "./Banner.module.scss";
-import H4 from "./H4";
+import { H4 } from "./H4";
 
 type BannerProps = {
 	/* eslint-disable react/no-unused-prop-types */
@@ -29,7 +29,7 @@ type BannerProps = {
 	/* eslint-enable react/no-unused-prop-types */
 } & Omit<React.HTMLProps<HTMLDivElement>, "children">;
 
-const Banner = memo(
+export const Banner = memo(
 	forwardRef<HTMLDivElement, BannerProps>(function Banner(
 		/* eslint-disable react/prop-types */
 		{
@@ -223,5 +223,3 @@ const Banner = memo(
 		);
 	}),
 );
-
-export default Banner;

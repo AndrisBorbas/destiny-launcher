@@ -1,6 +1,6 @@
 import Link from "next/link";
 
-import Layout from "@/components/Layout";
+import { Layout } from "@/components/Layout";
 
 export default function Custom404() {
 	return (
@@ -11,7 +11,7 @@ export default function Custom404() {
 				</h1>
 				<Link
 					href="/"
-					className="m-2 text-center text-lg underline decoration-yellow-300 hover:underline-offset-2 lg:text-2xl"
+					className="m-2 text-center text-lg underline decoration-yellow-300 underline-offset-2 hover:underline-offset-4 lg:text-2xl"
 				>
 					Return to home page
 				</Link>

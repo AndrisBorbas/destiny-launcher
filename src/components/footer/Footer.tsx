@@ -11,7 +11,7 @@ type FooterProps = {
 	buildDate?: number;
 };
 
-export default function Footer({ buildDate }: FooterProps) {
+export function Footer({ buildDate }: FooterProps) {
 	const buildDateFormat = buildDate && new Date(buildDate);
 	const buildDateString = buildDate
 		? new Intl.DateTimeFormat("hu-HU", {

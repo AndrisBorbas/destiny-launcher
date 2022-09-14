@@ -1,6 +1,5 @@
 import clsx from "clsx";
 import Image from "next/image";
-import Link from "next/link";
 import { Suspense, useEffect } from "react";
 import { FaBars } from "react-icons/fa";
 
@@ -12,7 +11,7 @@ import { TrackingLink } from "../link/TrackingLink";
 import styles from "./Navbar.module.scss";
 import { NavLink } from "./NavLink";
 
-export default function Navbar() {
+export function Navbar() {
 	const [isNavbarOpen, navbarHandlers] = useBool();
 	const { user, error, isLoading, isValidating } = useUser("/", false);
 

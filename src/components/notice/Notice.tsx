@@ -8,7 +8,7 @@ type NoticeProps = {
 	id: string;
 } & HTMLProps<HTMLDivElement>;
 
-export default function Notice({ id, children, className }: NoticeProps) {
+export function Notice({ id, children, className }: NoticeProps) {
 	const [isVisible, toggleVisible] = useState(false);
 
 	useEffect(() => {

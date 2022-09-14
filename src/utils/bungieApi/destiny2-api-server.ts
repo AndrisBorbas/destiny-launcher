@@ -65,7 +65,6 @@ export async function fetchUserProfileFromBungie(accessToken: string) {
 	const currentUser = await getMembershipDataForCurrentUser((config) =>
 		authenticatedHttpClient({
 			...config,
-			// @ts-expect-error: should work
 			headers: { auth: accessToken },
 		}),
 	);
@@ -102,7 +101,6 @@ export async function fetchUserProfileFromBungie(accessToken: string) {
 		(config) =>
 			authenticatedHttpClient({
 				...config,
-				// @ts-expect-error: should work
 				headers: { auth: accessToken },
 			}),
 		{
@@ -134,7 +132,6 @@ export async function fetchUserProfileFromBungie(accessToken: string) {
 		(config) =>
 			authenticatedHttpClient({
 				...config,
-				// @ts-expect-error: should work
 				headers: { auth: accessToken },
 			}),
 		{
@@ -159,7 +156,6 @@ export async function fetchUserProfileFromBungie(accessToken: string) {
 		(config) =>
 			authenticatedHttpClient({
 				...config,
-				// @ts-expect-error: should work
 				headers: { auth: accessToken },
 			}),
 		{

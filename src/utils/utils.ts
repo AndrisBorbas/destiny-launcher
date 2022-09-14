@@ -1,5 +1,4 @@
 import type { NextApiRequest } from "next";
-import { useEffect, useRef } from "react";
 
 export async function swrFetcher(url: string) {
 	const res = await fetch(url);
