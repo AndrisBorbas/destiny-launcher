@@ -13,20 +13,19 @@ import styles from "./SeasonInfo.module.scss";
 /** Calculates the time between two dates
  * @param d1 the first date in number form
  * @param d2 the second date in number form
- * @returns {{ minutes: number, hours: number, days: number, weeks: number}} the minutes, hours, days and weeks in an object
+ * @returns the weeks, days, hours and minutes in an object
  */
 function timeBetween(d1: number, d2: number) {
-	const weeks = Math.floor((d2 - d1) / (7 * 24 * 60 * 60 * 1000));
-	const days = Math.floor((d2 - d1) / (24 * 60 * 60 * 1000)) - weeks * 7;
-	const hours =
-		Math.floor((d2 - d1) / (60 * 60 * 1000)) - weeks * 7 * 24 - days * 24;
-	const minutes =
-		Math.floor((d2 - d1) / (60 * 1000)) -
-		weeks * 7 * 24 * 60 -
-		days * 24 * 60 -
-		hours * 60 +
-		1;
-	return { minutes, hours, days, weeks };
+	let delta = Math.abs(d1 - d2) / 1000;
+	const weeks = Math.floor(delta / 604800);
+	delta -= weeks * 604800;
+	const days = Math.floor(delta / 86400);
+	delta -= days * 86400;
+	const hours = Math.floor(delta / 3600) % 24;
+	delta -= hours * 3600;
+	const minutes = (Math.floor(delta / 60) % 60) + 1;
+
+	return { weeks, days, hours, minutes };
 }
 
 export function SeasonInfo({ initialData }: { initialData: InfoResponse }) {
@@ -64,8 +63,7 @@ export function SeasonInfo({ initialData }: { initialData: InfoResponse }) {
 
 	let currentSeason = Object.values(swrD2Info.allSeasons).find(
 		(season) =>
-			season.hash ===
-			swrD2Info.commonSettings.destiny2CoreSettings.currentSeasonHash,
+			season.hash === swrD2Info.destiny2CoreSettings.currentSeasonHash,
 	);
 
 	if (
@@ -75,8 +73,7 @@ export function SeasonInfo({ initialData }: { initialData: InfoResponse }) {
 	) {
 		currentSeason = Object.values(swrD2Info.allSeasons).find(
 			(season) =>
-				season.hash ===
-				swrD2Info.commonSettings.destiny2CoreSettings.futureSeasonHashes[0],
+				season.hash === swrD2Info.destiny2CoreSettings.futureSeasonHashes[0],
 		);
 	}
 
@@ -86,7 +83,7 @@ export function SeasonInfo({ initialData }: { initialData: InfoResponse }) {
 			node.displayProperties.hasIcon,
 	);
 
-	const { minutes, hours, days, weeks } = timeBetween(
+	const { weeks, days, hours, minutes } = timeBetween(
 		Date.now(),
 		Date.parse(currentSeason?.endDate ?? Date.now().toString()),
 	);
@@ -121,6 +118,7 @@ export function SeasonInfo({ initialData }: { initialData: InfoResponse }) {
 								<div className={styles.image}>
 									<Image
 										src={`https://bungie.net${
+											// eslint-disable-next-line @typescript-eslint/no-unnecessary-condition
 											seasonIcon.displayProperties.icon ?? ""
 										}`}
 										width={64}
@@ -177,7 +175,7 @@ export function SeasonInfo({ initialData }: { initialData: InfoResponse }) {
 										{hours > 1 ? " hours " : " hour "}
 									</>
 								)}
-								{weeks + days + hours <= 0 && (
+								{weeks + days <= 0 && (
 									<>
 										<span className="mx-1">{minutes}</span>
 										{minutes > 1 ? " minutes" : " minute"}

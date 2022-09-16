@@ -8,7 +8,7 @@ import type { ProfileResponse } from "@/pages/api/bungie/profile";
 import { dlog } from "./utils";
 
 export const d2InfoRoute = "/api/bungie/info";
-export const d2InfoKey = "d2manifest";
+export const d2InfoKey = "d2ManifestV2";
 /**
  * Fetch from "/api/bungie/info"
  * @returns manifest info

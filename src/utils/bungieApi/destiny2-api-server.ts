@@ -22,32 +22,63 @@ export async function getInitialD2Info(save?: boolean) {
 		"DestinyPresentationNodeDefinition",
 	]);
 
-	if (save) {
-		const dir = "public/data";
-		if (!fs.existsSync(dir)) fs.mkdirSync(dir);
-		fs.writeFile(
-			`${dir}/d2manifest.json`,
-			JSON.stringify(destinyManifest),
-			(err) => {
-				if (err) throw err;
-			},
-		);
-		fs.writeFile(
-			`${dir}/seasoninfo.json`,
-			JSON.stringify(manifestTables),
-			(err) => {
-				if (err) throw err;
-			},
-		);
-	}
+	const presentationNodes = manifestTables.DestinyPresentationNodeDefinition;
+
+	// Reduce size of data by removing unnecessary fields
+	Object.entries(presentationNodes).forEach(([key, value]) => {
+		Object.keys(value).forEach((subKey) => {
+			if (!["displayProperties"].includes(subKey)) {
+				// @ts-expect-error: it has the key because i used their keys
+				// eslint-disable-next-line no-param-reassign
+				delete value[subKey];
+			}
+			if (!value.displayProperties.name.toLowerCase().includes("season of")) {
+				// @ts-expect-error: it has the key because i used their keys
+				delete presentationNodes[key];
+			}
+		});
+	});
 
 	const commonSettings = await getSettings();
+
+	if (save) {
+		try {
+			const dir = "public/data";
+			if (!fs.existsSync(dir)) fs.mkdirSync(dir);
+			fs.writeFile(
+				`${dir}/d2Manifest.json`,
+				JSON.stringify(destinyManifest),
+				(err) => {
+					if (err) throw err;
+				},
+			);
+			fs.writeFile(
+				`${dir}/seasonInfo.json`,
+				JSON.stringify({
+					DestinyPresentationNodeDefinition: presentationNodes,
+					DestinySeasonDefinition: manifestTables.DestinySeasonDefinition,
+				}),
+				(err) => {
+					if (err) throw err;
+				},
+			);
+			fs.writeFile(
+				`${dir}/commonSettings.json`,
+				JSON.stringify(commonSettings),
+				(err) => {
+					if (err) throw err;
+				},
+			);
+		} catch (e) {
+			console.error(e);
+		}
+	}
 
 	return {
 		version: destinyManifest.version,
 		allSeasons: manifestTables.DestinySeasonDefinition,
-		commonSettings,
-		presentationNodes: manifestTables.DestinyPresentationNodeDefinition,
+		destiny2CoreSettings: commonSettings.destiny2CoreSettings,
+		presentationNodes,
 	};
 }
 
