@@ -22,6 +22,9 @@ export function Background({ mouseX, mouseY, svgRef }: BackgroundProps) {
 				<svg
 					ref={svgRef}
 					viewBox="0 0 1512 982"
+					preserveAspectRatio="xMidYMid slice"
+					height="100%"
+					width="100%"
 					fill="none"
 					xmlns="http://www.w3.org/2000/svg"
 				>
@@ -120,9 +123,6 @@ export function Background({ mouseX, mouseY, svgRef }: BackgroundProps) {
 							/>
 							<feGaussianBlur stdDeviation="150" result="bgEffectBlur" />
 						</filter>
-						<clipPath id="bgClipPath">
-							<rect width="1512" height="982" fill="white" />
-						</clipPath>
 					</defs>
 				</svg>
 			</LazyMotion>
