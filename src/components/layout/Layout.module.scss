@@ -1,0 +1,33 @@
+.app {
+	@apply min-h-screen;
+	// min-height: calc(100vh - var(--headerHeight));
+
+	@apply flex flex-col;
+	@apply bg-[#161627];
+
+	main {
+		@apply w-full;
+	}
+}
+
+.background {
+	// background: radial-gradient(circle at 50% 70px, #393956 0%, #161627 100%);
+	@apply pointer-events-none fixed inset-0 box-content;
+	background: radial-gradient(
+			75% var(--size-bottom) at 50% 120%,
+			#c4844899 0%,
+			#39395600 100%
+		),
+		linear-gradient(to bottom left, #b1513966 0%, #39395600 var(--size-top)),
+		linear-gradient(to bottom right, #b1513966 0%, #39395600 var(--size-top)),
+		linear-gradient(to bottom, #393956 0%, #161627 100%);
+	//top: var(--headerHeight);
+	//top: calc(var(--headerHeight) + constant(safe-area-inset-top));
+	//top: calc(var(--headerHeight) + env(safe-area-inset-top));
+	background-position: center top;
+	background-repeat: no-repeat;
+	content: "";
+	line-height: normal;
+	will-change: transform;
+	//z-index: -1;
+}

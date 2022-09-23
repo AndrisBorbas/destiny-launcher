@@ -1,9 +1,11 @@
-import { motion } from "framer-motion";
+import { useMotionValue } from "framer-motion";
 import Head from "next/head";
+import { createRef } from "react";
 
 import { Footer } from "@/components/footer/Footer";
 import { Navbar } from "@/components/navbar/Navbar";
 
+import { Background } from "./Background";
 import styles from "./Layout.module.scss";
 
 type LayoutProps = {
@@ -15,6 +17,20 @@ export function Layout({
 	buildDate,
 	...restProps
 }: LayoutProps): JSX.Element {
+	const svgRef = createRef<SVGSVGElement>();
+	const x = useMotionValue(0);
+	const y = useMotionValue(0);
+
+	function screenToSVG(sx: number, sy: number) {
+		if (!svgRef.current) {
+			return { x: 0, y: 0 };
+		}
+		const p = svgRef.current.createSVGPoint();
+		p.x = sx;
+		p.y = sy;
+		return p.matrixTransform(svgRef.current.getScreenCTM()?.inverse());
+	}
+
 	return (
 		<>
 			<Head>
@@ -126,16 +142,28 @@ export function Layout({
 				<link rel="shortcut icon" href="/favicon-100x100.png" />
 			</Head>
 
-			<motion.div
+			<div
 				id="app"
 				className={styles.app}
-				animate={{
-					// @ts-expect-error: Variants work
-					"--size-bottom": ["55%", "65%", "55%"],
-					"--size-top": ["20%", "30%", "20%"],
+				onMouseMove={(e) => {
+					const p = screenToSVG(e.clientX, e.clientY);
+					x.set(p.x);
+					y.set(p.y);
 				}}
-				transition={{ duration: 17.7, repeat: Infinity }}
 			>
+				{/* <motion.span
+					className={styles.background}
+					animate={{
+						// @ts-expect-error: Variants work
+						"--size-bottom": ["55%", "65%", "55%"],
+						"--size-top": ["20%", "30%", "20%"],
+					}}
+					transition={{ duration: 17.7, repeat: Infinity }}
+					aria-hidden="true"
+				/> */}
+
+				<Background mouseX={x} mouseY={y} svgRef={svgRef} />
+
 				<Navbar />
 
 				<main id="#" {...restProps}>
@@ -143,7 +171,7 @@ export function Layout({
 				</main>
 
 				<Footer buildDate={buildDate} />
-			</motion.div>
+			</div>
 		</>
 	);
 }

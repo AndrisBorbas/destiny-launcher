@@ -10,7 +10,7 @@ import type { BannerDataTypes } from "@/@types/DataTypes";
 import { BannerSection } from "@/components/banner/BannerSection";
 import { FAQ } from "@/components/faq/FAQ";
 import { SeasonInfo } from "@/components/info/SeasonInfo";
-import { Layout } from "@/components/Layout";
+import { Layout } from "@/components/layout/Layout";
 import { TrackingLink } from "@/components/link/TrackingLink";
 import { Notice } from "@/components/notice/Notice";
 import { getInitialD2Info } from "@/utils/bungieApi/destiny2-api-server";
