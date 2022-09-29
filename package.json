@@ -1,7 +1,7 @@
 {
 	"name": "destiny-launcher",
 	"private": true,
-	"version": "3.5.3",
+	"version": "3.5.4",
 	"browserslist": "> 0.5%, last 2 versions, not dead, not < 0.2%",
 	"scripts": {
 		"build": "next build",
@@ -13,16 +13,11 @@
 		"fix": "run-s fix:*",
 		"fix:eslint": "npm run lint:eslint -- --fix",
 		"fix:prettier": "npm run lint:prettier -- --write",
-		"postinstall": "husky install && shx rm -rf .git/hooks && shx ln -s ../.husky .git/hooks",
 		"lint": "run-p lint:*",
 		"lint:eslint": "eslint --ext .js,.ts,.tsx --ignore-path ./.gitignore .",
 		"lint:prettier": "prettier --check --ignore-path ./.gitignore .",
 		"lint:typescript": "tsc",
 		"start": "next start"
-	},
-	"nano-staged": {
-		"*": "prettier --write --ignore-unknown",
-		"*.{ts,tsx,js,jsx}": "eslint --fix"
 	},
 	"dependencies": {
 		"@dnd-kit/core": "^6.0.5",
@@ -82,12 +77,9 @@
 		"eslint-plugin-react-etc": "^2.0.0",
 		"eslint-plugin-react-hooks": "^4.6.0",
 		"eslint-plugin-simple-import-sort": "^8.0.0",
-		"husky": "^8.0.1",
-		"nano-staged": "^0.8.0",
 		"npm-run-all": "^4.1.5",
 		"prettier": "^2.7.1",
 		"prettier-plugin-tailwindcss": "^0.1.13",
-		"shx": "^0.3.4",
 		"typescript": "^4.8.3",
 		"typescript-plugin-css-modules": "^3.4.0"
 	}
