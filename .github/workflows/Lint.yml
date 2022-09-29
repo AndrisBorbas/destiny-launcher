@@ -32,5 +32,4 @@ jobs:
           eslint_args: --ignore-path ./.gitignore .
           eslint_extensions: js,ts,tsx
           prettier: true
-          prettier_args: --check --ignore-path ./.gitignore .
-          prettier_extensions: css,scss
+          prettier_args: --ignore-path ./.gitignore .
