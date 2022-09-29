@@ -40,3 +40,5 @@ public/workbox-*.js
 src/components/banner/Test.tsx
 
 public/data/
+
+*.tsbuildinfo
