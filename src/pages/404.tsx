@@ -15,7 +15,6 @@ export default function Custom404() {
 				>
 					Return to home page
 				</Link>
-				<br></br>
 			</section>
 		</Layout>
 	);
