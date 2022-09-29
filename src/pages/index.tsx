@@ -111,9 +111,7 @@ export default function Index({ banners, d2info, buildDate }: PageProps) {
 			<section className={styles.notices}>
 				<Notice id="notice7" className="mt-6">
 					<h2 className="mb-1 font-semibold">New features:</h2>
-					<h3 className={styles.yeet}>
-						Login to have personalized links to sites.
-					</h3>
+					<h3>Login to have personalized links to sites.</h3>
 					<h3>
 						Click the countdown to switch between weekly reset and season end.
 					</h3>
