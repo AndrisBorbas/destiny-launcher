@@ -39,7 +39,7 @@ export function Layout({
 		return p.matrixTransform(svgRef.current.getScreenCTM()?.inverse());
 	}
 
-	const [animate, setAnimate] = useLocalStorage<boolean>("animate", true);
+	const [animate, setAnimate] = useLocalStorage<boolean>("animate", false);
 
 	return (
 		<>
