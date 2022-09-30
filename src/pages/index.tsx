@@ -1,6 +1,7 @@
 import fs from "fs";
 import matter from "gray-matter";
 import type { InferGetStaticPropsType } from "next";
+import Link from "next/link";
 import { serialize } from "next-mdx-remote/serialize";
 import path from "path";
 import { getPlaiceholder } from "plaiceholder";
@@ -109,20 +110,28 @@ export default function Index({ banners, d2info, buildDate }: PageProps) {
 			buildDate={buildDate}
 		>
 			<section className={styles.notices}>
-				<Notice id="notice7" className="mt-6">
-					<h2 className="mb-1 font-semibold">New features:</h2>
-					<h3>Login to have personalized links to sites.</h3>
-					<h3>
-						Click the countdown to switch between weekly reset and season end.
-					</h3>
+				<Notice id="notice8" className="mt-6">
+					<h2 className="mb-1 font-semibold text-red-200">Warning:</h2>
+					<h3>The background animation uses a lot of gpu when moving.</h3>
+					<p className="text-base">
+						It is now disabled by default.{" "}
+						<Link
+							href="/#animateToggle"
+							className="mt-2 text-sm underline decoration-yellow-300 hover:underline-offset-2"
+						>
+							You can enable it in the footer.
+							<br />
+						</Link>
+					</p>
+
 					<TrackingLink
-						className="mt-2 text-sm underline decoration-yellow-300 hover:underline-offset-2"
 						href="https://ko-fi.com/andrisborbas"
+						className="mt-2 text-sm underline decoration-yellow-300 hover:underline-offset-2"
 						target="_blank"
 						rel="noopener noreferrer"
 						aria-label="Ko-fi link"
 						isExternal
-						eventName="banner-link-click"
+						eventName="notice-link-click"
 					>
 						Please consider supporting if you like this project.
 					</TrackingLink>
