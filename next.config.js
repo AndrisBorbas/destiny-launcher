@@ -33,7 +33,7 @@ const nextConfig = {
 				],
 			},
 		];
-		if (process.env.NODE_ENV !== "production") {
+		if (process.env.VERCEL_ENV !== "production") {
 			headers.push({
 				source: "/:path*",
 				headers: [
