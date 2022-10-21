@@ -12,6 +12,7 @@ const withTM = require("next-transpile-modules")(["bungie-api-ts"]);
 /** @type {import("next").NextConfig} */
 const nextConfig = {
 	reactStrictMode: true,
+	swcMinify: true,
 	images: {
 		deviceSizes: [375],
 		imageSizes: [40, 48, 64, 390, 520],
@@ -20,7 +21,31 @@ const nextConfig = {
 	experimental: {
 		newNextLinkBehavior: true,
 	},
-	swcMinify: true,
+	async headers() {
+		const headers = [
+			{
+				source: "/assets/:path*",
+				headers: [
+					{
+						key: "X-Robots-Tag",
+						value: "noindex",
+					},
+				],
+			},
+		];
+		if (process.env.NODE_ENV !== "production") {
+			headers.push({
+				source: "/:path*",
+				headers: [
+					{
+						key: "X-Robots-Tag",
+						value: "noindex",
+					},
+				],
+			});
+		}
+		return headers;
+	},
 };
 
 module.exports = withPlugins(
