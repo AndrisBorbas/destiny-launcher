@@ -6,6 +6,7 @@ import Image from "next/image";
 import { MDXRemote, MDXRemoteSerializeResult } from "next-mdx-remote";
 import { forwardRef, memo, useEffect, useState } from "react";
 import { FaAngleDown, FaGripVertical } from "react-icons/fa";
+import { HiExternalLink } from "react-icons/hi";
 
 import { currentCharacter, getPlatformCode } from "@/utils/bungieApi/utils";
 import { useUser } from "@/utils/hooks";
@@ -150,7 +151,10 @@ export const Banner = memo(
 								isExternal
 								eventName="banner-header-click"
 							>
-								{headerText}
+								<span className="mr-2">{headerText}</span>
+								<span className="inline-block">
+									<HiExternalLink className="h-6 w-6" />
+								</span>
 							</TrackingLink>
 						</h3>
 

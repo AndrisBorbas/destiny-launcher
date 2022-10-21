@@ -10,18 +10,6 @@
 	}
 }
 
-.seasonTimer {
-	width: fit-content;
-
-	&:after {
-		content: "";
-		display: block;
-		margin-top: 0;
-		width: var(--after-w);
-		@apply border-t-2 border-gray-600;
-	}
-}
-
 .image {
 	@apply h-12 w-12;
 	@screen xl {

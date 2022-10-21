@@ -1,5 +1,4 @@
 import clsx from "clsx";
-import { motion } from "framer-motion";
 
 import { TrackingLink } from "../link/TrackingLink";
 import styles from "./NavLink.module.scss";
@@ -23,20 +22,16 @@ export function NavLink({
 	replace,
 	disabled,
 }: NavLinkProps) {
-	const variants = {
-		initial: {
-			"--after-w": "0%",
-			rotation: 0.001,
-		},
-		hover: {
-			"--after-w": "100%",
-			rotation: 0.001,
-		},
+	const eventName = () => {
+		switch (label) {
+			case "Login":
+				return "login";
+			case "Logout":
+				return "logout";
+			default:
+				return "navbar-link-click";
+		}
 	};
-
-	let eventName = "navbar-link-click";
-	if (label === "Login") eventName = "login";
-	if (label === "Logout") eventName = "logout";
 
 	return (
 		<li key={`${href}`} className="py-1 pl-2 lg:p-0">
@@ -47,9 +42,9 @@ export function NavLink({
 				className={clsx(
 					disabled && "pointer-events-none cursor-default opacity-70",
 				)}
-				eventName={eventName}
+				eventName={eventName()}
 			>
-				<motion.p
+				<button
 					className={clsx(
 						styles.navlink,
 						"hover:text-pink inline-block w-full py-2 px-2 text-xl font-medium lg:px-4 lg:text-xl xl:px-5 xl:text-2xl",
@@ -58,16 +53,10 @@ export function NavLink({
 					)}
 					onClick={closeNavbar}
 					onKeyPress={closeNavbar}
-					role="link"
-					// @ts-expect-error: Variants work, I don't know why it is an error
-					variants={variants}
-					initial="initial"
-					whileHover="hover"
-					whileFocus="hover"
-					transition={{ duration: 0.3 }}
+					type="button"
 				>
 					{label}
-				</motion.p>
+				</button>
 			</TrackingLink>
 		</li>
 	);

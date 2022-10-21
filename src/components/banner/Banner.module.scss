@@ -22,14 +22,14 @@
 }
 
 .header {
-	@apply grid gap-2;
+	@apply grid gap-1;
 	align-items: stretch;
 	// min-height: 122px;
-	grid-template-columns: 56px 1fr auto 48px;
+	grid-template-columns: 56px 1fr auto 46px;
 }
 
 .headerText {
-	@apply self-center p-4 pl-2 pr-0 font-NeueHGD text-xl font-medium uppercase;
+	@apply self-center py-4 pl-1 font-NeueHGD text-xl font-medium uppercase;
 
 	width: fit-content;
 
@@ -44,26 +44,60 @@
 	&:before,
 	&:after {
 		content: "";
-		display: block;
-		@apply border-t-2 border-gray-700;
+		@apply block border-t-2 border-gray-700;
 	}
 	&:before {
 		margin-bottom: -1px;
 		width: 66%;
 	}
+
 	&:after {
 		margin-top: -1px;
-		width: 4rem;
-		@apply transition-all duration-300 ease-out;
+		will-change: width;
+		width: 4em;
+		animation: unload 350ms ease forwards;
 	}
 
-	&:hover::after {
-		width: 100%;
+	@keyframes load {
+		0% {
+			width: 4em;
+		}
+		50% {
+			width: 107%;
+		}
+		85% {
+			width: 97%;
+		}
+		100% {
+			width: 100%;
+		}
+	}
+
+	&:hover {
+		&:after {
+			width: 100%;
+			animation: load 350ms ease forwards;
+		}
+	}
+
+	@keyframes unload {
+		0% {
+			width: 100%;
+		}
+		50% {
+			width: 4em;
+		}
+		80% {
+			width: calc(4em + 7%);
+		}
+		100% {
+			width: 4em;
+		}
 	}
 }
 
 .toggle {
-	@apply h-12 w-12;
+	@apply -ml-1 h-12 w-12;
 
 	align-self: center;
 	transform-origin: center center;
