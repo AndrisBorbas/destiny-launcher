@@ -1,3 +1,4 @@
+import clsx from "clsx";
 import type { MotionValue } from "framer-motion";
 import { motion, useSpring } from "framer-motion";
 import type { RefObject } from "react";
@@ -8,11 +9,17 @@ export type BackgroundProps = {
 	svgRef: RefObject<SVGSVGElement>;
 	mouseX: MotionValue<number>;
 	mouseY: MotionValue<number>;
+	enabled: boolean;
 };
 
 // Original from https://twitter.com/laudis_io/status/1569750442703466496
 
-export function Background({ mouseX, mouseY, svgRef }: BackgroundProps) {
+export function Background({
+	mouseX,
+	mouseY,
+	svgRef,
+	enabled,
+}: BackgroundProps) {
 	const x = useSpring(mouseX, { stiffness: 70, damping: 7 });
 	const y = useSpring(mouseY, { stiffness: 70, damping: 7 });
 
@@ -51,6 +58,7 @@ export function Background({ mouseX, mouseY, svgRef }: BackgroundProps) {
 							y,
 							mixBlendMode: "overlay",
 						}}
+						className={clsx(enabled ? "" : styles.backgroundBlob)}
 						filter="url(#bgFilter3)"
 					>
 						<path

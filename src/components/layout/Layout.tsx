@@ -67,7 +67,7 @@ export function Layout({
 					aria-hidden="true"
 				/> */}
 
-				<Background mouseX={x} mouseY={y} svgRef={svgRef} />
+				<Background mouseX={x} mouseY={y} svgRef={svgRef} enabled={animate} />
 
 				<Navbar />
 
