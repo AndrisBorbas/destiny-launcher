@@ -21,6 +21,7 @@ const components = {
 			target="_blank"
 			isExternal
 			eventName="faq-link-click"
+			eventData={{ site: restProps.href }}
 			{...restProps}
 		/>
 	),

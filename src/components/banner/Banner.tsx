@@ -132,6 +132,7 @@ export const Banner = memo(
 								aria-label={`${headerText} link`}
 								isExternal
 								eventName="banner-icon-click"
+								eventData={{ site: headerText }}
 							>
 								<Image
 									src={iconSrc}
@@ -150,6 +151,7 @@ export const Banner = memo(
 								rel="noopener noreferrer"
 								isExternal
 								eventName="banner-header-click"
+								eventData={{ site: headerText }}
 							>
 								<span className="mr-2">{headerText}</span>
 								<span className="inline-block">
@@ -218,6 +220,7 @@ export const Banner = memo(
 							rel="noopener noreferrer"
 							isExternal
 							eventName="banner-button-click"
+							eventData={{ site: headerText }}
 						>
 							Open
 						</TrackingLink>

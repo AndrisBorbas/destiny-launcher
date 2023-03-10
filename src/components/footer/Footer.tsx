@@ -38,6 +38,7 @@ export function Footer({ buildDate, animate, setAnimate }: FooterProps) {
 						aria-label="Twitter link"
 						isExternal
 						eventName="footer-link-click"
+						eventData={{ site: "Twitter" }}
 					>
 						<FaTwitter className="h-auto w-10 text-white hover:text-yellow-500" />
 					</TrackingLink>
@@ -48,6 +49,7 @@ export function Footer({ buildDate, animate, setAnimate }: FooterProps) {
 						aria-label="GitHub link"
 						isExternal
 						eventName="footer-link-click"
+						eventData={{ site: "GitHub" }}
 					>
 						<FaGithub className="h-auto w-10 text-white hover:text-yellow-500" />
 					</TrackingLink>
@@ -58,6 +60,7 @@ export function Footer({ buildDate, animate, setAnimate }: FooterProps) {
 						aria-label="Ko-fi link"
 						isExternal
 						eventName="footer-link-click"
+						eventData={{ site: "Ko-fi" }}
 					>
 						<SiKofi className="h-auto w-10 text-white hover:text-yellow-500" />
 					</TrackingLink>
@@ -96,7 +99,8 @@ export function Footer({ buildDate, animate, setAnimate }: FooterProps) {
 							rel="noopener noreferrer"
 							aria-label="GitHub link"
 							isExternal
-							eventName="footer-link-click"
+							eventName="footer-version-click"
+							eventData={{ site: "GitHub" }}
 						>
 							v{manifest.version}.{buildDateString} ©&nbsp;
 							{new Date().getFullYear()}
