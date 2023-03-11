@@ -110,31 +110,44 @@ export default function Index({ banners, d2info, buildDate }: PageProps) {
 			buildDate={buildDate}
 		>
 			<section className={styles.notices}>
-				<Notice id="notice8" className="mt-6">
-					<h2 className="mb-1 font-semibold text-red-200">Warning:</h2>
-					<h3>The background animation uses a lot of gpu when moving.</h3>
-					<p className="text-base">
-						It is now disabled by default.{" "}
+				<Notice id="notice9" className="">
+					<h3 className="text-lg font-medium">
+						Update: New seasonal background
+					</h3>
+					<p className="text-xs text-gray-200">
+						If the site is lagging, You can disable it{" "}
 						<Link
 							href="/#animateToggle"
-							className="mt-2 text-sm underline decoration-yellow-300 hover:underline-offset-2"
+							className="mt-2 underline decoration-yellow-300 hover:underline-offset-2"
 						>
-							You can enable it in the footer.
+							in the footer.
 							<br />
 						</Link>
 					</p>
+				</Notice>
+				<Notice id="notice10" className="">
+					<h2 className="">Future:</h2>
+					<p className="text-base">
+						I plan on adding a dashboard page where you can pin your favourite
+						sites, see your in-game stats and progress and have access to
+						destiny related news and updates.
+					</p>
 
-					<TrackingLink
-						href="https://ko-fi.com/andrisborbas"
-						className="mt-2 text-sm underline decoration-yellow-300 hover:underline-offset-2"
-						target="_blank"
-						rel="noopener noreferrer"
-						aria-label="Ko-fi link"
-						isExternal
-						eventName="notice-link-click"
-					>
-						Please consider supporting if you like this project.
-					</TrackingLink>
+					<p className="mt-2 text-sm">
+						Please{" "}
+						<TrackingLink
+							href="https://ko-fi.com/andrisborbas"
+							className="underline decoration-yellow-300 hover:underline-offset-2"
+							target="_blank"
+							rel="noopener noreferrer"
+							aria-label="Ko-fi link"
+							isExternal
+							eventName="notice-link-click"
+						>
+							consider supporting
+						</TrackingLink>{" "}
+						if you like this project, so the site can keep running ad-free.
+					</p>
 				</Notice>
 			</section>
 			<SeasonInfo initialData={d2info} />

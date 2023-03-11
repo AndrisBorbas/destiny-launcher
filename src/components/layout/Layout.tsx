@@ -18,44 +18,13 @@ export function Layout({
 	buildDate,
 	...restProps
 }: LayoutProps): JSX.Element {
-	const svgRef = createRef<SVGSVGElement>();
-	const x = useMotionValue(0);
-	const y = useMotionValue(0);
-
-	useEffect(() => {
-		x.set(Math.random() * (window.innerWidth - 200) + 100);
-		y.set(Math.random() * (window.innerHeight - 200) + 100);
-
-		return () => {};
-	}, []);
-
-	function screenToSVG(sx: number, sy: number) {
-		if (!svgRef.current) {
-			return { x: 0, y: 0 };
-		}
-		const p = svgRef.current.createSVGPoint();
-		p.x = sx;
-		p.y = sy;
-		return p.matrixTransform(svgRef.current.getScreenCTM()?.inverse());
-	}
-
-	const [animate, setAnimate] = useLocalStorage<boolean>("animate", false);
+	const [bg, setBG] = useLocalStorage<boolean>("bg", false);
 
 	return (
 		<>
 			<SEO />
 
-			<div
-				id="app"
-				className={styles.app}
-				onMouseMove={(e) => {
-					if (animate) {
-						const p = screenToSVG(e.clientX, e.clientY);
-						x.set(p.x);
-						y.set(p.y);
-					}
-				}}
-			>
+			<div id="app" className={styles.app}>
 				{/* <motion.span
 					className={styles.background}
 					animate={{
@@ -67,7 +36,7 @@ export function Layout({
 					aria-hidden="true"
 				/> */}
 
-				<Background mouseX={x} mouseY={y} svgRef={svgRef} enabled={animate} />
+				<Background enabled={bg} />
 
 				<Navbar />
 
@@ -75,11 +44,7 @@ export function Layout({
 					{children}
 				</main>
 
-				<Footer
-					buildDate={buildDate}
-					animate={animate}
-					setAnimate={setAnimate}
-				/>
+				<Footer buildDate={buildDate} toggle={bg} setToggle={setBG} />
 			</div>
 		</>
 	);

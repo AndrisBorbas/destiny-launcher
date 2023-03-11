@@ -20,12 +20,12 @@ export function Notice({ id, children, className }: NoticeProps) {
 	return (
 		<div
 			style={{ display: isVisible ? "" : "none" }}
-			className={clsx("mb-4", className)}
+			className={clsx("mb-4 mt-6", className)}
 		>
 			<div
 				className={clsx(
 					styles.notice,
-					"bg-blur-10 relative ml-auto border-t border-gray-300 bg-button bg-opacity-50 p-3 px-6 text-center text-xl",
+					"bg-blur-10 relative ml-auto border-t border-gray-300 bg-button/50 p-3 px-6 text-center text-xl backdrop-blur",
 				)}
 			>
 				{children}

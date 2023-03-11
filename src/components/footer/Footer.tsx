@@ -9,11 +9,11 @@ import styles from "./Footer.module.scss";
 
 type FooterProps = {
 	buildDate?: number;
-	animate: boolean;
-	setAnimate: (animate: boolean) => void;
+	toggle: boolean;
+	setToggle: (toggle: boolean) => void;
 };
 
-export function Footer({ buildDate, animate, setAnimate }: FooterProps) {
+export function Footer({ buildDate, toggle, setToggle }: FooterProps) {
 	const buildDateFormat = buildDate && new Date(buildDate);
 	const buildDateString = buildDate
 		? new Intl.DateTimeFormat("hu-HU", {
@@ -77,12 +77,12 @@ export function Footer({ buildDate, animate, setAnimate }: FooterProps) {
 							id="animateToggle"
 							name="animateToggle"
 							className="peer sr-only"
-							checked={animate}
-							onChange={(e) => setAnimate(e.target.checked)}
+							checked={toggle}
+							onChange={(e) => setToggle(e.target.checked)}
 						/>
 						<div className="peer h-6 w-11 rounded-full bg-button bg-opacity-10 after:absolute after:top-[2px] after:left-[2px] after:h-5 after:w-5 after:rounded-full after:border after:border-gray-600 after:bg-white after:transition-all after:content-[''] peer-checked:bg-button peer-checked:bg-opacity-60 peer-checked:after:translate-x-full peer-checked:after:border-white peer-focus:outline-none peer-focus:ring-4 peer-focus:ring-button" />
 						<span className="ml-3 text-sm font-medium">
-							Background animations
+							Background graphics
 						</span>
 					</label>
 				</div>
