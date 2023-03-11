@@ -18,7 +18,7 @@ export function Layout({
 	buildDate,
 	...restProps
 }: LayoutProps): JSX.Element {
-	const [bg, setBG] = useLocalStorage<boolean>("bg", false);
+	const [bg, setBG] = useLocalStorage<boolean>("bg", true);
 
 	return (
 		<>
