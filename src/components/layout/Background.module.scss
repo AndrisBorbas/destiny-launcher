@@ -11,6 +11,13 @@
 	}
 }
 
+.bg {
+	@apply fixed inset-0 box-content;
+	background: url("/assets/bg/gradient.webp");
+	background-position: top left;
+	background-size: cover;
+}
+
 .image {
 	@apply fixed inset-0 box-content opacity-25 mix-blend-color;
 	background: url("/assets/bg/BrightRainSmall.webp") repeat center center;

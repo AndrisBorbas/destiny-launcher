@@ -13,12 +13,11 @@ export type BackgroundProps = {
 
 export function Background({ enabled }: BackgroundProps) {
 	return (
-		<div
-			className={styles.background}
-			style={{ display: enabled ? "initial" : "none" }}
-		>
+		<div className={styles.background}>
+			<div className={styles.bg} />
 			<svg
 				preserveAspectRatio="xMidYMid slice"
+				style={{ display: enabled ? "initial" : "none" }}
 				width="1920"
 				height="1080"
 				viewBox="0 0 1920 1080"
