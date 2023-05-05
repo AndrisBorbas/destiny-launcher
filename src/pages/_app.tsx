@@ -11,7 +11,7 @@ import React from "react";
 import { SWRConfig } from "swr";
 
 import { useEffectOnce } from "@/utils/hooks";
-import { TRACKING_ID, trackView } from "@/utils/track";
+import { TRACKING_ID } from "@/utils/track";
 import { dlog, swrFetcher } from "@/utils/utils";
 
 export default function DLApp({ Component, pageProps }: AppProps) {

@@ -7,20 +7,20 @@ const withMDX = require("@next/mdx")({
 	},
 });
 const withPWA = require("next-pwa");
-const withTM = require("next-transpile-modules")(["bungie-api-ts"]);
 
 /** @type {import("next").NextConfig} */
 const nextConfig = {
 	reactStrictMode: true,
-	swcMinify: true,
 	images: {
 		deviceSizes: [375],
 		imageSizes: [40, 48, 64, 390, 520],
 		domains: ["bungie.net"],
 	},
+	transpilePackages: ["@bungie-api-ts"],
 	experimental: {
 		newNextLinkBehavior: true,
 	},
+
 	async headers() {
 		const headers = [
 			{
@@ -50,7 +50,6 @@ const nextConfig = {
 
 module.exports = withPlugins(
 	[
-		[withTM],
 		[withBundleAnalyzer({ enabled: process.env.ANALYZE === "true" })],
 		[
 			withMDX,

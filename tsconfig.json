@@ -3,11 +3,13 @@
 	"compilerOptions": {
 		"baseUrl": "./src/",
 		"paths": { "@/*": ["*"], "*": [""] },
-		"importsNotUsedAsValues": "error",
 		"strict": true,
 		"skipLibCheck": true,
 		"isolatedModules": true,
 		"plugins": [
+			{
+				"name": "next"
+			},
 			{
 				"name": "typescript-plugin-css-modules"
 			}
