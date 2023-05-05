@@ -2,10 +2,13 @@ import { dlog } from "./utils";
 
 export const TRACKING_ID = "29d1f3eb-69a8-4451-a1c9-9a9a67fcff1c";
 
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
 export const assign = (a: any, b: any) => {
 	Object.keys(b).forEach((key) => {
-		// eslint-disable-next-line no-param-reassign
-		if (b[key] !== undefined) a[key] = b[key];
+		if (b[key] !== undefined) {
+			// eslint-disable-next-line no-param-reassign
+			a[key] = b[key];
+		}
 	});
 	return a;
 };
@@ -21,34 +24,20 @@ export const getPayload = () => ({
 	url: `${location.pathname}${location.search}`,
 });
 
-export function trackView(referrer?: string, url?: string) {
-	if (process.env.NODE_ENV === "development") {
-		dlog("trackView blocked: ", referrer, url);
+export function trackEvent(eventName: string, data: object, url?: string) {
+	if (process.env.NODE_ENV !== "production") {
+		dlog("trackEvent blocked: ", eventName, data, url, getPayload());
 		return;
 	}
-	fetch("/api/utils/view", {
-		method: "POST",
-		body: JSON.stringify({
-			type: "pageview",
-			payload: assign(getPayload(), {
-				website: TRACKING_ID,
-				url,
-				referrer,
-			}),
-		}),
-	});
-}
-
-export function trackEvent(eventName: string, data: object, url?: string) {
-	fetch("/api/utils/event", {
+	fetch("/api/succ", {
 		method: "POST",
 		body: JSON.stringify({
 			type: "event",
 			payload: assign(getPayload(), {
 				website: TRACKING_ID,
 				url,
-				event_name: eventName,
-				event_data: data,
+				name: eventName,
+				data,
 			}),
 		}),
 	});

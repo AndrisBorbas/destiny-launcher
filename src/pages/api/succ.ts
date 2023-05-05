@@ -7,7 +7,7 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
 		case "POST": {
 			try {
 				const data = await fetch(
-					"https://analytics.andrisborbas.com/api/collect",
+					"https://analytics.andrisborbas.com/api/send",
 					{
 						method: "POST",
 						body: req.body,

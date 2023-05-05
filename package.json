@@ -1,8 +1,8 @@
 {
 	"name": "destiny-launcher",
 	"private": true,
-	"version": "3.5.9",
-	"browserslist": "> 0.5%, last 2 versions, not dead, not < 0.2%",
+	"version": "3.5.10",
+	"packageManager": "pnpm@8.3.1",
 	"scripts": {
 		"build": "next build",
 		"build:analyze": "cross-env ANALYZE=true npm run build",
