@@ -31,8 +31,9 @@ export function Notice({ id, children, className }: NoticeProps) {
 				{children}
 				<button
 					className="absolute top-1 right-1 p-1 hover:text-red-300"
+					aria-label={isVisible ? "Close" : "Open"}
 					type="button"
-					title="Close"
+					title={isVisible ? "Close" : "Open"}
 					onClick={() => {
 						localStorage.setItem(id, JSON.stringify(false));
 						toggleVisible(false);
