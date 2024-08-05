@@ -13,9 +13,9 @@ export type InfoResponse = {
 		[key: number]: DestinySeasonDefinition;
 	};
 	destiny2CoreSettings: Destiny2CoreSettings;
-	presentationNodes: {
-		[key: number]: DestinyPresentationNodeDefinition;
-	};
+	// presentationNodes: {
+	// 	[key: number]: DestinyPresentationNodeDefinition;
+	// };
 };
 
 export default async (

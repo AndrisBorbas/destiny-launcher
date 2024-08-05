@@ -16,7 +16,7 @@ export function Navbar() {
 	const { user, error, isLoading, isValidating } = useUser("/", false);
 
 	useEffect(() => {
-		dlog(user, error?.message, isLoading, isValidating);
+		// dlog(user, error?.message, isLoading, isValidating);
 
 		return () => {};
 	}, [user, error, isLoading, isValidating]);

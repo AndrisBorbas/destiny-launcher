@@ -35,7 +35,7 @@ function createHttpClient(
 			credentials: withCredentials ? "include" : "omit",
 		});
 		const response = await fetchFunction(fetchOptions);
-		const data: ServerResponse<unknown> = await response.json();
+		const data = await response.json();
 		return data;
 	};
 }

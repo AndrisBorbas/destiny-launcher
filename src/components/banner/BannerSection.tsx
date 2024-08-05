@@ -85,12 +85,9 @@ export function BannerSection({
 			};
 
 			Object.keys(storage).forEach((containerId) => {
-				modified[containerId as Keys] = storage[containerId as Keys].map(
-					(id) => {
-						// eslint-disable-next-line @typescript-eslint/no-non-null-assertion
-						return flat.find((banner) => banner.id === id)!;
-					},
-				);
+				modified[containerId as Keys] = storage[containerId as Keys]
+					.map((id) => flat.find((banner) => banner.id === id))
+					.filter((banner) => banner !== undefined);
 			});
 
 			const tempFlat = Object.values(modified).flat(1);

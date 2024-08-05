@@ -19,9 +19,10 @@ export async function getInitialD2Info(save?: boolean) {
 	const destinyManifest = await getManifest();
 	const manifestTables = await getSlice(destinyManifest, [
 		"DestinySeasonDefinition",
-		"DestinyPresentationNodeDefinition",
+		// "DestinyPresentationNodeDefinition",
 	]);
 
+	/*
 	const presentationNodes = manifestTables.DestinyPresentationNodeDefinition;
 
 	// Reduce size of data by removing unnecessary fields
@@ -32,12 +33,13 @@ export async function getInitialD2Info(save?: boolean) {
 				// eslint-disable-next-line no-param-reassign
 				delete value[subKey];
 			}
-			if (!value.displayProperties.name.toLowerCase().includes("season of")) {
+			if (!value.displayProperties.name.toLowerCase().includes("season of") || !value.displayProperties.name.toLowerCase().includes("episode")) {
 				// @ts-expect-error: it has the key because i used their keys
 				delete presentationNodes[key];
 			}
 		});
 	});
+	*/
 
 	const commonSettings = await getSettings();
 
@@ -55,7 +57,7 @@ export async function getInitialD2Info(save?: boolean) {
 			fs.writeFile(
 				`${dir}/seasonInfo.json`,
 				JSON.stringify({
-					DestinyPresentationNodeDefinition: presentationNodes,
+					// DestinyPresentationNodeDefinition: presentationNodes,
 					DestinySeasonDefinition: manifestTables.DestinySeasonDefinition,
 				}),
 				(err) => {
@@ -78,7 +80,7 @@ export async function getInitialD2Info(save?: boolean) {
 		version: destinyManifest.version,
 		allSeasons: manifestTables.DestinySeasonDefinition,
 		destiny2CoreSettings: commonSettings.destiny2CoreSettings,
-		presentationNodes,
+		// presentationNodes,
 	};
 }
 

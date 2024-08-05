@@ -36,7 +36,7 @@ export function SeasonInfo({ initialData }: { initialData: InfoResponse }) {
 		);
 	}
 
-	const seasonIcon = Object.values(swrD2Info.presentationNodes).find(
+	const seasonIcon = Object.values(swrD2Info.allSeasons).find(
 		(node) =>
 			node.displayProperties.name === currentSeason?.displayProperties.name &&
 			node.displayProperties.hasIcon,
