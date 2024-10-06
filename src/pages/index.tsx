@@ -49,7 +49,9 @@ export const getStaticProps = async () => {
 
 	const banners = await Promise.all(
 		rawBanners.map(async (banner, i) => {
-			const buffer = await fs.readFileSync(path.join("./public", banner.data.previewImage));
+			const buffer = await fs.readFileSync(
+				path.join("./public", banner.data.previewImage),
+			);
 			const { base64 } = await getPlaiceholder(buffer);
 
 			return {

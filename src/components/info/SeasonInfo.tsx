@@ -56,7 +56,7 @@ export function SeasonInfo({ initialData }: { initialData: InfoResponse }) {
 							currentSeason?.displayProperties.name
 								.replace(/\s+/g, "")
 								?.toLowerCase()
-								.replace("Episode:", "") ?? ""
+								.replace("episode:", "") ?? ""
 						}`}
 						target="_blank"
 						rel="noopener noreferrer"

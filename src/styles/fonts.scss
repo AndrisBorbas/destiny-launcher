@@ -3,7 +3,8 @@
 	font-family: "NeueHaasGroteskDisp";
 	font-style: normal;
 	font-weight: 500;
-	src: url("../../public/assets/fonts/NHaasGroteskDSPro-55Rg.ttf")
+	src:
+		url("../../public/assets/fonts/NHaasGroteskDSPro-55Rg.ttf")
 			format("truetype"),
 		url("../../public/assets/fonts/NHaasGroteskDSPro-55Rg.woff") format("woff"),
 		url("../../public/assets/fonts/NHaasGroteskDSPro-55Rg.woff2")
@@ -15,7 +16,8 @@
 	font-family: "NeueHaasGroteskText";
 	font-style: normal;
 	font-weight: normal;
-	src: url("../../public/assets/fonts/NHaasGroteskTXPro-55Rg.woff2")
+	src:
+		url("../../public/assets/fonts/NHaasGroteskTXPro-55Rg.woff2")
 			format("woff2"),
 		url("../../public/assets/fonts/NHaasGroteskTXPro-55Rg.woff") format("woff");
 }

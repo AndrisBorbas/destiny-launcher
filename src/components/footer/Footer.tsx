@@ -21,7 +21,7 @@ export function Footer({ buildDate, toggle, setToggle }: FooterProps) {
 				day: "2-digit",
 				hour: "2-digit",
 				minute: "2-digit",
-		  })
+			})
 				.format(buildDateFormat)
 				.match(/\d+/g)
 				?.join("")
