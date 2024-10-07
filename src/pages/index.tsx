@@ -113,21 +113,6 @@ export default function Index({ banners, d2info, buildDate }: PageProps) {
 			buildDate={buildDate}
 		>
 			<section className={styles.notices}>
-				<Notice id="notice9" className="">
-					<h3 className="text-lg font-medium">
-						Update: New seasonal background
-					</h3>
-					<p className="text-xs text-gray-200">
-						If the site is lagging, You can disable it{" "}
-						<Link
-							href="/#animateToggle"
-							className="mt-2 underline decoration-yellow-300 hover:underline-offset-2"
-						>
-							in the footer.
-							<br />
-						</Link>
-					</p>
-				</Notice>
 				<Notice id="notice10" className="">
 					<h2 className="">Future:</h2>
 					<p className="text-base">

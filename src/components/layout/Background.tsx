@@ -15,7 +15,7 @@ export function Background({ enabled }: BackgroundProps) {
 	return (
 		<div className={styles.background}>
 			<div className={styles.bg} />
-			<svg
+			{/* <svg
 				preserveAspectRatio="xMidYMid slice"
 				style={{ display: enabled ? "initial" : "none" }}
 				width="1920"
@@ -246,8 +246,11 @@ export function Background({ enabled }: BackgroundProps) {
 						/>
 					</filter>
 				</defs>
-			</svg>
-			<div className={clsx(styles.image)} />
+			</svg> */}
+			<div
+				className={clsx(styles.image)}
+				style={{ display: enabled ? "initial" : "none" }}
+			/>
 		</div>
 	);
 }
