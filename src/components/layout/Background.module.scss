@@ -12,7 +12,7 @@
 }
 
 .bg {
-	@apply fixed inset-0 box-content;
+	@apply fixed inset-0 box-content filter brightness-[1.20] saturate-[1.20];
 	background: url("/assets/bg/gradient.webp");
 	background-position: top left;
 	background-size: cover;
