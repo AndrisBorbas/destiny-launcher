@@ -24,13 +24,13 @@ export default function DLApp({ Component, pageProps }: AppProps) {
 	return (
 		<React.StrictMode>
 			{/* Umami analytics */}
-			{/* <Script
+			<Script
 				async
 				defer
 				data-website-id={TRACKING_ID}
 				src="https://succ.andrisborbas.com/succ.js"
 				// data-auto-track="false"
-			/> */}
+			/>
 			{/* End Umami analytics */}
 
 			<SWRConfig value={{ fetcher: swrFetcher }}>
