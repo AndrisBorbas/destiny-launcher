@@ -15,7 +15,9 @@ class DLDocument extends Document {
 	render() {
 		return (
 			<Html lang="en">
-				<Head />
+				<Head>
+					<meta name="darkreader-lock" />
+				</Head>
 				<body>
 					<Main />
 					<NextScript />
