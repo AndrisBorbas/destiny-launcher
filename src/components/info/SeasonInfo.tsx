@@ -53,10 +53,7 @@ export function SeasonInfo({ initialData }: { initialData: InfoResponse }) {
 					</h4>
 					<TrackingLink
 						href={`https://www.bungie.net/${
-							currentSeason?.displayProperties.name
-								.replace(/\s+/g, "")
-								?.toLowerCase()
-								.replace("episode:", "") ?? ""
+							currentSeason?.displayProperties.name.replace(/\s+/g, "") ?? ""
 						}`}
 						target="_blank"
 						rel="noopener noreferrer"
@@ -85,7 +82,8 @@ export function SeasonInfo({ initialData }: { initialData: InfoResponse }) {
 									"my-2 ml-1 text-4xl font-bold xl:text-5xl",
 								)}
 							>
-								{currentSeason?.displayProperties.name ?? "Episode: [REDACTED]"}
+								{currentSeason?.displayProperties.name ??
+									"Season of the [REDACTED]"}
 							</h3>
 						</div>
 					</TrackingLink>

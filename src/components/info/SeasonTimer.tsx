@@ -55,7 +55,7 @@ export function SeasonTimer({ endDate }: SeasonTimerProps) {
 					isResetTime ? "hidden" : "initial",
 				)}
 			>
-				Episode ends in:
+				Season ends in:
 				<span className="mx-2">
 					{weeks > 0 && (
 						<>
