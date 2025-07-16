@@ -52,9 +52,13 @@ export function SeasonInfo({ initialData }: { initialData: InfoResponse }) {
 						Season {currentSeason?.seasonNumber ?? "didn't load"}
 					</h4>
 					<TrackingLink
-						href={`https://www.bungie.net/${
-							currentSeason?.displayProperties.name.replace(/\s+/g, "") ?? ""
-						}`}
+						href={
+							/*
+							 `https://www.bungie.net/${ currentSeason?.displayProperties.name.replace(/\s+/g, "") ?? "" }`
+							*/
+							// disable flavour link cause bungie didn't do a season page
+							"https://www.destinythegame.com/YearOfProphecy"
+						}
 						target="_blank"
 						rel="noopener noreferrer"
 						isExternal
