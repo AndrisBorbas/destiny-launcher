@@ -12,9 +12,9 @@
 }
 
 .bg {
-	@apply fixed inset-0 box-content filter brightness-[0.75] saturate-[1.20];
-	background: url("/assets/bg/gradient.webp");
-	background-position: top left;
+	@apply fixed inset-0 box-content filter brightness-[0.9] saturate-[1.3] contrast-[0.9] blur-[3px];
+	background: url("/assets/bg/edge.webp");
+	background-position: bottom center;
 	background-size: cover;
 }
 
