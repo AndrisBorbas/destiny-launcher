@@ -1,16 +1,14 @@
 {
 	"editor.defaultFormatter": "esbenp.prettier-vscode",
-	"prettier.stylelintIntegration": true,
+	"biome.enabled": false,
+	"eslint.enable": true,
 	"editor.formatOnSave": true,
 	"editor.codeActionsOnSave": {
-		"source.fixAll.stylelint": "explicit",
 		"source.fixAll.eslint": "explicit"
 	},
 	"typescript.tsdk": "node_modules\\typescript\\lib",
-
-	"css.validate": false,
-	"less.validate": false,
-	"scss.validate": false,
-
-	"stylelint.enable": true
+	"files.associations": {
+		"*.css": "tailwindcss",
+		"*.scss": "tailwindcss"
+	}
 }

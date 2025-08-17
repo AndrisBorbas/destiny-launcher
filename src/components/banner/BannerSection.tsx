@@ -22,7 +22,7 @@ import type { HydratedBannerType } from "@/@types/DataTypes";
 
 import { DroppableContainer } from "../dnd/DroppableContainer";
 import { Banner } from "./Banner";
-import styles from "./BannerSection.module.scss";
+import styles from "./BannerSection.module.css";
 
 const TITLES: { [key in string]: string } = {
 	favourite: "Favourites",
@@ -154,9 +154,7 @@ export function BannerSection({
 			return -1;
 		}
 
-		const index = banners[container as Keys].findIndex(
-			(banner) => banner.id === id,
-		);
+		const index = banners[container].findIndex((banner) => banner.id === id);
 
 		return index;
 	};
@@ -182,7 +180,7 @@ export function BannerSection({
 				const { active } = event;
 				setActiveId(active.id);
 				setActiveBanner(
-					banners[findContainer(active.id) as Keys].find(
+					banners[findContainer(active.id)].find(
 						(banner) => banner.id === active.id,
 					) ?? null,
 				);
@@ -254,7 +252,6 @@ export function BannerSection({
 						};
 						Object.keys(modified).forEach((containerId) => {
 							modified[containerId as Keys].forEach((banner, i) => {
-								// eslint-disable-next-line no-param-reassign
 								banner.index = i;
 							});
 						});
@@ -310,7 +307,6 @@ export function BannerSection({
 							};
 							Object.keys(modified).forEach((containerId) => {
 								modified[containerId as Keys].forEach((banner, i) => {
-									// eslint-disable-next-line no-param-reassign
 									banner.index = i;
 								});
 							});

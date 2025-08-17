@@ -31,7 +31,8 @@ export default async (
 					req.cookies.destinyLauncherLoggedIn !== "1" ||
 					!req.cookies.membershipId
 				) {
-					return res.status(403).end();
+					res.status(403).end();
+					return;
 				}
 				const { user, clan } = await fetchUserProfileFromBungie(
 					req.cookies.membershipId,
@@ -46,25 +47,30 @@ export default async (
 					clan: clan && clan.totalResults > 0 ? clan.results[0] : undefined,
 				};
 
-				return res.status(200).json(data);
+				res.status(200).json(data);
+				return;
 			} catch (error: any) {
 				console.error(error);
 				if (error.name === "AuthError") {
 					console.error("AuthError");
-					return res.redirect("/api/auth/refresh");
-					return res.status(403).json({
+					res.redirect("/api/auth/refresh");
+					return;
+					res.status(403).json({
 						characters: undefined as never,
 						profile: undefined as never,
 						error,
 					});
+					return;
 				}
-				return res.status(401).end();
+				res.status(401).end();
+				return;
 			}
 		}
 
 		default: {
 			res.setHeader("Allow", "GET");
-			return res.status(405).end();
+			res.status(405).end();
+			return;
 		}
 	}
 };

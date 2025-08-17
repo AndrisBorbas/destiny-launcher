@@ -1,0 +1,6 @@
+@reference "../../styles/core.css";
+
+.notice {
+	width: min(100%, 420px);
+	@apply pointer-events-auto xl:w-[520px];
+}

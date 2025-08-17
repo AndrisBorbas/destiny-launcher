@@ -1,3 +1,5 @@
+@reference "../../styles/core.css";
+
 .footer {
 	@apply z-20 mt-auto w-full border-t border-gray-300 p-8;
 

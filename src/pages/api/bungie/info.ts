@@ -27,16 +27,19 @@ export default async (
 			try {
 				const data = await getInitialD2Info(false);
 
-				return res.status(200).json(data);
+				res.status(200).json(data);
+				return;
 			} catch (error) {
 				console.error(error);
-				return res.status(401).end();
+				res.status(401).end();
+				return;
 			}
 		}
 
 		default: {
 			res.setHeader("Allow", "GET");
-			return res.status(405).end();
+			res.status(405).end();
+			return;
 		}
 	}
 };

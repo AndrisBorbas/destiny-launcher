@@ -1,7 +1,6 @@
 import fs from "fs";
 import matter from "gray-matter";
 import type { InferGetStaticPropsType } from "next";
-import Link from "next/link";
 import { serialize } from "next-mdx-remote/serialize";
 import path from "path";
 import { getPlaiceholder } from "plaiceholder";
@@ -18,7 +17,7 @@ import { getInitialD2Info } from "@/utils/bungieApi/destiny2-api-server";
 import { d2InfoKey, d2InfoRoute, d2UserKey } from "@/utils/hooks";
 import { BANNERS_PATH, bannersFilePaths } from "@/utils/mdxUtils";
 
-import styles from "./index.module.scss";
+import styles from "./index.module.css";
 
 export const getStaticProps = async () => {
 	const rawBanners = await Promise.all(
@@ -49,7 +48,7 @@ export const getStaticProps = async () => {
 
 	const banners = await Promise.all(
 		rawBanners.map(async (banner, i) => {
-			const buffer = await fs.readFileSync(
+			const buffer = fs.readFileSync(
 				path.join("./public", banner.data.previewImage),
 			);
 			const { base64 } = await getPlaiceholder(buffer);
@@ -83,14 +82,15 @@ export default function Index({ banners, d2info, buildDate }: PageProps) {
 	// console.log({ banners, d2info });
 
 	if (typeof window === "undefined") {
-		if (d2info) mutate(d2InfoRoute, d2info, false);
+		// eslint-disable-next-line @typescript-eslint/no-unnecessary-condition
+		if (d2info) void mutate(d2InfoRoute, d2info, false);
 	} else {
 		const info = localStorage.getItem(d2InfoKey);
-		if (info) mutate(d2InfoRoute, JSON.parse(info), false);
+		if (info) void mutate(d2InfoRoute, JSON.parse(info), false);
 	}
 	if (typeof window !== "undefined") {
 		const user = localStorage.getItem(d2UserKey);
-		if (user) mutate(d2UserKey, JSON.parse(user), false);
+		if (user) void mutate(d2UserKey, JSON.parse(user), false);
 	}
 
 	/*	useEffect(() => {

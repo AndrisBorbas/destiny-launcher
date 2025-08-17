@@ -1,9 +1,9 @@
-import clsx from "clsx";
 import { useEffect } from "react";
 
 import { useBool } from "@/utils/hooks";
+import { cn } from "@/utils/utils";
 
-import styles from "./SeasonTimer.module.scss";
+import styles from "./SeasonTimer.module.css";
 
 /** Calculates the time between two dates
  * @param d1 the first date in number form
@@ -34,7 +34,9 @@ export function SeasonTimer({ endDate }: SeasonTimerProps) {
 		const interval = setInterval(() => {
 			ResetTimeHandlers.toggle();
 		}, 7000);
-		return () => clearInterval(interval);
+		return () => {
+			clearInterval(interval);
+		};
 	}, [ResetTimeHandlers, isResetTime]);
 
 	const { weeks, days, hours, minutes } = timeBetween(
@@ -45,11 +47,13 @@ export function SeasonTimer({ endDate }: SeasonTimerProps) {
 	return (
 		<button
 			className="text-left"
-			onClick={() => ResetTimeHandlers.toggle()}
+			onClick={() => {
+				ResetTimeHandlers.toggle();
+			}}
 			type="button"
 		>
 			<h4
-				className={clsx(
+				className={cn(
 					styles.seasonTimer,
 					"text-xl uppercase xl:text-2xl",
 					isResetTime ? "hidden" : "initial",
@@ -84,7 +88,7 @@ export function SeasonTimer({ endDate }: SeasonTimerProps) {
 				</span>
 			</h4>
 			<h4
-				className={clsx(
+				className={cn(
 					styles.seasonTimer,
 					"text-xl uppercase xl:text-2xl",
 					!isResetTime ? "hidden" : "initial",

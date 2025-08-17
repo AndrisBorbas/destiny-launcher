@@ -1,13 +1,12 @@
+@reference "../../styles/core.css";
+
 .background {
 	@apply fixed inset-0 box-content;
-	//z-index: -1;
 }
 
 .backgroundBlob {
 	@supports (-moz-appearance: none) {
-		& {
-			display: none;
-		}
+		display: none;
 	}
 }
 

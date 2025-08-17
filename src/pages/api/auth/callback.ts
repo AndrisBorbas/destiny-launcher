@@ -8,7 +8,8 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
 		case "GET": {
 			const code = req.query.code as string;
 			if (!code) {
-				return res.status(400).end();
+				res.status(400).end();
+				return;
 			}
 			const tokens = await getAccessTokensFromCode(code).catch((r: unknown) => {
 				console.error(r);
@@ -69,12 +70,14 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
 					}),
 				]);
 			}
-			return res.redirect("/");
+			res.redirect("/");
+			return;
 		}
 
 		default: {
 			res.setHeader("Allow", "GET");
-			return res.status(405).end();
+			res.status(405).end();
+			return;
 		}
 	}
 };

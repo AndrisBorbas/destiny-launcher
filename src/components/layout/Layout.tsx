@@ -6,18 +6,14 @@ import { Navbar } from "@/components/navbar/Navbar";
 import { useLocalStorage } from "@/utils/hooks";
 
 import { Background } from "./Background";
-import styles from "./Layout.module.scss";
+import styles from "./Layout.module.css";
 import { SEO } from "./SEO";
 
 type LayoutProps = {
 	buildDate?: number;
 } & React.HTMLAttributes<HTMLDivElement>;
 
-export function Layout({
-	children,
-	buildDate,
-	...restProps
-}: LayoutProps): JSX.Element {
+export function Layout({ children, buildDate, ...restProps }: LayoutProps) {
 	const [bg, setBG] = useLocalStorage<boolean>("bg", true);
 
 	return (

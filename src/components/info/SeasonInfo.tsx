@@ -1,13 +1,13 @@
-import clsx from "clsx";
-import Image from "next/future/image";
+import Image from "next/image";
 import { Suspense } from "react";
 
 import type { InfoResponse } from "@/pages/api/bungie/info";
 import { currentCharacter, getClass } from "@/utils/bungieApi/utils";
 import { useD2Info, useUser } from "@/utils/hooks";
+import { cn } from "@/utils/utils";
 
 import { TrackingLink } from "../link/TrackingLink";
-import styles from "./SeasonInfo.module.scss";
+import styles from "./SeasonInfo.module.css";
 import { SeasonTimer } from "./SeasonTimer";
 
 export function SeasonInfo({ initialData }: { initialData: InfoResponse }) {
@@ -15,7 +15,6 @@ export function SeasonInfo({ initialData }: { initialData: InfoResponse }) {
 	const { user } = useUser("/", false);
 
 	if (!swrD2Info) {
-		// eslint-disable-next-line no-console
 		console.error(error);
 		return null;
 	}
@@ -26,8 +25,7 @@ export function SeasonInfo({ initialData }: { initialData: InfoResponse }) {
 	);
 
 	if (
-		!currentSeason ||
-		!currentSeason.endDate ||
+		!currentSeason?.endDate ||
 		Date.parse(currentSeason.endDate) < Date.now()
 	) {
 		currentSeason = Object.values(swrD2Info.allSeasons).find(
@@ -44,11 +42,9 @@ export function SeasonInfo({ initialData }: { initialData: InfoResponse }) {
 
 	return (
 		<Suspense>
-			<section
-				className={clsx(styles.grid, "mt-4 grid gap-3 p-2 font-NeueHGD")}
-			>
+			<section className={cn(styles.grid, "mt-4 grid gap-3 p-2 font-display")}>
 				<div className="uppercase tracking-widest">
-					<h4 className={clsx(styles.seasonCounter, "text-2xl xl:text-3xl")}>
+					<h4 className={cn(styles.seasonCounter, "text-2xl xl:text-3xl")}>
 						Season {currentSeason?.seasonNumber ?? "didn't load"}
 					</h4>
 					<TrackingLink
@@ -77,11 +73,15 @@ export function SeasonInfo({ initialData }: { initialData: InfoResponse }) {
 										alt="Season Logo"
 										unoptimized
 										className="min-h-[48px] min-w-[48px]"
+										style={{
+											maxWidth: "100%",
+											height: "auto",
+										}}
 									/>
 								</div>
 							)}
 							<h3
-								className={clsx(
+								className={cn(
 									styles.glow,
 									"my-2 ml-1 text-4xl font-bold xl:text-5xl",
 								)}
@@ -97,7 +97,7 @@ export function SeasonInfo({ initialData }: { initialData: InfoResponse }) {
 				</div>
 				{user && (
 					<div
-						className={clsx(
+						className={cn(
 							styles.min,
 							"relative col-start-1 col-end-3 row-start-1 h-fit justify-self-end md:col-span-1 md:col-start-2",
 							"-mx-2 sm:-mx-0",
@@ -110,21 +110,25 @@ export function SeasonInfo({ initialData }: { initialData: InfoResponse }) {
 								currentCharacter(user.characters)?.emblemBackgroundPath
 							}`}
 							alt="User icon"
+							style={{
+								maxWidth: "100%",
+								height: "auto",
+							}}
 						/>
 						<h3
-							className={clsx(
+							className={cn(
 								styles.left,
 								styles.glow,
-								"absolute top-2 w-[13.5rem] overflow-hidden overflow-ellipsis text-3xl",
+								"absolute top-2 w-54 overflow-hidden text-ellipsis text-3xl",
 							)}
 						>
 							{user.profile.userInfo.displayName}
 						</h3>
-						<h5 className={clsx(styles.left, "absolute bottom-3 text-base")}>
+						<h5 className={cn(styles.left, "absolute bottom-3 text-base")}>
 							{getClass(currentCharacter(user.characters)?.classType)}
 						</h5>
 						<h4
-							className={clsx(
+							className={cn(
 								styles.light,
 								styles.glow,
 								"absolute top-2 right-4 text-3xl text-yellow-300",

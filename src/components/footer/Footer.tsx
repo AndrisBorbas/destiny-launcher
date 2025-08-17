@@ -1,11 +1,11 @@
-import clsx from "clsx";
 import { FaGithub, FaTwitter } from "react-icons/fa";
 import { SiKofi } from "react-icons/si";
 
 import manifest from "@/../package.json";
+import { cn } from "@/utils/utils";
 
 import { TrackingLink } from "../link/TrackingLink";
-import styles from "./Footer.module.scss";
+import styles from "./Footer.module.css";
 
 type FooterProps = {
 	buildDate?: number;
@@ -28,7 +28,7 @@ export function Footer({ buildDate, toggle, setToggle }: FooterProps) {
 		: "";
 
 	return (
-		<footer className={clsx(styles.footer, "bg-blur-10")} id="footer">
+		<footer className={cn(styles.footer, "bg-blur-10")} id="footer">
 			<div className="container mx-auto flex flex-col items-center justify-center space-y-6">
 				<div className="flex w-full items-center justify-evenly lg:w-1/3">
 					<TrackingLink
@@ -66,7 +66,7 @@ export function Footer({ buildDate, toggle, setToggle }: FooterProps) {
 					</TrackingLink>
 				</div>
 
-				<div className="flex flex-col items-center justify-center">
+				{/* <div className="flex flex-col items-center justify-center">
 					<label
 						htmlFor="animateToggle"
 						className="relative inline-flex cursor-pointer items-center"
@@ -78,14 +78,16 @@ export function Footer({ buildDate, toggle, setToggle }: FooterProps) {
 							name="animateToggle"
 							className="peer sr-only"
 							checked={toggle}
-							onChange={(e) => setToggle(e.target.checked)}
+							onChange={(e) => {
+								setToggle(e.target.checked);
+							}}
 						/>
 						<div className="peer h-6 w-11 rounded-full bg-button bg-opacity-10 after:absolute after:top-[2px] after:left-[2px] after:h-5 after:w-5 after:rounded-full after:border after:border-gray-600 after:bg-white after:transition-all after:content-[''] peer-checked:bg-button peer-checked:bg-opacity-60 peer-checked:after:translate-x-full peer-checked:after:border-white peer-focus:outline-none peer-focus:ring-4 peer-focus:ring-button" />
 						<span className="ml-3 text-sm font-medium">
 							Background graphics
 						</span>
 					</label>
-				</div>
+				</div> */}
 
 				<div className="flex w-full flex-row justify-between">
 					<p className="pr-4 text-xs">

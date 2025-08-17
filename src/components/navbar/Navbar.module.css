@@ -1,0 +1,12 @@
+@reference "../../styles/core.css";
+
+.header {
+	@apply sticky top-0 z-40 flex w-full flex-wrap items-center justify-between border-b border-gray-300 py-2 font-display text-white;
+
+	min-height: var(--headerHeight);
+
+	pointer-events: none;
+
+	top: calc(constant(safe-area-inset-top));
+	top: calc(env(safe-area-inset-top));
+}

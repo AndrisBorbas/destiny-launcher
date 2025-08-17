@@ -1,25 +1,31 @@
+@reference "../../styles/core.css";
+
 .seasonCounter {
 	width: fit-content;
+}
 
-	&:before {
-		content: "";
-		display: block;
-		margin-bottom: -1px;
-		width: 4rem;
-		@apply border-t-2 border-gray-600;
-	}
+.seasonCounter:before {
+	content: "";
+	display: block;
+	margin-bottom: -1px;
+	width: 4rem;
+	@apply border-t-2 border-gray-600;
 }
 
 .image {
 	@apply h-12 w-12;
-	@screen xl {
+}
+
+.image > div {
+	@apply h-12 w-12;
+}
+
+@screen xl {
+	.image {
 		@apply h-16 w-16;
 	}
-	& > div {
-		@apply h-12 w-12;
-		@screen xl {
-			@apply h-16 w-16;
-		}
+	.image > div {
+		@apply h-16 w-16;
 	}
 }
 

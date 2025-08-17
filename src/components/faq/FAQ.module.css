@@ -1,0 +1,42 @@
+@reference "../../styles/core.css";
+
+.faq {
+	@apply container mx-auto mt-4;
+	scroll-margin: 100px;
+	scroll-margin-top: 100px;
+}
+
+.headerText {
+	@apply my-4 p-4 pl-2 font-display text-4xl font-medium;
+	width: fit-content;
+}
+
+.headerText:before,
+.headerText:after {
+	content: "";
+	display: block;
+	@apply border-t-2 border-gray-600;
+}
+.headerText:before {
+	margin-bottom: 0;
+	width: 4rem;
+}
+.headerText:after {
+	margin-top: 1px;
+	width: 75%;
+}
+
+.question {
+	@apply mb-2 text-2xl font-medium;
+}
+
+.answer {
+	@apply mb-3 pl-3 text-lg;
+}
+
+.link {
+	@apply text-blue-400;
+}
+.link:hover {
+	@apply text-blue-500 underline;
+}

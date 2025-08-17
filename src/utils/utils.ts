@@ -1,4 +1,9 @@
+import { type ClassValue, clsx } from "clsx";
 import type { NextApiRequest } from "next";
+import { twMerge } from "tailwind-merge";
+export function cn(...inputs: ClassValue[]) {
+	return twMerge(clsx(inputs));
+}
 
 export async function swrFetcher(url: string) {
 	const res = await fetch(url);
@@ -25,7 +30,7 @@ export function typedFetch<T>(url: string): Promise<T> {
  * https://github.com/auth0/nextjs-auth0/blob/88959971958e5c6ed5bd874828c97363d2224f74/src/utils/cookies.ts
  */
 export function isSecureEnvironment(req: NextApiRequest) {
-	if (!req || !req.headers || !req.headers.host) {
+	if (!req?.headers?.host) {
 		throw new Error('The "host" request header is not available');
 	}
 
@@ -45,7 +50,6 @@ export function isSecureEnvironment(req: NextApiRequest) {
 
 export function dlog(...args: any) {
 	if (process.env.NODE_ENV !== "production") {
-		// eslint-disable-next-line no-console
 		console.log(...args);
 	}
 }

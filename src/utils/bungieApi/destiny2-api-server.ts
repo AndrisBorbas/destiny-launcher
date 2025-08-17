@@ -184,7 +184,6 @@ export async function fetchUserProfileFromBungie(membershipId: string) {
 	});
 	// @ts-expect-error: Const enums work
 	if (clan.ErrorCode !== PlatformErrorCodes.Success) {
-		// eslint-disable-next-line no-console
 		console.error(new Error("Could not get clan info"));
 	}
 

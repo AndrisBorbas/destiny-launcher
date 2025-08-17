@@ -1,7 +1,0 @@
-.notice {
-	width: min(100%, 420px);
-	@screen xl {
-		width: min(100%, 520px);
-	}
-	@apply pointer-events-auto;
-}

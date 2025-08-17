@@ -9,14 +9,14 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
 				client_id: oauthClientId(),
 				response_type: "code",
 			});
-			return res.redirect(
-				`https://www.bungie.net/en/OAuth/Authorize?${queryParams}`,
-			);
+			res.redirect(`https://www.bungie.net/en/OAuth/Authorize?${queryParams}`);
+			return;
 		}
 
 		default: {
 			res.setHeader("Allow", "GET");
-			return res.status(405).end();
+			res.status(405).end();
+			return;
 		}
 	}
 };

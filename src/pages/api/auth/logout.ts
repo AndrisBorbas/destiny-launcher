@@ -34,12 +34,14 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
 				}),
 			]);
 
-			return res.redirect("/");
+			res.redirect("/");
+			return;
 		}
 
 		default: {
 			res.setHeader("Allow", "GET");
-			return res.status(405).end();
+			res.status(405).end();
+			return;
 		}
 	}
 };

@@ -1,28 +1,21 @@
-import clsx from "clsx";
 import Image from "next/image";
 import { Suspense, useEffect } from "react";
 import { FaBars } from "react-icons/fa";
 
 import navbarContent from "@/data/navbar.json";
 import { useBool, useUser } from "@/utils/hooks";
-import { dlog } from "@/utils/utils";
+import { cn, dlog } from "@/utils/utils";
 
 import { TrackingLink } from "../link/TrackingLink";
-import styles from "./Navbar.module.scss";
+import styles from "./Navbar.module.css";
 import { NavLink } from "./NavLink";
 
 export function Navbar() {
 	const [isNavbarOpen, navbarHandlers] = useBool();
 	const { user, error, isLoading, isValidating } = useUser("/", false);
 
-	useEffect(() => {
-		// dlog(user, error?.message, isLoading, isValidating);
-
-		return () => {};
-	}, [user, error, isLoading, isValidating]);
-
 	return (
-		<header className={clsx(styles.header, "bg-blur-10")}>
+		<header className={cn(styles.header, "bg-blur-10")}>
 			<Suspense>
 				<div className="relative mx-auto flex w-full flex-wrap items-center justify-between px-2 lg:px-8">
 					<div className="pointer-events-auto relative flex w-full items-center justify-between lg:static lg:block lg:w-auto lg:justify-start">
@@ -33,7 +26,13 @@ export function Navbar() {
 							eventName="navbar-link-click"
 						>
 							<span className="relative mr-2 inline-block h-12 w-12">
-								<Image src="/icon.png" alt="Logo" layout="fill" unoptimized />
+								<Image
+									src="/icon.png"
+									alt="Logo"
+									unoptimized
+									fill
+									sizes="100vw"
+								/>
 							</span>
 							<h1>Destiny Launcher</h1>
 						</TrackingLink>
@@ -47,7 +46,7 @@ export function Navbar() {
 						</button>
 					</div>
 					<nav
-						className={clsx(
+						className={cn(
 							"pointer-events-auto z-50 w-full items-center lg:flex lg:w-auto",
 							isNavbarOpen ? "flex" : "hidden",
 						)}

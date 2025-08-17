@@ -7,7 +7,8 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
 	switch (req.method) {
 		case "GET": {
 			if (!req.cookies.refreshToken) {
-				return res.status(403).end();
+				res.status(403).end();
+				return;
 			}
 			const tokens = await getAccessTokenFromRefreshToken(
 				req.cookies.refreshToken,
@@ -16,7 +17,8 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
 				throw new Error("Can't get access token");
 			});
 			if (!tokens.refreshToken) {
-				return res.status(400).end();
+				res.status(400).end();
+				return;
 			}
 
 			res.setHeader("Set-Cookie", [
@@ -49,12 +51,14 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
 				}),
 			]);
 
-			return res.redirect("/");
+			res.redirect("/");
+			return;
 		}
 
 		default: {
 			res.setHeader("Allow", "GET");
-			return res.status(405).end();
+			res.status(405).end();
+			return;
 		}
 	}
 };

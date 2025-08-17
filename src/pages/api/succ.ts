@@ -18,16 +18,19 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
 					},
 				).then((res2) => res2.text());
 
-				return res.status(200).json(data);
+				res.status(200).json(data);
+				return;
 			} catch (error) {
 				console.error(error);
-				return res.status(401).end();
+				res.status(401).end();
+				return;
 			}
 		}
 
 		default: {
 			res.setHeader("Allow", "POST");
-			return res.status(405).end();
+			res.status(405).end();
+			return;
 		}
 	}
 };

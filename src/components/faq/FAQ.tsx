@@ -3,9 +3,7 @@ import { MDXProvider } from "@mdx-js/react";
 import FAQContent from "@/data/FAQ.mdx";
 
 import { TrackingLink } from "../link/TrackingLink";
-import styles from "./FAQ.module.scss";
-
-/* eslint-disable react/display-name */
+import styles from "./FAQ.module.css";
 
 const components = {
 	// eslint-disable-next-line jsx-a11y/heading-has-content
@@ -13,22 +11,20 @@ const components = {
 	p: ({ ...restProps }) => <p className={styles.answer} {...restProps} />,
 
 	a: ({ ...restProps }) => (
-		// eslint-disable-next-line jsx-a11y/anchor-has-content
-		// @ts-expect-error: Should have link from mdx
+		// @ts-expect-error: mdx should have href
 		<TrackingLink
 			className={styles.link}
 			rel="noopener"
 			target="_blank"
 			isExternal
 			eventName="faq-link-click"
+			// eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
 			eventData={{ site: restProps.href }}
 			{...restProps}
 		/>
 	),
 	ul: ({ ...restProps }) => <ul className="list-disc pl-8" {...restProps} />,
 };
-
-/* eslint-enable react/display-name */
 
 export function FAQ() {
 	return (

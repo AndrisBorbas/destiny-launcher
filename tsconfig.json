@@ -2,7 +2,10 @@
 	"extends": "@tsconfig/next/tsconfig.json",
 	"compilerOptions": {
 		"baseUrl": "./src/",
-		"paths": { "@/*": ["*"], "*": [""] },
+		"paths": {
+			"@/*": ["*"],
+			"*": [""]
+		},
 		"strict": true,
 		"skipLibCheck": true,
 		"isolatedModules": true,
@@ -13,8 +16,15 @@
 			{
 				"name": "typescript-plugin-css-modules"
 			}
-		]
+		],
+		"target": "esnext"
 	},
-	"include": ["*.config.js", "next-env.d.ts", "**/*.ts", "**/*.tsx"],
+	"include": [
+		"*.config.js",
+		"next-env.d.ts",
+		"**/*.ts",
+		"**/*.tsx",
+		"postcss.config.mjs"
+	],
 	"exclude": ["node_modules", "public", ".next/"]
 }

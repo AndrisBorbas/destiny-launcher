@@ -14,7 +14,7 @@ export const d2InfoKey = "d2ManifestV2";
  * @returns manifest info
  */
 export function useD2Info(fallbackData?: InfoResponse) {
-	return useSWR<InfoResponse>(d2InfoRoute, {
+	return useSWR<InfoResponse, Error>(d2InfoRoute, {
 		onError() {
 			localStorage.removeItem(d2InfoKey);
 		},

@@ -3,7 +3,9 @@ import type { MotionValue } from "framer-motion";
 import { motion, useSpring } from "framer-motion";
 import type { RefObject } from "react";
 
-import styles from "./Background.module.scss";
+import { cn } from "@/utils/utils";
+
+import styles from "./Background.module.css";
 
 export type BackgroundProps = {
 	enabled: boolean;
@@ -248,7 +250,7 @@ export function Background({ enabled }: BackgroundProps) {
 				</defs>
 			</svg> */}
 			<div
-				className={clsx(styles.image)}
+				className={cn(styles.image)}
 				style={{ display: enabled ? "initial" : "none" }}
 			/>
 		</div>

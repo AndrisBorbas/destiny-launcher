@@ -1,2 +1,124 @@
-@tailwind base;
-@tailwind components;
+@import "tailwindcss";
+
+/* Fonts */
+
+@font-face {
+	font-display: swap;
+	font-family: "NeueHaasGroteskDisp";
+	font-style: normal;
+	font-weight: 500;
+	src:
+		url("../../public/assets/fonts/NHaasGroteskDSPro-55Rg.ttf")
+			format("truetype"),
+		url("../../public/assets/fonts/NHaasGroteskDSPro-55Rg.woff") format("woff"),
+		url("../../public/assets/fonts/NHaasGroteskDSPro-55Rg.woff2")
+			format("woff2");
+}
+
+@font-face {
+	font-display: swap;
+	font-family: "NeueHaasGroteskText";
+	font-style: normal;
+	font-weight: normal;
+	src:
+		url("../../public/assets/fonts/NHaasGroteskTXPro-55Rg.woff2")
+			format("woff2"),
+		url("../../public/assets/fonts/NHaasGroteskTXPro-55Rg.woff") format("woff");
+}
+
+/* Themes */
+
+@theme {
+	--font-display:
+		"NeueHaasGroteskDisp", "ui-sans-serif", "system-ui", "-apple-system",
+		'"Segoe UI"', "Roboto";
+	--font-text:
+		"NeueHaasGroteskText", "ui-sans-serif", "system-ui", "-apple-system",
+		'"Segoe UI"', "Roboto";
+
+	--color-banner: oklch(25.775% 0.06883 275.829);
+	--color-banner-dark: oklch(20.295% 0.04561 277.767);
+	--color-button: oklch(82.734% 0.16932 80.177);
+
+	--default-transition-timing-function: var(--ease-out);
+}
+
+/* Globals */
+
+:root {
+	color-scheme: dark light;
+
+	--headerHeight: 65px;
+}
+
+html {
+	scroll-behavior: smooth;
+}
+
+body {
+	@apply text-white;
+	@apply bg-gray-900;
+	@apply min-h-screen;
+
+	margin: 0 auto;
+}
+
+a,
+button {
+	@apply cursor-pointer;
+}
+a:disabled,
+button:disabled {
+	@apply cursor-not-allowed opacity-70;
+}
+
+/* Components */
+
+@layer components {
+	.safe-area-x {
+		padding-left: calc(0.75rem + constant(safe-area-inset-left));
+		padding-left: calc(0.75rem + env(safe-area-inset-left));
+		padding-right: calc(0.75rem + constant(safe-area-inset-right));
+		padding-right: calc(0.75rem + env(safe-area-inset-right));
+	}
+
+	.text-shadow-2 {
+		text-shadow: 2px 2px 2px rgba(0, 0, 0, 0.5);
+	}
+
+	.blur-5 {
+		filter: blur(5px);
+	}
+
+	.bg-blur-10 {
+		background-color: rgba(122, 122, 122, 0.66);
+		@supports (
+			(-webkit-backdrop-filter: blur(10px)) or (backdrop-filter: blur(10px))
+		) {
+			-webkit-backdrop-filter: blur(10px);
+			backdrop-filter: blur(10px);
+			background-color: rgba(150, 150, 150, 0.33);
+			opacity: 0.99;
+		}
+	}
+
+	.w-fit {
+		width: fit-content;
+	}
+
+	.h-fit {
+		height: fit-content;
+	}
+
+	.border-t-3 {
+		border-top-width: 3px;
+	}
+
+	.leading-0 {
+		line-height: 0;
+	}
+
+	.-z-1 {
+		z-index: -1;
+	}
+}

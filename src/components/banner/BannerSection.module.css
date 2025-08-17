@@ -1,0 +1,46 @@
+@reference "../../styles/core.css";
+
+.headerText {
+	@apply my-4 p-4 pl-2 font-display text-4xl font-medium;
+	scroll-margin: 100px;
+	scroll-margin-top: 100px;
+	width: fit-content;
+}
+
+.headerText:before,
+.headerText:after {
+	content: "";
+	display: block;
+	@apply border-t-2 border-gray-600;
+}
+
+.headerText:before {
+	margin-bottom: 1px;
+	width: 4rem;
+}
+
+.headerText:after {
+	margin-top: 0;
+	width: 75%;
+}
+
+.bannerSection {
+	@apply grid grid-cols-1 justify-center justify-items-center gap-8;
+	box-sizing: border-box;
+	grid-auto-rows: max-content;
+	min-height: 72px;
+	min-width: 280px;
+
+	/* grid-template-rows: masonry; /* TODO: Experimental feature now */
+}
+
+@media (min-width: 640px) {
+	.bannerSection {
+		grid-template-columns: repeat(auto-fill, 520px);
+	}
+}
+
+.placeholder {
+	@apply flex w-full items-center justify-center text-center text-lg;
+	height: 72px;
+}

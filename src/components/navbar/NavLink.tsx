@@ -1,7 +1,7 @@
-import clsx from "clsx";
+import { cn } from "@/utils/utils";
 
 import { TrackingLink } from "../link/TrackingLink";
-import styles from "./NavLink.module.scss";
+import styles from "./NavLink.module.css";
 
 export type NavLinkProps = {
 	href: string;
@@ -34,25 +34,25 @@ export function NavLink({
 	};
 
 	return (
-		<li key={`${href}`} className="py-1 pl-2 lg:p-0">
+		<li key={href} className="py-1 pl-2 lg:p-0">
 			<TrackingLink
 				href={href}
 				passHref
 				replace={replace}
-				className={clsx(
-					disabled && "pointer-events-none cursor-default opacity-70",
+				className={cn(
+					disabled && "pointer-events-none cursor-not-allowed opacity-70",
 				)}
 				eventName={eventName()}
 			>
 				<button
-					className={clsx(
+					className={cn(
 						styles.navlink,
 						"hover:text-pink inline-block w-full py-2 px-2 text-xl font-medium lg:px-4 lg:text-xl xl:px-5 xl:text-2xl",
 						isFirst && "lg:pl-0",
 						isLast && "lg:pr-0",
 					)}
 					onClick={closeNavbar}
-					onKeyPress={closeNavbar}
+					onKeyUp={closeNavbar}
 					type="button"
 				>
 					{label}
