@@ -10,7 +10,9 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
 					"https://analytics.andrisborbas.com/api/send",
 					{
 						method: "POST",
+						// eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
 						body: req.body,
+						// @ts-expect-error: works for now
 						headers: assign(
 							{ "Content-Type": "application/json" },
 							{ "User-Agent": req.headers["user-agent"] },
