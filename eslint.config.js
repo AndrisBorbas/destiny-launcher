@@ -1,4 +1,5 @@
 import js from "@eslint/js";
+import next from "@next/eslint-plugin-next";
 import { globalIgnores } from "eslint/config";
 import eslintConfigPrettier from "eslint-config-prettier/flat";
 import importPlugin from "eslint-plugin-import";
@@ -44,6 +45,7 @@ export default tseslint.config([
 		],
 		plugins: {
 			"simple-import-sort": simpleImportSort,
+			"@next/next": next,
 		},
 		settings: {
 			"import/resolver": {
