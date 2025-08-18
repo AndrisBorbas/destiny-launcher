@@ -1,0 +1,22 @@
+{
+	"currencies": {
+		"important": [
+			3853748946, // Enhancement Core
+			3282419336, // Raid Banner
+			4257549984, // Enhancement Prism
+			3702027555, // Spoils of Conquest
+			353704689, // Ascendant Alloy
+			4257549985, // Ascendant Shard
+			800069450, // Strange Coin
+			3467984096, // Exotic Cipher
+		],
+		"common": [
+			1289622079, // Strand Meditation
+			2610515000, // Fated Cipher
+			2174713383, // Timelost Spirit Bloom
+			3793612644, // Alkane Mutations
+			3388913371, // Nine-Touched Relic Iron
+			2367456861, // Phaseglass Refraction
+		],
+	},
+}

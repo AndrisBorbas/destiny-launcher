@@ -2,6 +2,7 @@ import { serialize } from "cookie";
 import type { NextApiRequest, NextApiResponse } from "next";
 
 import { getAccessTokensFromCode } from "@/utils/bungieApi/oauth";
+import { isSecureEnvironment } from "@/utils/utils";
 
 export default async (req: NextApiRequest, res: NextApiResponse) => {
 	switch (req.method) {
@@ -20,21 +21,21 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
 				res.setHeader("Set-Cookie", [
 					serialize("accessToken", tokens.accessToken.value, {
 						maxAge: tokens.accessToken.expires,
-						secure: true /* isSecureEnvironment(req) */,
+						secure: isSecureEnvironment(req),
 						path: "/",
 						sameSite: true,
 						httpOnly: true,
 					}),
 					serialize("membershipId", tokens.bungieMembershipId, {
 						maxAge: tokens.accessToken.expires,
-						secure: true /* isSecureEnvironment(req) */,
+						secure: isSecureEnvironment(req),
 						path: "/",
 						sameSite: true,
 						httpOnly: true,
 					}),
 					serialize("destinyLauncherLoggedIn", "1", {
 						maxAge: tokens.accessToken.expires,
-						secure: true /* isSecureEnvironment(req) */,
+						secure: isSecureEnvironment(req),
 						path: "/",
 						sameSite: true,
 					}),
@@ -43,34 +44,34 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
 				res.setHeader("Set-Cookie", [
 					serialize("accessToken", tokens.accessToken.value, {
 						maxAge: tokens.accessToken.expires,
-						secure: true /* isSecureEnvironment(req) */,
+						secure: isSecureEnvironment(req),
 						path: "/",
 						sameSite: true,
 						httpOnly: true,
 					}),
 					serialize("refreshToken", tokens.refreshToken.value, {
 						maxAge: tokens.refreshToken.expires,
-						secure: true /* isSecureEnvironment(req) */,
+						secure: isSecureEnvironment(req),
 						path: "/",
 						sameSite: true,
 						httpOnly: true,
 					}),
 					serialize("membershipId", tokens.bungieMembershipId, {
 						maxAge: tokens.refreshToken.expires,
-						secure: true /* isSecureEnvironment(req) */,
+						secure: isSecureEnvironment(req),
 						path: "/",
 						sameSite: true,
 						httpOnly: true,
 					}),
 					serialize("destinyLauncherLoggedIn", "1", {
 						maxAge: tokens.refreshToken.expires,
-						secure: true /* isSecureEnvironment(req) */,
+						secure: isSecureEnvironment(req),
 						path: "/",
 						sameSite: true,
 					}),
 				]);
 			}
-			res.redirect("/");
+			res.redirect("/dashboard");
 			return;
 		}
 

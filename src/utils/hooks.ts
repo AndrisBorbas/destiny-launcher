@@ -44,21 +44,21 @@ export function useUser(redirectTo?: string, redirectIfLoggedIn = false) {
 			},
 		},
 	);
-	useEffect(() => {
-		if (!redirectTo || !data) return;
+	// useEffect(() => {
+	// 	if (!redirectTo || !data) return;
 
-		if (
-			(!redirectIfLoggedIn && !data.profile) ||
-			(redirectIfLoggedIn && data.profile)
-		) {
-			router.replace(redirectTo);
-		}
-	}, [router, data, redirectTo, redirectIfLoggedIn]);
+	// 	if ((!redirectIfLoggedIn && !error) || (redirectIfLoggedIn && error)) {
+	// 		void router.replace(redirectTo);
+	// 	}
+	// }, [router, data, redirectTo, redirectIfLoggedIn, error]);
 
 	return {
 		user: data && {
 			profile: data.profile,
 			characters: data.characters,
+			inventories: data.inventories,
+			currencies: data.currencies,
+			silver: data.silver,
 			clan: data.clan,
 		},
 		error,
@@ -113,11 +113,10 @@ export function useLocalStorage<T>(key: string, initialValue: T) {
 			return initialValue;
 		}
 		try {
-			dlog("init");
 			// Get from local storage by key
 			const item = window.localStorage.getItem(key);
 			// Parse stored json or if none return initialValue
-			return item ? JSON.parse(item) : initialValue;
+			return item ? (JSON.parse(item) as T) : initialValue;
 		} catch (error) {
 			// If error also return initialValue
 			console.error(error);
@@ -132,7 +131,6 @@ export function useLocalStorage<T>(key: string, initialValue: T) {
 			return;
 		}
 		try {
-			dlog("save");
 			// Allow value to be a function so we have same API as useState
 			const valueToStore =
 				value instanceof Function ? value(storedValue) : value;

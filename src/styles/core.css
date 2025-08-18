@@ -102,6 +102,15 @@ button:disabled {
 		}
 	}
 
+	.glow {
+		text-shadow: 0px 0px 7px rgba(255, 255, 255, 0.5);
+	}
+
+	.light:before {
+		@apply pr-1 align-top text-3xl;
+		content: "\2727";
+	}
+
 	.w-fit {
 		width: fit-content;
 	}

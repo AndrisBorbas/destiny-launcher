@@ -1,5 +1,8 @@
 import type {
 	DestinyCharacterComponent,
+	DestinyCurrenciesComponent,
+	DestinyInventoryComponent,
+	DestinyPlatformSilverComponent,
 	DestinyProfileComponent,
 } from "bungie-api-ts/destiny2";
 import type { GroupMembership } from "bungie-api-ts/groupv2";
@@ -15,6 +18,9 @@ export type ProfileResponse = {
 		[key: string]: DestinyCharacterComponent;
 	};
 	profile: DestinyProfileComponent;
+	inventories?: DestinyInventoryComponent;
+	currencies?: DestinyCurrenciesComponent;
+	silver?: DestinyPlatformSilverComponent;
 	clan?: GroupMembership;
 	error?: AuthError;
 };
@@ -36,33 +42,41 @@ export default async (
 				}
 				const { user, clan } = await fetchUserProfileFromBungie(
 					req.cookies.membershipId,
+					req.cookies.accessToken, // Pass the access token from the cookie
 				);
+
 				if (!user.profile.data || !user.characters.data) {
 					throw new Error("No data inside fetched profile");
 				}
 
-				const data = {
+				const data: ProfileResponse = {
 					characters: user.characters.data,
 					profile: user.profile.data,
-					clan: clan && clan.totalResults > 0 ? clan.results[0] : undefined,
+					inventories: user.profileInventory.data,
+					currencies: user.profileCurrencies.data as
+						| DestinyCurrenciesComponent
+						| undefined,
+					silver: user.platformSilver.data,
+					clan: clan.totalResults > 0 ? clan.results[0] : undefined,
 				};
 
 				res.status(200).json(data);
 				return;
-			} catch (error: any) {
+			} catch (error: unknown) {
 				console.error(error);
-				if (error.name === "AuthError") {
+				if (error instanceof Error && error.name === "AuthError") {
 					console.error("AuthError");
 					res.redirect("/api/auth/refresh");
-					return;
-					res.status(403).json({
-						characters: undefined as never,
-						profile: undefined as never,
-						error,
-					});
+					res.status(403).end();
 					return;
 				}
-				res.status(401).end();
+				res.status(403).json({
+					characters: undefined as never,
+					profile: undefined as never,
+					inventories: undefined as never,
+					currencies: undefined as never,
+					error: error instanceof Error ? error : new Error(String(error)),
+				});
 				return;
 			}
 		}

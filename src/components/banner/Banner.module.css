@@ -110,14 +110,8 @@
 }
 
 .figure {
-	@apply p-2;
+	@apply p-2 sm:p-4;
 	justify-content: stretch;
-}
-
-@screen sm {
-	.figure {
-		@apply p-4;
-	}
 }
 
 .button {

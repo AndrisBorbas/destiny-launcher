@@ -1,9 +1,8 @@
 {
 	"links": [
 		{ "href": "steam://rungameid/1085660", "label": "Run Destiny 2" },
-		{ "href": "/#manager", "label": "Managers" },
-		{ "href": "/#info", "label": "Info sites" },
-		{ "href": "/#sheet", "label": "Sheets" },
-		{ "href": "/#FAQ", "label": "FAQ" }
+		{ "href": "/", "label": "Sites" },
+		{ "href": "/#FAQ", "label": "FAQ" },
+		{ "href": "/dashboard", "label": "Dashboard" }
 	]
 }

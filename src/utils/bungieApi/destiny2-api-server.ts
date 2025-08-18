@@ -12,14 +12,17 @@ import {
 import { getMembershipDataById } from "bungie-api-ts/user";
 import fs from "fs";
 
-import { authenticatedHttpClient } from "./client";
+import {
+	authenticatedHttpClient,
+	authenticatedHttpClientWithToken,
+} from "./client";
 import { getManifest, getSettings, getSlice } from "./destiny2-api-client";
 
 export async function getInitialD2Info(save?: boolean) {
 	const destinyManifest = await getManifest();
 	const manifestTables = await getSlice(destinyManifest, [
 		"DestinySeasonDefinition",
-		// "DestinyPresentationNodeDefinition",
+		// "DestinyInventoryItemDefinition",
 	]);
 
 	/*
@@ -94,8 +97,16 @@ export class AuthError extends Error {
 	}
 }
 
-export async function fetchUserProfileFromBungie(membershipId: string) {
-	const currentUser = await getMembershipDataById(authenticatedHttpClient, {
+export async function fetchUserProfileFromBungie(
+	membershipId: string,
+	accessToken?: string,
+) {
+	// Use the token-based client if accessToken is provided, otherwise fallback to cookie-based
+	const httpClient = accessToken
+		? authenticatedHttpClientWithToken(accessToken)
+		: authenticatedHttpClient;
+
+	const currentUser = await getMembershipDataById(httpClient, {
 		membershipId,
 		// @ts-expect-error: Const enums work
 		membershipType: BungieMembershipType.BungieNext,
@@ -129,7 +140,7 @@ export async function fetchUserProfileFromBungie(membershipId: string) {
 		);
 	}
 
-	const linkedProfiles = await getLinkedProfiles(authenticatedHttpClient, {
+	const linkedProfiles = await getLinkedProfiles(httpClient, {
 		membershipId: currentUser.Response.bungieNetUser.membershipId,
 		// @ts-expect-error: Const enums work
 		membershipType: BungieMembershipType.All,
@@ -153,7 +164,7 @@ export async function fetchUserProfileFromBungie(membershipId: string) {
 				: prev,
 		);
 
-	const detailedProfile = await getProfile(authenticatedHttpClient, {
+	const detailedProfile = await getProfile(httpClient, {
 		destinyMembershipId: primaryProfile.membershipId,
 		membershipType: primaryProfile.membershipType,
 		components: [
@@ -161,6 +172,12 @@ export async function fetchUserProfileFromBungie(membershipId: string) {
 			DestinyComponentType.Profiles,
 			// @ts-expect-error: Const enums work
 			DestinyComponentType.Characters,
+			// @ts-expect-error: Const enums work
+			DestinyComponentType.ProfileInventories,
+			// @ts-expect-error: Const enums work
+			DestinyComponentType.ProfileCurrencies,
+			// @ts-expect-error: Const enums work
+			DestinyComponentType.PlatformSilver,
 		],
 	});
 	// @ts-expect-error: Const enums work
@@ -170,7 +187,7 @@ export async function fetchUserProfileFromBungie(membershipId: string) {
 		);
 	}
 
-	const clan = await getGroupsForMember(authenticatedHttpClient, {
+	const clan = await getGroupsForMember(httpClient, {
 		// @ts-expect-error: Const enums work
 		filter: GroupsForMemberFilter.All,
 		// @ts-expect-error: Const enums work

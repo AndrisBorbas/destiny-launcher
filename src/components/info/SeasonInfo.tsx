@@ -12,7 +12,7 @@ import { SeasonTimer } from "./SeasonTimer";
 
 export function SeasonInfo({ initialData }: { initialData: InfoResponse }) {
 	const { data: swrD2Info, error } = useD2Info(initialData);
-	const { user } = useUser("/", false);
+	const { user } = useUser();
 
 	if (!swrD2Info) {
 		console.error(error);
@@ -49,10 +49,10 @@ export function SeasonInfo({ initialData }: { initialData: InfoResponse }) {
 					</h4>
 					<TrackingLink
 						href={
+							// disable flavour link cause bungie didn't do a season page
 							/*
 							 `https://www.bungie.net/${ currentSeason?.displayProperties.name.replace(/\s+/g, "") ?? "" }`
 							*/
-							// disable flavour link cause bungie didn't do a season page
 							"https://www.destinythegame.com/YearOfProphecy"
 						}
 						target="_blank"

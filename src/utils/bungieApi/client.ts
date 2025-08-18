@@ -1,4 +1,3 @@
-import type { ServerResponse } from "bungie-api-ts/destiny2";
 import type { HttpClient, HttpClientConfig } from "bungie-api-ts/http";
 
 import { oauthClientAPIKey } from "./consts";
@@ -9,8 +8,9 @@ function createHttpClient(
 	fetchFunction: typeof fetch,
 	apiKey: string,
 	withCredentials: boolean,
+	accessToken?: string,
 ): HttpClient {
-	return async (config: HttpClientConfig) => {
+	return async <Return>(config: HttpClientConfig) => {
 		let { url } = config;
 		if (config.params) {
 			// strip out undefined params keys. bungie-api-ts creates them for optional endpoint parameters
@@ -25,17 +25,27 @@ function createHttpClient(
 			).toString()}`;
 		}
 
+		const headers: { [key: string]: string } = {
+			"X-API-Key": apiKey,
+		};
+
+		// Add OAuth authorization header if access token is provided
+		if (accessToken) {
+			headers.Authorization = `Bearer ${accessToken}`;
+		}
+
+		if (config.body) {
+			headers["Content-Type"] = "application/json";
+		}
+
 		const fetchOptions = new Request(url, {
 			method: config.method,
 			body: config.body ? JSON.stringify(config.body) : undefined,
-			headers: {
-				"X-API-Key": apiKey,
-				...(config.body && { "Content-Type": "application/json" }),
-			},
+			headers,
 			credentials: withCredentials ? "include" : "omit",
 		});
 		const response = await fetchFunction(fetchOptions);
-		const data = await response.json();
+		const data = (await response.json()) as Return;
 		return data;
 	};
 }
@@ -51,3 +61,10 @@ export const authenticatedHttpClient = createHttpClient(
 	oauthClientAPIKey(),
 	true,
 );
+
+// Create an authenticated client with an access token
+export function authenticatedHttpClientWithToken(
+	accessToken: string,
+): HttpClient {
+	return createHttpClient(fetch, oauthClientAPIKey(), false, accessToken);
+}

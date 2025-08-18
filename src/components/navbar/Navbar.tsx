@@ -12,15 +12,15 @@ import { NavLink } from "./NavLink";
 
 export function Navbar() {
 	const [isNavbarOpen, navbarHandlers] = useBool();
-	const { user, error, isLoading, isValidating } = useUser("/", false);
+	const { user, error, isLoading, isValidating } = useUser();
 
 	return (
 		<header className={cn(styles.header, "bg-blur-10")}>
 			<Suspense>
-				<div className="relative mx-auto flex w-full flex-wrap items-center justify-between px-2 lg:px-8">
+				<div className="relative mx-auto flex w-full flex-wrap items-center overflow-hidden justify-between px-2 lg:px-8">
 					<div className="pointer-events-auto relative flex w-full items-center justify-between lg:static lg:block lg:w-auto lg:justify-start">
 						<TrackingLink
-							href="/#"
+							href={user && !error ? "/dashboard" : "/"}
 							replace
 							className="mr-2 flex items-center text-2xl no-underline lg:text-4xl lg:leading-10"
 							eventName="navbar-link-click"

@@ -132,6 +132,7 @@ export default tseslint.config([
 			"react-refresh/only-export-components": "off",
 			"import/no-default-export": "off",
 			"import/prefer-default-export": "warn",
+			"@typescript-eslint/require-await": "off",
 		},
 	},
 	{

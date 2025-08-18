@@ -12,21 +12,8 @@
 	@apply border-t-2 border-gray-600;
 }
 
-.image {
-	@apply h-12 w-12;
-}
-
-.image > div {
-	@apply h-12 w-12;
-}
-
-@screen xl {
-	.image {
-		@apply h-16 w-16;
-	}
-	.image > div {
-		@apply h-16 w-16;
-	}
+.image, .image > div {
+	@apply h-12 w-12 xl:h-16 xl:w-16;
 }
 
 .glow {
