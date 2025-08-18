@@ -28,12 +28,12 @@ export function Notice({ id, children, className }: NoticeProps) {
 	return (
 		<div
 			style={{ display: isVisible ? "" : "none" }}
-			className={cn("mb-4 mt-6", className)}
+			className={cn("mt-6 mb-4", className)}
 		>
 			<div
 				className={cn(
 					styles.notice,
-					"bg-blur-10 relative ml-auto border-t border-gray-300 bg-button/50 p-3 px-6 text-center text-xl backdrop-blur",
+					"bg-blur-10 bg-button/50 relative ml-auto border-t border-gray-300 p-3 px-6 text-center text-xl backdrop-blur",
 				)}
 			>
 				{children}

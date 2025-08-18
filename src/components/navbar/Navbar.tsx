@@ -17,7 +17,7 @@ export function Navbar() {
 	return (
 		<header className={cn(styles.header, "bg-blur-10")}>
 			<Suspense>
-				<div className="relative mx-auto flex w-full flex-wrap items-center overflow-hidden justify-between px-2 lg:px-8">
+				<div className="relative mx-auto flex w-full flex-wrap items-center justify-between overflow-hidden px-2 lg:px-8">
 					<div className="pointer-events-auto relative flex w-full items-center justify-between lg:static lg:block lg:w-auto lg:justify-start">
 						<TrackingLink
 							href={user && !error ? "/dashboard" : "/"}
@@ -37,7 +37,7 @@ export function Navbar() {
 							<h1>Destiny Launcher</h1>
 						</TrackingLink>
 						<button
-							className="block h-full cursor-pointer rounded border border-solid border-transparent bg-transparent py-2 px-2 text-xl leading-none outline-none focus:outline-none lg:hidden"
+							className="block h-full cursor-pointer rounded border border-solid border-transparent bg-transparent px-2 py-2 text-xl leading-none outline-none focus:outline-none lg:hidden"
 							type="button"
 							onClick={navbarHandlers.toggle}
 							aria-label="Navbar toggler"

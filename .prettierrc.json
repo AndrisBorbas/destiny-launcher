@@ -1,6 +1,7 @@
 {
 	"useTabs": true,
 	"trailingComma": "all",
+	"plugins": ["prettier-plugin-tailwindcss"],
 	"overrides": [
 		{
 			"files": "*.md",

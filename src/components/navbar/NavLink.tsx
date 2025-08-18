@@ -47,7 +47,7 @@ export function NavLink({
 				<button
 					className={cn(
 						styles.navlink,
-						"hover:text-pink inline-block w-full py-2 px-2 text-xl font-medium lg:px-4 lg:text-xl xl:px-5 xl:text-2xl",
+						"hover:text-pink inline-block w-full px-2 py-2 text-xl font-medium lg:px-4 lg:text-xl xl:px-5 xl:text-2xl",
 						isFirst && "lg:pl-0",
 						isLast && "lg:pr-0",
 					)}

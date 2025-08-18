@@ -1,5 +1,5 @@
 @reference "../styles/core.css";
 
 .notices {
-	@apply pointer-events-none absolute left-2 right-2 top-0 z-20 md:left-0 md:right-8 lg:right-12 xl:right-16;
+	@apply pointer-events-none absolute top-0 right-2 left-2 z-20 md:right-8 md:left-0 lg:right-12 xl:right-16;
 }

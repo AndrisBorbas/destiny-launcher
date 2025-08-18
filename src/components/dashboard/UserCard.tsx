@@ -28,17 +28,17 @@ export function CharacterCard({ character }: CharacterCardProps) {
 		return (
 			// loading skeleton
 			<div className="animate-pulse">
-				<div className="w-[474px] h-[96px] bg-blur-10">
-					<div className="absolute left-2 top-2 w-[80px] h-[80px] bg-gray-400/50" />
-					<div className="glow left-[96px] font-medium absolute rounded bg-gray-400/50 top-4 w-64 h-10 overflow-hidden text-ellipsis text-4xl" />
-					<div className="glow right-4 font-medium absolute rounded bg-gray-400/50 top-4 w-20 h-10 overflow-hidden text-ellipsis text-4xl" />
+				<div className="bg-blur-10 h-[96px] w-[474px]">
+					<div className="absolute top-2 left-2 h-[80px] w-[80px] bg-gray-400/50" />
+					<div className="glow absolute top-4 left-[96px] h-10 w-64 overflow-hidden rounded bg-gray-400/50 text-4xl font-medium text-ellipsis" />
+					<div className="glow absolute top-4 right-4 h-10 w-20 overflow-hidden rounded bg-gray-400/50 text-4xl font-medium text-ellipsis" />
 				</div>
 			</div>
 		);
 
 	return (
 		<Suspense>
-			<div className={cn("relative w-[474px] h-[96px]", "-mx-2 sm:-mx-0")}>
+			<div className={cn("relative -mx-2 h-[96px] w-[474px] sm:-mx-0")}>
 				<Image
 					width={474}
 					height={96}
@@ -51,12 +51,12 @@ export function CharacterCard({ character }: CharacterCardProps) {
 				/>
 				<h3
 					className={cn(
-						"glow left-[96px] font-medium absolute top-4 w-64 overflow-hidden text-ellipsis text-4xl",
+						"glow absolute top-4 left-[96px] w-64 overflow-hidden text-4xl font-medium text-ellipsis",
 					)}
 				>
 					{getClass(character.classType)}
 				</h3>
-				<h5 className={cn("left-[96px] absolute bottom-4 text-base")}>
+				<h5 className={cn("absolute bottom-4 left-[96px] text-base")}>
 					{getClass(character.classType)}
 				</h5>
 				<h4
@@ -92,10 +92,10 @@ export function UserHeader() {
 		return (
 			// loading skeleton
 			<div className="animate-pulse">
-				<div className="w-[474px] h-[96px] bg-blur-10">
-					<div className="absolute left-2 top-2 w-[80px] h-[80px] bg-gray-400/50" />
-					<div className="glow left-[96px] font-medium absolute rounded bg-gray-400/50 top-4 w-64 h-10 overflow-hidden text-ellipsis text-4xl" />
-					<div className="glow right-4 font-medium absolute rounded bg-gray-400/50 top-4 w-20 h-10 overflow-hidden text-ellipsis text-4xl" />
+				<div className="bg-blur-10 h-[96px] w-[474px]">
+					<div className="absolute top-2 left-2 h-[80px] w-[80px] bg-gray-400/50" />
+					<div className="glow absolute top-4 left-[96px] h-10 w-64 overflow-hidden rounded bg-gray-400/50 text-4xl font-medium text-ellipsis" />
+					<div className="glow absolute top-4 right-4 h-10 w-20 overflow-hidden rounded bg-gray-400/50 text-4xl font-medium text-ellipsis" />
 				</div>
 			</div>
 		);
@@ -107,24 +107,24 @@ export function UserHeader() {
 				height={146}
 				src={`https://bungie.net${emblem?.items[emblemId].secondarySpecial}`}
 				alt="User icon"
-				className="absolute top-0 left-0 w-full h-full object-cover max-w-full min-h-48 max-h-48 -mt-[65px]"
+				className="absolute top-0 left-0 -mt-[65px] h-full max-h-[192px] min-h-[192px] w-full max-w-full object-cover select-none"
 			/>
-			<div className={cn("relative h-[96px]", "-mx-2 sm:-mx-0")}>
+			<div className={cn("relative -mx-2 -mt-[1px] h-[128px] sm:-mx-0")}>
 				<Image
 					width={96}
 					height={96}
 					src={`https://bungie.net${emblem?.items[emblemId].secondaryOverlay}`}
 					alt="User icon"
-					className="absolute top-4 left-4 w-[96px] h-auto"
+					className="absolute top-4 left-4 h-auto w-[96px]"
 				/>
 				<h3
 					className={cn(
-						"glow left-[128px] font-medium absolute top-4 w-64 overflow-hidden text-ellipsis text-4xl",
+						"glow absolute top-4 left-[128px] w-64 overflow-hidden text-4xl font-medium text-ellipsis",
 					)}
 				>
 					{user.profile.userInfo.displayName}
 				</h3>
-				<h5 className={cn("left-[128px] absolute bottom-4 text-base")}>
+				<h5 className={cn("absolute bottom-4 left-[128px] text-base")}>
 					{getClass(currentCharacter(user.characters)?.classType)}
 				</h5>
 				<h4

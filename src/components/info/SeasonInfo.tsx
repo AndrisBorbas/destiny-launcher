@@ -42,8 +42,8 @@ export function SeasonInfo({ initialData }: { initialData: InfoResponse }) {
 
 	return (
 		<Suspense>
-			<section className={cn(styles.grid, "mt-4 grid gap-3 p-2 font-display")}>
-				<div className="uppercase tracking-widest">
+			<section className={cn(styles.grid, "font-display mt-4 grid gap-3 p-2")}>
+				<div className="tracking-widest uppercase">
 					<h4 className={cn(styles.seasonCounter, "text-2xl xl:text-3xl")}>
 						Season {currentSeason?.seasonNumber ?? "didn't load"}
 					</h4>
@@ -119,7 +119,7 @@ export function SeasonInfo({ initialData }: { initialData: InfoResponse }) {
 							className={cn(
 								styles.left,
 								styles.glow,
-								"absolute top-2 w-54 overflow-hidden text-ellipsis text-3xl",
+								"absolute top-2 w-54 overflow-hidden text-3xl text-ellipsis",
 							)}
 						>
 							{user.profile.userInfo.displayName}

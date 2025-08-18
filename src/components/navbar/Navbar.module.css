@@ -1,7 +1,7 @@
 @reference "../../styles/core.css";
 
 .header {
-	@apply sticky top-0 z-40 flex w-full flex-wrap items-center justify-between border-b border-gray-300 py-2 font-display text-white;
+	@apply font-display sticky top-0 z-40 flex w-full flex-wrap items-center justify-between border-b border-gray-300 py-2 text-white;
 
 	min-height: var(--headerHeight);
 

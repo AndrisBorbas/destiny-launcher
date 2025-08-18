@@ -5,7 +5,7 @@
 }
 
 .container {
-	@apply flex flex-col bg-banner;
+	@apply bg-banner flex flex-col;
 	height: fit-content;
 	@apply relative;
 }
@@ -29,7 +29,7 @@
 }
 
 .headerText {
-	@apply self-center py-4 pl-1 font-display text-xl font-medium uppercase;
+	@apply font-display self-center py-4 pl-1 text-xl font-medium uppercase;
 	width: fit-content;
 }
 
@@ -115,7 +115,7 @@
 }
 
 .button {
-	@apply relative m-2 mt-4 block bg-button/50 p-2 text-center;
+	@apply bg-button/50 relative m-2 mt-4 block p-2 text-center;
 }
 
 .button::after {

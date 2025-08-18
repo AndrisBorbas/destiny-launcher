@@ -12,7 +12,8 @@
 	@apply border-t-2 border-gray-600;
 }
 
-.image, .image > div {
+.image,
+.image > div {
 	@apply h-12 w-12 xl:h-16 xl:w-16;
 }
 

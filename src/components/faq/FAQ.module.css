@@ -7,7 +7,7 @@
 }
 
 .headerText {
-	@apply my-4 p-4 pl-2 font-display text-4xl font-medium;
+	@apply font-display my-4 p-4 pl-2 text-4xl font-medium;
 	width: fit-content;
 }
 

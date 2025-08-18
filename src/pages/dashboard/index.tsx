@@ -24,16 +24,11 @@ export default function DashboardPage({ buildDate }: PageProps) {
 	const { user } = useUser();
 
 	const characters = useMemo(() => {
-		//create an array from characters object
-		return Object.values(user?.characters ?? {})
-			.filter(
-				(character) =>
-					character.characterId !==
-					currentCharacter(user?.characters)?.characterId,
-			)
-			.map((character) => ({
-				...character,
-			}));
+		return Object.values(user?.characters ?? {}).filter(
+			(character) =>
+				character.characterId !==
+				currentCharacter(user?.characters)?.characterId,
+		);
 	}, [user]);
 
 	return (

@@ -111,7 +111,7 @@ export const Banner = memo(function Banner({
 		>
 			<div className={styles.container}>
 				<div className={styles.header}>
-					<div className="flex w-14 items-center bg-banner-dark p-2 py-4">
+					<div className="bg-banner-dark flex w-14 items-center p-2 py-4">
 						<TrackingLink
 							className="relative block h-10 w-10"
 							href={link}
