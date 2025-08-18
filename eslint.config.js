@@ -15,7 +15,7 @@ import tseslint, { configs as tsConfigs } from "typescript-eslint";
 
 /** @type { import("typescript-eslint").Config } */
 export default tseslint.config([
-	globalIgnores(["dist", "build", "node_modules", ".next"]),
+	globalIgnores(["dist", "build", "node_modules", ".next", "destiny-icons"]),
 	{
 		name: "typescript",
 		files: ["**/*.{js,jsx,ts,tsx,mts}"],

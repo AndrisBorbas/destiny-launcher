@@ -17,6 +17,20 @@ const nextConfig: NextConfig = {
 		reactCompiler: true,
 	},
 
+	// eslint-disable-next-line @typescript-eslint/no-explicit-any
+	webpack(config: any) {
+		// Handle SVG imports as React components
+		// eslint-disable-next-line @typescript-eslint/no-unsafe-call, @typescript-eslint/no-unsafe-member-access
+		config.module.rules.push({
+			test: /\.svg$/i,
+			issuer: /\.[jt]sx?$/,
+			use: ["@svgr/webpack"],
+		});
+
+		// eslint-disable-next-line @typescript-eslint/no-unsafe-return
+		return config;
+	},
+
 	eslint: {
 		// Warning: This allows production builds to successfully complete even if
 		// your project has ESLint errors.

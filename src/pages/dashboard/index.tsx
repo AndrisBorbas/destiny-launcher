@@ -3,12 +3,24 @@ import { useMemo } from "react";
 
 import { CharacterCard, UserHeader } from "@/components/dashboard/UserCard";
 import { Layout } from "@/components/layout/Layout";
-import { getInitialD2Info } from "@/utils/bungieApi/destiny2-api-server";
+import { fetchAllItemDefinitionsServer } from "@/utils/bungieApi/itemDefinitions";
+import { fetchAllStatDefinitionsServer } from "@/utils/bungieApi/statDefinitions";
 import { currentCharacter } from "@/utils/bungieApi/utils";
 import { useUser } from "@/utils/hooks";
+import { populateItemCache } from "@/utils/hooks/useItemDefinitions";
+import { populateStatCache } from "@/utils/hooks/useStatDefinitions";
 
 export const getStaticProps = async () => {
 	// const d2info = await getInitialD2Info(false);
+
+	// Fetch definitions on the server and populate caches
+	const [statDefinitions, itemDefinitions] = await Promise.all([
+		fetchAllStatDefinitionsServer(),
+		fetchAllItemDefinitionsServer(),
+	]);
+
+	populateStatCache(statDefinitions);
+	populateItemCache(itemDefinitions);
 
 	return {
 		props: {

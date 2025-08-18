@@ -39,6 +39,8 @@
 	--color-banner: oklch(25.775% 0.06883 275.829);
 	--color-banner-dark: oklch(20.295% 0.04561 277.767);
 	--color-button: oklch(82.734% 0.16932 80.177);
+	--color-title: oklch(55.255% 0.20735 321.33);
+	--color-gild: oklch(91.338% 0.05791 76.272);
 
 	--default-transition-timing-function: var(--ease-out);
 }
@@ -108,6 +110,10 @@ button:disabled {
 
 	.light:before {
 		@apply pr-1 align-top text-3xl;
+		content: "\2727";
+	}
+	.light-small:before {
+		@apply pr-[0.125rem] align-top text-xl;
 		content: "\2727";
 	}
 

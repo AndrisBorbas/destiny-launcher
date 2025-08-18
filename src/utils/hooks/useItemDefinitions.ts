@@ -69,9 +69,10 @@ export function useItemDefinitions(hashes: (string | number)[] = []) {
 	const uniqueHashes = [...new Set(hashes.filter((hash) => hash))];
 	const hashKey =
 		uniqueHashes.length > 0 ? uniqueHashes.sort().join(",") : null;
+	const shouldFetch = hashKey && hashKey !== "0";
 
 	return useSWR(
-		hashKey ? [itemsRoute, hashKey] : null,
+		shouldFetch ? [itemsRoute, hashKey] : null,
 		() => fetchItemDefinitions(uniqueHashes),
 		{
 			revalidateOnFocus: false,
@@ -135,4 +136,16 @@ export async function preloadItemDefinitions(hashes: (string | number)[]) {
 	} catch (error) {
 		console.warn("Failed to preload item definitions:", error);
 	}
+}
+
+/**
+ * Populate the cache with item definitions (useful for server-side preloading)
+ * @param items Object with item definitions keyed by hash
+ */
+export function populateItemCache(items: {
+	[hash: string]: DestinyInventoryItemDefinition;
+}) {
+	Object.entries(items).forEach(([hash, item]) => {
+		itemCache.set(hash, item);
+	});
 }
