@@ -50,7 +50,7 @@ export default function DashboardPage({ buildDate }: PageProps) {
 		>
 			<UserHeader />
 
-			<div className="mt-12">
+			<div className="mt-4 flex flex-col gap-4">
 				{characters.map((character) => (
 					<CharacterCard key={character.characterId} character={character} />
 				))}

@@ -140,7 +140,7 @@ export function UserHeader() {
 				height={146}
 				src={`https://bungie.net${emblemDefinition?.items[emblemId].secondarySpecial}`}
 				alt="User icon"
-				className="absolute top-0 left-0 -mt-[65px] h-full max-h-[192px] min-h-[192px] w-full max-w-full object-cover select-none"
+				className="absolute top-0 left-0 -mt-[65px] h-full max-h-[192px] min-h-[192px] w-full max-w-full border-b border-gray-300/30 object-cover select-none"
 			/>
 
 			<div className="relative -mt-[1px] grid h-[128px] grid-cols-[96px_1fr] items-center gap-2 py-4 sm:gap-4">
