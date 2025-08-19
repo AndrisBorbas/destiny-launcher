@@ -30,6 +30,14 @@ export function CharacterCard({ character }: CharacterCardProps) {
 		character?.titleRecordHash ?? 0,
 	]);
 
+	const title = useMemo(() => {
+		if (character?.titleRecordHash && titleDefinition) {
+			const titleRecord = titleDefinition.records[character.titleRecordHash];
+			return getTitleFromRecord(titleRecord, character);
+		}
+		return null;
+	}, [character, titleDefinition]);
+
 	if (!character)
 		return (
 			// loading skeleton
@@ -64,15 +72,11 @@ export function CharacterCard({ character }: CharacterCardProps) {
 						classType={character.classType}
 						className="h-6 w-6 text-white"
 					/>
-					{character.titleRecordHash &&
-						titleDefinition?.records[character.titleRecordHash] && (
-							<h5 className="text-title glow ml-4 inline-block text-2xl italic drop-shadow-md drop-shadow-black/50">
-								{
-									titleDefinition.records[character.titleRecordHash]
-										.displayProperties.name
-								}
-							</h5>
-						)}
+					{title && (
+						<h5 className="text-title glow ml-4 inline-block text-2xl italic drop-shadow-md drop-shadow-black/50">
+							{title}
+						</h5>
+					)}
 				</h3>
 
 				<h5 className={cn("absolute bottom-4 left-[96px] text-base")}>
