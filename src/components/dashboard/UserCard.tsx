@@ -9,7 +9,10 @@ import {
 import { currentCharacter } from "@/utils/bungieApi/utils";
 import { useUser } from "@/utils/hooks";
 import { useItemDefinitions } from "@/utils/hooks/useItemDefinitions";
-import { useRecordDefinitions } from "@/utils/hooks/useRecordDefinitions";
+import {
+	getTitleFromRecord,
+	useRecordDefinitions,
+} from "@/utils/hooks/useRecordDefinitions";
 import {
 	ALL_STAT_HASHES,
 	useAllStatDefinitions,
@@ -121,6 +124,14 @@ export function UserHeader() {
 		}
 	}, [character, user]);
 
+	const title = useMemo(() => {
+		if (character?.titleRecordHash && titleDefinition) {
+			const titleRecord = titleDefinition.records[character.titleRecordHash];
+			return getTitleFromRecord(titleRecord, character);
+		}
+		return null;
+	}, [character, titleDefinition]);
+
 	if (!character || !user)
 		return (
 			// loading skeleton
@@ -166,15 +177,11 @@ export function UserHeader() {
 								classType={character.classType}
 								className="h-8 w-8 text-white drop-shadow-md drop-shadow-black/50"
 							/>
-							{character.titleRecordHash &&
-								titleDefinition?.records[character.titleRecordHash] && (
-									<h4 className="text-title glow inline-block text-4xl italic drop-shadow-md drop-shadow-black/50">
-										{
-											titleDefinition.records[character.titleRecordHash]
-												.displayProperties.name
-										}
-									</h4>
-								)}
+							{title && (
+								<h4 className="text-title glow inline-block text-4xl italic drop-shadow-md drop-shadow-black/50">
+									{title}
+								</h4>
+							)}
 						</div>
 
 						<div className="flex w-fit flex-row gap-2 rounded-t border-b border-gray-300/30 bg-gray-700/20 pr-1 backdrop-blur-xs">

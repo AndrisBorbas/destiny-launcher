@@ -31,6 +31,16 @@ const nextConfig: NextConfig = {
 		return config;
 	},
 
+	// Turbopack configuration for SVG handling
+	turbopack: {
+		rules: {
+			"*.svg": {
+				loaders: ["@svgr/webpack"],
+				as: "*.js",
+			},
+		},
+	},
+
 	eslint: {
 		// Warning: This allows production builds to successfully complete even if
 		// your project has ESLint errors.

@@ -1,4 +1,7 @@
-import type { DestinyRecordDefinition } from "bungie-api-ts/destiny2";
+import type {
+	DestinyCharacterComponent,
+	DestinyRecordDefinition,
+} from "bungie-api-ts/destiny2";
 import { useCallback, useState } from "react";
 import useSWR from "swr";
 
@@ -174,9 +177,18 @@ export function useTitleRecordDefinitions(
  */
 export function getTitleFromRecord(
 	recordDefinition: DestinyRecordDefinition | null,
+	character?: DestinyCharacterComponent,
 ): string | null {
 	if (!recordDefinition?.titleInfo.titlesByGender) {
 		return null;
+	}
+
+	const genderHash = character?.genderHash;
+	if (genderHash) {
+		const title = recordDefinition.titleInfo.titlesByGenderHash[genderHash];
+		if (title) {
+			return title;
+		}
 	}
 
 	// Try to get the title text - usually the same for all genders
