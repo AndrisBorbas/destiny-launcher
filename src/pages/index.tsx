@@ -11,13 +11,10 @@ import { BannerSection } from "@/components/banner/BannerSection";
 import { FAQ } from "@/components/faq/FAQ";
 import { SeasonInfo } from "@/components/info/SeasonInfo";
 import { Layout } from "@/components/layout/Layout";
-import { TrackingLink } from "@/components/link/TrackingLink";
-import { Notice } from "@/components/notice/Notice";
+import { Notices } from "@/components/notice/Notices";
 import { getInitialD2Info } from "@/utils/bungieApi/destiny2-api-server";
 import { d2InfoKey, d2InfoRoute, d2UserKey } from "@/utils/hooks";
 import { BANNERS_PATH, bannersFilePaths } from "@/utils/mdxUtils";
-
-import styles from "./index.module.css";
 
 export const getStaticProps = async () => {
 	const rawBanners = await Promise.all(
@@ -112,32 +109,7 @@ export default function Index({ banners, d2info, buildDate }: PageProps) {
 			className="safe-area-x relative mx-auto mb-8 flex flex-col sm:px-4 md:px-8 lg:px-12 xl:px-16"
 			buildDate={buildDate}
 		>
-			<section className={styles.notices}>
-				<Notice id="notice10" className="">
-					<h2 className="">Future:</h2>
-					<p className="text-base">
-						I plan on adding a dashboard page where you can pin your favourite
-						sites, see your in-game stats and progress and have access to
-						destiny related news and updates.
-					</p>
-
-					<p className="mt-2 text-sm">
-						Please{" "}
-						<TrackingLink
-							href="https://ko-fi.com/andrisborbas"
-							className="underline decoration-yellow-300 hover:underline-offset-2"
-							target="_blank"
-							rel="noopener noreferrer"
-							aria-label="Ko-fi link"
-							isExternal
-							eventName="notice-link-click"
-						>
-							consider supporting
-						</TrackingLink>{" "}
-						if you like this project, so the site can keep running ad-free.
-					</p>
-				</Notice>
-			</section>
+			<Notices />
 			<SeasonInfo initialData={d2info} />
 			<BannerSection banners={banners} />
 			<FAQ />

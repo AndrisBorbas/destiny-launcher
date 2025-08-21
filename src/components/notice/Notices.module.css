@@ -1,4 +1,4 @@
-@reference "../styles/core.css";
+@reference "../../styles/core.css";
 
 .notices {
 	@apply pointer-events-none absolute top-0 right-2 left-2 z-20 md:right-8 md:left-0 lg:right-12 xl:right-16;

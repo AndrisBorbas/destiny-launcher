@@ -9,6 +9,7 @@ import { BannerPins } from "@/components/banner/BannerPins";
 import { Currencies } from "@/components/dashboard/Inventory";
 import { CharacterCard, UserHeader } from "@/components/dashboard/UserCard";
 import { Layout } from "@/components/layout/Layout";
+import { Notices } from "@/components/notice/Notices";
 import { fetchAllItemDefinitionsServer } from "@/utils/bungieApi/itemDefinitions";
 import { fetchAllStatDefinitionsServer } from "@/utils/bungieApi/statDefinitions";
 import { currentCharacter } from "@/utils/bungieApi/utils";
@@ -87,6 +88,10 @@ export default function DashboardPage({ banners, buildDate }: PageProps) {
 			className="safe-area-x mx-auto mb-8 flex max-w-[1920px] flex-col sm:px-4 md:px-8 lg:px-12 xl:px-16"
 			buildDate={buildDate}
 		>
+			<div className="absolute top-[60px] right-0 left-0 w-full max-w-full">
+				<Notices />
+			</div>
+
 			<UserHeader />
 
 			<div className="relative mt-8 flex flex-col-reverse gap-8 lg:grid lg:grid-cols-[auto_1fr]">
