@@ -2,7 +2,6 @@ import { DestinyCharacterComponent } from "bungie-api-ts/destiny2";
 import Image from "next/image";
 import { Suspense, useEffect, useMemo, useState } from "react";
 
-import { BannerDataTypes } from "@/@types/DataTypes";
 import {
 	ClassIcon,
 	StatDisplay,

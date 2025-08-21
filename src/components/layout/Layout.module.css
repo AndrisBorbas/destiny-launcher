@@ -4,7 +4,7 @@
 	@apply min-h-screen relative;
 
 	@apply flex flex-col;
-	@apply bg-[#1d1235];
+	/* @apply bg-[#1d1235]; */
 }
 
 .app main {

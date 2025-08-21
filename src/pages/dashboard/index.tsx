@@ -6,6 +6,7 @@ import { useMemo } from "react";
 
 import { BannerDataTypes } from "@/@types/DataTypes";
 import { BannerPins } from "@/components/banner/BannerPins";
+import { FavoriteBanners } from "@/components/dashboard/FavoriteBanners";
 import { Currencies } from "@/components/dashboard/Inventory";
 import { CharacterCard, UserHeader } from "@/components/dashboard/UserCard";
 import { Layout } from "@/components/layout/Layout";
@@ -50,21 +51,24 @@ export const getStaticProps = async () => {
 		return a.data.order > b.data.order ? 1 : -1;
 	});
 
-	const banners = rawBanners
-		.map((banner, i) => {
-			return {
-				id: banner.filePath,
-				index: i,
-				data: {
-					...banner.data,
-				},
-			};
-		})
-		.filter((banner) => banner.data.isQuickLaunch === true);
+	const allBanners = rawBanners.map((banner, i) => {
+		return {
+			id: banner.filePath,
+			index: i,
+			data: {
+				...banner.data,
+			},
+		};
+	});
+
+	const quickLaunchBanners = allBanners.filter(
+		(banner) => banner.data.isQuickLaunch === true,
+	);
 
 	return {
 		props: {
-			banners,
+			quickLaunchBanners,
+			allBanners,
 			buildDate: Date.now(),
 		},
 	};
@@ -72,7 +76,11 @@ export const getStaticProps = async () => {
 
 type PageProps = InferGetStaticPropsType<typeof getStaticProps>;
 
-export default function DashboardPage({ banners, buildDate }: PageProps) {
+export default function DashboardPage({
+	quickLaunchBanners,
+	allBanners,
+	buildDate,
+}: PageProps) {
 	const { user } = useUser();
 
 	const characters = useMemo(() => {
@@ -94,17 +102,19 @@ export default function DashboardPage({ banners, buildDate }: PageProps) {
 
 			<UserHeader />
 
-			<div className="relative mt-8 flex flex-col-reverse gap-8 lg:grid lg:grid-cols-[auto_1fr]">
-				<div className="flex flex-col gap-4">
+			<div className="relative mt-8 flex flex-col-reverse gap-8 lg:grid lg:grid-cols-[auto_3fr_2fr]">
+				<div className="flex flex-col gap-8">
+					<BannerPins banners={quickLaunchBanners} />
 					{characters.map((character) => (
 						<CharacterCard key={character.characterId} character={character} />
 					))}
 				</div>
 
-				<div className="flex flex-col gap-8">
-					<BannerPins banners={banners} />
+				<div className="flex flex-col gap-4">
 					<Currencies />
 				</div>
+
+				<FavoriteBanners allBanners={allBanners} />
 			</div>
 		</Layout>
 	);

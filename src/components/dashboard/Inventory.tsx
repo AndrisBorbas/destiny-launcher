@@ -1,4 +1,3 @@
-import { getSanitizedPlatformDisplayNames } from "bungie-api-ts/user";
 import Image from "next/image";
 import { useMemo } from "react";
 import { HiExclamation } from "react-icons/hi";
@@ -13,7 +12,6 @@ import {
 	ALL_CURRENCY_HASHES,
 	items,
 } from "@/utils/bungieApi/itemDefinitions";
-import { getPlatformCode } from "@/utils/bungieApi/utils";
 import { useUser } from "@/utils/hooks";
 import { useItemDefinitions } from "@/utils/hooks/useItemDefinitions";
 import { cn } from "@/utils/utils";

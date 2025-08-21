@@ -103,39 +103,45 @@ export function SeasonInfo({ initialData }: { initialData: InfoResponse }) {
 							"-mx-2 sm:-mx-0",
 						)}
 					>
-						<Image
-							width={390}
-							height={79}
-							src={`https://bungie.net${
-								currentCharacter(user.characters)?.emblemBackgroundPath
-							}`}
-							alt="User icon"
-							style={{
-								maxWidth: "100%",
-								height: "auto",
-							}}
-						/>
-						<h3
-							className={cn(
-								styles.left,
-								styles.glow,
-								"absolute top-2 w-54 overflow-hidden text-3xl text-ellipsis",
-							)}
+						<TrackingLink
+							href="/dashboard"
+							className="block"
+							eventName="emblem-link-click"
 						>
-							{user.profile.userInfo.displayName}
-						</h3>
-						<h5 className={cn(styles.left, "absolute bottom-3 text-base")}>
-							{getClass(currentCharacter(user.characters)?.classType)}
-						</h5>
-						<h4
-							className={cn(
-								styles.light,
-								styles.glow,
-								"absolute top-2 right-4 text-3xl text-yellow-300",
-							)}
-						>
-							{currentCharacter(user.characters)?.light}
-						</h4>
+							<Image
+								width={390}
+								height={79}
+								src={`https://bungie.net${
+									currentCharacter(user.characters)?.emblemBackgroundPath
+								}`}
+								alt="User icon"
+								style={{
+									maxWidth: "100%",
+									height: "auto",
+								}}
+							/>
+							<h3
+								className={cn(
+									styles.left,
+									styles.glow,
+									"absolute top-2 w-54 overflow-hidden text-3xl text-ellipsis",
+								)}
+							>
+								{user.profile.userInfo.displayName}
+							</h3>
+							<h5 className={cn(styles.left, "absolute bottom-3 text-base")}>
+								{getClass(currentCharacter(user.characters)?.classType)}
+							</h5>
+							<h4
+								className={cn(
+									styles.light,
+									styles.glow,
+									"absolute top-2 right-4 text-3xl text-yellow-300",
+								)}
+							>
+								{currentCharacter(user.characters)?.light}
+							</h4>
+						</TrackingLink>
 					</div>
 				)}
 			</section>

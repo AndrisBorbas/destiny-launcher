@@ -5,10 +5,9 @@ import useSWR from "swr";
 import type { InfoResponse } from "@/pages/api/bungie/info";
 import type { ProfileResponse } from "@/pages/api/bungie/profile";
 
-import { dlog } from "./utils";
-
 // Export new authenticated hooks
 export * from "./hooks/useAuthenticatedFetch";
+export * from "./hooks/useFavorites";
 
 export const d2InfoRoute = "/api/bungie/info";
 export const d2InfoKey = "d2ManifestV2";

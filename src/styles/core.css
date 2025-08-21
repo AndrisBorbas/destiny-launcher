@@ -126,7 +126,7 @@ html {
 
 body {
 	@apply text-white;
-	@apply bg-gray-900;
+	@apply bg-cyan-950;
 	@apply min-h-screen;
 
 	margin: 0 auto;
@@ -280,8 +280,5 @@ button:disabled {
 @layer base {
   * {
     @apply border-border outline-ring/50;
-	}
-  body {
-    @apply bg-background text-foreground;
 	}
 }

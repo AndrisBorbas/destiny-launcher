@@ -3,12 +3,12 @@ import { CSS } from "@dnd-kit/utilities";
 import { motion } from "framer-motion";
 import Image from "next/image";
 import { MDXRemote, MDXRemoteSerializeResult } from "next-mdx-remote";
-import { forwardRef, memo, useEffect, useState } from "react";
-import { FaAngleDown, FaGripVertical } from "react-icons/fa";
+import { memo, useEffect, useState } from "react";
+import { FaAngleDown, FaGripVertical, FaRegStar, FaStar } from "react-icons/fa";
 import { HiExternalLink } from "react-icons/hi";
 
 import { currentCharacter, getPlatformCode } from "@/utils/bungieApi/utils";
-import { useUser } from "@/utils/hooks";
+import { useFavourites, useUser } from "@/utils/hooks";
 import { cn } from "@/utils/utils";
 
 import { TrackingLink } from "../link/TrackingLink";
@@ -29,13 +29,11 @@ type BannerProps = {
 } & Omit<React.HTMLProps<HTMLDivElement>, "children">;
 
 export const Banner = memo(function Banner({
-	ref,
 	iconSrc,
 	headerText,
 	previewImage,
 	previewBlurhash,
 	url,
-	category,
 	loggedInURL,
 	id,
 	isActive,
@@ -44,7 +42,8 @@ export const Banner = memo(function Banner({
 }: BannerProps & { ref?: React.RefObject<HTMLDivElement | null> }) {
 	// Banners are hydrated with them being closed, less layout shift
 	const [isOpened, setOpened] = useState(false);
-	const { user, error: userError, isLoading, mutateUser } = useUser("/", false);
+	const { user } = useUser("/", false);
+	const { isFavourite, toggleFavourite } = useFavourites();
 
 	const link =
 		user && loggedInURL
@@ -69,19 +68,22 @@ export const Banner = memo(function Banner({
 	useEffect(() => {
 		const jsonString = localStorage.getItem("toggledBanners");
 		const map =
-			jsonString != null
-				? new Map<string, boolean>(JSON.parse(jsonString))
+			jsonString !== null
+				? new Map<string, boolean>(
+						JSON.parse(jsonString) as [string, boolean][],
+					)
 				: new Map<string, boolean>();
 		// But when the page loads they are opened if there is no stored value
 		setOpened(map.get(url) ?? true);
-		return () => {};
 	}, [url]);
 
 	function saveState(state: boolean) {
 		const jsonString = localStorage.getItem("toggledBanners");
 		const map =
-			jsonString != null
-				? new Map<string, boolean>(JSON.parse(jsonString))
+			jsonString !== null
+				? new Map<string, boolean>(
+						JSON.parse(jsonString) as [string, boolean][],
+					)
 				: new Map<string, boolean>();
 		map.set(url, state);
 		localStorage.setItem(
@@ -177,6 +179,22 @@ export const Banner = memo(function Banner({
 							<FaAngleDown className="text-5xl" />
 						</button>
 					</motion.div>
+					<button
+						className="absolute -top-4 -right-4 z-10 rounded-full bg-gray-800/80 p-1 transition-colors hover:bg-gray-700/80"
+						type="button"
+						onClick={() => {
+							toggleFavourite(id);
+						}}
+						aria-label={
+							isFavourite(id) ? "Remove from favourites" : "Add to favourites"
+						}
+					>
+						{isFavourite(id) ? (
+							<FaStar className="size-6 text-yellow-400" />
+						) : (
+							<FaRegStar className="size-6 text-gray-300 hover:text-yellow-400" />
+						)}
+					</button>
 				</div>
 
 				<div
