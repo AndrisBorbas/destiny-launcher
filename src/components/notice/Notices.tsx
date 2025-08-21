@@ -10,8 +10,8 @@ export function Notices() {
 				<h2 className="">Update Live:</h2>
 				<p className="text-base">
 					Login to view the dashboard page with your characters, inventory and
-					quick links to popular sites. Pin sites to the dashboard for quick
-					access.
+					quick links to popular sites. Pin sites from the home page to the
+					dashboard for quick access.
 				</p>
 
 				<p className="mt-2 text-sm">
