@@ -4,32 +4,44 @@ import { getDestinyEntityDefinition } from "bungie-api-ts/destiny2";
 import { unauthenticatedHttpClient } from "@/utils/bungieApi/client";
 
 export const items = {
-	currencies: {
+	silver: 3147280338,
+	currencies: [
+		3159615086, // Glimmer
+		2718300701, // Unstable Core
+		2817410917, // Bright Dust
+	],
+	consumables: {
 		important: [
 			3853748946, // Enhancement Core
-			3282419336, // Raid Banner
 			4257549984, // Enhancement Prism
-			3702027555, // Spoils of Conquest
-			353704689, // Ascendant Alloy
 			4257549985, // Ascendant Shard
-			800069450, // Strange Coin
+			353704689, // Ascendant Alloy
 			3467984096, // Exotic Cipher
+			800069450, // Strange Coin
+			3282419336, // Raid Banner
+			3702027555, // Spoils of Conquest
 		],
 		common: [
-			1289622079, // Strand Meditation
 			2610515000, // Fated Cipher
 			2174713383, // Timelost Spirit Bloom
 			3793612644, // Alkane Mutations
 			3388913371, // Nine-Touched Relic Iron
 			2367456861, // Phaseglass Refraction
+			1289622079, // Strand Meditation
 		],
 	},
 } as const;
 
-// Extract all item hashes from the items data
-export const ALL_CURRENCY_HASHES = [
-	...items.currencies.important,
-	...items.currencies.common,
+export const ALL_CURRENCY_HASHES = [items.silver, ...items.currencies];
+
+export const ALL_CONSUMABLE_HASHES = [
+	...items.consumables.important,
+	...items.consumables.common,
+];
+
+export const ALL_ITEM_HASHES = [
+	...ALL_CURRENCY_HASHES,
+	...ALL_CONSUMABLE_HASHES,
 ];
 
 /**
@@ -86,5 +98,5 @@ export async function fetchItemDefinitionsServer(
 export async function fetchAllItemDefinitionsServer(): Promise<{
 	[hash: string]: DestinyInventoryItemDefinition;
 }> {
-	return fetchItemDefinitionsServer(ALL_CURRENCY_HASHES);
+	return fetchItemDefinitionsServer(ALL_ITEM_HASHES);
 }

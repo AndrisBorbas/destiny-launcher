@@ -4,6 +4,11 @@ import Warlock from "@icons/general/class_warlock.svg";
 import { DestinyStatDefinition } from "bungie-api-ts/destiny2";
 import Image from "next/image";
 
+import {
+	Tooltip,
+	TooltipContent,
+	TooltipTrigger,
+} from "@/components/ui/tooltip";
 import { cn } from "@/utils/utils";
 
 type StatDisplayProps = {
@@ -14,21 +19,28 @@ type StatDisplayProps = {
 
 export function StatDisplay({ stat, value, small }: StatDisplayProps) {
 	return (
-		<div
-			className="flex flex-row items-center drop-shadow-md drop-shadow-black/50"
-			title={`${stat.displayProperties.name} - ${stat.displayProperties.description}`}
-		>
-			<Image
-				src={`https://bungie.net${stat.displayProperties.icon}`}
-				alt={stat.displayProperties.name}
-				className={cn(small ? "h-6 w-6" : "h-8 w-8")}
-				width={32}
-				height={32}
-			/>
-			<span className={cn("font-bold", small ? "text-lg" : "text-2xl")}>
-				{value}
-			</span>
-		</div>
+		<Tooltip>
+			<TooltipTrigger asChild>
+				<div className="flex flex-row items-center drop-shadow-md drop-shadow-black/50">
+					<Image
+						src={`https://bungie.net${stat.displayProperties.icon}`}
+						alt={stat.displayProperties.name}
+						className={cn(small ? "h-6 w-6" : "h-8 w-8")}
+						width={small ? 24 : 32}
+						height={small ? 24 : 32}
+					/>
+					<span className={cn("font-bold", small ? "text-lg" : "text-2xl")}>
+						{value}
+					</span>
+				</div>
+			</TooltipTrigger>
+			<TooltipContent>
+				<p className="text-sm font-bold">
+					{stat.displayProperties.name} -{" "}
+					<span className="text-xs">{stat.displayProperties.description}</span>
+				</p>
+			</TooltipContent>
+		</Tooltip>
 	);
 }
 
@@ -45,6 +57,7 @@ export function ClassIcon({ classType, className }: ClassIconProps) {
 					className={className}
 					style={{ fill: "currentColor" }}
 					title="Titan"
+					alt="Titan"
 				/>
 			);
 		case 1:
@@ -53,6 +66,7 @@ export function ClassIcon({ classType, className }: ClassIconProps) {
 					className={className}
 					style={{ fill: "currentColor" }}
 					title="Hunter"
+					alt="Hunter"
 				/>
 			);
 		case 2:
@@ -61,6 +75,7 @@ export function ClassIcon({ classType, className }: ClassIconProps) {
 					className={className}
 					style={{ fill: "currentColor" }}
 					title="Warlock"
+					alt="Warlock"
 				/>
 			);
 		default:

@@ -3,6 +3,7 @@ import { useCallback, useState } from "react";
 import useSWR from "swr";
 
 import type { ItemDefinitionsResponse } from "@/pages/api/bungie/items";
+import { authenticatedFetch } from "@/utils/api";
 
 const itemsRoute = "/api/bungie/items";
 
@@ -29,19 +30,10 @@ async function fetchItemDefinitions(
 		return { items };
 	}
 
-	const response = await fetch(itemsRoute, {
+	const result = await authenticatedFetch<ItemDefinitionsResponse>(itemsRoute, {
 		method: "POST",
-		headers: {
-			"Content-Type": "application/json",
-		},
 		body: JSON.stringify({ hashes: uncachedHashes }),
 	});
-
-	if (!response.ok) {
-		throw new Error(`Failed to fetch item definitions: ${response.statusText}`);
-	}
-
-	const result = (await response.json()) as ItemDefinitionsResponse;
 
 	// Cache the fetched items
 	Object.entries(result.items).forEach(([hash, item]) => {

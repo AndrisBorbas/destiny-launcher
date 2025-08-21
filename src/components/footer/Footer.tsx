@@ -29,7 +29,7 @@ export function Footer({ buildDate, toggle, setToggle }: FooterProps) {
 
 	return (
 		<footer className={cn(styles.footer, "bg-blur-10")} id="footer">
-			<div className="container mx-auto flex flex-col items-center justify-center space-y-6">
+			<div className="container mx-auto flex max-w-[1920px] flex-col items-center justify-center space-y-6 px-2 md:px-16">
 				<div className="flex w-full items-center justify-evenly lg:w-1/3">
 					<TrackingLink
 						href="https://twitter.com/AndrisBorbas"

@@ -1,7 +1,7 @@
 @reference "../../styles/core.css";
 
 .app {
-	@apply min-h-screen;
+	@apply min-h-screen relative;
 
 	@apply flex flex-col;
 	@apply bg-[#1d1235];

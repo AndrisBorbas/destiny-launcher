@@ -2,6 +2,7 @@ import { DestinyCharacterComponent } from "bungie-api-ts/destiny2";
 import Image from "next/image";
 import { Suspense, useEffect, useMemo, useState } from "react";
 
+import { BannerDataTypes } from "@/@types/DataTypes";
 import {
 	ClassIcon,
 	StatDisplay,
@@ -63,23 +64,23 @@ export function CharacterCard({ character }: CharacterCardProps) {
 						height: "auto",
 					}}
 				/>
-				<h3
+				<div
 					className={cn(
-						"glow absolute top-4 left-[96px] flex max-w-64 flex-row items-center overflow-hidden text-4xl font-medium text-ellipsis",
+						"glow absolute top-2 left-[86px] flex max-w-64 flex-row items-center overflow-hidden text-4xl font-medium text-ellipsis",
 					)}
 				>
 					<ClassIcon
 						classType={character.classType}
-						className="h-6 w-6 text-white"
+						className="mt-1 h-6 w-6 text-white drop-shadow-md drop-shadow-black/50"
 					/>
 					{title && (
 						<h5 className="text-title glow ml-4 inline-block text-2xl italic drop-shadow-md drop-shadow-black/50">
 							{title}
 						</h5>
 					)}
-				</h3>
+				</div>
 
-				<h5 className={cn("absolute bottom-4 left-[96px] text-base")}>
+				<h5 className={cn("absolute bottom-4 left-[86px] text-base")}>
 					<div className="flex flex-row gap-2 rounded-t border-b border-gray-300/30 bg-gray-700/20 pr-1 backdrop-blur-xs">
 						{ALL_STAT_HASHES.map((statHash) => {
 							const stat = statDefinitions?.stats[statHash];
@@ -94,7 +95,7 @@ export function CharacterCard({ character }: CharacterCardProps) {
 				</h5>
 				<h4
 					className={cn(
-						"glow light-small absolute top-4 right-4 text-2xl text-yellow-300 tabular-nums",
+						"glow light-small absolute top-2 right-3 text-2xl text-yellow-300 tabular-nums",
 					)}
 				>
 					{character.light}
@@ -119,9 +120,6 @@ export function UserHeader() {
 		character?.titleRecordHash ?? 0,
 	]);
 
-	console.log(character);
-	console.log(titleDefinition);
-
 	useEffect(() => {
 		if (user && character) {
 			setEmblemId(character.emblemHash);
@@ -139,7 +137,7 @@ export function UserHeader() {
 	if (!character || !user)
 		return (
 			// loading skeleton
-			<div className="animate-pulse">
+			<div className="w-screen animate-pulse">
 				<div className="bg-blur-10 h-[96px] w-[474px]">
 					<div className="absolute top-2 left-2 h-[80px] w-[80px] bg-gray-400/50" />
 					<div className="glow absolute top-4 left-[96px] h-10 w-64 overflow-hidden rounded bg-gray-400/50 text-4xl font-medium text-ellipsis" />
@@ -154,8 +152,9 @@ export function UserHeader() {
 				width={2300}
 				height={146}
 				src={`https://bungie.net${emblemDefinition?.items[emblemId].secondarySpecial}`}
-				alt="User icon"
-				className="absolute top-0 left-0 -mt-[65px] h-full max-h-[192px] min-h-[192px] w-full max-w-full border-b border-gray-300/30 object-cover select-none"
+				alt="User emblem"
+				className="absolute top-0 right-0 left-0 h-full max-h-[192px] min-h-[192px] w-full max-w-full border-b border-gray-300/30 object-cover"
+				priority
 			/>
 
 			<div className="relative -mt-[1px] grid h-[128px] grid-cols-[96px_1fr] items-center gap-2 py-4 sm:gap-4">
@@ -165,6 +164,7 @@ export function UserHeader() {
 					src={`https://bungie.net${emblemDefinition?.items[emblemId].secondaryOverlay}`}
 					alt="User icon"
 					className="h-auto w-[96px]"
+					priority
 				/>
 
 				<div className="grid h-full grid-cols-[1fr_auto] gap-2 sm:gap-4">
@@ -179,7 +179,7 @@ export function UserHeader() {
 							</h3>
 							<ClassIcon
 								classType={character.classType}
-								className="h-8 w-8 text-white drop-shadow-md drop-shadow-black/50"
+								className="mt-1 h-8 w-8 text-white drop-shadow-md drop-shadow-black/50"
 							/>
 							{title && (
 								<h4 className="text-title glow inline-block text-4xl italic drop-shadow-md drop-shadow-black/50">

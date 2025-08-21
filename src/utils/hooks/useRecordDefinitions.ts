@@ -6,6 +6,7 @@ import { useCallback, useState } from "react";
 import useSWR from "swr";
 
 import type { RecordDefinitionsResponse } from "@/pages/api/bungie/records";
+import { authenticatedFetch } from "@/utils/api";
 
 const recordsRoute = "/api/bungie/records";
 
@@ -32,21 +33,13 @@ async function fetchRecordDefinitions(
 		return { records };
 	}
 
-	const response = await fetch(recordsRoute, {
-		method: "POST",
-		headers: {
-			"Content-Type": "application/json",
+	const result = await authenticatedFetch<RecordDefinitionsResponse>(
+		recordsRoute,
+		{
+			method: "POST",
+			body: JSON.stringify({ hashes: uncachedHashes }),
 		},
-		body: JSON.stringify({ hashes: uncachedHashes }),
-	});
-
-	if (!response.ok) {
-		throw new Error(
-			`Failed to fetch record definitions: ${response.statusText}`,
-		);
-	}
-
-	const result = (await response.json()) as RecordDefinitionsResponse;
+	);
 
 	// Cache the fetched records
 	Object.entries(result.records).forEach(([hash, record]) => {

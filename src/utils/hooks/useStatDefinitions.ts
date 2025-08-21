@@ -3,6 +3,7 @@ import { useCallback, useState } from "react";
 import useSWR from "swr";
 
 import type { StatDefinitionsResponse } from "@/pages/api/bungie/stats";
+import { authenticatedFetch } from "@/utils/api";
 
 const statsRoute = "/api/bungie/stats";
 
@@ -42,19 +43,10 @@ async function fetchStatDefinitions(
 		return { stats };
 	}
 
-	const response = await fetch(statsRoute, {
+	const result = await authenticatedFetch<StatDefinitionsResponse>(statsRoute, {
 		method: "POST",
-		headers: {
-			"Content-Type": "application/json",
-		},
 		body: JSON.stringify({ hashes: uncachedHashes }),
 	});
-
-	if (!response.ok) {
-		throw new Error(`Failed to fetch stat definitions: ${response.statusText}`);
-	}
-
-	const result = (await response.json()) as StatDefinitionsResponse;
 
 	// Cache the fetched stats
 	Object.entries(result.stats).forEach(([hash, stat]) => {

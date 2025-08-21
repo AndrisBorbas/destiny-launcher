@@ -6,9 +6,41 @@ export function cn(...inputs: ClassValue[]) {
 	return twMerge(clsx(inputs));
 }
 
-export async function swrFetcher(url: string) {
+export async function swrFetcher(url: string): Promise<unknown> {
 	const res = await fetch(url);
-	if (res.ok) return res.json();
+
+	// If we get 401 (Unauthorized), try to refresh the token and retry once
+	if (res.status === 401) {
+		try {
+			// Attempt to refresh the token
+			const refreshRes = await fetch("/api/auth/refresh", {
+				method: "POST",
+			});
+
+			if (refreshRes.ok) {
+				// Token refresh succeeded, retry the original request
+				const retryRes = await fetch(url);
+				if (retryRes.ok) return await retryRes.json();
+				throw new Error(
+					`Failed to fetch ${url} after refresh: ${retryRes.status} ${retryRes.statusText}`,
+				);
+			} else {
+				// Refresh failed, redirect to login
+				if (typeof window !== "undefined") {
+					window.location.href = "/api/auth/login";
+				}
+				throw new Error("Authentication expired and refresh failed");
+			}
+		} catch (_refreshError) {
+			// Refresh failed, redirect to login
+			if (typeof window !== "undefined") {
+				window.location.href = "/api/auth/login";
+			}
+			throw new Error("Authentication expired and refresh failed");
+		}
+	}
+
+	if (res.ok) return await res.json();
 	throw new Error(`Failed to fetch ${url}: ${res.status} ${res.statusText}`);
 }
 
@@ -63,7 +95,7 @@ export function isSecureEnvironment(req: NextApiRequest) {
 	return true;
 }
 
-export function dlog(...args: any) {
+export function dlog(...args: unknown[]) {
 	if (process.env.NODE_ENV !== "production") {
 		console.log(...args);
 	}

@@ -9,6 +9,7 @@ export type BannerDataTypes = {
 	previewImage: string;
 	previewBlurhash: string;
 	order: number;
+	isQuickLaunch?: boolean;
 };
 
 export type HydratedBannerType = {

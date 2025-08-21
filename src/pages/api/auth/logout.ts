@@ -19,7 +19,7 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
 					sameSite: true,
 					httpOnly: true,
 				}),
-				serialize("membershipID", "", {
+				serialize("membershipId", "", {
 					maxAge: -1,
 					secure: true /* isSecureEnvironment(req) */,
 					path: "/",

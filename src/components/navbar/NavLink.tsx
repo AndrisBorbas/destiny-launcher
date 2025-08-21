@@ -47,9 +47,9 @@ export function NavLink({
 				<button
 					className={cn(
 						styles.navlink,
-						"hover:text-pink inline-block w-full px-2 py-2 text-xl font-medium lg:px-4 lg:text-xl xl:px-5 xl:text-2xl",
-						isFirst && "lg:pl-0",
-						isLast && "lg:pr-0",
+						"hover:text-pink inline-block w-full px-2 py-2 text-xl font-medium lg:px-2 lg:text-xl xl:px-2 xl:text-2xl",
+						isFirst && "lg:pl-0 xl:pl-0",
+						isLast && "lg:pr-0 xl:pr-0",
 					)}
 					onClick={closeNavbar}
 					onKeyUp={closeNavbar}

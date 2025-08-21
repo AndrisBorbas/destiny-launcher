@@ -37,7 +37,7 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
 					sameSite: true,
 					httpOnly: true,
 				}),
-				serialize("membershipID", tokens.bungieMembershipId, {
+				serialize("membershipId", tokens.bungieMembershipId, {
 					maxAge: tokens.refreshToken.expires,
 					secure: isSecureEnvironment(req),
 					path: "/",
@@ -56,8 +56,66 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
 			return;
 		}
 
+		case "POST": {
+			try {
+				if (!req.cookies.refreshToken) {
+					res.status(401).json({ error: "No refresh token available" });
+					return;
+				}
+
+				const tokens = await getAccessTokenFromRefreshToken(
+					req.cookies.refreshToken,
+				);
+
+				if (!tokens.refreshToken) {
+					res.status(400).json({ error: "Invalid refresh token" });
+					return;
+				}
+
+				res.setHeader("Set-Cookie", [
+					serialize("accessToken", tokens.accessToken.value, {
+						maxAge: tokens.accessToken.expires,
+						secure: isSecureEnvironment(req),
+						path: "/",
+						sameSite: true,
+						httpOnly: true,
+					}),
+					serialize("refreshToken", tokens.refreshToken.value, {
+						maxAge: tokens.refreshToken.expires,
+						secure: isSecureEnvironment(req),
+						path: "/",
+						sameSite: true,
+						httpOnly: true,
+					}),
+					serialize("membershipId", tokens.bungieMembershipId, {
+						maxAge: tokens.refreshToken.expires,
+						secure: isSecureEnvironment(req),
+						path: "/",
+						sameSite: true,
+						httpOnly: true,
+					}),
+					serialize("destinyLauncherLoggedIn", "1", {
+						maxAge: tokens.refreshToken.expires,
+						secure: isSecureEnvironment(req),
+						path: "/",
+						sameSite: true,
+					}),
+				]);
+
+				res.status(200).json({ success: true });
+				return;
+			} catch (error: unknown) {
+				console.error("Token refresh failed:", error);
+				res.status(401).json({
+					error: "Token refresh failed",
+					details: error instanceof Error ? error.message : String(error),
+				});
+				return;
+			}
+		}
+
 		default: {
-			res.setHeader("Allow", "GET");
+			res.setHeader("Allow", "GET, POST");
 			res.status(405).end();
 			return;
 		}

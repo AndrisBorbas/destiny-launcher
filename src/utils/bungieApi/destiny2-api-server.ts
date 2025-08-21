@@ -178,8 +178,32 @@ export async function fetchUserProfileFromBungie(
 			DestinyComponentType.ProfileCurrencies,
 			// @ts-expect-error: Const enums work
 			DestinyComponentType.PlatformSilver,
+			// @ts-expect-error: Const enums work
+			DestinyComponentType.CharacterInventories,
 		],
 	});
+	if (
+		// @ts-expect-error: Const enums work
+		detailedProfile.ErrorCode === PlatformErrorCodes.AccessTokenHasExpired ||
+		// @ts-expect-error: Const enums work
+		detailedProfile.ErrorCode === PlatformErrorCodes.WebAuthRequired ||
+		// @ts-expect-error: Const enums work
+		detailedProfile.ErrorCode === PlatformErrorCodes.WebAuthModuleAsyncFailed ||
+		detailedProfile.ErrorCode ===
+			// @ts-expect-error: Const enums work
+			PlatformErrorCodes.AuthorizationRecordRevoked ||
+		detailedProfile.ErrorCode ===
+			// @ts-expect-error: Const enums work
+			PlatformErrorCodes.AuthorizationRecordExpired ||
+		// @ts-expect-error: Const enums work
+		detailedProfile.ErrorCode === PlatformErrorCodes.AuthorizationCodeStale ||
+		// @ts-expect-error: Const enums work
+		detailedProfile.ErrorCode === PlatformErrorCodes.AuthorizationCodeInvalid
+	) {
+		throw new AuthError(
+			`(detailedProfile) ${detailedProfile.ErrorCode} - ${detailedProfile.ErrorStatus}: ${detailedProfile.Message}`,
+		);
+	}
 	// @ts-expect-error: Const enums work
 	if (detailedProfile.ErrorCode !== PlatformErrorCodes.Success) {
 		throw new Error(

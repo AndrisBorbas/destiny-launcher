@@ -7,6 +7,9 @@ import type { ProfileResponse } from "@/pages/api/bungie/profile";
 
 import { dlog } from "./utils";
 
+// Export new authenticated hooks
+export * from "./hooks/useAuthenticatedFetch";
+
 export const d2InfoRoute = "/api/bungie/info";
 export const d2InfoKey = "d2ManifestV2";
 /**
@@ -31,16 +34,23 @@ export const d2UserKey = "d2User";
  * Fetch from "/api/bungie/profile"
  * @returns profile and character info
  */
-export function useUser(redirectTo?: string, redirectIfLoggedIn = false) {
-	const router = useRouter();
+export function useUser(redirectTo?: string, _redirectIfLoggedIn = false) {
+	const _router = useRouter();
 	const { data, error, mutate, isValidating } = useSWR<ProfileResponse, Error>(
 		d2UserRoute,
 		{
-			onError() {
+			onError(err) {
 				localStorage.removeItem(d2UserKey);
+				// If it's an auth error, the swrFetcher will handle the redirect
+				// No need to handle it here as well
+				console.error("User fetch error:", err);
 			},
 			onSuccess(loadedData) {
 				localStorage.setItem(d2UserKey, JSON.stringify(loadedData));
+			},
+			// Don't retry on auth errors - let the fetcher handle the refresh
+			shouldRetryOnError: (err) => {
+				return !err.message.includes("Authentication expired");
 			},
 		},
 	);
@@ -54,12 +64,7 @@ export function useUser(redirectTo?: string, redirectIfLoggedIn = false) {
 
 	return {
 		user: data && {
-			profile: data.profile,
-			characters: data.characters,
-			inventories: data.inventories,
-			currencies: data.currencies,
-			silver: data.silver,
-			clan: data.clan,
+			...data,
 		},
 		error,
 		isLoading: !error && !data,
@@ -109,7 +114,7 @@ export function useLocalStorage<T>(key: string, initialValue: T) {
 	// Pass initial state function to useState so logic is only executed once
 	const [storedValue, setStoredValue] = useState<T>(() => {
 		if (typeof window === "undefined") {
-			console.warn("No window yet in useLocalStorage");
+			// console.warn("No window yet in useLocalStorage");
 			return initialValue;
 		}
 		try {
@@ -127,7 +132,7 @@ export function useLocalStorage<T>(key: string, initialValue: T) {
 	// ... persists the new value to localStorage.
 	const setValue = (value: T | ((val: T) => T)) => {
 		if (typeof window === "undefined") {
-			console.warn("No window yet in useLocalStorage");
+			// console.warn("No window yet in useLocalStorage");
 			return;
 		}
 		try {

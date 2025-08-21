@@ -1,6 +1,12 @@
+import fs from "fs";
+import matter from "gray-matter";
 import { InferGetStaticPropsType } from "next";
+import path from "path";
 import { useMemo } from "react";
 
+import { BannerDataTypes } from "@/@types/DataTypes";
+import { BannerPins } from "@/components/banner/BannerPins";
+import { Currencies } from "@/components/dashboard/Inventory";
 import { CharacterCard, UserHeader } from "@/components/dashboard/UserCard";
 import { Layout } from "@/components/layout/Layout";
 import { fetchAllItemDefinitionsServer } from "@/utils/bungieApi/itemDefinitions";
@@ -9,10 +15,9 @@ import { currentCharacter } from "@/utils/bungieApi/utils";
 import { useUser } from "@/utils/hooks";
 import { populateItemCache } from "@/utils/hooks/useItemDefinitions";
 import { populateStatCache } from "@/utils/hooks/useStatDefinitions";
+import { BANNERS_PATH, bannersFilePaths } from "@/utils/mdxUtils";
 
 export const getStaticProps = async () => {
-	// const d2info = await getInitialD2Info(false);
-
 	// Fetch definitions on the server and populate caches
 	const [statDefinitions, itemDefinitions] = await Promise.all([
 		fetchAllStatDefinitionsServer(),
@@ -22,9 +27,43 @@ export const getStaticProps = async () => {
 	populateStatCache(statDefinitions);
 	populateItemCache(itemDefinitions);
 
+	const rawBanners = await Promise.all(
+		bannersFilePaths.map(async (filePath) => {
+			const source = fs.readFileSync(path.join(BANNERS_PATH, filePath));
+			const { data } = matter(source) as unknown as {
+				data: BannerDataTypes;
+			};
+
+			if (data.category === "manager") data.order *= 10;
+			if (data.category === "info") data.order *= 1000;
+			if (data.category === "sheet") data.order *= 100000;
+
+			return {
+				data,
+				filePath,
+			};
+		}),
+	);
+
+	rawBanners.sort((a, b) => {
+		return a.data.order > b.data.order ? 1 : -1;
+	});
+
+	const banners = rawBanners
+		.map((banner, i) => {
+			return {
+				id: banner.filePath,
+				index: i,
+				data: {
+					...banner.data,
+				},
+			};
+		})
+		.filter((banner) => banner.data.isQuickLaunch === true);
+
 	return {
 		props: {
-			// d2info,
+			banners,
 			buildDate: Date.now(),
 		},
 	};
@@ -32,7 +71,7 @@ export const getStaticProps = async () => {
 
 type PageProps = InferGetStaticPropsType<typeof getStaticProps>;
 
-export default function DashboardPage({ buildDate }: PageProps) {
+export default function DashboardPage({ banners, buildDate }: PageProps) {
 	const { user } = useUser();
 
 	const characters = useMemo(() => {
@@ -45,15 +84,22 @@ export default function DashboardPage({ buildDate }: PageProps) {
 
 	return (
 		<Layout
-			className="safe-area-x relative mx-auto mb-8 flex flex-col sm:px-4 md:px-8 lg:px-12 xl:px-16"
+			className="safe-area-x mx-auto mb-8 flex max-w-[1920px] flex-col sm:px-4 md:px-8 lg:px-12 xl:px-16"
 			buildDate={buildDate}
 		>
 			<UserHeader />
 
-			<div className="mt-4 flex flex-col gap-4">
-				{characters.map((character) => (
-					<CharacterCard key={character.characterId} character={character} />
-				))}
+			<div className="relative mt-8 flex flex-col-reverse gap-8 lg:grid lg:grid-cols-[auto_1fr]">
+				<div className="flex flex-col gap-4">
+					{characters.map((character) => (
+						<CharacterCard key={character.characterId} character={character} />
+					))}
+				</div>
+
+				<div className="flex flex-col gap-8">
+					<BannerPins banners={banners} />
+					<Currencies />
+				</div>
 			</div>
 		</Layout>
 	);

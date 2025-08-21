@@ -17,7 +17,7 @@ export function Navbar() {
 	return (
 		<header className={cn(styles.header, "bg-blur-10")}>
 			<Suspense>
-				<div className="relative mx-auto flex w-full flex-wrap items-center justify-between overflow-hidden px-2 lg:px-8">
+				<div className="relative mx-auto flex w-full max-w-[1920px] flex-wrap items-center justify-between overflow-hidden px-2 lg:px-16">
 					<div className="pointer-events-auto relative flex w-full items-center justify-between lg:static lg:block lg:w-auto lg:justify-start">
 						<TrackingLink
 							href={user && !error ? "/dashboard" : "/"}
@@ -51,7 +51,7 @@ export function Navbar() {
 							isNavbarOpen ? "flex" : "hidden",
 						)}
 					>
-						<ul className="flex w-full list-none flex-col rounded-lg lg:ml-auto lg:w-auto lg:flex-row">
+						<ul className="flex w-full list-none flex-col rounded-lg lg:ml-auto lg:w-auto lg:flex-row lg:gap-2 xl:gap-4">
 							{navbarContent.links.map(({ href, label }, i) => (
 								<NavLink
 									href={href}
