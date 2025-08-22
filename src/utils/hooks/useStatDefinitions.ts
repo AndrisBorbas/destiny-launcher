@@ -174,7 +174,9 @@ export function getStatDefinition(
  * Populate the cache with stat definitions (useful for server-side preloading)
  * @param stats Object with stat definitions keyed by hash
  */
-export function populateStatCache(stats: { [hash: string]: DestinyStatDefinition }) {
+export function populateStatCache(stats: {
+	[hash: string]: DestinyStatDefinition;
+}) {
 	Object.entries(stats).forEach(([hash, stat]) => {
 		statCache.set(hash, stat);
 	});
