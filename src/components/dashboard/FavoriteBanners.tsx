@@ -40,7 +40,7 @@ export function FavoriteBanners({ allBanners }: FavoriteBannersProps) {
 	}
 
 	return (
-		<div className="flex flex-row flex-wrap justify-center gap-4 rounded-t border-b border-gray-300/30 bg-gray-700/20 p-2 pr-1 backdrop-blur">
+		<div className="flex h-fit flex-row flex-wrap justify-center gap-4 rounded-t border-b border-gray-300/30 bg-gray-700/20 p-2 pr-1 backdrop-blur">
 			<div className="flex items-center px-2 py-1 text-sm font-medium text-gray-300">
 				<FaStar className="mr-2 size-4 text-yellow-400" />
 				Favorites
