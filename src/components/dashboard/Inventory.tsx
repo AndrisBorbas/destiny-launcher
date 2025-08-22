@@ -32,8 +32,6 @@ export function Currencies() {
 
 	const { data: currencyDefinitions } = useItemDefinitions(ALL_CURRENCY_HASHES);
 
-	console.log(user);
-
 	const currencyData = useMemo(() => {
 		if (!user) return [];
 

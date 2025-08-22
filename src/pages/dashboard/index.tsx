@@ -18,6 +18,7 @@ import { useUser } from "@/utils/hooks";
 import { populateItemCache } from "@/utils/hooks/useItemDefinitions";
 import { populateStatCache } from "@/utils/hooks/useStatDefinitions";
 import { BANNERS_PATH, bannersFilePaths } from "@/utils/mdxUtils";
+import { dlog } from "@/utils/utils";
 
 export const getStaticProps = async () => {
 	// Fetch definitions on the server and populate caches
@@ -90,6 +91,8 @@ export default function DashboardPage({
 				currentCharacter(user?.characters)?.characterId,
 		);
 	}, [user]);
+
+	dlog(user);
 
 	return (
 		<Layout
