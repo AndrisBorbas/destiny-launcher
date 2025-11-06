@@ -7,7 +7,7 @@ export const items = {
 	silver: 3147280338,
 	currencies: [
 		3159615086, // Glimmer
-		2718300701, // Unstable Core
+		// 2718300701, // Unstable Core
 		2817410917, // Bright Dust
 	],
 	consumables: {
