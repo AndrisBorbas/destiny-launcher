@@ -9,10 +9,10 @@ export const items = {
 		3159615086, // Glimmer
 		// 2718300701, // Unstable Core
 		2817410917, // Bright Dust
-		4041218086, // Chronologs
 	],
 	consumables: {
 		important: [
+			4041218086, // Chronologs
 			3853748946, // Enhancement Core
 			4257549984, // Enhancement Prism
 			4257549985, // Ascendant Shard
