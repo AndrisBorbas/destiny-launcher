@@ -9,6 +9,7 @@ export const items = {
 		3159615086, // Glimmer
 		// 2718300701, // Unstable Core
 		2817410917, // Bright Dust
+		4041218086, // Chronologs
 	],
 	consumables: {
 		important: [

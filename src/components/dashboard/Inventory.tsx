@@ -148,7 +148,7 @@ export function Currencies() {
 						</TooltipTrigger>
 						<TooltipContent>
 							<p>
-								{currency.name}: x
+								{currency.name}:{" "}
 								{currency.quantity.toLocaleString("en-US", {
 									style: "decimal",
 								})}{" "}
