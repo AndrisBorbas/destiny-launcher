@@ -25,11 +25,11 @@ export function NavLink({
 	const eventName = () => {
 		switch (label) {
 			case "Login":
-				return "login";
+				return "Login";
 			case "Logout":
-				return "logout";
+				return "Logout";
 			default:
-				return "navbar-link-click";
+				return "Navbar_Link_Click";
 		}
 	};
 
