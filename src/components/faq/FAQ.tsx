@@ -17,7 +17,7 @@ const components = {
 			rel="noopener"
 			target="_blank"
 			isExternal
-			eventName="faq-link-click"
+			eventName="Faq_Link_Click"
 			// eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
 			eventData={{ site: restProps.href }}
 			{...restProps}

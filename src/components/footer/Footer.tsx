@@ -37,7 +37,7 @@ export function Footer({ buildDate, toggle, setToggle }: FooterProps) {
 						rel="noopener noreferrer"
 						aria-label="Twitter link"
 						isExternal
-						eventName="footer-link-click"
+						eventName="Footer_Link_Click"
 						eventData={{ site: "Twitter" }}
 					>
 						<FaTwitter className="h-auto w-10 text-white hover:text-yellow-500" />
@@ -48,7 +48,7 @@ export function Footer({ buildDate, toggle, setToggle }: FooterProps) {
 						rel="noopener noreferrer"
 						aria-label="GitHub link"
 						isExternal
-						eventName="footer-link-click"
+						eventName="Footer_Link_Click"
 						eventData={{ site: "GitHub" }}
 					>
 						<FaGithub className="h-auto w-10 text-white hover:text-yellow-500" />
@@ -59,7 +59,7 @@ export function Footer({ buildDate, toggle, setToggle }: FooterProps) {
 						rel="noopener noreferrer"
 						aria-label="Ko-fi link"
 						isExternal
-						eventName="footer-link-click"
+						eventName="Footer_Link_Click"
 						eventData={{ site: "Ko-fi" }}
 					>
 						<SiKofi className="h-auto w-10 text-white hover:text-yellow-500" />
@@ -101,7 +101,7 @@ export function Footer({ buildDate, toggle, setToggle }: FooterProps) {
 							rel="noopener noreferrer"
 							aria-label="GitHub link"
 							isExternal
-							eventName="footer-version-click"
+							eventName="Footer_Version_Click"
 							eventData={{ site: "GitHub" }}
 						>
 							v{manifest.version}.{buildDateString} ©&nbsp;

@@ -23,7 +23,7 @@ export function Navbar() {
 							href={user && !error ? "/dashboard" : "/"}
 							replace
 							className="mr-2 flex items-center text-2xl no-underline lg:text-4xl lg:leading-10"
-							eventName="navbar-link-click"
+							eventName="Navbar_Link_Click"
 						>
 							<span className="relative mr-2 inline-block h-12 w-12">
 								<Image

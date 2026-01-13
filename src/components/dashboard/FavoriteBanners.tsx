@@ -80,7 +80,7 @@ export function FavoriteBanners({ allBanners }: FavoriteBannersProps) {
 									rel="noopener noreferrer"
 									aria-label={`${banner.data.headerText} link`}
 									isExternal
-									eventName="banner-icon-click"
+									eventName="Banner_Icon_Click"
 									eventData={{ site: banner.data.headerText }}
 								>
 									<Image
@@ -102,7 +102,7 @@ export function FavoriteBanners({ allBanners }: FavoriteBannersProps) {
 									target="_blank"
 									rel="noopener noreferrer"
 									isExternal
-									eventName="banner-header-click"
+									eventName="Banner_Header_Click"
 									eventData={{ site: banner.data.headerText }}
 									className="w-full"
 								>

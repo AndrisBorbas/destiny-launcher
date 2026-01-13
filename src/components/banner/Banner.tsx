@@ -121,7 +121,7 @@ export const Banner = memo(function Banner({
 							rel="noopener noreferrer"
 							aria-label={`${headerText} link`}
 							isExternal
-							eventName="banner-icon-click"
+							eventName="Banner_Icon_Click"
 							eventData={{ site: headerText }}
 						>
 							<Image
@@ -143,7 +143,7 @@ export const Banner = memo(function Banner({
 							target="_blank"
 							rel="noopener noreferrer"
 							isExternal
-							eventName="banner-header-click"
+							eventName="Banner_Header_Click"
 							eventData={{ site: headerText }}
 						>
 							<span className="mr-2">{headerText}</span>
@@ -228,7 +228,7 @@ export const Banner = memo(function Banner({
 						target="_blank"
 						rel="noopener noreferrer"
 						isExternal
-						eventName="banner-button-click"
+						eventName="Banner_Button_Click"
 						eventData={{ site: headerText }}
 					>
 						Open

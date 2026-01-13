@@ -58,7 +58,7 @@ export function SeasonInfo({ initialData }: { initialData: InfoResponse }) {
 						target="_blank"
 						rel="noopener noreferrer"
 						isExternal
-						eventName="season-link-click"
+						eventName="Season_Link_Click"
 					>
 						<div className="flex items-center">
 							{seasonIcon && (
@@ -106,7 +106,7 @@ export function SeasonInfo({ initialData }: { initialData: InfoResponse }) {
 						<TrackingLink
 							href="/dashboard"
 							className="block"
-							eventName="emblem-link-click"
+							eventName="Emblem_Link_Click"
 						>
 							<Image
 								width={390}

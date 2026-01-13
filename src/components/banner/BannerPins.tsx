@@ -55,7 +55,7 @@ export function BannerPins({ banners }: BannerPinProps) {
 									target="_blank"
 									aria-label={`${banner.data.headerText} link`}
 									isExternal
-									eventName="banner-pin-click"
+									eventName="Banner_Pin_Click"
 									eventData={{ site: banner.data.headerText }}
 								>
 									<Image

@@ -23,7 +23,7 @@ export function Notices() {
 						rel="noopener noreferrer"
 						aria-label="Ko-fi link"
 						isExternal
-						eventName="notice-link-click"
+						eventName="Notice_Link_Click"
 					>
 						consider supporting
 					</TrackingLink>{" "}
