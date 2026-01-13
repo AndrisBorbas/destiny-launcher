@@ -7,7 +7,7 @@ import React from "react";
 import { SWRConfig } from "swr";
 
 import { useEffectOnce } from "@/utils/hooks";
-import { TRACKING_ID } from "@/utils/track";
+import { useSwetrix } from "@/utils/track";
 import { dlog, swrFetcher } from "@/utils/utils";
 
 export default function DLApp({ Component, pageProps }: AppProps) {
@@ -17,18 +17,10 @@ export default function DLApp({ Component, pageProps }: AppProps) {
 	// 	trackView(document.referrer, router.asPath);
 	// });
 
+	useSwetrix();
+
 	return (
 		<React.StrictMode>
-			{/* Umami analytics */}
-			<Script
-				async
-				defer
-				data-website-id={TRACKING_ID}
-				src="https://succ.andrisborbas.com/succ.js"
-				// data-auto-track="false"
-			/>
-			{/* End Umami analytics */}
-
 			<SWRConfig value={{ fetcher: swrFetcher }}>
 				<Component {...pageProps} />
 			</SWRConfig>

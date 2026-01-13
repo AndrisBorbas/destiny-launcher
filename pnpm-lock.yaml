@@ -41,6 +41,9 @@ importers:
       '@tsconfig/next':
         specifier: ^2.0.5
         version: 2.0.5
+      babel-plugin-react-compiler:
+        specifier: ^1.0.0
+        version: 1.0.0
       bungie-api-ts:
         specifier: ^5.10.0
         version: 5.10.0
@@ -67,7 +70,7 @@ importers:
         version: 0.561.0(react@19.2.3)
       next:
         specifier: ^15.5.9
-        version: 15.5.9(@babel/core@7.28.3)(babel-plugin-react-compiler@19.1.0-rc.1-rc-af1b7da-20250421)(react-dom@19.2.3(react@19.2.3))(react@19.2.3)(sass@1.90.0)
+        version: 15.5.9(@babel/core@7.28.3)(babel-plugin-react-compiler@1.0.0)(react-dom@19.2.3(react@19.2.3))(react@19.2.3)(sass@1.90.0)
       next-compose-plugins:
         specifier: ^2.2.1
         version: 2.2.1
@@ -76,7 +79,7 @@ importers:
         version: 5.0.0(@types/react@19.2.7)(acorn@8.15.0)(react@19.2.3)
       next-pwa:
         specifier: 5.6.0
-        version: 5.6.0(@babel/core@7.28.3)(next@15.5.9(@babel/core@7.28.3)(babel-plugin-react-compiler@19.1.0-rc.1-rc-af1b7da-20250421)(react-dom@19.2.3(react@19.2.3))(react@19.2.3)(sass@1.90.0))(webpack@5.101.2)
+        version: 5.6.0(@babel/core@7.28.3)(next@15.5.9(@babel/core@7.28.3)(babel-plugin-react-compiler@1.0.0)(react-dom@19.2.3(react@19.2.3))(react@19.2.3)(sass@1.90.0))(webpack@5.101.2)
       plaiceholder:
         specifier: ^3.0.0
         version: 3.0.0(sharp@0.34.5)
@@ -95,6 +98,9 @@ importers:
       sharp:
         specifier: ^0.34.5
         version: 0.34.5
+      swetrix:
+        specifier: ^4.0.0
+        version: 4.0.0
       swr:
         specifier: ^2.3.7
         version: 2.3.7(react@19.2.3)
@@ -132,9 +138,6 @@ importers:
       '@types/umami':
         specifier: ^2.10.1
         version: 2.10.1
-      babel-plugin-react-compiler:
-        specifier: ^19.1.0-rc.1-rc-af1b7da-20250421
-        version: 19.1.0-rc.1-rc-af1b7da-20250421
       cross-env:
         specifier: ^10.1.0
         version: 10.1.0
@@ -2233,9 +2236,8 @@ packages:
     peerDependencies:
       '@babel/core': ^7.4.0 || ^8.0.0-0 <8.0.0
 
-  babel-plugin-react-compiler@19.1.0-rc.1-rc-af1b7da-20250421:
-    resolution: {integrity: sha512-E3kaokBhWDLf7ZD8fuYjYn0ZJHYZ+3EHtAWCdX2hl4lpu1z9S/Xr99sxhx2bTCVB41oIesz9FtM8f4INsrZaOw==}
-    deprecated: Wrong version name was published
+  babel-plugin-react-compiler@1.0.0:
+    resolution: {integrity: sha512-Ixm8tFfoKKIPYdCCKYTsqv+Fd4IJ0DQqMyEimo+pxUOMUR9cVPlwTrFt9Avu+3cb6Zp3mAzl+t1MrG2fxxKsxw==}
 
   bail@2.0.2:
     resolution: {integrity: sha512-0xO6mYd7JB2YesxDKplafRpsiOzPt9V02ddPCLbY1xYGPOX24NTyN50qnUxgCPcSoYMhKpAuBTjQoRZCAkUDRw==}
@@ -4553,6 +4555,9 @@ packages:
     resolution: {integrity: sha512-OoohrmuUlBs8B8o6MB2Aevn+pRIH9zDALSR+6hhqVfa6fRwG/Qw9VUMSMW9VNg2CFc/MTIfabtdOVl9ODIJjpw==}
     engines: {node: '>=14.0.0'}
     hasBin: true
+
+  swetrix@4.0.0:
+    resolution: {integrity: sha512-IfNuvP4SipihlW8TB/wFHtRPRtWuN0fPimS2va8snsLU1MOYkWKM8FmkPqOasZfHjo3J4CcX78zt0fleAcEoig==}
 
   swr@2.3.7:
     resolution: {integrity: sha512-ZEquQ82QvalqTxhBVv/DlAg2mbmUjF4UgpPg9wwk4ufb9rQnZXh1iKyyKBqV6bQGu1Ie7L1QwSYO07qFIa1p+g==}
@@ -7212,7 +7217,7 @@ snapshots:
     transitivePeerDependencies:
       - supports-color
 
-  babel-plugin-react-compiler@19.1.0-rc.1-rc-af1b7da-20250421:
+  babel-plugin-react-compiler@1.0.0:
     dependencies:
       '@babel/types': 7.28.2
 
@@ -9077,12 +9082,12 @@ snapshots:
       - acorn
       - supports-color
 
-  next-pwa@5.6.0(@babel/core@7.28.3)(next@15.5.9(@babel/core@7.28.3)(babel-plugin-react-compiler@19.1.0-rc.1-rc-af1b7da-20250421)(react-dom@19.2.3(react@19.2.3))(react@19.2.3)(sass@1.90.0))(webpack@5.101.2):
+  next-pwa@5.6.0(@babel/core@7.28.3)(next@15.5.9(@babel/core@7.28.3)(babel-plugin-react-compiler@1.0.0)(react-dom@19.2.3(react@19.2.3))(react@19.2.3)(sass@1.90.0))(webpack@5.101.2):
     dependencies:
       babel-loader: 8.4.1(@babel/core@7.28.3)(webpack@5.101.2)
       clean-webpack-plugin: 4.0.0(webpack@5.101.2)
       globby: 11.1.0
-      next: 15.5.9(@babel/core@7.28.3)(babel-plugin-react-compiler@19.1.0-rc.1-rc-af1b7da-20250421)(react-dom@19.2.3(react@19.2.3))(react@19.2.3)(sass@1.90.0)
+      next: 15.5.9(@babel/core@7.28.3)(babel-plugin-react-compiler@1.0.0)(react-dom@19.2.3(react@19.2.3))(react@19.2.3)(sass@1.90.0)
       terser-webpack-plugin: 5.3.14(webpack@5.101.2)
       workbox-webpack-plugin: 6.6.0(webpack@5.101.2)
       workbox-window: 6.6.0
@@ -9121,7 +9126,7 @@ snapshots:
       - '@babel/core'
       - babel-plugin-macros
 
-  next@15.5.9(@babel/core@7.28.3)(babel-plugin-react-compiler@19.1.0-rc.1-rc-af1b7da-20250421)(react-dom@19.2.3(react@19.2.3))(react@19.2.3)(sass@1.90.0):
+  next@15.5.9(@babel/core@7.28.3)(babel-plugin-react-compiler@1.0.0)(react-dom@19.2.3(react@19.2.3))(react@19.2.3)(sass@1.90.0):
     dependencies:
       '@next/env': 15.5.9
       '@swc/helpers': 0.5.15
@@ -9139,7 +9144,7 @@ snapshots:
       '@next/swc-linux-x64-musl': 15.5.7
       '@next/swc-win32-arm64-msvc': 15.5.7
       '@next/swc-win32-x64-msvc': 15.5.7
-      babel-plugin-react-compiler: 19.1.0-rc.1-rc-af1b7da-20250421
+      babel-plugin-react-compiler: 1.0.0
       sass: 1.90.0
       sharp: 0.34.5
     transitivePeerDependencies:
@@ -9940,6 +9945,8 @@ snapshots:
       css-what: 6.2.2
       csso: 5.0.5
       picocolors: 1.1.1
+
+  swetrix@4.0.0: {}
 
   swr@2.3.7(react@19.2.3):
     dependencies:
