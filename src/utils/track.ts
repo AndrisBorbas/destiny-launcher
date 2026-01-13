@@ -15,6 +15,7 @@ export function useSwetrix(
 	useEffect(() => {
 		Swetrix.init(pid, initOptions);
 		void Swetrix.trackViews(pageViewsOptions);
+		// void Swetrix.trackErrors();
 	}, [initOptions, pageViewsOptions, pid]);
 };
 
