@@ -5,7 +5,7 @@ import { trackEvent } from "@/utils/track";
 type TrackingLinkProps = {
 	isExternal?: boolean;
 	eventName: string;
-	eventData?: object;
+	eventData?: { [key: string]: string | number | boolean | null | undefined };
 	href: string;
 	ref?: React.Ref<HTMLAnchorElement>;
 } & React.HTMLProps<HTMLAnchorElement> &
