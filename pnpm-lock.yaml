@@ -99,8 +99,8 @@ importers:
         specifier: ^0.34.5
         version: 0.34.5
       swetrix:
-        specifier: ^4.0.0
-        version: 4.0.0
+        specifier: ^4.1.0
+        version: 4.1.0
       swr:
         specifier: ^2.3.7
         version: 2.3.7(react@19.2.3)
@@ -4556,8 +4556,8 @@ packages:
     engines: {node: '>=14.0.0'}
     hasBin: true
 
-  swetrix@4.0.0:
-    resolution: {integrity: sha512-IfNuvP4SipihlW8TB/wFHtRPRtWuN0fPimS2va8snsLU1MOYkWKM8FmkPqOasZfHjo3J4CcX78zt0fleAcEoig==}
+  swetrix@4.1.0:
+    resolution: {integrity: sha512-TPOr14oYBt3LquPfWqBjRP6IhbQ+WOiz8ticORRvg4gECb3loFbHB455OUWcpXPCTaFi/E9s5TVgxgqIX+viHQ==}
 
   swr@2.3.7:
     resolution: {integrity: sha512-ZEquQ82QvalqTxhBVv/DlAg2mbmUjF4UgpPg9wwk4ufb9rQnZXh1iKyyKBqV6bQGu1Ie7L1QwSYO07qFIa1p+g==}
@@ -9946,7 +9946,7 @@ snapshots:
       csso: 5.0.5
       picocolors: 1.1.1
 
-  swetrix@4.0.0: {}
+  swetrix@4.1.0: {}
 
   swr@2.3.7(react@19.2.3):
     dependencies:
