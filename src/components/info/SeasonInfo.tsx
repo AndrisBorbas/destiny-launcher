@@ -53,7 +53,7 @@ export function SeasonInfo({ initialData }: { initialData: InfoResponse }) {
 							/*
 							 `https://www.bungie.net/${ currentSeason?.displayProperties.name.replace(/\s+/g, "") ?? "" }`
 							*/
-							"https://www.destinythegame.com/YearOfProphecy"
+							"https://www.destinythegame.com"
 						}
 						target="_blank"
 						rel="noopener noreferrer"
