@@ -59,7 +59,7 @@ export function SeasonTimer({ endDate }: SeasonTimerProps) {
           isResetTime ? "hidden" : "initial",
         )}
       >
-        {weeks >= 100 && <>See you starside Guardian.</>}
+        {weeks >= 100 && <>See you starside Guardian</>}
         {weeks < 100 && (
           <>
             Season ends in:
