@@ -1,6 +1,7 @@
 import Link, { LinkProps } from "next/link";
 
 import { trackEvent } from "@/utils/track";
+import { addUTMSource } from "@/utils/utils";
 
 type TrackingLinkProps = {
 	isExternal?: boolean;
@@ -20,11 +21,13 @@ export function TrackingLink({
 	children,
 	...restProps
 }: TrackingLinkProps) {
+	const externalHref = addUTMSource(href);
+
 	return (
 		<>
 			{isExternal && (
 				<a
-					href={href}
+					href={externalHref}
 					onClick={(e) => {
 						trackEvent(eventName, { link: href, ...eventData });
 						onClick?.(e);

@@ -100,3 +100,30 @@ export function dlog(...args: unknown[]) {
 		console.log(...args);
 	}
 }
+
+export const UTM_SOURCE = "destinylauncher";
+
+const OWN_HOSTS = ["destinylauncher.net", "www.destinylauncher.net"];
+
+/**
+ * Add a `utm_source` query param to external http(s) links, so linked sites
+ * can see the traffic came from here.
+ * Leaves relative, non-http, own-domain and already tagged urls untouched.
+ * @param url link to tag
+ * @returns the url with `utm_source` added when applicable
+ */
+export function addUTMSource(url: string) {
+	if (!/^https?:\/\//i.test(url)) return url;
+
+	try {
+		const parsed = new URL(url);
+
+		if (OWN_HOSTS.includes(parsed.hostname.toLowerCase())) return url;
+		if (parsed.searchParams.has("utm_source")) return url;
+
+		parsed.searchParams.set("utm_source", UTM_SOURCE);
+		return parsed.toString();
+	} catch {
+		return url;
+	}
+}
