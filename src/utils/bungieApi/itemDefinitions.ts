@@ -11,27 +11,58 @@ export const items = {
 		2817410917, // Bright Dust
 		4041218086, // Chronologs
 	],
-	consumables: {
-		important: [
-			// 4041218086, // Chronologs
+	/** Material counts, grouped the way the game sorts them */
+	materials: [
+		[
 			3853748946, // Enhancement Core
 			4257549984, // Enhancement Prism
-			4257549985, // Ascendant Shard
 			353704689, // Ascendant Alloy
+			4257549985, // Ascendant Shard
+			2228452164, // Deepsight Harmonizer
 			3467984096, // Exotic Cipher
-			800069450, // Strange Coin
-			3282419336, // Raid Banner
-			3702027555, // Spoils of Conquest
 		],
-		common: [
-			2610515000, // Fated Cipher
-			2174713383, // Timelost Spirit Bloom
-			3793612644, // Alkane Mutations
+		[
+			2993288448, // Herealways Piece
+			443031982, // Phantasmal Fragment
+			1633854071, // Dark Fragment
+			2979281381, // Upgrade Module
+		],
+		[
+			4150228564, // Salvage
+			589719184, // Credit
+			3675783772, // Dark Matter Ingot
+			2616412571, // Strange Matter
+			228855596, // Deathmark
+			3769435351, // Iron Cipher
+			402110270, // Legendary Mark
+			3397709326, // Osirion Cipher
+			3702027555, // Spoils of Conquest
+			800069450, // Strange Coin
+			3643918802, // Vanguard Cipher
+			3181091287, // Strange Signal
+			3282419336, // Raid Banner
+		],
+		[
+			1498161294, // Synthweave Bolt
+			4238733045, // Synthweave Plate
+			4019412287, // Synthweave Strap
+			1583786617, // Synthweave Template
+			3552107018, // Plush Synthcord
+			3855200273, // Rigid Synthcord
+		],
+		[
+			3793612644, // Alkane Mutation
 			3388913371, // Nine-Touched Relic Iron
 			2367456861, // Phaseglass Refraction
-			1289622079, // Strand Meditation
+			2174713383, // Timelost Spirit Bloom
+			2217640604, // Quantum Substance (Word-Bearer)
+			2217640605, // Quantum Substance (Assimilation Scout)
+			2217640606, // Quantum Substance (Well of the Archon)
+			2217640607, // Quantum Substance (Polus)
+			2610515000, // Fated Cipher
+			1289622079, // Strand Meditations
 		],
-	},
+	],
 } as const;
 
 export const buckets = {
@@ -41,15 +72,11 @@ export const buckets = {
 
 export const ALL_CURRENCY_HASHES = [items.silver, ...items.currencies];
 
-export const ALL_CONSUMABLE_HASHES = [
-	...items.consumables.important,
-	...items.consumables.common,
-];
+export const ALL_MATERIAL_HASHES: number[] = items.materials.flat();
 
-export const ALL_ITEM_HASHES = [
-	...ALL_CURRENCY_HASHES,
-	...ALL_CONSUMABLE_HASHES,
-];
+export const MATERIAL_HASHES = new Set<number>(ALL_MATERIAL_HASHES);
+
+export const ALL_ITEM_HASHES = [...ALL_CURRENCY_HASHES, ...ALL_MATERIAL_HASHES];
 
 /**
  * Server-side function to fetch item definitions directly

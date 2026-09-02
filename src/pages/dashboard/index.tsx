@@ -8,7 +8,7 @@ import { BannerDataTypes } from "@/@types/DataTypes";
 import { BannerPins } from "@/components/banner/BannerPins";
 import { Bounties } from "@/components/dashboard/Bounties";
 import { FavoriteBanners } from "@/components/dashboard/FavoriteBanners";
-import { Currencies } from "@/components/dashboard/Inventory";
+import { Currencies, Materials } from "@/components/dashboard/Inventory";
 import { CharacterCard, UserHeader } from "@/components/dashboard/UserCard";
 import { Layout } from "@/components/layout/Layout";
 import { Notices } from "@/components/notice/Notices";
@@ -117,6 +117,7 @@ export default function DashboardPage({
 				<div className="flex flex-col gap-4">
 					<Currencies />
 					<Bounties />
+					<Materials />
 				</div>
 
 				<FavoriteBanners allBanners={allBanners} />
