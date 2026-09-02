@@ -180,6 +180,8 @@ export async function fetchUserProfileFromBungie(
 			DestinyComponentType.PlatformSilver,
 			// @ts-expect-error: Const enums work
 			DestinyComponentType.CharacterInventories,
+			// @ts-expect-error: Const enums work
+			DestinyComponentType.ItemObjectives,
 		],
 	});
 	if (

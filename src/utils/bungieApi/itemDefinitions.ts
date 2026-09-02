@@ -34,6 +34,11 @@ export const items = {
 	},
 } as const;
 
+export const buckets = {
+	/** Quests & bounties, including seasonal "Active Orders" */
+	quests: 635141261,
+} as const;
+
 export const ALL_CURRENCY_HASHES = [items.silver, ...items.currencies];
 
 export const ALL_CONSUMABLE_HASHES = [

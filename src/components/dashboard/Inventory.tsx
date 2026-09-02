@@ -109,7 +109,7 @@ export function Currencies() {
 	}, [user, consumableDefinitions, currencyDefinitions]);
 
 	return (
-		<div className="grid grid-cols-[repeat(auto-fill,_8.5rem)] gap-4">
+		<div className="grid grid-cols-[repeat(auto-fill,_8.25rem)] gap-4">
 			{currencyData.map(([key, currency]) => {
 				const atLimit = currency.maxStackSize
 					? currency.quantity % currency.maxStackSize === 0

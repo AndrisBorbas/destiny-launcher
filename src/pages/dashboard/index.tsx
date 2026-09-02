@@ -6,6 +6,7 @@ import { useMemo } from "react";
 
 import { BannerDataTypes } from "@/@types/DataTypes";
 import { BannerPins } from "@/components/banner/BannerPins";
+import { Bounties } from "@/components/dashboard/Bounties";
 import { FavoriteBanners } from "@/components/dashboard/FavoriteBanners";
 import { Currencies } from "@/components/dashboard/Inventory";
 import { CharacterCard, UserHeader } from "@/components/dashboard/UserCard";
@@ -115,6 +116,7 @@ export default function DashboardPage({
 
 				<div className="flex flex-col gap-4">
 					<Currencies />
+					<Bounties />
 				</div>
 
 				<FavoriteBanners allBanners={allBanners} />

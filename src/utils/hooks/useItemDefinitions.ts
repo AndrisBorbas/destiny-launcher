@@ -7,6 +7,9 @@ import { authenticatedFetch } from "@/utils/api";
 
 const itemsRoute = "/api/bungie/items";
 
+// The api route only accepts a limited amount of hashes per request
+const CHUNK_SIZE = 99;
+
 // Cache for item definitions to avoid refetching
 const itemCache = new Map<string, DestinyInventoryItemDefinition>();
 
@@ -30,15 +33,27 @@ async function fetchItemDefinitions(
 		return { items };
 	}
 
-	const result = await authenticatedFetch<ItemDefinitionsResponse>(itemsRoute, {
-		method: "POST",
-		body: JSON.stringify({ hashes: uncachedHashes }),
-	});
+	let error: string | undefined;
 
-	// Cache the fetched items
-	Object.entries(result.items).forEach(([hash, item]) => {
-		itemCache.set(hash, item);
-	});
+	// Fetch the missing definitions in chunks the api route accepts
+	for (let i = 0; i < uncachedHashes.length; i += CHUNK_SIZE) {
+		const chunk = uncachedHashes.slice(i, i + CHUNK_SIZE);
+
+		const result = await authenticatedFetch<ItemDefinitionsResponse>(
+			itemsRoute,
+			{
+				method: "POST",
+				body: JSON.stringify({ hashes: chunk }),
+			},
+		);
+
+		// Cache the fetched items
+		Object.entries(result.items).forEach(([hash, item]) => {
+			itemCache.set(hash, item);
+		});
+
+		error ??= result.error;
+	}
 
 	// Combine cached and newly fetched items
 	const allItems: { [hash: string]: DestinyInventoryItemDefinition } = {};
@@ -49,7 +64,7 @@ async function fetchItemDefinitions(
 		}
 	});
 
-	return { items: allItems, error: result.error };
+	return { items: allItems, error };
 }
 
 /**

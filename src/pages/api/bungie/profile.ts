@@ -1,6 +1,7 @@
 import type {
 	DestinyCharacterComponent,
 	DestinyInventoryComponent,
+	DestinyItemObjectivesComponent,
 	DestinyPlatformSilverComponent,
 	DestinyProfileComponent,
 } from "bungie-api-ts/destiny2";
@@ -22,6 +23,9 @@ export type ProfileResponse = {
 	silver?: DestinyPlatformSilverComponent;
 	characterInventories?: {
 		[key: string]: DestinyInventoryComponent;
+	};
+	itemObjectives?: {
+		[itemInstanceId: string]: DestinyItemObjectivesComponent;
 	};
 	clan?: GroupMembership;
 	error?: AuthError;
@@ -92,6 +96,7 @@ export default async (
 					silver: user.platformSilver.data,
 					clan: clan.totalResults > 0 ? clan.results[0] : undefined,
 					characterInventories: user.characterInventories.data,
+					itemObjectives: user.itemComponents.objectives.data,
 				};
 
 				res.status(200).json(data);
