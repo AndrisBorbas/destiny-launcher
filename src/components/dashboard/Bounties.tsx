@@ -108,12 +108,12 @@ function ObjectiveProgress({ objective, description }: ObjectiveProgressProps) {
 					objective.complete && "border-white/80 bg-white/80",
 				)}
 			/>
-			<div className="relative h-5 grow overflow-hidden rounded-xs bg-gray-900/40">
+			<div className="relative h-5 grow overflow-hidden bg-gray-900/40 backdrop-blur">
 				{!isBoolean && (
 					<div
 						className={cn(
-							"absolute inset-y-0 left-0 bg-teal-300/70",
-							objective.complete && "bg-teal-200/90",
+							"absolute inset-y-0 left-0 bg-green-400/50",
+							objective.complete && "bg-green-500/70",
 						)}
 						style={{ width: `${percent}%` }}
 					/>
