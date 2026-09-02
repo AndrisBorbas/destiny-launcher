@@ -3,7 +3,7 @@ import type {
 	DestinyObjectiveProgress,
 } from "bungie-api-ts/destiny2";
 import Image from "next/image";
-import { useMemo } from "react";
+import { useMemo, useSyncExternalStore } from "react";
 import { HiChevronDown } from "react-icons/hi";
 
 import { ClassIcon } from "@/components/dashboard/CharacterComponents";
@@ -27,7 +27,59 @@ type Bounty = {
 	itemHash: number;
 	objectives: DestinyObjectiveProgress[];
 	complete: boolean;
+	expirationDate?: string;
 };
+
+const MINUTE = 60 * 1000;
+const HOUR = 60 * MINUTE;
+
+function subscribeToClock(onTick: () => void) {
+	const interval = setInterval(onTick, MINUTE);
+	return () => {
+		clearInterval(interval);
+	};
+}
+
+// Rounded to the minute so the snapshot stays stable between ticks
+function clockSnapshot() {
+	return Math.floor(Date.now() / MINUTE) * MINUTE;
+}
+
+function serverClockSnapshot() {
+	return null;
+}
+
+/**
+ * Keeps a ticking timestamp so expiry countdowns stay current
+ * @returns The current time to the minute, or null before hydration
+ */
+function useNow() {
+	return useSyncExternalStore(
+		subscribeToClock,
+		clockSnapshot,
+		serverClockSnapshot,
+	);
+}
+
+/**
+ * Time left until a bounty expires, in the game's own d/h/m shorthand
+ * @param expirationDate ISO date the bounty expires at
+ * @param now Current timestamp
+ * @returns Formatted time left, or null if the date can't be read
+ */
+function timeLeft(expirationDate: string, now: number) {
+	const remaining = Date.parse(expirationDate) - now;
+	if (Number.isNaN(remaining)) return null;
+	if (remaining <= 0) return "Expired";
+
+	const minutes = Math.floor(remaining / 60000);
+	const hours = Math.floor(minutes / 60);
+	const days = Math.floor(hours / 24);
+
+	if (days > 0) return `${days}d ${hours % 24}h`;
+	if (hours > 0) return `${hours}h ${minutes % 60}m`;
+	return `${minutes}m`;
+}
 
 type CharacterBounties = {
 	character: DestinyCharacterComponent;
@@ -87,6 +139,7 @@ type BountyCardProps = {
 	description: string;
 	icon: string;
 	objectiveDescriptions: { [hash: string]: string };
+	now: number | null;
 };
 
 function BountyCard({
@@ -95,7 +148,19 @@ function BountyCard({
 	description,
 	icon,
 	objectiveDescriptions,
+	now,
 }: BountyCardProps) {
+	const remaining =
+		bounty.expirationDate && now !== null
+			? timeLeft(bounty.expirationDate, now)
+			: null;
+	const expired = remaining === "Expired";
+	const expiringSoon =
+		!expired &&
+		!!bounty.expirationDate &&
+		now !== null &&
+		Date.parse(bounty.expirationDate) - now < HOUR;
+
 	return (
 		<div className="flex flex-row gap-2">
 			<Tooltip>
@@ -120,9 +185,22 @@ function BountyCard({
 			</Tooltip>
 
 			<div className="flex min-w-0 grow flex-col gap-1">
-				<p className="glow overflow-hidden text-lg leading-tight font-medium text-ellipsis whitespace-nowrap">
-					{name}
-				</p>
+				<div className="flex flex-row items-baseline gap-2">
+					<p className="glow overflow-hidden text-lg leading-tight font-medium text-ellipsis whitespace-nowrap">
+						{name}
+					</p>
+					{remaining && (
+						<span
+							className={cn(
+								"ml-auto shrink-0 text-sm tabular-nums",
+								expiringSoon && "text-yellow-400/90",
+								expired && "text-orange-500/90",
+							)}
+						>
+							{remaining}
+						</span>
+					)}
+				</div>
 				{bounty.objectives.map((objective) => (
 					<ObjectiveProgress
 						key={objective.objectiveHash}
@@ -144,6 +222,7 @@ type CharacterOrdersProps = {
 	defaultOpen: boolean;
 	itemDefinitions?: ItemDefinitionsResponse;
 	objectiveDescriptions: { [hash: string]: string };
+	now: number | null;
 };
 
 function CharacterOrders({
@@ -152,6 +231,7 @@ function CharacterOrders({
 	defaultOpen,
 	itemDefinitions,
 	objectiveDescriptions,
+	now,
 }: CharacterOrdersProps) {
 	return (
 		<details className="group flex flex-col" open={defaultOpen}>
@@ -180,6 +260,7 @@ function CharacterOrders({
 							description={definition.displayProperties.description}
 							icon={definition.displayProperties.icon}
 							objectiveDescriptions={objectiveDescriptions}
+							now={now}
 						/>
 					);
 				})}
@@ -190,6 +271,7 @@ function CharacterOrders({
 
 export function Bounties() {
 	const { user } = useUser();
+	const now = useNow();
 
 	const current = useMemo(() => currentCharacter(user?.characters), [user]);
 
@@ -198,7 +280,7 @@ export function Bounties() {
 
 		return Object.entries(user.characterInventories)
 			.map(([characterId, inventory]) => {
-				const bounties = inventory.items
+				const bounties: Bounty[] = inventory.items
 					.filter(
 						(item) => item.bucketHash === buckets.quests && item.itemInstanceId,
 					)
@@ -217,13 +299,19 @@ export function Bounties() {
 							complete: visibleObjectives.every(
 								(objective) => objective.complete,
 							),
+							expirationDate: item.expirationDate,
 						};
 					})
 					// Quest steps without any objective progress have nothing to show
 					.filter((bounty) => bounty.objectives.length > 0);
 
-				// Show what is still in progress first
-				bounties.sort((a, b) => Number(a.complete) - Number(b.complete));
+				// Show what is still in progress first, then whatever expires soonest
+				bounties.sort(
+					(a, b) =>
+						Number(a.complete) - Number(b.complete) ||
+						(a.expirationDate ? Date.parse(a.expirationDate) : Infinity) -
+							(b.expirationDate ? Date.parse(b.expirationDate) : Infinity),
+				);
 
 				return { character: user.characters[characterId], bounties };
 			})
@@ -288,6 +376,7 @@ export function Bounties() {
 					defaultOpen={character.characterId === current?.characterId}
 					itemDefinitions={itemDefinitions}
 					objectiveDescriptions={objectiveDescriptions}
+					now={now}
 				/>
 			))}
 		</div>
