@@ -9,7 +9,6 @@ import { mutate } from "swr";
 import type { BannerDataTypes } from "@/@types/DataTypes";
 import { BannerSection } from "@/components/banner/BannerSection";
 import { FAQ } from "@/components/faq/FAQ";
-import { Intro } from "@/components/info/Intro";
 import { SeasonInfo } from "@/components/info/SeasonInfo";
 import { Layout } from "@/components/layout/Layout";
 import { SITE_URL } from "@/components/layout/SEO";
@@ -141,7 +140,6 @@ export default function Index({ banners, d2info, buildDate }: PageProps) {
 			buildDate={buildDate}
 			seo={{ path: "/", jsonLd: buildJsonLd(banners) }}
 		>
-			<Intro />
 			<Notices />
 			<SeasonInfo initialData={d2info} />
 			<BannerSection banners={banners} />
