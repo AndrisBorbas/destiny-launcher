@@ -1,50 +1,95 @@
 import Head from "next/head";
 
-export function SEO() {
+export const SITE_URL = "https://destinylauncher.net";
+export const SITE_NAME = "Destiny Launcher";
+const DEFAULT_TITLE =
+	"Destiny Launcher – Destiny 2 Tools & Websites in One Place";
+const DEFAULT_DESCRIPTION =
+	"Launch DIM, Light.gg, Raid Report and 35+ other Destiny 2 tools from one ad-free page. Item managers, databases, raid stats and community spreadsheets.";
+
+const PUBLISHER_ID = `${SITE_URL}/#publisher`;
+const WEBSITE_ID = `${SITE_URL}/#website`;
+
+const siteJsonLd = [
+	{
+		"@context": "https://schema.org",
+		"@type": "WebSite",
+		"@id": WEBSITE_ID,
+		url: `${SITE_URL}/`,
+		name: SITE_NAME,
+		description: DEFAULT_DESCRIPTION,
+		inLanguage: "en",
+		publisher: { "@id": PUBLISHER_ID },
+	},
+	{
+		"@context": "https://schema.org",
+		"@type": "Person",
+		"@id": PUBLISHER_ID,
+		name: "Andris Borbas",
+		url: "https://github.com/AndrisBorbas",
+		sameAs: [
+			"https://github.com/AndrisBorbas",
+			"https://twitter.com/AndrisBorbas",
+			"https://ko-fi.com/andrisborbas",
+		],
+	},
+];
+
+const NO_JSON_LD: object[] = [];
+
+export type SEOProps = {
+	title?: string;
+	description?: string;
+	/** Path relative to the site root, e.g. "/" */
+	path?: string;
+	noindex?: boolean;
+	jsonLd?: object[];
+};
+
+export function SEO({
+	title = DEFAULT_TITLE,
+	description = DEFAULT_DESCRIPTION,
+	path = "/",
+	noindex = false,
+	jsonLd = NO_JSON_LD,
+}: SEOProps) {
+	const url = `${SITE_URL}${path}`;
+
 	return (
 		<Head>
 			<link rel="preconnect" href="https://vitals.vercel-insights.com" />
 			<link rel="preconnect" href="https://succ.andrisborbas.com" />
-			<title>Destiny Launcher</title>
+			<title>{title}</title>
 			<meta name="viewport" content="initial-scale=1.0, width=device-width" />
-			<meta
-				name="description"
-				content="Destiny Launcher aims to be a launcher for the websites
-					made around Destiny and its public api. It presents the numerous
-					websites for new players to explore and makes them easily accessible
-					from one place, for everyone."
-			/>
+			<meta name="description" content={description} />
+			{noindex ? (
+				<meta name="robots" content="noindex, follow" />
+			) : (
+				<link rel="canonical" href={url} />
+			)}
 			<meta name="twitter:card" content="summary_large_image" />
-			<meta name="twitter:title" content="Destiny Launcher" />
-			<meta
-				name="twitter:description"
-				content="Destiny Launcher aims to be a launcher for the websites
-					made around Destiny and its public api. It presents the numerous
-					websites for new players to explore and makes them easily accessible
-					from one place, for everyone."
-			/>
-			<meta
-				name="twitter:image"
-				content="https://destinylauncher.net/preview.png"
-			/>
-			<meta
-				name="thumbnail"
-				content="https://destinylauncher.net/preview.png"
-			/>
-			<meta
-				property="og:image"
-				content="https://destinylauncher.net/preview.png"
-			/>
-			<meta property="og:title" content="Destiny Launcher" />
-			<meta
-				property="og:description"
-				content="Destiny Launcher aims to be a launcher for the websites
-					made around Destiny and its public api. It presents the numerous
-					websites for new players to explore and makes them easily accessible
-					from one place, for everyone."
-			/>
-			<meta property="og:url" content="https://destinylauncher.net" />
+			<meta name="twitter:title" content={title} />
+			<meta name="twitter:description" content={description} />
+			<meta name="twitter:image" content={`${SITE_URL}/preview.png`} />
+			<meta name="thumbnail" content={`${SITE_URL}/preview.png`} />
+			<meta property="og:image" content={`${SITE_URL}/preview.png`} />
+			<meta property="og:title" content={title} />
+			<meta property="og:description" content={description} />
+			<meta property="og:url" content={url} />
 			<meta property="og:type" content="website" />
+			<meta property="og:site_name" content={SITE_NAME} />
+			{!noindex && (
+				<script
+					type="application/ld+json"
+					// eslint-disable-next-line react-dom/no-dangerously-set-innerhtml -- escaped JSON-LD
+					dangerouslySetInnerHTML={{
+						__html: JSON.stringify([...siteJsonLd, ...jsonLd]).replace(
+							/</g,
+							"\\u003c",
+						),
+					}}
+				/>
+			)}
 			<link
 				rel="apple-touch-icon"
 				sizes="60x60"

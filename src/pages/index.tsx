@@ -9,8 +9,10 @@ import { mutate } from "swr";
 import type { BannerDataTypes } from "@/@types/DataTypes";
 import { BannerSection } from "@/components/banner/BannerSection";
 import { FAQ } from "@/components/faq/FAQ";
+import { Intro } from "@/components/info/Intro";
 import { SeasonInfo } from "@/components/info/SeasonInfo";
 import { Layout } from "@/components/layout/Layout";
+import { SITE_URL } from "@/components/layout/SEO";
 import { Notices } from "@/components/notice/Notices";
 import { getInitialD2Info } from "@/utils/bungieApi/destiny2-api-server";
 import { d2InfoKey, d2InfoRoute, d2UserKey } from "@/utils/hooks";
@@ -75,6 +77,35 @@ export const getStaticProps = async () => {
 
 type PageProps = InferGetStaticPropsType<typeof getStaticProps>;
 
+function buildJsonLd(banners: PageProps["banners"]) {
+	const sites = banners.filter((banner) => banner.data.category !== "sheet");
+
+	return [
+		{
+			"@context": "https://schema.org",
+			"@type": "CollectionPage",
+			"@id": `${SITE_URL}/#collection`,
+			url: `${SITE_URL}/`,
+			name: "Destiny 2 tools and websites",
+			isPartOf: { "@id": `${SITE_URL}/#website` },
+			mainEntity: { "@id": `${SITE_URL}/#sites` },
+		},
+		{
+			"@context": "https://schema.org",
+			"@type": "ItemList",
+			"@id": `${SITE_URL}/#sites`,
+			name: "Destiny 2 community websites and tools",
+			numberOfItems: sites.length,
+			itemListElement: sites.map((banner, i) => ({
+				"@type": "ListItem",
+				position: i + 1,
+				name: banner.data.headerText,
+				url: banner.data.url,
+			})),
+		},
+	];
+}
+
 export default function Index({ banners, d2info, buildDate }: PageProps) {
 	// console.log({ banners, d2info });
 
@@ -108,7 +139,9 @@ export default function Index({ banners, d2info, buildDate }: PageProps) {
 		<Layout
 			className="safe-area-x relative mx-auto mb-8 flex flex-col sm:px-4 md:px-8 lg:px-12 xl:px-16"
 			buildDate={buildDate}
+			seo={{ path: "/", jsonLd: buildJsonLd(banners) }}
 		>
+			<Intro />
 			<Notices />
 			<SeasonInfo initialData={d2info} />
 			<BannerSection banners={banners} />

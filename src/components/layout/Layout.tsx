@@ -7,18 +7,24 @@ import { useLocalStorage } from "@/utils/hooks";
 
 import { Background } from "./Background";
 import styles from "./Layout.module.css";
-import { SEO } from "./SEO";
+import { SEO, type SEOProps } from "./SEO";
 
 type LayoutProps = {
 	buildDate?: number;
+	seo?: SEOProps;
 } & React.HTMLAttributes<HTMLDivElement>;
 
-export function Layout({ children, buildDate, ...restProps }: LayoutProps) {
+export function Layout({
+	children,
+	buildDate,
+	seo,
+	...restProps
+}: LayoutProps) {
 	const [bg, setBG] = useLocalStorage<boolean>("bg", true);
 
 	return (
 		<>
-			<SEO />
+			<SEO {...seo} />
 
 			<div id="app" className={styles.app}>
 				{/* <motion.span
@@ -36,7 +42,7 @@ export function Layout({ children, buildDate, ...restProps }: LayoutProps) {
 
 				<Navbar />
 
-				<main id="#" {...restProps}>
+				<main id="main" {...restProps}>
 					{children}
 				</main>
 

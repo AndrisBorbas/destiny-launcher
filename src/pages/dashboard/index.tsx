@@ -99,6 +99,11 @@ export default function DashboardPage({
 		<Layout
 			className="safe-area-x mx-auto mb-8 flex max-w-[1920px] flex-col sm:px-4 md:px-8 lg:px-12 xl:px-16"
 			buildDate={buildDate}
+			seo={{
+				title: "Dashboard – Destiny Launcher",
+				path: "/dashboard",
+				noindex: true,
+			}}
 		>
 			<div className="absolute top-[60px] right-0 left-0 w-full max-w-full">
 				<Notices />
